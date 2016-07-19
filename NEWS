@@ -1,0 +1,25 @@
+comf v0.1.4 (Release date: 2016-06-18)
+==============
+
+Changes:
+
+* Correction of error in function calcComfInd
+
+comf v0.1.3 (Release date: 2016-06-16)
+==============
+
+Changes:
+
+* Added relative humidity as input for dTNZ calculation
+* Added different methods to calculate basal metabolic rate and surface are for dTNZ
+* Added further examples to help files
+* calcComfInd now also accepts data frames
+
+
+comf v0.1.2 (Release date: 2016-03-28)
+==============
+
+Changes:
+
+* Added data set with exemplary field data
+* Changed calcMeanBias to calcBias and added output of standard deviation and standard error
