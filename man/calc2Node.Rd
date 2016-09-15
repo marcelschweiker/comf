@@ -25,6 +25,7 @@
 \alias{pts}
 \alias{calcPMVGagge}
 \alias{calcPMVStar}
+\alias{calcSkinWettedness}
 \title{
 Calculating Comfort Indices based on the 2-Node-Model
 }
@@ -33,7 +34,7 @@ Calculating Comfort Indices based on the 2-Node-Model
 }
 \usage{
 calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171,
- wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
+ wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5, varOut = "else")
 calcET(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171,
  wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
 calcSET(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171,
@@ -52,6 +53,9 @@ calcPMVGagge(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60,
  wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
 calcPMVStar(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171,
  wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
+calcSkinWettedness(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltime = 60, 
+ ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = .5, 
+ varOut="skinWet")
 }
 \arguments{
   \item{ta}{
@@ -101,6 +105,9 @@ a numeric value presenting the driving coefficient for vasodilation
 }
   \item{cstr}{
 a numeric value presenting the driving coefficient for vasoconstriction
+}
+  \item{varOut}{
+a string value either "else" for normal output of SET or "skinWet" to report value of skin wettedness.
 }
 }
 \details{

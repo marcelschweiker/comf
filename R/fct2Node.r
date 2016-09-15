@@ -15,7 +15,7 @@
 
 # Function: Two Node model ################
 ###########################################
-calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = .5){
+calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = .5, varOut="else"){
    
   m <- met * 58.2 #[w/m2]
   w <- wme * 58.2 #[w/m2]
@@ -323,7 +323,11 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, lti
   ps   <- 100 * (1.13 * (top ^ .5) - .24 * top + 2.7 * (vel ^ .5) - .99 * vel)
   pts  <- .25 * set - 6.03
   
+  if(varOut=="skinWet"){
+  output <- data.frame(wet)
+  } else {
   output <- data.frame(et, set, tsens, disc, pd, ps, pts, pmvg, pmvstar)
+  }
   rm(et, set, tsens, disc, pd, ps, pts)
   output
 }
@@ -362,6 +366,10 @@ calc2Node(ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt, tu, obj, csw, cdil,
 
 calcPMVStar <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = .5){
 calc2Node(ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr)$pmvstar
+}
+
+calcSkinWettedness <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = .5, varOut="skinWet"){
+as.numeric(calc2Node(ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr, varOut="skinWet"))
 }
 
  

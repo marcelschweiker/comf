@@ -434,3 +434,15 @@ wdXCheck <- function(p1, poo){
 	wdXCheckx
 }
 
+## Check whether package is working
+pckgCheck <- function(){
+	
+	lsCond <- createCond()
+	res <- calcComfInd(lsCond, request = "all")
+	resSet <- c(-0.13, 5.37, 25, 24.22, 0.18, 0.21, 6.45, 40.48, 0.02, 0.22, 0.2, 23.32, 19.91, 21.92, 23.75, 2.4, 2.3, 0.7, 32.7, 29.2, 36.1, 24.3, 19.4, 28.9, 23.3, 25.1, 0.52, 26.65, 0.63, -0.14, -0.41, 0.02, -0.05, -0.13, 2.27, 28.28)
+	print(table(round(res, 2) == resSet))
+	print(table(round(calcPMVPPD(25, 20, .2, 50), 2) == c(-1.53, 52.75)))
+	
+}
+
+	

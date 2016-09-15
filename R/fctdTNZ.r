@@ -8,7 +8,10 @@
 
 # Function: dTNZ ################
 ###########################################
-		
+# ht <- 175; wt <- 80; age <- 30; gender <- 1; clo <- .5; vel <- .1; tskObs <- 36; taObs <- 25; met <- 1.1; rh <- 50; deltaT =1; fBasMet <- "rosa"; fSA <- "duBois"	
+
+## calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, deltaT =.1, fBasMet = "rosa", fSA = "duBois", fSkinWet = "const"){ ## experimental and not leading to reliable results (s. line 122ff.)
+
 calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, deltaT =.1, fBasMet = "rosa", fSA = "duBois"){		
 	 
 	if (fSA == "duBois"){
@@ -59,7 +62,7 @@ calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, delt
 	offseqj <- 9 #Ta
 
 	alpha  <- 0.08 # []
-	w      <- 0.06 # skin wettedness fraction []
+	
 	gammac <- 0.00750061683 # [mmHg/pa]
 	lambda <- 2.2 # [degree C/mmHg] Lewis relation
 
@@ -115,6 +118,18 @@ calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, delt
 	pair <- gammac * rh * exp(18.965 - 4030 / (Ta + 235))
 
 	fpcl <- 1 / (1 + .143 * hconv * clo)
+	
+	#if(fSkinWet == "const"){ # experimental for testing other method of calcuting skin wettedness. So far not leading to reliable results.
+	w <- 0.06 # skin wettedness fraction []
+	# } else if(fSkinWet == "Gagge"){
+		# wCol = NA
+		# for(i in 1:length(seqj)){
+			# TaTemp <- seqj[i] + offseqj
+			# wCol[i] 	   <- calcSkinWettedness(TaTemp, TaTemp, vel, rh, clo, met)
+			# rm(TaTemp)
+		# }
+		# w <- matrix(rep(wCol, length(seqi)), length(seqj), length(seqi))
+	# }
 
 	Qe  <- A * w * lambda * hconv * (ps - pair) * fpcl
 	Qrc <- (A / (iCL + iAir)) * (Ts - Ta) 

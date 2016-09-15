@@ -1,0 +1,237 @@
+%\VignetteIndexEntry{R package: comf}
+%\VignetteEngine{R.rsp::tex}
+%\VignetteKeyword{R}
+%\VignetteKeyword{package}
+%\VignetteKeyword{vignette}
+%\VignetteKeyword{LaTeX}
+
+% #### Definieren von Konstanten fuer das Dokument ####
+
+\title{comf: An introduction}
+\author{
+        Marcel Schweiker
+}
+\date{Version \today}
+
+% #### Laden von Zusatzpaketen ####
+\documentclass[11pt]{article} %Definition des Dokumenttypes und der Standardschriftgroesse
+\usepackage{geometry}	%Definition der Seitenraender
+\geometry{a4paper, left=3cm, right=2cm, top=2cm, bottom=2.5cm,}
+\usepackage[latin1]{inputenc} %Lade Paket mit deutschen Umlauten
+%\usepackage[utf8]{inputenc} 
+\usepackage{graphicx}
+\usepackage{verbatim} % Paket fuer mehrzeilige Kommentare (\begin{comment} ... \end{comment})
+\usepackage{subfigure} %Paket fuer mehrteilige Abbildungen
+\usepackage{multirow}
+\usepackage{color}
+%\usepackage[ngerman]{babel}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage[gen]{eurosym}
+\usepackage{float}
+\usepackage{lscape} %Paket zur Aenderung der Seite ins Querformat
+\usepackage{setspace}\usepackage{threeparttable} %Paket fuer Fussnoten in Tabellen
+\usepackage{epstopdf}
+\usepackage{units}
+%\usepackage{longtable}
+%\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref} %Paket um Inhaltsverzeichnis und Verweise zu verlinken
+
+\let\oldv\verbatim
+\let\oldendv\endverbatim
+
+\def\verbatim{\par\setbox0\vbox\bgroup\oldv}
+\def\endverbatim{\oldendv\egroup\fboxsep0pt \noindent\colorbox[gray]{0.8}{\usebox0}\par}
+
+
+% #### Beginn des eigentlichen Dokumentes ####
+\begin{document}
+
+\maketitle	% Erstellen des Titles mit Autorangaben
+\lstset{keepspaces=true,backgroundcolor = \color{lightgray}, language=R}
+
+\pagenumbering{arabic}
+
+\section{Introduction}
+The R-package \textit{comf} was developed in order to facilitate the computation of thermal comfort indices and the preparation and usage of corresponding data. 
+
+This document describes the groups of functions included in this package. These can be grouped according to 
+
+\begin{enumerate}
+\item The preparation of a dataset and conversion of physical variables
+\item The calculation of one or more comfort indices
+\item The comparison of the values calculated by this package with existing validation tables
+\item The evaluation of the performance of one or more comfort indices
+\end{enumerate}
+
+At this stage, 22 indices can be calculated. For a complete list, use:
+
+\begin{verbatim}
+  install.packages("comf_0.1.6.tar.gz", repos=NULL, type="source")
+  library(comf)
+  ?comf
+\end{verbatim}
+
+Further information about each index together with corresponding references can be obtained by consulting the corresponding help page, e.g.
+
+\begin{verbatim}
+  ?pmv
+  ?ATHBpmv
+\end{verbatim}
+
+\section{Preparation of a dataset and conversion of physical variables}
+Each of the thermal comfort indeces requires different input parameters. This pacakge offers two procedures in order to assure that all necessary input parameters of present in the dataset used to the calculate one or more thermal comfort indices.
+
+\subsection{Using a predefined list of parameters}
+The first procedure uses the function \textit{createCond}, which creates a list of standard values of parameters required for \textbf{all} comfort indices included in this package, which could then be adjusted according to the existing data:
+
+\begin{verbatim}
+  lsCond <- createCond()
+  lsCond$ta <- 21:30
+  lsCond$rh <- 51:60
+  lsCond$met <- 1.0
+\end{verbatim}
+
+The length of vectors assigned to the elements of this list need to be either 1 or have the same length. In above example, it would not be possible to assign a vector with 15 items to \textit{ta}, the indoor air temperature, and a vector with 9 items to \textit{rh}, the relative humidity indoors.
+
+\subsection{Converting a dataframe with variables}
+For the second procedure, a dataframe containing all variables necessary for a calculation can be used. This procedure requires knowledge about the necessary parameters for a comfort index, which could be obtained through the corresponding help file. The dataframe can either be transferred into a list or used directly.
+
+\begin{verbatim}
+  ta <- 21:30
+  rh <- 51:60
+  met <- 1.0
+  dfCond <- data.frame(ta, rh, met)
+  lsCond2 <- as.list(dfCond)
+\end{verbatim}
+
+\subsection{Additional functions}
+Additional small functions to convert variables from one type to another are among others
+
+\begin{itemize}
+\item \textit{calcDewp}, which calculates the dew point temperature, given air temperature and relative humidity,
+\item \textit{calcEnth}, which calculates the enthalpy of the air, given air temperature, relative humidity, and barometric pressure,
+\item \textit{calcRH}, which calculates the relative humidity of air, given air temperature, mixing ratio, and barometric pressure,
+\item \textit{calcTroin}, which calculates the operative and radiant temperature for standard globe measurements according to ISO 7726, given air temperature, globe temperature, air velocity, and metabolic rate.
+\end{itemize}
+
+ 
+\section{Calculating one or more comfort indices}
+There are two possibilities to calculate one or more comfort indices
+\begin{enumerate}
+\item Calculating one or more indices using the function \textit{calcComfInd} or
+\item Calculating one index with its corresponding function.
+\end{enumerate}
+
+\subsection{Calculating one or more indices using the function \textit{calcComfInd}}
+The function \textit{calcComfInd} requires a list or data frame of variables together with a vector of comfort indices to be calculated, e.g. \textit{request="all"} to calculate all indices or \textit{request=c("ATHBpmv", "pmv")}. The list of variables can consist of one element per variable or several elements per variable, e.g. one value for each input parameter, or for some parameters 234 values and for the others one parameter. This was implemented , because variables such as age, gender, or metabolic rate often do not differ in a given dataset, while others like the indoor air temperature are different for each case. A complete list of indices to be calculated can be found through
+
+\begin{verbatim}
+  ?calcComfInd
+  # or 
+  listOfRequests()
+\end{verbatim}
+
+The function \textit{calcComfInd} performs preliminary checks before computing the requested indices. In case one or more required variables do not exist in the list, pre-defined standard values for these variables are used. A warning is given to inform the user about the missing variable(s) and the standard value(s) used for the calculation.
+
+\begin{verbatim}
+  # using lsCond from above does not produce a warning
+  calcComfInd(lsCond, request="all")
+
+  # using lsCond2 from above displays 31 warnings which report
+  # the corresponding standard values used
+  calcComfInd(lsCond2, request="all")
+  warnings()
+
+  # the results however are identical
+\end{verbatim}
+
+\subsection{Calculating an index with its corresponding function}
+Individual functions, e.g. \textit{calcSET} to calculate SET, can be used to calculate one or more comfort indices. With this procedure, one can use a data frame or a list of vectors to calculate a specific thermal comfort index. 
+
+The following example illustrates the usage for multiple input lines:
+
+\begin{verbatim}
+  ta <- c(20,22,24)
+  tr <- ta
+  vel <- rep(.15,3)
+  rh <- rep(50,3)
+
+  maxLength <- max(sapply(list(ta, tr, vel, rh), length))
+  SET <- sapply(seq(maxLength), 
+  function(x) { calcSET(ta[x], tr[x], vel[x], rh[x]) } )
+\end{verbatim}
+
+\section{Comparing the values calculated by this package with existing validation tables}
+Included in this package are two tables to compare the output of computer programs with standard values. These are Table D.1 from ISO 7730 and Table G1-1 from ASHRAE 55-2013.
+
+\begin{verbatim}
+  data(dfISO7730TableD1)
+  head(dfISO7730TableD1)
+
+  data(dfASHRAETableG11)
+  head(dfASHRAETableG11)
+\end{verbatim}
+
+Note that one value differs from ISO 7730 Table D1 to the values in \textit{dfISO7730TableD1}, as a comparison with the calculation done by this package and the values given by the CBE Thermal Comfort Tool (ASHRAE approved) showed a different value. The difference is: 
+
+\begin{itemize}
+\item row 7, PMV must be .36 (not .5) and PPD 8 (not 10) 
+\end{itemize}
+
+Also note that in \textit{dfASHRAETableG11} rows 21 and 22 can only be compared to the function \textit{calcSET} in case \textit{obj="pmvadj"} is chosen. The value of \textit{obj} defines whether the function will use the version presented in ASHRAE 55-2013 for adjustment of PMV (\textit{obj = "pmvadj"}), or the original code by Gagge to calculate the standard effective temperature (SET) (\textit{obj = "set"}). The reason is, that in the version presented in ASHRAE 55-2013, the lines of code related to self-generated convection are deleted. Therefore, a difference can be seen at higher values of met.  
+
+A comparison can look as follows
+
+\begin{verbatim}
+  PMV <- sapply(seq(nrow(dfISO7730TableD1)), function(x) { 
+  calcPMV(dfISO7730TableD1$ta[x], dfISO7730TableD1$tr[x], 
+  dfISO7730TableD1$vel[x], dfISO7730TableD1$rh[x], 
+  dfISO7730TableD1$clo[x], dfISO7730TableD1$met[x]) } ) 
+
+  plot(PMV~dfISO7730TableD1$pmv)
+  data.frame(pmv=dfISO7730TableD1$pmv, PMV)
+\end{verbatim}
+
+\section{Evaluating the performance of one or more comfort indices}
+
+The comparison between the performance of different indices with respect to the prediction of thermal sensation or thermal comfort will be an important aspect in future studies. This package offers the functions 
+\begin{itemize} 
+\item \textit{calcBias} to calculate the mean bias, its standard deviation, and standard error between the actual (observed) thermal sensation vote (ASV) and the predicted thermal sensation vote (PSV) 
+\item \textit{calcTPRTSV}, which calculates the true positive rate (TPR): the proportion of true predicted cases, where the categorical ASV is equal to the categorical PSV 
+\item \textit{calcAvgAcc}, which calculates the average accuracy between PSV and ASV.
+\end{itemize}
+
+Using the example data from above together with an additional column for the ASV, such evaluation can look like this:
+
+\begin{verbatim}
+  ta <- c(20,22,24)
+  tr <- ta
+  vel <- rep(.15,3)
+  rh <- rep(50,3)
+  asv <- c(-1.5, -1, .5) 
+
+  maxLength <- max(sapply(list(ta, tr, vel, rh), length))
+  PTS <- sapply(seq(maxLength), 
+  function(x) { calcPTS(ta[x], tr[x], vel[x], rh[x]) } )
+
+  plot(PTS~asv, xlim=c(-2,1), ylim=c(-2,1))
+  abline(0,1)
+
+  calcBias(asv, PTS)
+
+\end{verbatim}
+
+Such evaluation is underlying e.g., the following paper:
+
+Schweiker, M. and Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
+
+A sample of the dataset used for that paper is included in this package and can be obtained through:
+
+\begin{verbatim}
+  data(dfField)
+  head(dfField)
+\end{verbatim}
+
+\end{document}
