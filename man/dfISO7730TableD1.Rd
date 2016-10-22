@@ -6,7 +6,7 @@
 Adjusted data from Table D1 of ISO 7730
 }
 \description{
-Callibration data for SET model (used for calculation of PMVadj) from ISO 7730 Table D1
+Callibration data for PMV / PPD model (used for calculation of PMVadj) from ISO 7730 Table D1
 }
 \usage{data(dfISO7730TableD1)}
 \format{

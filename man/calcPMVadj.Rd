@@ -16,7 +16,7 @@ Calculating Adjusted Predicted Mean Votes
 \usage{
 calcpmvadj(ta, tr, vel, rh, clo, met, wme = 0)
 calcaPMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
-calcePMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, epCoeff, asv)
+calcePMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, epCoeff)
 }
 \arguments{
   \item{ta}{
@@ -45,9 +45,6 @@ adaptive coefficient lambda
 }
   \item{epCoeff}{
 expectancy factor e
-}
-  \item{asv}{
-actual thermal sensation vote coded with 0 = neutral, hot = +3, cold = -3.
 }
 }
 \details{

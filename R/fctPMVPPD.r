@@ -107,9 +107,10 @@ calcaPMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, apCoeff){
 ## calc epmv ################################
 ## based on Fanger et al.
 ############################################
-calcePMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, epCoeff, asv){
+calcePMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, epCoeff){
 
-	met <- ifelse (asv > 0, met * (1 + asv * (-.067)), met)
+	pmv <- as.numeric(calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1])
+	met <- ifelse (pmv > 0, met * (1 + pmv * (-.067)), met)
 	pmv <- calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1]
 	epmv <- epCoeff * pmv
 	names(epmv) <- "epmv"

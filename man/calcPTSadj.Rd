@@ -18,7 +18,7 @@ Calculating the Predicted Thermal Sensation based on 2-Node Model adjusted for A
 calcPtsa(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171,
  wt = 70, tu = 40, asCoeff)
 calcPtse(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171,
- wt = 70, tu = 40, esCoeff, asv)
+ wt = 70, tu = 40, esCoeff)
 }
 \arguments{
   \item{ta}{
@@ -62,9 +62,6 @@ adaptive coefficient lambda
 }
   \item{esCoeff}{
 expectancy factor e
-}
-  \item{asv}{
-actual thermal sensation vote coded with 0 = neutral, hot = +3, cold = -3.
 }
 }
 \details{

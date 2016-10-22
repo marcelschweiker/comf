@@ -93,9 +93,9 @@ calcComfInd <- function(lsCond, request="all"){
 		} else if (request[nparam] == "ptsa"){
 		paramsI <- c("ta", "tr", "vel", "rh", "clo", "met", "wme", "pb", "ltime", "ht", "wt", "asCoeff")
 		} else if (request[nparam] == "epmv"){
-		paramsI <- c("ta", "tr", "vel", "rh", "clo", "met", "wme", "epCoeff", "asv")
+		paramsI <- c("ta", "tr", "vel", "rh", "clo", "met", "wme", "epCoeff")
 		} else if (request[nparam] == "ptse"){
-		paramsI <- c("ta", "tr", "vel", "rh", "clo", "met", "wme", "pb", "ltime", "ht", "wt", "esCoeff", "asv")			
+		paramsI <- c("ta", "tr", "vel", "rh", "clo", "met", "wme", "pb", "ltime", "ht", "wt", "esCoeff")			
 		} else if (request[nparam] == "epCoeff" | request[nparam] == "apCoeff"){
 		paramsI <- c("ta", "tr", "vel", "rh", "clo", "met", "wme", "asv")			
 		} else if (request[nparam] == "esCoeff" | request[nparam] == "asCoeff"){
@@ -156,9 +156,9 @@ calcComfInd <- function(lsCond, request="all"){
 								 ATHBset = calcATHBset(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i]), 
 								 ATHBpts = calcATHBpts(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i]), 
 								 apmv = calcaPMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], apCoeff[i]), 
-								 epmv = calcePMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], epCoeff[i], asv[i]), 
+								 epmv = calcePMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], epCoeff[i]), 
 								 ptsa = calcPtsa(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], asCoeff[i]), 
-								 ptse = calcPtse(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], esCoeff[i], asv[i]), 
+								 ptse = calcPtse(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], esCoeff[i]), 
 								 pmvadj = calcpmvadj(ta[i], tr[i], vel[i], rh[i], clo[i], met[i]), 
 								 HBxst = calcHbExSteady(ta[i], tr[i], rh[i], vel[i], clo[i], met[i], tao[i], rho[i], frad[i], eps[i], ic[i], ht[i], wt[i], tcrI[i], tskI[i], basMet[i], warmUp[i], cdil[i], sigmatr[i])[33],
 								 humidex = calcHumx(ta[i], rh[i])
@@ -247,14 +247,14 @@ calcComfInd <- function(lsCond, request="all"){
 					
 				} else if (request[nparam] == "epmv"){
 			
-					giveDat <- data.frame(calcePMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], epCoeff[i], asv[i]))
+					giveDat <- data.frame(calcePMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], epCoeff[i]))
 					if (nparam == 1){
 						giveDatas<-giveDat
 					} else {giveDatas<-cbind(giveDatas, giveDat)}
 
 				} else if (request[nparam] == "ptse"){
 			
-					giveDat <- data.frame(calcPtse(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], esCoeff[i], asv[i]))
+					giveDat <- data.frame(calcPtse(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], esCoeff[i]))
 					if (nparam == 1){
 						giveDatas<-giveDat
 					} else {giveDatas<-cbind(giveDatas, giveDat)}

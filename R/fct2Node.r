@@ -389,9 +389,10 @@ calcPtsa <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltim
 ## calc eset ################################
 ## based on Gao et al.
 ############################################
-calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, esCoeff, asv){
+calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, esCoeff){
 
-	met  <- ifelse (asv > 0, met * (1 + asv * (-.067)), met)
+	pmv <- as.numeric(calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1])
+	met  <- ifelse (pmv > 0, met * (1 + pmv * (-.067)), met)
 	set  <- calc2Node(ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt, tu, obj = "set")[2]
 	ptse <- .25 * set - 6.03
 	ptse <- esCoeff * ptse
