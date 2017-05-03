@@ -33,7 +33,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, lti
   sbc   <- 5.6697 * 10 ^ (-08) #stephan-Boltzmann constant
   sa    <- ((ht * wt) / 3600 ) ^ .5   # surface Area (m2) according to mosteller formula 
   
-  if (vel < .1){vel <- .1}
+  vel <- max(vel, 0.1) # set minimum va to .1 m/s
   
   # INITIAL VALUEs - start of 1st experiment
   tsk   <- tskn
@@ -48,7 +48,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, lti
   atm   <- pb / 760 # input unit is torr!
   timeh <- ltime / 60 
   rcl   <- .155 * clo 
-  facl  <- 1 + .15 * clo  # INCreasE IN BODY sURFAce Area DUE to cloTHING
+  facl  <- 1 + .15 * clo  # Increase in body surface area due to clothing
   lr    <- 2.2 / atm     # Lewis Relation is 2.2 at sea level
   pa    <- rh * exp(18.6686 - (4030.183/(ta + 235))) / 100
   
@@ -230,7 +230,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, lti
     if (chcs < 3){chcs <- 3}
   }
   ctcs  <- chcs + chrs
-  rclos <- 1.52 / ((met - wme) + .6944) -.1835 # here wme als in [met]!
+  rclos <- 1.52 / ((met - wme) + .6944) -.1835 # here wme also in [met]!
   rcls  <- .155 * rclos
   facls <- 1 + kclo * rclos
   fcls  <- 1 / (1 + .155 * facls * ctcs * rclos)
