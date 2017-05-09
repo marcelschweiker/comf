@@ -45,7 +45,7 @@ The comfort indices calculated within this package are as follows. To get furthe
 	pd \tab Predicted percentage dissatisfied due to draft \cr
 	pts \tab Predicted thermal sensation vote based on set \cr
 	HBxst \tab Human body exergy consumption rate using steady state method \cr
-	PHS \ tab Predicted heat strain
+	PHS \tab Predicted heat strain
 }
 
 The performance criteria included in this package are presented below. Again you can get further information on the corresponding help pages:
