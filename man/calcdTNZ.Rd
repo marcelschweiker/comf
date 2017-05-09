@@ -9,8 +9,9 @@ Calculating dTNZ, the Distance from the Thermoneutral Zone
 \code{calcdTNZ} calculates the distance from the thermoneutral zone, either skin temperature or room air related. 
 }
 \usage{
-calcdTNZ(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, 
-deltaT = 0.1, fBasMet = "rosa", fSA = "duBois")
+calcdTNZ(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, deltaT =.1, 
+fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38, 
+plotZone = FALSE)
 }
 \arguments{
   \item{ht}{
@@ -52,9 +53,24 @@ a string presenting the method of calculating basal metbolic rate. Needs to be o
   \item{fSA}{
 a string presenting the method of calculating the surface area. Needs to be one of "duBois" or "mosteller".
 }
+  \item{percCov}{
+a numeric value between 0 and 1 presenting the percentage of the body covered by clothes in [%].
+}
+  \item{TcMin}{
+a numeric value presenting the minimum allowed core temperature in [degree C].
+}
+  \item{TcMax}{
+a numeric value presenting the maximum allowed core temperature in [degree C].
+}
+  \item{plotZone}{
+a boolean variable TRUE or FALSE stating, wether TNZ should be plotted or not.
+}
+}
+\details{
+The percentage of the body covered by clothes can be estimated e.g. based on ISO 9920 Appendix H (Figure H.1).  A typical winter case leads to a value of around .86, in the summer case this goes down to values around .68.
 }
 \value{
-\code{calcdTNZ} returns a dataframe with the columns dTNZ, dTNZTs, dTNZTa. Thereby
+\code{calcdTNZ} returns a dataframe with the columns dTNZ, dTNZTs, dTNZTa.  Thereby
 \item{dTNZ }{The absolute distance to the centroid of the thermoneutral zone}
 \item{dTNZTs }{Relative value of distance assuming skin temperature to be dominant for sensation}
 \item{dTNZTa }{Relative value of distance assuming ambient temperature to be dominant for sensation}

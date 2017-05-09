@@ -1,3 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 importFrom("stats", "median", "sd", "na.omit")
 importFrom("plyr", "round_any")
+importFrom("graphics", "image")
