@@ -1,18 +1,26 @@
+comf v0.1.7 (Release date: 2017-05-04)
+==============
+
+Changes:
+* added verification table for ISO 7933
+* added calculation of PHS-index
+* minor additions and updates to dTNZ
+
 comf v0.1.6 (Release date: 2016-09-28)
 ==============
 
 Changes:
 
-* Updated callibration table from ASHRAE 55-2013 for SET
+* Updated verification table from ASHRAE 55-2013 for SET
 * Updated adjustment of met for ePMV and PTSe
-* Added callibration table from ISO 7730 Appendix E for PMV and PPD
+* Added verification table from ISO 7730 Appendix E for PMV and PPD
 
 comf v0.1.5 (Release date: 2016-09-13)
 ==============
 
 Changes:
 
-* Added callibration tables from ISO 7730 for PMV and PPD and ASHRAE 55-2013 for SET
+* Added verification tables from ISO 7730 for PMV and PPD and ASHRAE 55-2013 for SET
 * Added function to check package is running
 * Added vignette
 

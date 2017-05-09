@@ -12,7 +12,7 @@
 
 ## calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, deltaT =.1, fBasMet = "rosa", fSA = "duBois", fSkinWet = "const"){ ## experimental and not leading to reliable results (s. line 122ff.)
 
-calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, deltaT =.1, fBasMet = "rosa", fSA = "duBois"){		
+calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, deltaT =.1, fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38, plotZone = FALSE){		
 	 
 	if (fSA == "duBois"){
 	# calculation of surface area according to duBois
@@ -66,8 +66,8 @@ calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, delt
 	gammac <- 0.00750061683 # [mmHg/pa]
 	lambda <- 2.2 # [degree C/mmHg] Lewis relation
 
-	TcMin  <- 36 # [degree C]
-	TcMax  <- 38 # [degree C]
+	# TcMin  <- 36 # [degree C]
+	# TcMax  <- 38 # [degree C]
 
 	velStill <- 100 * 0.05
 
@@ -75,12 +75,17 @@ calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, delt
 	dTNZHori <- wert <- dTNZVert <- dTNZ <- dTNZTs <- dTNZTa <- NA
 
 	iCL <- 0.155 * clo # [m2 degree C/W]
-	va <- vel # [m/s]
-	va <- max(va,.05) # set minimum va to .05
-	va <- va * 100 # [cm/s] convert va to cm/s
 
+	vel <- max(vel, 0.05) # set minimum vel to .05 m/s
+	va <- vel * 100 # [cm/s] convert va to cm/s
+
+	if (fBasMet == "rosa"){
+	mMin <- basMet * (met-.1) # [W]
+	mMax <- basMet * (met+.1) # [W]
+	} else {
 	mMin <- basMet * 5 / 4 * (met-.1) # [W]
 	mMax <- basMet * 5 / 4 * (met+.1) # [W]
+	}
 
 	iBodyMax <- 0.112 # [m2 degree C/W] see Veicsteinas et al.
 	iBodyMin <- 0.032 # [m2 degree C/W]
@@ -97,13 +102,22 @@ calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, delt
 	iBody <- ifelse(iBody > iBodyMax, iBodyMax, iBody)
 	iBody <- ifelse(iBody < iBodyMin, iBodyMin, iBody)
 	
-	#iAir <- 1 / ((0.19 * sqrt(va) * (298 / (ta + 273.15))) + (0.61 * ((ta + 273.15) / 298) ^ 3)) 
-	#a1 <- 0.8*(0.19*sqrt(velStill)*(298/(ta+273.15))) + 0.2*(0.19*sqrt(va)*(298/(ta+273.15)))
-	#a2 <- (0.61*((ta+273.15)/298) ^ 3)
-	#iAir <- 1/(a1+a2) # weighted average due to body not completely exposed to air velocity
+	#iAir <- 1 / ((0.19 * sqrt(va) * (298 / (Ta + 273.15))) + (0.61 * ((Ta + 273.15) / 298) ^ 3)) 
+	
+	#a1 <- 0.61 * ((Ta + 273.15) / 298) ^ 3 # radiative
+	#a2 <- 0.8 * (0.19 * sqrt(velStill) * (298 / (Ta + 273.15))) + 0.2 * (0.19 * sqrt(va) * (298 / (Ta + 273.15)))
+	
+	#iAir <- .155 / (a1 + a2) # weighted average due to body not completely exposed to air velocity
 
 	a1 <- 0.61 * ((Ta + 273.15) / 298) ^ 3 # radiative
-	a2 <- 0.19 * sqrt(va) * (298 / (Ta + 273.15)) #convective
+	
+	if(percCov >1){
+	warning("Warning! percCov was >1 but should be between 0 and 1 maximum. The value of 1 was used for calculation. Consider dividing percCov by 100.")
+	percCov <- min(percCov,1) # limit percCov to max of 1
+	}
+		
+	a2 <- percCov * (0.19 * sqrt(velStill) * (298 / (Ta + 273.15))) + # covered part
+		  (1-percCov) * (0.19 * sqrt(va) * (298 / (Ta + 273.15))) # uncovered part
 	
 	iAir <- .155 / (a1 + a2) # to adjust from clo unit to m2K/w
 	
@@ -111,8 +125,6 @@ calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, delt
 	chr <- a1 / .155
 	
 	hconv <- ctc - chr
-	#hconv <- 1 / iAir - (0.61 * ((Ta + 273.15) / 298) ^ 3) / 0.155 # [W/m2 degree C]
-	#hconv <- 0.19*sqrt(va)*(298/(ta+273.15))
 
 	ps <- gammac * 100 * exp(18.965 - 4030 / (Ts + 235))
 	pair <- gammac * rh * exp(18.965 - 4030 / (Ta + 235))
@@ -153,13 +165,16 @@ calcdTNZ <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh, delt
 	taGr <- seqj + offseqj 
 	TsGr <- seqi + offseqi 
 	
-	#image(taGr, TsGr, as.matrix(Tc), col="gray", xlab="Ambient temperature [degree C]", ylab="Meanskin temperature [degree C]", xlim=c(5,40), ylim=c(20,42))
-
+	if(plotZone == TRUE){
+	image(taGr, TsGr, as.matrix(Tc), col="gray", xlab="Ambient temperature [degree C]", ylab="Meanskin temperature [degree C]", xlim=c(5,40), ylim=c(20,42))
+	}
+	
 	Qtnz <- Q
 	Qtnz[Q < (1 - alpha) * mMin] <- NA
 	Qtnz[Q > (1 - alpha) * mMax] <- NA
-	#image(taGr, TsGr, as.matrix(Qtnz), col="black", add=T)
-
+	if(plotZone == TRUE){
+	image(taGr, TsGr, as.matrix(Qtnz), col="black", add=T)
+	}
 
 	#########################
 	# from here get dTNZ (vertical + horizontal)
