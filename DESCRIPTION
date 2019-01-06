@@ -1,9 +1,9 @@
 Package: comf
 Type: Package
 Title: Functions for Thermal Comfort Research
-Version: 0.1.7
-Date: 2017-05-04
-Imports: plyr
+Version: 0.1.8
+Date: 2019-01-06
+Imports: plyr, graphics, reshape
 Author: Marcel Schweiker [aut, cre] and Sophia Mueller [aut] and Michael Kleber [ctr] and Boris Kingma [ctr] and Masanori Shukuya [ctr]
 Maintainer: Marcel Schweiker <marcel.schweiker@kit.edu>
 Description: Functions to calculate various common and less common thermal comfort indices, convert physical variables, and evaluate the performance of thermal comfort indices.
