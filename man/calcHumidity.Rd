@@ -7,6 +7,7 @@
 \alias{calcRH}
 \alias{calcSVP}
 \alias{calcVP}
+\alias{calcVapourpressure}
 \title{
 Calculating Various Humidity Related Values
 }
@@ -21,13 +22,14 @@ calcMixR(ta, rh, pb)
 calcRH(ta, mr, pb)
 calcSVP(ta)
 calcVP(ta, mr, pb)
+calcVapourpressure(ta, rh)
 }
 \arguments{
   \item{ta}{
 a numeric value or vector presenting air temperature in [degree C] 
 }
   \item{rh}{
-a numeric value or vector presenting relative humidity in [\%]
+a numeric value or vector presenting relative humidity in [\%], except for \code{calcVapourpressure}, where it must be in decimal (e.g. 0.5)
 }
   \item{mr}{
 a numeric value or vector presenting the mixIng ratio in [g/kg]
@@ -53,6 +55,8 @@ The length of the arguments must be either the same or they must have the length
 \code{calcSVP} returns a single value or a vector of saturation vapor pressure in [kpa]
 
 \code{calcVP} returns a single value or a vector of vapor pressure in [kpa]
+
+\code{calcVapourpressure} returns a single value or a vector of vapor pressure in [kpa]
 
 }
 \references{

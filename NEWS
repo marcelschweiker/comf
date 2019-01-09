@@ -1,7 +1,16 @@
+comf v0.1.8 (Release date: 2019-01-06)
+==============
+
+Changes:
+
+* added updated function for TNZ according to review paper by Schweiker et al. (2018)
+* minor adjustments to comments
+
 comf v0.1.7 (Release date: 2017-05-04)
 ==============
 
 Changes:
+
 * added verification table for ISO 7933
 * added calculation of PHS-index
 * minor additions and updates to dTNZ

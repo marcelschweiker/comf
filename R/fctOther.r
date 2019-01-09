@@ -76,3 +76,9 @@ calcRH <- function(ta, mr, pb){
 	calcVP(ta, mr, pb)/calcSVP(ta)*100
   }
 
+# vapour pressure for pdftnz
+calcVapourpressure <- function(ta, rh){ # Ta in degree C and rh in decimal (e.g. 0.5)
+ psat <- 100 * exp(18.965 - 4030/(ta + 235))
+ rh * psat
+ }
+ 

@@ -86,10 +86,11 @@ Kingma, B. R.; Frijns, A. J.; Schellen, L. and van Marken Lichtenbelt, W. D. Bey
 Marcel Schweiker and Boris Kingma
 }
 \note{
+This function was used in earlier versions of TNZ calculation (see references above). The newest version is \code{calcTNZPDF}.
 In case one of the variables is not given, a standard value will be taken from a list (see \code{\link{createCond}} for details.
 }
 \seealso{
-see also \code{\link{calcComfInd}}
+see also \code{\link{calcTNZPDF}} and \code{\link{calcComfInd}}
 }
 \examples{
 ## Calculate all values

@@ -44,7 +44,7 @@ calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
   eps  <- .00015
   
   
-  # COmPUTE sURFAce TEmPEratuRE OF cloTHING BY ITEraTIONs
+  # Compute surface temperature of clothing by iterations
   while (noi < 150){
     xf  <- (xf + xn) / 2
     hcn <- 2.38 * abs(100 * xf - taa) ^ .25
@@ -59,7 +59,7 @@ calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
   }
   tcl <- 100 * xn - 273
   
-  # COmPUTE pmv
+  # Compute pmv
 
   pm1 <- 3.96 * fcl * (xn ^ 4 - (tra / 100) ^ 4)
   pm2 <- fcl * hc * (tcl - ta)
