@@ -22,9 +22,9 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, lti
   mw <- m - w 
   
   kclo <- .25	
-  csw  <- 170   #driving coefficient for regulatory sweating
-  cdil <- 120   #driving coefficient for vasodilation
-  cstr <- .5    #driving coefficient for vasoconstriction
+  csw  <- csw   #driving coefficient for regulatory sweating
+  cdil <- cdil   #driving coefficient for vasodilation
+  cstr <- cstr    #driving coefficient for vasoconstriction
   
   tskn  <- 33.7  #setpoint (neutral) value for tsk
   tcrn  <- 36.8  #setpoint value for tcr
