@@ -383,7 +383,7 @@ createCond <- function(a = TRUE){
 	tskI	<- 36	# initial values for skin temperature
 	basMet	<- 58.2 # basal metabolic rate
 	warmUp	<- 60	# length of warm up period, i.e. number of times, loop is running for HBx calculation
-	cdil	<- 100
+	cdil	<- 120
 	sigmatr <- .25
 
     print("A list with standard values was created. It contains standard room conditions.")
