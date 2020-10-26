@@ -1,0 +1,32 @@
+\name{calcUTCI}
+\alias{calcUTCI}
+\alias{es}
+\title{Calculating PMV and PPD}
+\usage{
+calcUTCI(ta, tr, vel, rh)
+es(ta)
+}
+\arguments{
+\item{ta}{a numeric value presenting air temperature in [degree C]}
+
+\item{tr}{a numeric value presenting mean radiant temperature in [degree C]}
+
+\item{vel}{a numeric value presenting air velocity in [m/s]}
+
+\item{rh}{a numeric value presenting relative humidity [\%]}
+}
+\value{
+the \code{utci_approx} value rounded to one decimal
+}
+\description{
+Functions to calculate UTCI and es.
+}
+\details{
+air temperature and mean radiant temperature should be in Degree C unit. Air velocity has to be in m/s unit and relative humidity has to be put in percentage value.
+}
+\examples{
+calcUTCI(25, 25, 1.0, 50) = 24.6
+}
+\author{
+Code implemented in to R by Shaomi Rahman
+}
