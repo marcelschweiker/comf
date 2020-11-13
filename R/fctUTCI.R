@@ -8,36 +8,33 @@
 #
 # v2.0 done by Shaomi Rahman
 
-
-# Function: UTCI ########################
-###########################################
-#' @title Calculating UTCI
-#' @aliases es
-#' @description Functions to calculate UTCI and es.
-#' @usage calcUTCI(ta, tr, vel, rh)
-#' es(ta)
-#' @param ta a numeric value presenting air temperature in [degree C]
-#' @param tr a numeric value presenting mean radiant temperature in [degree C]
-#' @param vel a numeric value presenting air velocity in [m/s]
-#' @param rh a numeric value presenting relative humidity [\%]
-#' @details air temperature and mean radiant temperature should be in Degree C unit. Air velocity has to be in m/s unit and relative humidity has to be put in percentage value.
-#' @return the \code{utci_approx} value rounded to one decimal
-#' @author Code implemented in to R by Shaomi Rahman
-#' @export
-#' @examples
-#' calcUTCI(25, 25, 1.0, 50) = 24.6
 calcUTCI <- function(ta, tr, vel, rh) {
   
   #validate the inputs and prints an error message for invalid inputs
   validate_UTCI(ta, tr, vel, rh)
   
+  #calculate utci value from function
+  utci_value = utci_approx(ta, tr, vel, rh)
+  
+  #check if utci value is within acceptable range
+  utci_range = get_utci_range()
+  check_range(utci_value, round(utci_range[1],3), round(utci_range[2],3))
+  
+  #return the value
+  round(utci_value,1)
+}
+
+
+#function for calculating UTCI Value
+utci_approx <- function(ta, tr, vel, rh) {
   ehPa = es(ta) * (rh / 100.0)
   delta_t_tr = tr - ta
+  
   # convelert velapour pressure to kPa
   Pa = ehPa / 10.0
   
   #calculation of the utci value
-  utci_approx = (
+  utci = (
     ta
     + (0.607562052)
     + (-0.0227712343) * ta
@@ -394,14 +391,9 @@ calcUTCI <- function(ta, tr, vel, rh) {
     + (2.47090539 * (10 ** (-4))) * delta_t_tr * Pa * Pa * Pa * Pa * Pa
     + (0.00148348065) * Pa * Pa * Pa * Pa * Pa * Pa
   )
-  
-  round(utci_approx,1)
 }
-# End calcUTCI##############################
-###########################################
 
-# Function: es########################
-###########################################
+#function for calculating the es value
 es <- function(ta) {
   g <- c(-2836.5744,
          -6028.076559,
@@ -420,6 +412,4 @@ es <- function(ta) {
   es = exp(es) * 0.01
   es
 }
-# End es##############################
-###########################################
 

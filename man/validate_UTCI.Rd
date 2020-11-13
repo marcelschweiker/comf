@@ -29,10 +29,10 @@ validate_UTCI(25, 25, 0.1, 50) #valid input
 does nothing
 validate_UTCI(FALSE, 50, 0.1, 50) #not numerical ta input
 validate_UTCI(50, 50, 0.1, 50) #invalid input for ta, td
-Warning Message: 50 is out of range. Has to be between 0 and 40"
+Error Message: 50 is out of range. Has to be between 0 and 40"
                  50 is out of range. Has to be between 0 and 40
 validate_UTCI(25, 25, 0.1, 150) #invalid input for rh
-Warning Message: 150 is out of range. Has to be between 0 and 100"
+Error Message: 150 is out of range. Has to be between 0 and 100"
 }
 \author{
 Code implemented in to R by Shaomi Rahman

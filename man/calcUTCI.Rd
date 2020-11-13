@@ -1,9 +1,10 @@
 \name{calcUTCI}
 \alias{calcUTCI}
 \alias{es}
-\title{Calculating PMV and PPD}
+\title{Calculating UTCI}
 \usage{
 calcUTCI(ta, tr, vel, rh)
+utci_approx(ta, tr, vel, rh)
 es(ta)
 }
 \arguments{
@@ -16,7 +17,7 @@ es(ta)
 \item{rh}{a numeric value presenting relative humidity [\%]}
 }
 \value{
-the \code{utci_approx} value rounded to one decimal
+the \code{utci_value} value rounded to one decimal
 }
 \description{
 Functions to calculate UTCI and es.
