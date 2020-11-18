@@ -3,55 +3,62 @@
 # -Delta mean radiant temperature(float)
 #
 # File contains 2 functions:
-#   - calcSolarGain(sol_altitude, sol_azimuth, sol_radiation_dir,
-#                   sol_transmittance, f_svv, f_bes, asw=0.7, 
-#                   posture="seated", floor_reflectance=0.6)
+#   - calcSolarGain(solAlt, solAzi, solRadDir,
+#                   solTrans, fSvv, fBes, asw=0.7, 
+#                   posture="seated", floorRef=0.6)
 #   - find_span(arr,x)
 #
 # v2.0 done by Shaomi Rahman
 
 #calculates Solar Gain and return Solar Gain and Delta mean radiant temperature
 #input parameters 
-# - sol_altitude : float
-#   Solar altitude, degrees from horizontal [deg]. Ranges between 0 and 90.
-#   sol_azimuth : float
-#   Solar azimuth, degrees clockwise from North [deg]. Ranges between 0 and 180.
+# - solAlt : float
+#   Solar altitude, a numeric value presenting Solar altitude, degrees from horizontal in [degree C].
+#   solAzi : float
+#   Solar azimuth, a numeric value presenting Solar azimuth, degrees clockwise from North in [degree C].
 #   posture : str
 #   Default 'seated' list of available options 'standing', 'supine' or 'seated'
-#   sol_radiation_dir : float
-#   Direct-beam solar radiation, [W/m2]. Ranges between 200 and 1000.
-#   sol_transmittance : float
+#   solRadDir : float
+#   a numeric value presenting Direct-beam solar radiation [W/m2].
+#   solTrans : float
 #   Total solar transmittance, ranges from 0 to 1.
-#   f_svv : float
+#   fSvv : float
 #   Fraction of sky vault exposed to body, ranges from 0 to 1.
-#   f_bes : float
+#   fBes : float
 #   Fraction of the possible body surface exposed to sun, ranges from 0 to 1.
 #   asw: float
 #   The average short-wave absorptivity of the occupant. It will range widely. 
 #   Default value 0.7
-#   floor_reflectance: float
+#   floorRef: float
 #   Floor refectance. It is assumed to be constant and equal to 0.6.
 
 #Output Parameters
 #  erf: float
 #  Solar gain to the human body using the Effective Radiant Field [W/m2]
-#  delta_mrt: float
+#  delMrt: float
 #  Delta mean radiant temperature. The amount by which the mean radiant
 #  temperature of the space should be increased if no solar radiation is present
 
-calcSolarGain <- function(sol_altitude, sol_azimuth, sol_radiation_dir, 
-                          sol_transmittance, f_svv, f_bes, asw=0.7, 
-                          posture="seated", floor_reflectance=0.6){
+calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans, 
+                          fSvv, fBes, asw=0.7, 
+                          posture="seated", floorRef=0.6){
   
   posture = tolower(posture)
-  
-  #validate posture input
-  if(!posture %in% c("standing", "supine", "seated"))
-    stop("Posture has to be either standing, supine or seated")
+  solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw=0.7, 
+            posture="seated", floorRef=0.6)
+  #solarGainRange = getSolarGainRange()
+  #check_range(solarGainRes[1], solarGainRange[1],solarGainRange[2])
+  #check_range(solarGainRes[2], solarGainRange[3],solarGainRange[4])
+  solarGainRes
+}
+
+solarGain <- function(solAlt, solAzi, solRadDir, solTrans, 
+                      fSvv, fBes, asw=0.7, 
+                      posture="seated", floorRef=0.6){
   
   deg_to_rad = 0.0174532925
   hr = 6
-  i_diff = 0.2 * sol_radiation_dir
+  i_diff = 0.2 * solRadDir
   
   fp_table = rbind(
     c(0.25, 0.25, 0.23, 0.19, 0.15, 0.10, 0.06),
@@ -88,15 +95,15 @@ calcSolarGain <- function(sol_altitude, sol_azimuth, sol_radiation_dir,
   }
   
   if(posture == "supine"){
-    alt_temp = sol_altitude
-    sol_altitude = abs(90 - sol_azimuth)
-    sol_azimuth = alt_temp
+    alt_temp = solAlt
+    solAlt = abs(90 - solAzi)
+    solAzi = alt_temp
   }
   
   alt_range = c(0, 15, 30, 45, 60, 75, 90)
   az_range = c(0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180)
-  alt_i = find_span(alt_range, sol_altitude)
-  az_i = find_span(az_range, sol_azimuth)
+  alt_i = find_span(alt_range, solAlt)
+  az_i = find_span(az_range, solAzi)
   fp11 = fp_table[az_i,alt_i]
   fp12 = fp_table[az_i,alt_i + 1]
   fp21 = fp_table[az_i + 1,alt_i]
@@ -105,10 +112,10 @@ calcSolarGain <- function(sol_altitude, sol_azimuth, sol_radiation_dir,
   az2 = az_range[az_i + 1]
   alt1 = alt_range[alt_i]
   alt2 = alt_range[alt_i + 1]
-  fp = fp11 * (az2 - sol_azimuth) * (alt2 - sol_altitude)
-  fp = fp + (fp21 * (sol_azimuth - az1) * (alt2 - sol_altitude))
-  fp = fp +(fp12 * (az2 - sol_azimuth) * (sol_altitude - alt1))
-  fp = fp +(fp22 * (sol_azimuth - az1) * (sol_altitude - alt1))
+  fp = fp11 * (az2 - solAzi) * (alt2 - solAlt)
+  fp = fp + (fp21 * (solAzi - az1) * (alt2 - solAlt))
+  fp = fp +(fp12 * (az2 - solAzi) * (solAlt - alt1))
+  fp = fp +(fp22 * (solAzi - az1) * (solAlt - alt1))
   fp = fp/((az2 - az1) * (alt2 - alt1))
   f_eff = 0.725
   
@@ -118,21 +125,20 @@ calcSolarGain <- function(sol_altitude, sol_azimuth, sol_radiation_dir,
   sw_abs = asw
   lw_abs = 0.95
   
-  e_diff = f_eff * f_svv * 0.5 * sol_transmittance * i_diff
-  e_direct = fp * sol_transmittance * f_bes * sol_radiation_dir
+  e_diff = f_eff * fSvv * 0.5 * solTrans * i_diff
+  e_direct = fp * solTrans * fBes * solRadDir
   e_refl = (
     f_eff 
-    * f_svv 
+    * fSvv 
     * 0.5 
-    * sol_transmittance 
-    * (sol_radiation_dir * sin(sol_altitude * deg_to_rad) + i_diff) 
-    * floor_reflectance
-    )
+    * solTrans 
+    * (solRadDir * sin(solAlt * deg_to_rad) + i_diff) 
+    * floorRef
+  )
   e_solar = e_diff + e_direct + e_refl
   erf = e_solar * (sw_abs / lw_abs)
-  d_mrt = erf / (hr * f_eff)
-  
-  return(c(round(erf,1), round(d_mrt,1)))
+  delMrt = erf / (hr * f_eff)
+  return(c(erf, delMrt))
 }
 
 find_span <- function(arr, x){

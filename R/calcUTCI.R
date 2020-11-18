@@ -17,7 +17,7 @@ calcUTCI <- function(ta, tr, vel, rh) {
   utci_value = utci_approx(ta, tr, vel, rh)
   
   #check if utci value is within acceptable range
-  utci_range = get_utci_range()
+  utci_range = getUtciRange()
   check_range(utci_value, round(utci_range[1],3), round(utci_range[2],3))
   
   #return the value

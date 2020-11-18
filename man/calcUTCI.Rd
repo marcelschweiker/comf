@@ -1,11 +1,8 @@
 \name{calcUTCI}
 \alias{calcUTCI}
-\alias{es}
 \title{Calculating UTCI}
 \usage{
 calcUTCI(ta, tr, vel, rh)
-utci_approx(ta, tr, vel, rh)
-es(ta)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
