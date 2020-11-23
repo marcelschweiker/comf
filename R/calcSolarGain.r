@@ -44,11 +44,11 @@ calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans,
                           posture="seated", floorRef=0.6){
   
   posture = tolower(posture)
-  solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw=0.7, 
-            posture="seated", floorRef=0.6)
-  #solarGainRange = getSolarGainRange()
-  #check_range(solarGainRes[1], solarGainRange[1],solarGainRange[2])
-  #check_range(solarGainRes[2], solarGainRange[3],solarGainRange[4])
+  solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
+            posture, floorRef=0.6)
+  solarGainRange = getSolarGainRange()
+  check_range(solarGainRes[1], solarGainRange[1],solarGainRange[2])
+  check_range(solarGainRes[2], solarGainRange[3],solarGainRange[4])
   solarGainRes
 }
 

@@ -79,12 +79,18 @@ getSolarGainRange <- function() {
   posture= c("standing", "supine", "seated")
   solarGainValue = expand.grid(solAlt = solAlt, solAzi = solAzi, 
                                solRadDir = solRadDir, solTrans = solTrans,
-                               fSvv = fSvv, fBes = fBes, asw = asw, 
-                               solarGainRes = solarGain(solAlt, solAzi, 
-                                                        solRadDir, solTrans, 
-                                                        fSvv, fBes,asw,posture))
+                               fSvv = fSvv, fBes = fBes, asw = asw,
+                               posture = posture, erf = 0, dMart = 0)
+  for(i in 1:nrow(solarGainValue)){
+    solarGainRes = solarGain(solarGainValue$solAlt[i], solarGainValue$solAzi[i],
+                             solarGainValue$solRadDir[i], 
+                             solarGainValue$solTrans[i], solarGainValue$fSvv[i],
+                             solarGainValue$fBes[i], solarGainValue$asw[i],
+                             solarGainValue$posture[i])
+    solarGainValue$erf[i] = solarGainRes[1]
+    solarGainValue$dMart[i] = solarGainRes[2]
+  }
   
-  
-  #c(min(solarGainValue$erf), max(solarGainValue$erf), 
-    #min(solarGainValue$delMrt), max(solarGainValue$delMart))
+  c(min(solarGainValue$erf), max(solarGainValue$erf), 
+    min(solarGainValue$dMart), max(solarGainValue$dMart))
 }
