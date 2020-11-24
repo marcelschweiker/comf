@@ -2,11 +2,15 @@
 % Please edit documentation in R/fctAD.R
 \name{calcAD}
 \alias{calcAD}
-\alias{AnkleDraft}
-\alias{Ad}
-\title{Calculate PPD with ankle Draft}
+\alias{ankledraft}
+\alias{ad}
+\title{Calculate PPD with Ankle Draft}
 \usage{
-calcadraft(ta, tr, vel, rh, clo, met, vankle)
+calcAD(ta, tr, vel, rh, clo, met, v_ankle)
+
+ad(ta, tr, vel, rh, clo, met, v_ankle)
+
+ankledraft(ta, tr, vel, rh, clo, met, v_ankle)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -21,7 +25,7 @@ calcadraft(ta, tr, vel, rh, clo, met, vankle)
 
 \item{met}{a numeric value presenting metabolic rate in [met]}
 
-\item{vankle}{air speed at the 0.1 m (4 in.) above the floor [m/s]}
+\item{v_ankle}{air speed at the 0.1 m (4 in.) above the floor [m/s]}
 }
 \value{
 Predicted Percentage of Dissatisfied occupants with ankle draft in [\%]

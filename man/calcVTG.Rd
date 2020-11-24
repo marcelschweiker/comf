@@ -2,14 +2,15 @@
 % Please edit documentation in R/fctVTG.R
 \name{calcVTG}
 \alias{calcVTG}
-\alias{Vertical}
-\alias{Air}
-\alias{Temperature}
-\alias{Gradient}
-\alias{VTG}
-\title{Calculate PPD with ankle Draft}
+\alias{vairtepgrad}
+\alias{vtg}
+\title{Calculate PPD with Vertical Air Temperature Gradient}
 \usage{
 calcVTG(ta, tr, vel, rh, clo, met, vankle)
+
+vtg(ta, tr, vel, rh, clo, met, vankle)
+
+vairtmpgrad(ta, tr, vel, rh, clo, met, vankle)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -38,7 +39,7 @@ Function to calculate vertical air temperature gradient using the function predi
 Calculates the percentage of thermally dissatisfied people with a vertical temperature gradient between feet and head.This equation is only applicable for velocity(vel) < 0.2 m/s (40 fps)
 }
 \examples{
-calcVTG(25,25,0.1,50,0.5,1.2,7) returns Vertical Air Temperature Gradient:12.6, Acceptability:FALSE
+calcVTG(25,25,0.1,50,0.5,1.2,7) returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
 }
 \author{
 Shoaib Sarwar
