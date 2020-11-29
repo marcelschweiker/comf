@@ -3,9 +3,6 @@
 \name{calcATHBpmv}
 \alias{calcATHBpmv}
 \title{Calculation of Adaptive Thermal Heat Balance Indices with PMV}
-\description{
-\code{calcATHBpmv} calculates three different indices related to the adaptive thermal heat balance framework according to PMV
-}
 \usage{
 calcATHBpmv(trm, psych, ta, tr, vel, rh, met, wme)
 }
@@ -26,28 +23,25 @@ calcATHBpmv(trm, psych, ta, tr, vel, rh, met, wme)
 
 \item{wme}{- a numeric value presenting external work in [met]}
 }
+\value{
+\code{calcATHBpmv} pmv value adapted through the ATHB appoach
+}
+\description{
+\code{calcATHBpmv} calculates three different indices related to the adaptive thermal heat balance framework according to PMV
+}
 \details{
 All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
 }
-\value{
-pmv value adapted through the ATHB approach
-}
-\description{
-calcATHB calculates three different indices related to the adaptive thermal heat balance framework. This function returns the pmv value adapted through the ATHB approach
+\examples{
+calcATHBpmv(20, 0, 25, 25, .1, 50, 1.1, 0)
 }
 \references{
 Schweiker, M. & Wagner, A. A framework for an adaptive thermal heat balance model (ATHB), Building and Environment, 2015, 94, 252 - 262
-
 Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 }
-\author{
-Marcel Schweiker
-}
-
 \seealso{
 see also \code{\link{calcComfInd}}
 }
-\examples{
-calcATHBpmv(20, 0, 25, 25, .1, 50, 1.1, 0)
-
+\author{
+Marcel Schweiker
 }

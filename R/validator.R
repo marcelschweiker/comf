@@ -67,8 +67,14 @@ getUtciRange <- function() {
   ta = tr = c(0,20,40)
   vel = c(0,5,10)
   rh = c(0,50,100)
-  utciValue = expand.grid(ta = ta, tr = tr, vel = vel, rh = rh, UTCI = utci_approx(ta, tr, vel, rh))
-  c(min(utciValue$UTCI), max(utciValue$UTCI))
+  utciValue = expand.grid(ta = ta, tr = tr, vel = vel, rh = rh)
+  utciR = c()
+  for(i in 1:nrow(utciValue)){
+    row <- utciValue[i,]
+    utciR = append(utciR, utci_approx(row$ta, row$tr, row$vel, row$rh))
+  }
+  utciValue$UTCI_R = utciR
+  return(c(min(utciValue$UTCI_R), max(utciValue$UTCI_R)))
 }
 
 getSolarGainRange <- function() {

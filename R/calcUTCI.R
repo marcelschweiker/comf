@@ -1,13 +1,20 @@
-# Functions return:
-#
-# UTCI - Universal Thermal Climate Index
-#
-# File contains 2 functions:
-#   - calcUTCI(ta, tr, vel, rh)
-#       returns UTCI
-#
-# v2.0 done by Shaomi Rahman
-
+#' Calculating Universal Thermal Comfort Index (UTCI)
+#'
+#' @param ta a numeric value presenting air temperature in [degree C]
+#' @param tr a numeric value presenting mean radiant temperature in [degree C]
+#' @param vel a numeric value presenting air velocity in [m/s]
+#' @param rh a numeric value presenting relative humidity [\%]
+#'
+#' @return the \code{utci_value} value rounded to one decimal
+#' @export
+#'
+#' @description Functions to calculate UTCI.
+#' @usage calcUTCI(ta, tr, vel, rh)
+#' @details air temperature and mean radiant temperature should be in Degree C unit. Air velocity has to be in m/s unit and relative humidity has to be put in percentage value.
+#' @author Code implemented in R by Shaomi Rahman
+#' @seealso see also calcComfInd
+#' @examples 
+#' calcUTCI(25, 25, 1.0, 50) = 24.6
 calcUTCI <- function(ta, tr, vel, rh) {
   
   #validate the inputs and prints an error message for invalid inputs
@@ -18,7 +25,7 @@ calcUTCI <- function(ta, tr, vel, rh) {
   
   #check if utci value is within acceptable range
   utci_range = getUtciRange()
-  check_range(utci_value, round(utci_range[1],3), round(utci_range[2],3))
+  check_range(utci_value, utci_range[1], utci_range[2])
   
   #return the value
   round(utci_value,1)
