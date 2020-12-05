@@ -74,7 +74,6 @@ getUtciRange <- function() {
     utci = append(utci, utci_approx(row$ta, row$tr, row$vel, row$rh))
   }
   utciValue$UTCI = utci
-  save(utciValue, file = "/Users/junayed/Documents/GitHub/comf/data/utciValue.RData")
   return(c(min(utciValue$UTCI), max(utciValue$UTCI)))
 }
 
@@ -97,7 +96,6 @@ getSolarGainRange <- function() {
     solarGainValue$erf[i] = solarGainRes[1]
     solarGainValue$dMart[i] = solarGainRes[2]
   }
-  #save(solarGainValue, file = "/Users/junayed/Documents/GitHub/comf/data/solarGainValue.Rdata")
   c(min(solarGainValue$erf), max(solarGainValue$erf), 
     min(solarGainValue$dMart), max(solarGainValue$dMart))
 }
