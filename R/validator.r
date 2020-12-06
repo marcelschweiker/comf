@@ -80,7 +80,7 @@ getUtciRange <- function() {
 getSolarGainRange <- function() {
   solAlt = c(0, 90) 
   solAzi = c(0, 180) 
-  solRadDir = c(200, 2000) 
+  solRadDir = c(200, 1000) 
   solTrans = fSvv = fBes = asw = c(0,1)
   posture= c("standing", "supine", "seated")
   solarGainValue = expand.grid(solAlt = solAlt, solAzi = solAzi, 
