@@ -27,19 +27,23 @@
 #' Solar gain to the human body using the Effective Radiant Field. The unit is W/m2
 #' Delta mean radiant temperature in Degree C
 #' @export
-#'
+#' @aliases calcSolarGain calcsolargain SolarGain solargain
 #' @examples
 #' calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") = [42.9, 10.3]
-#' @author Code implemented to R by Shaomi Rahman
+#' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 #' @seealso see also calcComfInd
 calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans, 
                           fSvv, fBes, asw=0.7, 
                           posture="seated", floorRef=0.6){
   
   posture = tolower(posture)
+  validateSolarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
+                    posture)
   solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
-            posture, floorRef=0.6)
-  solarGainRange = getSolarGainRange()
+                           posture, floorRef=0.6)
+  if(!exists("solarGainRange")){
+    solarGainRange <<- getSolarGainRange()
+  }
   check_range(solarGainRes[1], solarGainRange[1],solarGainRange[2])
   check_range(solarGainRes[2], solarGainRange[3],solarGainRange[4])
   solarGainRes
@@ -131,7 +135,7 @@ solarGain <- function(solAlt, solAzi, solRadDir, solTrans,
   e_solar = e_diff + e_direct + e_refl
   erf = e_solar * (sw_abs / lw_abs)
   delMrt = erf / (hr * f_eff)
-  return(c(erf, delMrt))
+  return(c(round(erf,1),round(delMrt,1)))
 }
 
 find_span <- function(arr, x){

@@ -183,7 +183,7 @@ def utci(tdb, tr, v, rh, units="SI"):
         or (v < 0.5)
         or (v > 17)
     ):
-        return "None"
+        return(None)
         raise ValueError(
             "The value you entered are outside the equation applicability limits"
         )

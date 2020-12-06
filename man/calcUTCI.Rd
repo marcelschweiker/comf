@@ -2,6 +2,9 @@
 % Please edit documentation in R/calcUTCI.R
 \name{calcUTCI}
 \alias{calcUTCI}
+\alias{calcutci}
+\alias{utci}
+\alias{UTCI}
 \title{Calculating Universal Thermal Comfort Index (UTCI)}
 \usage{
 calcUTCI(ta, tr, vel, rh)
@@ -31,5 +34,5 @@ calcUTCI(25, 25, 1.0, 50) = 24.6
 see also calcComfInd
 }
 \author{
-Code implemented in R by Shaomi Rahman
+Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 }

@@ -6,41 +6,49 @@ utciModel = py_run_file('~/Documents/GitHub/comf/R/models.py')
 ta = tr = c(0,20,40)
 vel = c(0,5,10)
 rh = c(0,50,100)
-utciValue = expand.grid(ta = ta, tr = tr, vel = vel, rh = rh)
+utciTest = expand.grid(ta = ta, tr = tr, vel = vel, rh = rh)
 utciPython = c()
 utciR = c()
-for(i in 1:nrow(utciValue)){
-  row <- utciValue[i,]
-  utciPython = append(utciPython, utciModel$utci(row$ta, row$tr, row$vel, row$rh))
+for(i in 1:nrow(utciTest)){
+  row <- utciTest[i,]
+  utciPythonResult = utciModel$utci(row$ta, row$tr, row$vel, row$rh)
+  if(is.numeric(utciPythonResult)){
+    utciPython = append(utciPython, utciPythonResult)
+  }
+  else{
+    utciPython = append(utciPython, NA)
+  }
   utciR = append(utciR, calcUTCI(row$ta, row$tr, row$vel, row$rh))
 }
-utciValue$UTCI_Python = utciPython
-utciValue$UTCI_R = utciR
+utciTest$UTCI_Python = utciPython
+utciTest$UTCI_R = utciR
 
 #for solar gain
-solAlt = c(0, 45, 90) 
-solAzi = c(0, 90, 180) 
-solRadDir = c(200, 1100, 2000) 
-solTrans = fSvv = fBes = asw = c(0,0.5,1)
+solAlt = c(0,90) 
+solAzi = c(0,180) 
+solRadDir = c(200, 1000) 
+solTrans = fSvv = fBes = asw = c(0,1)
 posture= c("standing", "supine", "seated")
-solarGainR = c()
-solarGainPython = c()
-solarGainMatch = c()
-solarGainValue = expand.grid(solAlt = solAlt, solAzi = solAzi, 
+erfR = c()
+erfPython = c()
+deltaMrtR = c()
+deltaMrtPython = c()
+solarGainTest = expand.grid(solAlt = solAlt, solAzi = solAzi, 
                              solRadDir = solRadDir, solTrans = solTrans,
                              fSvv = fSvv, fBes = fBes, asw = asw,
                              posture = posture)
-for(i in 1:nrow(solarGainValue)){
-  row = solarGainValue[i,]
+for(i in 1:nrow(solarGainTest)){
+  row = solarGainTest[i,]
   rResult = calcSolarGain(row$solAlt, row$solAzi,row$solRadDir, row$solTrans,
                           row$fSvv, row$fBes, row$asw,row$posture)
   pythonResult = utciModel$solar_gain(row$solAlt, row$solAzi,row$solRadDir, row$solTrans,
                                   row$fSvv, row$fBes, row$asw,row$posture)
-  rStringResult = cat("erf:", rResult[1], "delta_mrt:", rResult[2])
-  solarGainR = append(solarGainR, rStringResult)
-  solarGainPython = append(solarGainPython, pythonResult)
-  solarGainMatch = (rStringResult == pythonResult)
+  erfR = append(erfR, rResult[1])
+  erfPython = append(erfPython, pythonResult['erf'])
+  deltaMrtR = append(deltaMrtR, rResult[2])
+  deltaMrtPython = append(deltaMrtPython, pythonResult['delta_mrt'])
 }
-solarGainValue$SolarGainPython = solarGainPython
-solarGainValue$SolarGainR = solarGainR
-solarGainValue$ResultMatched = solarGainMatch
+solarGainTest$erfR = erfR
+solarGainTest$erfPython = erfPython
+solarGainTest$deltaMrtR = deltaMrtR
+solarGainTest$deltaMrtPython = deltaMrtPython

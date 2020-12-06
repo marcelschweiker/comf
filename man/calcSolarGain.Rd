@@ -2,6 +2,9 @@
 % Please edit documentation in R/calcSolarGain.r
 \name{calcSolarGain}
 \alias{calcSolarGain}
+\alias{calcsolargain}
+\alias{SolarGain}
+\alias{solargain}
 \title{Calculating Solar Gain}
 \usage{
 calcSolarGain(solAlt, solAzi, solRadDir, solTrans,
@@ -51,5 +54,5 @@ calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") = [42.9, 10
 see also calcComfInd
 }
 \author{
-Code implemented to R by Shaomi Rahman
+Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 }

@@ -7,11 +7,11 @@
 #'
 #' @return the \code{utci_value} value rounded to one decimal
 #' @export
-#'
+#' @aliases calcUTCI calcutci utci UTCI
 #' @description Functions to calculate UTCI.
 #' @usage calcUTCI(ta, tr, vel, rh)
 #' @details air temperature and mean radiant temperature should be in Degree C unit. Air velocity has to be in m/s unit and relative humidity has to be put in percentage value.
-#' @author Code implemented in R by Shaomi Rahman
+#' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 #' @seealso see also calcComfInd
 #' @examples 
 #' calcUTCI(25, 25, 1.0, 50) = 24.6
@@ -24,11 +24,13 @@ calcUTCI <- function(ta, tr, vel, rh) {
   utci_value = utci_approx(ta, tr, vel, rh)
   
   #check if utci value is within acceptable range
-  utci_range = getUtciRange()
-  check_range(utci_value, utci_range[1], utci_range[2])
+  if(!exists("utciRange")){
+    utciRange <<- getUtciRange() 
+  }
+  check_range(utci_value, utciRange[1], utciRange[2])
   
   #return the value
-  round(utci_value,1)
+  utci_value
 }
 
 
@@ -398,6 +400,7 @@ utci_approx <- function(ta, tr, vel, rh) {
     + (2.47090539 * (10 ** (-4))) * delta_t_tr * Pa * Pa * Pa * Pa * Pa
     + (0.00148348065) * Pa * Pa * Pa * Pa * Pa * Pa
   )
+  round(utci,1)
 }
 
 #function for calculating the es value
@@ -419,4 +422,3 @@ es <- function(ta) {
   es = exp(es) * 0.01
   es
 }
-
