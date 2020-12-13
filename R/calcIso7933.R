@@ -1,34 +1,126 @@
-# v1.0 done by Michael Kleber
-
-# Function returns:
-#
-# Tre        - final rectal temperature [degree C]
-# SWtotg     - total water loss [g]
-# Dlimtre    - time when limit for rectal temperature is reached [min]
-# Dlimloss50 - time when limit for water loss Dmax50 (7.5 percent of body mass of an average person) is reached [min]
-# Dlimloss95 - time when limit for water loss Dmax95 (5 percent of body mass of 95 percent of the working people) is reached [min]
-# Cres       - convective heat flow at respiration [W/(m*m)]
-# Eres	 - evaporative heat flow at respiration [W/(m*m)]
-# Ep         - predicted evaporative heat flow [W/(m*m)]
-# SWp		 - predicted sweating rate [W/(m*m)]
-# Texp	 - temperature of the exhaled air [degree C]
-# Tskeq	 - skin Temperature in equilibrium [degree C]
-# Tsk		 - skin Temperature at the minute [degree C]
-# wp		 - predicted skin wettedness [-]
-#
-# File contains 1 function:
-#   - function(accl, posture, Ta, Pa, Tr, Va, Met, Icl, THETA, Walksp, Duration, weight, height, DRINK, Adu, spHeat, SWp, Tre, Tcr, Tsk, Tcreq, Work, imst, Ap, Fr, defspeed, defdir, HR, pb)
-#       returns a data.frame with Tre, SWtotg, Dlimtre, Dlimloss50, Dlimloss95, Cres, Eres, Ep, SWp, Texp, Tskeq, Tsk, wp
-#
 # The code for fctCalcISO7933 is based on the code in BASIC presented in the standard ISO 7933 
 
 # Function: fctCalcISO7933 ################
 ###########################################
 
-
+#' Calculating Heat Strain Indices based on ISO 7933
+#'
+#' @param accl a numeric value presenting state of acclimation [100 if acclimatised subject, 0 otherwise]
+#' @param posture a numeric value presenting posture of person [sitting=1, standing=2, crouching=3]
+#' @param Ta a numeric value presenting air temperature in [degrees celsius]
+#' @param Pa a numeric value presenting partial water vapour pressure [kPa]
+#' @param Tr a numeric value presenting mean radiant temperature in [degrees celsius]
+#' @param Va a numeric value presenting air velocity in [m/s]
+#' @param Met a numeric value presenting metabolic rate in [W/(m*m)]
+#' @param Icl a numeric value presenting static thermal insulation of clothing [clo]
+#' @param THETA a numeric value presenting angle between walking direction and wind direction in [degrees]
+#' @param Walksp a numeric value presenting walking speed in [m/s]
+#' @param Duration a numeric value presenting the duration of the work sequence in [min]
+#' @param weight a numeric value presenting the body mass in [kg]
+#' @param height a numeric value presenting the body height in [m]
+#' @param DRINK a numeric value presenting if workers can drink as they want [1 if they can drink without restriction, 0 if restricted] 
+#' @param Adu a numeric value presenting body surface area according to Du Bois [m*m]
+#' @param spHeat a numeric value presenting specific body heat [(W/(m*m))/K]
+#' @param SWp a numeric value presenting predicted sweat rate [W/(m*m)]
+#' @param Tre a numeric value presenting rectal temperature [degrees celsius]
+#' @param Tcr a numeric value presenting temperature of body core [degrees celsius]
+#' @param Tsk a numeric value presenting skin temperature at start [degrees celsius]
+#' @param Tcreq a numeric value presenting temperature of body core dependent on energy metabolism [degrees celsius]
+#' @param Work a numeric value presenting effective mechanical power [W/(m*m)]
+#' @param imst a numeric value presenting static moisture permeability index [-]
+#' @param Ap a numeric value presenting fraction of the body surface covered by the reflective clothing [-]
+#' @param Fr a numeric value presenting emissivity of the reflective clothing [-]
+#' @param defspeed a numeric value presenting if walking speed entered [1 if walking speed entered, 0 otherwise]
+#' @param defdir a numeric value presenting if walking direction entered [1 if walking direction entered, 0 otherwise]
+#' @param HR a numeric value presenting humidity ratio [g/kg]
+#' @param pb a numeric value presenting normal barometric pressure in [Pa]
+#'
+#' @usage 
+#' calcIso7933(accl, posture, Ta, Pa, Tr, Va, Met, Icl, THETA, Walksp, Duration,
+#' weight, height, DRINK, Adu, spHeat, SWp, Tre, Tcr, Tsk, Tcreq, Work, imst, 
+#' Ap, Fr, defspeed, defdir, HR, pb)
+#'  
+#' @description 
+#' \code{calcISO7933} calculates Tre, SWtotg, Dlimtre, Dlimloss50 and Dlimloss95 based 
+#' on ISO 7933. It additionally provides intermediate results from the 
+#' calculation: Cres, Eres, Ep, SWp, Texp, Tskeq, Tsk, wp
+#' 
+#' @details All variables must have the same length 1.
+#' 
+#' @note In case one of the variables is not given, a standard value according
+#' to ISO 7933 will be taken.
+#' 
+#' @authors The code for calcISO7933 is based on the code in BASIC presented in 
+#' Addendum E of EN ISO 7933. The translation into R-language conducted by Michael Kleber.
+#' 
+#' @references 
+#' Ergonomics of the thermal environment - Analytical determination and 
+#' interpretation of heat stress using calculation of the predicted heat strain
+#' (ISO 7933:2004) Malchaire J., Piette A., Kampmann B., Mehnert P., Gebhardt 
+#' H. J., Havenith G., Den Hartog E., Holmer I., Parsons K., Alfano G., 
+#' Griefahn B. (2000), Development and validation of the predicted heat strain 
+#' model, The Annals of Occupational Hygiene The Annals of Occupational Hygene,
+#' 45, pp 123-135 Malchaire J., Kampmann B., Havenith G., Mehnert P., 
+#' Gebhardt H. J. (2000), Criteria for estimating acceptable exposure times in
+#' hot work environment, a review, International Archives of Occupational and
+#' Environmental Health, 73(4), pp. 215-220.
+#' 
+#' @return \code{calcISO7933} returns a data.frame with the following items: \cr{
+#'  \cr
+#'  \code{Tre	final} rectal temperature [degrees Celsius] \cr
+#'  \cr
+#'  \code{SWtotg} total water loss [g]\cr
+#'  \cr
+#'  \code{Dlimtre} time when limit for rectal temperature is reached [min]\cr
+#'  \cr
+#'  \code{Dlimloss50} time when limit for water loss Dmax50 (7.5 percent of 
+#'  body mass of an average person) is reached [min]\cr
+#'  \cr
+#'  \code{Dlimloss95} time when limit for water loss Dmax95 (5 percent of body 
+#'  mass of 95 percent of the working people) is reached [min]\cr
+#'  \cr
+#'  \code{Cres} convective heat flow at respiration [W/(m*m)]\cr
+#'  \cr
+#'  \code{Eres} evaporative heat flow at respiration [W/(m*m)]\cr
+#'  \cr
+#'  \code{Ep} predicted evaporative heat flow [W/(m*m)]\cr
+#'  \cr
+#'  \code{SWp} predicted sweating rate [W/(m*m)]\cr
+#'  \cr
+#'  \code{Texp} temperature of the exhaled air [degrees Celsius]\cr
+#'  \cr
+#'  \code{Tskeq} skin Temperature in equilibrium [degrees Celsius]\cr
+#'  \cr
+#'  \code{Tsk} skin Temperature at the minute [degrees Celsius]\cr
+#'  \cr
+#'  \code{wp} predicted skin wettedness [-]\cr
+#' }
+#'  
+#' @export
+#'
+#' @examples
+#' ## Calculation of a single set of values.
+#' calcIso7933(accl = 100, posture = 2, Ta = 35, Pa = 4, Tr = 35, Va = 0.3, Met = 150, 
+#' Icl = 0.5, THETA = 0, Walksp = 0, Duration = 480)
+#' calcIso7933(100,2,35,4,35,0.3,150,0.5,0,0,480)
+#' ## Using several rows of data:
+#' accl <- 100
+#' posture <- 2
+#' Ta <- c(40,35)
+#' Pa <- c(2.5,4)
+#' Tr <- c(40,35)
+#' Va <- 0.3
+#' Met <- 150
+#' Icl <- 0.5
+#' THETA <- 0
+#' Walksp <- 0
+#' Duration <- 480
+#' maxLength <- max(sapply(list(accl, posture, Ta, Pa, Tr, Va, Met, Icl, THETA,
+#' Walksp, Duration), length))
+#' PHI <- sapply(seq(maxLength), function(x) {calcIso7933(accl, posture, Ta[x], 
+#' Pa[x], Tr[x], Va, Met, Icl, THETA, Walksp, Duration) } ) 
 
 calcIso7933 <- function(accl, posture, Ta, Pa, Tr, Va, Met, Icl, THETA, Walksp, Duration, weight, height, DRINK, Adu, spHeat, SWp, Tre, Tcr, Tsk, Tcreq, Work, imst, Ap, Fr, defspeed, defdir, HR, pb){
-
 
 # INITIALISATION
 

@@ -2,6 +2,10 @@
 % Please edit documentation in R/calcATHBpmv.r
 \name{calcATHBpmv}
 \alias{calcATHBpmv}
+\alias{calcATHBpmv,}
+\alias{calcathbpmv}
+\alias{athbpmv}
+\alias{ATHBpmv}
 \title{Calculation of Adaptive Thermal Heat Balance Indices with PMV}
 \usage{
 calcATHBpmv(trm, psych, ta, tr, vel, rh, met, wme)
@@ -27,7 +31,8 @@ calcATHBpmv(trm, psych, ta, tr, vel, rh, met, wme)
 \code{calcATHBpmv} pmv value adapted through the ATHB appoach
 }
 \description{
-\code{calcATHBpmv} calculates three different indices related to the adaptive thermal heat balance framework according to PMV
+\code{calcATHBpmv} calculates three different indices related 
+to the adaptive thermal heat balance framework according to PMV
 }
 \details{
 All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.

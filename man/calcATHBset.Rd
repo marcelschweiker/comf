@@ -3,9 +3,6 @@
 \name{calcATHBset}
 \alias{calcATHBset}
 \title{Calculation of Adaptive Thermal Heat Balance Indices with SET}
-\description{
-\code{calcATHB} calculates three different indices related to the adaptive thermal heat balance framework according to SET
-}
 \usage{
 calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 }
@@ -34,27 +31,25 @@ calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 
 \item{wt}{- a numeric value presenting body weight in [kg]}
 }
-\details{
-All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
-}
 \value{
 ATHBset set value adapted through the ATHB appoach
 }
 \description{
 Calculation of Adaptive Thermal Heat Balance Indices with SET
 }
-\references{
-Schweiker, M. & Wagner, A. A framework for an adaptive thermal heat balance model (ATHB), Building and Environment, 2015, 94, 252 - 262
-
-Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
-}
-\author{
-Marcel Schweiker
-}
-
-\seealso{
-see also \code{\link{calcComfInd}}
+\details{
+All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
 }
 \examples{
 calcATHBset(20, 0, 25, 25, .1, 50, 1.1, 0, 760, 60, 171, 70)
+}
+\references{
+Schweiker, M. & Wagner, A. A framework for an adaptive thermal heat balance model (ATHB), Building and Environment, 2015, 94, 252 - 262
+Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
+}
+\seealso{
+see also \code{\link{calcComfInd}}
+}
+\author{
+Marcel Schweiker
 }
