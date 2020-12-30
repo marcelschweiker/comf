@@ -14,7 +14,7 @@
 #' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 #' @seealso see also calcComfInd
 #' @examples 
-#' calcUTCI(25, 25, 1.0, 50) = 24.6
+#' calcUTCI(25, 25, 1.0, 50) # Returns 24.6
 calcUTCI <- function(ta, tr, vel, rh) {
   
   #validate the inputs and prints an error message for invalid inputs

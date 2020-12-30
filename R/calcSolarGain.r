@@ -29,7 +29,7 @@
 #' @export
 #' @aliases calcSolarGain calcsolargain SolarGain solargain
 #' @examples
-#' calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") = [42.9, 10.3]
+#' calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") # Returns [42.9, 10.3]
 #' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 #' @seealso see also calcComfInd
 calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans, 
