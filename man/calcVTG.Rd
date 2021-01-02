@@ -39,8 +39,8 @@ Function to calculate vertical air temperature gradient using the function predi
 Calculates the percentage of thermally dissatisfied people with a vertical temperature gradient between feet and head.This equation is only applicable for velocity(vel) < 0.2 m/s (40 fps)
 }
 \examples{
-calcVTG(25,25,0.1,50,0.5,1.2,7) returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
+calcVTG(25,25,0.1,50,0.5,1.2,7) # returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
 }
 \author{
-Shoaib Sarwar
+Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 }
