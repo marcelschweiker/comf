@@ -2,9 +2,10 @@
 #' @description Function to calculate vertical air temperature gradient using the function predicted percentage of dissatisfied.
 #' @aliases  vairtepgrad
 #' @aliases  vtg
-#' @usage calcVTG(ta, tr, vel, rh, clo, met, vankle)
-#' @usage vtg(ta, tr, vel, rh, clo, met, vankle)
-#' @usage vairtmpgrad(ta, tr, vel, rh, clo, met, vankle)
+#' @aliases  vairtmpgrad
+#' @usage calcVTG(ta, tr, vel, rh, clo, met, v_tmp_grad)
+#' @usage vtg(ta, tr, vel, rh, clo, met, v_tmp_grad)
+#' @usage vairtmpgrad(ta, tr, vel, rh, clo, met, v_tmp_grad)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
@@ -15,8 +16,13 @@
 #' @details  Calculates the percentage of thermally dissatisfied people with a vertical temperature gradient between feet and head.This equation is only applicable for velocity(vel) < 0.2 m/s (40 fps)
 #' @returns Predicted Percentage of Dissatisfied occupants with vertical temperature gradient in [\%]
 #' @returns Acceptability in [boolean]
+<<<<<<< HEAD:R/calcVTG.R
+#' @examples calcVTG(25,25,0.1,50,0.5,1.2,7)
+#' @author Shoaib Sarwar
+=======
 #' @examples calcVTG(25,25,0.1,50,0.5,1.2,7) # returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
+>>>>>>> origin/towards-0.1.9:R/fctVTG.R
 #' @export
 
 calcVTG <- function(ta,tr,vel,rh,clo,met,v_tmp_grad){

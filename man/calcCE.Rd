@@ -37,7 +37,11 @@ Function to calculate cooling effect using the function standard effective tempe
 The CE of the elevated air speed is the value that, when subtracted equally from both the average air temperature and the mean radiant temperature, yields the same SET under still air as in the first SET calculation under elevated air speed. The cooling effect is calculated only for air speed higher than 0.1 m/s.
 }
 \examples{
+<<<<<<< HEAD
+calcCE(25,25,0.3,50,0.5,1)
+=======
 calcCE(25,25,0.3,50,0.5,1) # returns Cooling Effect: 1.3
+>>>>>>> origin/towards-0.1.9
 }
 \author{
 Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
