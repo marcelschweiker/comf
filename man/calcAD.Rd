@@ -6,11 +6,11 @@
 \alias{ad}
 \title{Calculate PPD with Ankle Draft}
 \usage{
-calcAD(ta, tr, vel, rh, clo, met, v_ankle)
+calcAD(ta, tr, vel, rh, clo, met, vAnkle)
 
-ad(ta, tr, vel, rh, clo, met, v_ankle)
+ad(ta, tr, vel, rh, clo, met, vAnkle)
 
-ankledraft(ta, tr, vel, rh, clo, met, v_ankle)
+ankledraft(ta, tr, vel, rh, clo, met, vAnkle)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -25,7 +25,7 @@ ankledraft(ta, tr, vel, rh, clo, met, v_ankle)
 
 \item{met}{a numeric value presenting metabolic rate in [met]}
 
-\item{v_ankle}{air speed at the 0.1 m (4 in.) above the floor [m/s]}
+\item{vAnkle}{air speed at the 0.1 m (4 in.) above the floor [m/s]}
 }
 \value{
 Predicted Percentage of Dissatisfied occupants with ankle draft in [\%]
@@ -39,8 +39,12 @@ Function to calculate ankle draft using the function predicted percentage of dis
 Calculates the percentage of thermally dissatisfied people with the ankle draft (0.1 m) above floor level.This equation is only applicable for velocity < 0.2 m/s (40 fps)
 }
 \examples{
+<<<<<<< HEAD
 calcAD(25,25,0.2,50,0.5,1.2,0.3)
+=======
+calcAD(25,25,0.2,50,0.5,1.2,0.3) # returns Ankle_draft_ppd:18.6, Acceptability:TRUE
+>>>>>>> origin/towards-0.1.9
 }
 \author{
-Shoaib Sarwar
+Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 }
