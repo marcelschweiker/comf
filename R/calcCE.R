@@ -14,13 +14,8 @@
 #' @param wme a numeric value presenting external work in [met]
 #' @details The CE of the elevated air speed is the value that, when subtracted equally from both the average air temperature and the mean radiant temperature, yields the same SET under still air as in the first SET calculation under elevated air speed. The cooling effect is calculated only for air speed higher than 0.1 m/s.
 #' @returns ce - Cooling Effect in [degree C]
-<<<<<<< HEAD:R/calcCE.R
-#' @examples calcCE(25,25,0.3,50,0.5,1)
-#' @author Shoaib Sarwar
-=======
 #' @examples calcCE(25,25,0.3,50,0.5,1) # returns Cooling Effect: 1.3
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
->>>>>>> origin/towards-0.1.9:R/fctCE.R
 #' @export
 
 
@@ -69,4 +64,3 @@ calcCE <- function(ta,tr,vel,rh,clo= .5,met=1,wme=0)
 }
 ce <- calcCE
 coolingeffect <- calcCE
-

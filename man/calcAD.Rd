@@ -39,11 +39,7 @@ Function to calculate ankle draft using the function predicted percentage of dis
 Calculates the percentage of thermally dissatisfied people with the ankle draft (0.1 m) above floor level.This equation is only applicable for velocity < 0.2 m/s (40 fps)
 }
 \examples{
-<<<<<<< HEAD
-calcAD(25,25,0.2,50,0.5,1.2,0.3)
-=======
 calcAD(25,25,0.2,50,0.5,1.2,0.3) # returns Ankle_draft_ppd:18.6, Acceptability:TRUE
->>>>>>> origin/towards-0.1.9
 }
 \author{
 Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
