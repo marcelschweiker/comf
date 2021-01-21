@@ -7,7 +7,7 @@
 \usage{
 calcPMV(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 
-PMV(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
+pmv(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -23,6 +23,8 @@ PMV(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 \item{met}{a numeric value presenting metabolic rate in [met]}
 
 \item{wme}{a numeric value presenting external work in [met]}
+
+\item{basMet}{a numeric value presenting basal metabolic rate [w/m2]}
 }
 \value{
 PMV - Predicted Mean Vote

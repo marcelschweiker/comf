@@ -1,3 +1,4 @@
+#' @keywords internal
 # help functions
 
 calcepCoeff <- function(lsCond){

@@ -108,9 +108,11 @@ metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", t
 }
 \value{
 \code{calcTNZPDF} returns either a dataframe suitbale to draw the pdf of TNZ (by setting forPDF to TURE) or a dataframe with the columns dTNZ, dTNZTs, dTNZTa and others.  Thereby
+\itemize{
 \item{dTNZ }{The absolute distance to the centroid of the thermoneutral zone}
 \item{dTNZTs }{Relative value of distance assuming skin temperature to be dominant for sensation}
 \item{dTNZTa }{Relative value of distance assuming ambient temperature to be dominant for sensation}
+}
 }
 \description{
 \code{calcTNZPDF} calculates the distance from the thermoneutral zone, either skin temperature or room air related. Also calculates the probability function (PDF) of the thermoneutral zone.

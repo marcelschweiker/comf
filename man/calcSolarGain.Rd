@@ -48,7 +48,7 @@ Solar gain to the human body using the Effective Radiant Field. The unit is W/m2
 Delta mean radiant temperature in Degree C
 }
 \examples{
-calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") = [42.9, 10.3]
+calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") # Returns [42.9, 10.3]
 }
 \seealso{
 see also calcComfInd

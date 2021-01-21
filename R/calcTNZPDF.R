@@ -65,9 +65,11 @@
 #' @param TcPreAdapt numerical value presenting the initial core temperature before adaptation in [degree C]. Only used with metAdapt: Q10.
 #' @details The percentage of the body covered by clothes can be estimated e.g. based on ISO 9920 Appendix H (Figure H.1).  A typical winter case leads to a value of around .86, in the summer case this goes down to values around .68.
 #' @returns \code{calcTNZPDF} returns either a dataframe suitbale to draw the pdf of TNZ (by setting forPDF to TURE) or a dataframe with the columns dTNZ, dTNZTs, dTNZTa and others.  Thereby
+#' \itemize{
 #' \item{dTNZ }{The absolute distance to the centroid of the thermoneutral zone}
 #' \item{dTNZTs }{Relative value of distance assuming skin temperature to be dominant for sensation}
 #' \item{dTNZTa }{Relative value of distance assuming ambient temperature to be dominant for sensation}
+#' }
 #' @examples
 #' ## Calculate and draw pdf of TNZ for a young non-obese male
 #' longTcYoungMale <- calcTNZPDF(ht = 178, wt = 70, age = 30, gender = 2, clo = 0.5,

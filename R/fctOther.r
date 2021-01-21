@@ -1,4 +1,5 @@
- # Functions return:
+#' @keywords internal
+# Functions return:
 #
 # tAdapt15251 - adaptive comfort temperature according to EN 15251
 # tnAuliciems - neutral temperature based on Auliciems
