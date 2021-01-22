@@ -47,7 +47,7 @@ varOut = "else")
 \item{varOut}{a string value either "else" for normal output of SET or "skinWet" to report value of skin wettedness}
 }
 \value{
-\code{calc2Node} returns a data.frame with the following items:
+
 }
 \description{
 \code{calc2Node} calculates Comfort Indices based on the 2-Node-Model by Gagge et al.

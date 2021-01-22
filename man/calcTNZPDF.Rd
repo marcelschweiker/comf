@@ -58,13 +58,13 @@ metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", t
 
 \item{met}{a numeric value presenting metabolic rate (activity related) in [met].}
 
-\item{rh}{a numeric value presenting realtive humidity in [%].}
+\item{rh}{a numeric value presenting realtive humidity in [\%].}
 
 \item{fBasMet}{a string presenting the method of calculating basal metbolic rate. Needs to be one of "rosa", "harris", "miflin", "fixed", or "direct". Fixed will result in the value of 58.2 W/m2. Direct requires definition of metMin and metMax.}
 
 \item{fSA}{a string presenting the method of calculating the surface area. Needs to be one of "duBois", "mosteller", or "direct".}
 
-\item{percCov}{a numeric value between 0 and 1 presenting the percentage of the body covered by clothes in [%].}
+\item{percCov}{a numeric value between 0 and 1 presenting the percentage of the body covered by clothes in [\%].}
 
 \item{TcMin}{a numeric value presenting the minimum allowed core temperature in [degree C].}
 

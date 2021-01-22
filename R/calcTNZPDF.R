@@ -39,10 +39,10 @@
 #' @param tskObs a numeric value presenting actual mean skin temperature in [degree C].
 #' @param taObs a numeric value presenting actual air temperature in [degree C].
 #' @param met a numeric value presenting metabolic rate (activity related) in [met].
-#' @param rh a numeric value presenting realtive humidity in [%].
+#' @param rh a numeric value presenting realtive humidity in [\%].
 #' @param fBasMet a string presenting the method of calculating basal metbolic rate. Needs to be one of "rosa", "harris", "miflin", "fixed", or "direct". Fixed will result in the value of 58.2 W/m2. Direct requires definition of metMin and metMax.
 #' @param fSA a string presenting the method of calculating the surface area. Needs to be one of "duBois", "mosteller", or "direct".
-#' @param percCov a numeric value between 0 and 1 presenting the percentage of the body covered by clothes in [%].
+#' @param percCov a numeric value between 0 and 1 presenting the percentage of the body covered by clothes in [\%].
 #' @param TcMin a numeric value presenting the minimum allowed core temperature in [degree C].
 #' @param TcMAx a numeric value presenting the maximum allowed core temperature in [degree C].
 #' @param plotZone a boolean variable TRUE or FALSE stating, wether TNZ should be plotted or not.

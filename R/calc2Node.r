@@ -40,6 +40,7 @@
 #' 
 #' @return
 #' \code{calc2Node} returns a data.frame with the following items:
+#' \itemize{
 #' @item{et}{Effective temperature}
 #' @item{set}{standard effective temperature}
 #' @item{tsens}{Predicted thermal sensation }
@@ -50,6 +51,7 @@
 #' @item{pmvg}{Gagge's version of Fanger's PMV}
 #' @item{pmvstar}{Same as Fanger's PMV except that dry is calculated using SET* 
 #' rather than the operative temperature}
+#' }
 #' The other functions return a single index, e.g. code(calcSET) returns the 
 #' standard effective temperature.
 #' 
