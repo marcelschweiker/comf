@@ -6,6 +6,9 @@
 #' @usage comfind(lsCond, request = "all")
 #' @param IsCond a list of climatic conditions and additional variables necessary for one or more of the indices (see details below).
 #' @param request a vector with one or more comfort indices (see details below).
+#' @returns
+#' \code{calcComfInd} returns one or more rows with the comfort indices listed as \code{request}. For details see details above.
+
 #' @details
 #' The list \code{lsCond} could contain one or more of the following variables:
 #' \tabular{ll}{
@@ -70,8 +73,6 @@
 #'  "pts" \tab Predicted thermal sensation vote based on set \tab ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt \cr
 #'  "HBxst" \tab Human body exergy consumPtion rate using steady state method \tab ta, tr, vel, rh, clo, met, tao, rho, frad, eps, ic, ht, wt, tcr, tsk, basMet, warmUp, cdil, sigmatr
 #' }
-#' @returns
-#' \code{calcComfInd} returns one or more rows with the comfort indices listed as \code{request}. For details see details above.
 #' @examples
 #' ## Creating list with all values
 #' lsstrd <- createCond()
@@ -82,7 +83,7 @@
 #' ## Requesting multiple indices
 #' calcComfInd(lsstrd, request=c("pmv", "ptse"))
 #' @author Sophia Mueller and Marcel Schweiker.
-#' @seealso see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHB}}, \code{\link{calcdTNZ}}, \code{\link{calcpmvadj}}, \code{\link{calcPtsadj}}, \code{\link{calctadapt}}
+#' @seealso see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctadapt}}
 #' @references For references see individual functions.
 #' @note In case one of the variables is not given, a standard value will be taken from a list (see \code{\link{createCond}} for details.
 #' @export
@@ -417,5 +418,6 @@ calcComfInd <- function(lsCond, request="all"){
   giveData
   #comfortData
 } # end fct
+
 comfind <- calcComfInd
 

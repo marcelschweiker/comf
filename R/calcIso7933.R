@@ -50,7 +50,7 @@
 #' @note In case one of the variables is not given, a standard value according
 #' to ISO 7933 will be taken.
 #' 
-#' @authors The code for calcISO7933 is based on the code in BASIC presented in 
+#' @author The code for calcISO7933 is based on the code in BASIC presented in 
 #' Addendum E of EN ISO 7933. The translation into R-language conducted by Michael Kleber.
 #' 
 #' @references 

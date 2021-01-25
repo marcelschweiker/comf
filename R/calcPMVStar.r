@@ -1,7 +1,7 @@
 #' Calculating Fanger's PMV except that dry is calculated using SET* rather than 
 #' the Operative Temperature based on the 2-Node-Model
 #'
-#' @aliases calcPMVStar PMVStar pmv star
+#' @aliases calcPMVStar PMVStar star
 #' @description 
 #' \code{calcPMVStar} calculates Fanger's PMV except that dry is calculated 
 #' using SET* rather than the operative temperature based on the 2-Node-Model by 

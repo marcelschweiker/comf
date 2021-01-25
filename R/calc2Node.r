@@ -2,7 +2,7 @@
 ###########################################
 #' Calculating Comfort Indices based on the 2-Node-Model
 #'
-#' @aliases calc2Node 2Node Gagge 2node
+#' @aliases calc2Node 2Node 2node
 #' @description 
 #' \code{calc2Node} calculates Comfort Indices based on the 2-Node-Model by Gagge et al.
 #' 
@@ -38,19 +38,17 @@
 #' code related to self-generated convection is deleted. Therefore, a difference 
 #' can only be seen at higher values of met.
 #' 
-#' @return
-#' \code{calc2Node} returns a data.frame with the following items:
-#' \itemize{
-#' @item{et}{Effective temperature}
-#' @item{set}{standard effective temperature}
-#' @item{tsens}{Predicted thermal sensation }
-#' @item{disc}{Predicted discomfort}
-#' @item{ps}{Predicted percentage satisfied with the level of air movement}
-#' @item{pd}{Predicted percentage dissatisfied due to draft}
-#' @item{pts}{Predicted thermal sensation vote based on set}
-#' @item{pmvg}{Gagge's version of Fanger's PMV}
-#' @item{pmvstar}{Same as Fanger's PMV except that dry is calculated using SET* 
-#' rather than the operative temperature}
+#' @returns returns a data.frame with the following items:
+#' \describe{
+#' \item{\code{et - }Effective temperature}{}
+#' \item{\code{tsens - }Predicted thermal sensation}{}
+#' \item{\code{disc - }Predicted discomfort}{}
+#' \item{\code{ps - }Predicted percentage satisfied with the level of air movement}{}
+#' \item{\code{pd - }Predicted percentage dissatisfied due to draft}{}
+#' \item{\code{pts - }Predicted thermal sensation vote based on set}{}
+#' \item{\code{pmvg - }Gagge's version of Fanger's PMV}{}
+#' \item{\code{pmvstar - }Same as Fanger's PMV except that dry is calculated 
+#' using SET* rather than the operative temperature}{}
 #' }
 #' The other functions return a single index, e.g. code(calcSET) returns the 
 #' standard effective temperature.

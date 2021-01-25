@@ -25,7 +25,7 @@ calcUTCI <- function(ta, tr, vel, rh) {
   
   #check if utci value is within acceptable range
   if(!exists("utciRange")){
-    utciRange <<- getUtciRange() 
+    assign("utciRange", getUtciRange(), envir = .GlobalEnv)
   }
   check_range(utci_value, utciRange[1], utciRange[2])
   

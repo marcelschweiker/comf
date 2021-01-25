@@ -2,10 +2,7 @@
 % Please edit documentation in R/calcSET.r
 \name{calcSET}
 \alias{calcSET}
-\alias{calcET}
 \alias{SET}
-\alias{et}
-\alias{calcet}
 \title{Calculating Standard Effective Temperature based on the 2-Node-Model}
 \usage{
 calcSET(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, 
