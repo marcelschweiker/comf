@@ -50,7 +50,7 @@
 #' ## Calc set of values of enthalpy
 #' ta <- 25:30
 #' rh <- 50
-#' calcEnth(ta, rh, 760))
+#' calcEnth(ta, rh, 760)
 #' @author Michael Kleber (code and documentation), Marcel Schweiker (documentation).
 #' @references Rajib Ranaa, Brano Kusya, Raja Jurdaka, Josh Wallb and Wen Hua, Feasibility analysis of using humidex as an indoor thermal comfort predictor, Energy and Buildings 64 (2013) 17-25.
 #' @references Masterton, J. M., and Richardson, F. A., Humidex a method of quantifying humandiscomfort due to excessive heat and humidity, clI 1-79. Downsview, Ont: Environment Canada. Atmosheric Environment Service, 1979.
