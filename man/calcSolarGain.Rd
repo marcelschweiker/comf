@@ -51,7 +51,7 @@ Delta mean radiant temperature in Degree C
 calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") # Returns [42.9, 10.3]
 }
 \seealso{
-see also calcComfInd
+see also \code{\link{calcComfInd}}
 }
 \author{
 Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.

@@ -3,7 +3,6 @@
 \name{calcPMVGagge}
 \alias{calcPMVGagge}
 \alias{PMVGagge}
-\alias{pmv}
 \alias{Gagge}
 \title{Calculating Gagge's Version of Fanger's PMV based on the 2-Node-Model}
 \usage{

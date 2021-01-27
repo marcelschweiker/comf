@@ -1,6 +1,6 @@
 #' Calculating Predicted Thermal Sensation based on the 2-Node-Model
 #'
-#' @aliases calcET TSens et calcet
+#' @aliases TSens
 #' @description 
 #' \code{calcTSens} calculates Predicted Thermal Sensation based on the 
 #' 2-Node-Model by Gagge et al.

@@ -1,4 +1,4 @@
-#validation for UTCI input
+#' @keywords internal
 validate_UTCI <- function(ta, tr, vel, rh) {
   parameters <- c(ta, tr, vel, rh)
   
@@ -62,7 +62,6 @@ check_range <- function(parameter, lower_bound, upper_bound) {
     stop(paste(parameter, " is out of range. Has to be between ",lower_bound, " and ",upper_bound))
 }
 
-#get acceptable utci range
 getUtciRange <- function() {
   ta = tr = c(0,20,40)
   vel = c(0,5,10)

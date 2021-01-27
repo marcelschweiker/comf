@@ -31,7 +31,7 @@
 #' @examples
 #' calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") # Returns [42.9, 10.3]
 #' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
-#' @seealso see also calcComfInd
+#' @seealso see also \code{\link{calcComfInd}}
 calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans, 
                           fSvv, fBes, asw=0.7, 
                           posture="seated", floorRef=0.6){
@@ -42,7 +42,7 @@ calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans,
   solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
                            posture, floorRef=0.6)
   if(!exists("solarGainRange")){
-    solarGainRange <<- getSolarGainRange()
+    assign("solarGainRange", getSolarGainRange(), envir = .GlobalEnv)
   }
   check_range(solarGainRes[1], solarGainRange[1],solarGainRange[2])
   check_range(solarGainRes[2], solarGainRange[3],solarGainRange[4])

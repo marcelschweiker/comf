@@ -3,7 +3,6 @@
 \name{calc2Node}
 \alias{calc2Node}
 \alias{2Node}
-\alias{Gagge}
 \alias{2node}
 \title{Calculating Comfort Indices based on the 2-Node-Model}
 \usage{
@@ -47,7 +46,20 @@ varOut = "else")
 \item{varOut}{a string value either "else" for normal output of SET or "skinWet" to report value of skin wettedness}
 }
 \value{
-
+returns a data.frame with the following items:
+\describe{
+\item{\code{et - }Effective temperature}{}
+\item{\code{tsens - }Predicted thermal sensation}{}
+\item{\code{disc - }Predicted discomfort}{}
+\item{\code{ps - }Predicted percentage satisfied with the level of air movement}{}
+\item{\code{pd - }Predicted percentage dissatisfied due to draft}{}
+\item{\code{pts - }Predicted thermal sensation vote based on set}{}
+\item{\code{pmvg - }Gagge's version of Fanger's PMV}{}
+\item{\code{pmvstar - }Same as Fanger's PMV except that dry is calculated 
+using SET* rather than the operative temperature}{}
+}
+The other functions return a single index, e.g. code(calcSET) returns the 
+standard effective temperature.
 }
 \description{
 \code{calc2Node} calculates Comfort Indices based on the 2-Node-Model by Gagge et al.

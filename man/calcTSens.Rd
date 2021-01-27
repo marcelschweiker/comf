@@ -2,10 +2,7 @@
 % Please edit documentation in R/calcTSens.r
 \name{calcTSens}
 \alias{calcTSens}
-\alias{calcET}
 \alias{TSens}
-\alias{et}
-\alias{calcet}
 \title{Calculating Predicted Thermal Sensation based on the 2-Node-Model}
 \usage{
 calcTSens(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, 

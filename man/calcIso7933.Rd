@@ -145,3 +145,7 @@ Gebhardt H. J. (2000), Criteria for estimating acceptable exposure times in
 hot work environment, a review, International Archives of Occupational and
 Environmental Health, 73(4), pp. 215-220.
 }
+\author{
+The code for calcISO7933 is based on the code in BASIC presented in 
+Addendum E of EN ISO 7933. The translation into R-language conducted by Michael Kleber.
+}

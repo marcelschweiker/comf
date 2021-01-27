@@ -1,6 +1,6 @@
 #' Calculating Gagge's Version of Fanger's PMV based on the 2-Node-Model
 #'
-#' @aliases calcPMVGagge PMVGagge pmv Gagge
+#' @aliases calcPMVGagge PMVGagge Gagge
 #' @description 
 #' \code{calcPMVGagge} calculates Gagge's Version of Fanger's PMV based on the 
 #' 2-Node-Model by Gagge et al.

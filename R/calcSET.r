@@ -1,6 +1,6 @@
 #' Calculating Standard Effective Temperature based on the 2-Node-Model
 #'
-#' @aliases calcET SET et calcet
+#' @aliases SET
 #' @description 
 #' \code{calcSET} calculates Standard Effective Temperature based on the 
 #' 2-Node-Model by Gagge et al.

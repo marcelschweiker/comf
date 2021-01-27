@@ -3,7 +3,6 @@
 \name{calcPMVStar}
 \alias{calcPMVStar}
 \alias{PMVStar}
-\alias{pmv}
 \alias{star}
 \title{Calculating Fanger's PMV except that dry is calculated using SET* rather than 
 the Operative Temperature based on the 2-Node-Model}
