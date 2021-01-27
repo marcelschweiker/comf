@@ -39,7 +39,7 @@
 #' epmv
 #' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
 #' @note In case one of \code{epCoeff} is not given, a standard value will be taken from a list (see \code{\link{createCond}} for details.
-#' @seealso see also \code{\link{calcComfInd}}, \code{\link{calcepCoeff}}
+#' @seealso \code{\link{calcComfInd}}, \code{\link{calcepCoeff}}
 #' @references epmv is based on Fanger, P. and Toftum, J. Extension of the PMV model to non-air-conditioned buildings in warm climates Energy and Buildings, 2002, 34, 533-536
 #' @export
 
