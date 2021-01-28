@@ -8,7 +8,7 @@
 \title{Calculating the Predicted Thermal Sensation based on 2-Node Model adjusted 
 for Adaptation or Expectancy}
 \usage{
-calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
+calcPtse(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
                      ltime = 60, ht = 171, wt = 70, tu = 40, esCoeff)
 }
 \arguments{
@@ -36,7 +36,7 @@ calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
 
 \item{tu}{a numeric value presenting turbulence intensity in [\%]}
 
-\item{esCoeff}{}
+\item{esCoeff}{a numeric values presenting adaptive coefficient [-]}
 }
 \value{
 \code{calcPtse} returns a dataframe containing the Predicted Thermal 
@@ -65,10 +65,10 @@ ta <- c(20,22,24)
 tr <- ta
 vel <- rep(.15,3)
 rh <- rep(50,3)
-asCoeff <- 0.5
+esCoeff <- 0.5
 
 maxLength <- max(sapply(list(ta, tr, vel, rh), length))
-ptse <- sapply(seq(maxLength), function(x) { calcPtse(ta[x], tr[x], vel[x], rh[x]), esCoeff } )
+ptse <- sapply(seq(maxLength), function(x) { calcPtse(ta[x], tr[x], vel[x], rh[x], esCoeff=esCoeff) } )
 }
 \references{
 ASHRAE Standard 55-2013. Thermal environmental conditions for human occupancy. 

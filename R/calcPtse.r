@@ -22,7 +22,7 @@
 #' @param ht a numeric value presenting body height in [cm]
 #' @param wt a numeric value presenting body weight in [kg]
 #' @param tu a numeric value presenting turbulence intensity in [\%]
-#' @param esCoeff 
+#' @param esCoeff a numeric values presenting adaptive coefficient [-]
 #' 
 #' @details 
 #' All variables must have the same length 1. For the calculation of several 
