@@ -7,7 +7,7 @@
 #' 2-Node-Model by Gagge et al.
 #' 
 #' @usage 
-#' calcPtsa <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
+#' calcPtsa(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
 #'                      ltime = 60, ht = 171, wt = 70, tu = 40, asCoeff)
 #' 
 #' @param ta a numeric value presenting air temperature in [degree C]

@@ -7,7 +7,7 @@
 #' 2-Node-Model by Gagge et al.
 #' 
 #' @usage 
-#' calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
+#' calcPtse(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
 #'                      ltime = 60, ht = 171, wt = 70, tu = 40, esCoeff)
 #' 
 #' @param ta a numeric value presenting air temperature in [degree C]
@@ -67,7 +67,7 @@
 #' tr <- ta
 #' vel <- rep(.15,3)
 #' rh <- rep(50,3)
-#' asCoeff <- 0.5
+#' esCoeff <- 0.5
 #' 
 #' maxLength <- max(sapply(list(ta, tr, vel, rh), length))
 #' ptse <- sapply(seq(maxLength), function(x) { calcPtse(ta[x], tr[x], vel[x], rh[x], esCoeff=esCoeff) } )
