@@ -24,13 +24,13 @@
 #' \item{ICLneutral }{Upper bound of REQUIRED basic clothing insulation (ISO 9920) in [clo]}
 #' \item{DLEminimal }{Lower bound of duration limited exposure in [hours]}
 #' \item{DLEneutral }{upper bound of duration limited exposure in [hours]}
-#' @examples calcIREQ(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
-#' @examples calcireq(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
-#' @examples ireq(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
-#' @examples IREQ(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
+#' @examples calcIREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
+#' @examples calcireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
+#' @examples ireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
+#' @examples IREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
 #' @references ISO 11079, 2007-12-15, ERGONOMICS OF THE THERMAL ENVIRONMENT - DETERMINATION AND INTERPRETATION OF COLD STRESS WHEN USING REQUIRED CLOTHING INSULATION (IREQ) AND LOCAL COOLING EFFECTS
 #' @note The authors disclaim all obligations and liabilities for damages arising from the use or attempted use of the information, including, but not limited to, direct, indirect, special and consequential damages, and attorneys' and experts' fees and court costs. Any use of the information will be at the risk of the user.
-#' @author Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and Modified in R by Shoaib Sarwar.
+#' @author Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and transferred to R by Shoaib Sarwar and Marcel Schweiker.
 #' @export
 
 
@@ -60,7 +60,7 @@ calcIREQ <- function(M,W,ta,tr,p,w,v,rh,clo){
   if (v >= 18) {
     v=18
   }
-  clo = clo * 0.15
+  clo = clo * 0.155
   Ia =0.092*exp(-0.15 * v - 0.22 *  w) - 0.0045
   calculation=0
   while(calculation<2){
@@ -87,7 +87,7 @@ calcIREQ <- function(M,W,ta,tr,p,w,v,rh,clo){
     ArAdu=0.77
     factor=0.5 #Initial values !
     Balance=1
-    W=1
+    #W=1
     while (abs(Balance) > 0.01) {
       fcl=1+1.197*IREQ
       Rt=(0.06/0.38)*(Ia+IREQ)
@@ -118,8 +118,8 @@ calcIREQ <- function(M,W,ta,tr,p,w,v,rh,clo){
     factor=500
     Iclr=clo # Initial values !
     Balance=1
-    W=1
-    DLE=1
+    #W=1
+    #DLE=1
     while (abs(Balance) > 0.01) {
       fcl=1+1.197*Iclr
       Iclr=((clo+0.085/fcl)*(0.54*exp(-0.15*v-0.22*w)*(p^0.075)-0.06*log(p)+0.5)-
