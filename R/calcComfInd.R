@@ -1,14 +1,10 @@
 #' @title Calculating one or more Thermal Comfort Indices using a List of Climatic Conditions
 #' @description \code{calcComfInd} calculates one or more thermal comfort indices using a list of climatic conditions.
-#' @aliases calcComfInd
 #' @aliases comfind
 #' @usage calcComfInd(lsCond, request = "all")
 #' @usage comfind(lsCond, request = "all")
-#' @param IsCond a list of climatic conditions and additional variables necessary for one or more of the indices (see details below).
+#' @param lsCond a list of climatic conditions and additional variables necessary for one or more of the indices (see details below).
 #' @param request a vector with one or more comfort indices (see details below).
-#' @returns
-#' \code{calcComfInd} returns one or more rows with the comfort indices listed as \code{request}. For details see details above.
-
 #' @details
 #' The list \code{lsCond} could contain one or more of the following variables:
 #' \tabular{ll}{
@@ -73,17 +69,19 @@
 #'  "pts" \tab Predicted thermal sensation vote based on set \tab ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt \cr
 #'  "HBxst" \tab Human body exergy consumPtion rate using steady state method \tab ta, tr, vel, rh, clo, met, tao, rho, frad, eps, ic, ht, wt, tcr, tsk, basMet, warmUp, cdil, sigmatr
 #' }
+#' @returns
+#' \code{calcComfInd} returns one or more rows with the comfort indices listed as \code{request}. For details see details above.
 #' @examples
 #' ## Creating list with all values
-#' lsstrd <- createCond()
+#' lsCond <- createCond()
 #' ## Requesting all comfort indices
-#' calcComfInd(lsstrd, request="all")
+#' calcComfInd(lsCond, request="all")
 #' ## Requesting a single index
-#' calcComfInd(lsstrd, request="pmv")
+#' calcComfInd(lsCond, request="pmv")
 #' ## Requesting multiple indices
-#' calcComfInd(lsstrd, request=c("pmv", "ptse"))
+#' calcComfInd(lsCond, request=c("pmv", "ptse"))
 #' @author Sophia Mueller and Marcel Schweiker.
-#' @seealso see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctadapt}}
+#' @seealso see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHBpmv}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctAdapt}}
 #' @references For references see individual functions.
 #' @note In case one of the variables is not given, a standard value will be taken from a list (see \code{\link{createCond}} for details.
 #' @export
@@ -233,7 +231,7 @@ calcComfInd <- function(lsCond, request="all"){
                             epmv = calcePMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], epCoeff[i]),
                             ptsa = calcPtsa(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], asCoeff[i]),
                             ptse = calcPtse(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], esCoeff[i]),
-                            pmvadj = calcpmvadj(ta[i], tr[i], vel[i], rh[i], clo[i], met[i]),
+                            pmvadj = calcPMVadj(ta[i], tr[i], vel[i], rh[i], clo[i], met[i]),
                             HBxst = calcHbExSteady(ta[i], tr[i], rh[i], vel[i], clo[i], met[i], tao[i], rho[i], frad[i], eps[i], ic[i], ht[i], wt[i], tcrI[i], tskI[i], basMet[i], warmUp[i], cdil[i], sigmatr[i])[33],
                             humidex = calcHumx(ta[i], rh[i])
 
@@ -335,7 +333,7 @@ calcComfInd <- function(lsCond, request="all"){
 
         } else if (request[nparam] == "pmvadj"){
 
-          giveDat <- data.frame(calcpmvadj(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i]))
+          giveDat <- data.frame(calcPMVadj(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i]))
           if (nparam == 1){
             giveDatas<-giveDat
           } else {giveDatas<-cbind(giveDatas, giveDat)}
@@ -418,6 +416,5 @@ calcComfInd <- function(lsCond, request="all"){
   giveData
   #comfortData
 } # end fct
-
 comfind <- calcComfInd
 

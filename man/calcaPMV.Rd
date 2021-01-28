@@ -64,7 +64,7 @@ apmv
 apmv is based on Yao, R., Li, B. and Liu, J. A theoretical adaptive model of thermal comfort - Adaptive Predicted mean Vote (aPMV) Building and Environment, 2009, 44, 2089-209
 }
 \seealso{
-see also \code{\link{calcComfInd}}, \code{\link{calcapCoeff}}
+\code{\link{calcComfInd}} , \code{\link{calcapCoeff}}
 }
 \author{
 Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.

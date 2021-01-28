@@ -10,9 +10,9 @@ calcComfInd(lsCond, request = "all")
 comfind(lsCond, request = "all")
 }
 \arguments{
-\item{request}{a vector with one or more comfort indices (see details below).}
+\item{lsCond}{a list of climatic conditions and additional variables necessary for one or more of the indices (see details below).}
 
-\item{IsCond}{a list of climatic conditions and additional variables necessary for one or more of the indices (see details below).}
+\item{request}{a vector with one or more comfort indices (see details below).}
 }
 \value{
 \code{calcComfInd} returns one or more rows with the comfort indices listed as \code{request}. For details see details above.
@@ -90,19 +90,19 @@ In case one of the variables is not given, a standard value will be taken from a
 }
 \examples{
 ## Creating list with all values
-lsstrd <- createCond()
+lsCond <- createCond()
 ## Requesting all comfort indices
-calcComfInd(lsstrd, request="all")
+calcComfInd(lsCond, request="all")
 ## Requesting a single index
-calcComfInd(lsstrd, request="pmv")
+calcComfInd(lsCond, request="pmv")
 ## Requesting multiple indices
-calcComfInd(lsstrd, request=c("pmv", "ptse"))
+calcComfInd(lsCond, request=c("pmv", "ptse"))
 }
 \references{
 For references see individual functions.
 }
 \seealso{
-see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctadapt}}
+see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHBpmv}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctAdapt}}
 }
 \author{
 Sophia Mueller and Marcel Schweiker.
