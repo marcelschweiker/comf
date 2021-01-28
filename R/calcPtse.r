@@ -70,7 +70,7 @@
 #' asCoeff <- 0.5
 #' 
 #' maxLength <- max(sapply(list(ta, tr, vel, rh), length))
-#' ptse <- sapply(seq(maxLength), function(x) { calcPtse(ta[x], tr[x], vel[x], rh[x]), esCoeff } )
+#' ptse <- sapply(seq(maxLength), function(x) { calcPtse(ta[x], tr[x], vel[x], rh[x], esCoeff=esCoeff) } )
 calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
                      ltime = 60, ht = 171, wt = 70, tu = 40, esCoeff){
   
