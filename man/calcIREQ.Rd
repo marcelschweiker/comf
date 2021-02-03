@@ -9,7 +9,7 @@
 \usage{
 calcIREQ(M,W,ta,tr,p,w,v,rh,clo)
 
-clacireq(M,W,ta,tr,p,w,v,rh,clo)
+calcireq(M,W,ta,tr,p,w,v,rh,clo)
 
 IREQ(M,W,ta,tr,p,w,v,rh,clo)
 
@@ -53,14 +53,14 @@ The function gives IREQ Insulation of clothing required to maintain thermal equi
 The authors disclaim all obligations and liabilities for damages arising from the use or attempted use of the information, including, but not limited to, direct, indirect, special and consequential damages, and attorneys' and experts' fees and court costs. Any use of the information will be at the risk of the user.
 }
 \examples{
-calcIREQ(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
-calcireq(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
-ireq(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
-IREQ(116,0,-15,-15,0.5,8,0,0.4,85,2.5)
+calcIREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
+calcireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
+ireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
+IREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
 }
 \references{
 ISO 11079, 2007-12-15, ERGONOMICS OF THE THERMAL ENVIRONMENT - DETERMINATION AND INTERPRETATION OF COLD STRESS WHEN USING REQUIRED CLOTHING INSULATION (IREQ) AND LOCAL COOLING EFFECTS
 }
 \author{
-Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and Modified in R by Shoaib Sarwar.
+Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and transferred to R by Shoaib Sarwar and Marcel Schweiker.
 }

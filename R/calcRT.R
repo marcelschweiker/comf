@@ -4,7 +4,7 @@
 #' @aliases  RT
 #' @aliases  rt
 #' @usage calcRT(M,W,ta,tr,p,w,v,rh,clo)
-#' @usage clacrt(M,W,ta,tr,p,w,v,rh,clo)
+#' @usage calcrt(M,W,ta,tr,p,w,v,rh,clo)
 #' @usage RT(M,W,ta,tr,p,w,v,rh,clo)
 #' @usage rt(M,W,ta,tr,p,w,v,rh,clo)
 #' @param M a numeric value presenting metabolic energy production (58 to 400 W/m2) in [W/m2]
