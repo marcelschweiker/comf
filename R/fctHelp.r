@@ -1,6 +1,8 @@
 #' @keywords internal
 # help functions
 
+utils::globalVariables(c("solarGainRange", "utciRange"))
+
 calcepCoeff <- function(lsCond){
   
   pmv     <- calcComfInd(lsCond, request = "epCoeff")

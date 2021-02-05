@@ -1,7 +1,7 @@
 #' List of all the variables used
 #' 
 #' @docType data
-#' @usage data(varg.data)
+#' @usage data(variable)
 #'
 #'
 #' @format A data frame with 13 rows and 5 variables:
@@ -16,5 +16,5 @@
 #' @keywords datasets internal
 #'
 #' @examples
-#' data(variables)
-#' head(varg.data)
+#' data(variable)
+#' head(variable)
