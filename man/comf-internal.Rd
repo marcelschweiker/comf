@@ -1,7 +1,6 @@
 \name{comf-internal}
 \alias{comf-internal}
 \alias{bisect}
-\alias{calcet}
 \alias{hcvF}
 \alias{hcvG}
 \alias{hcvM}

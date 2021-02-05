@@ -3,7 +3,7 @@
 #' @docType data
 #'
 #' @keywords internal
-#' @usage data(solarGainValue)
+#' @usage data(solarGainValues)
 #'
 #' @format A data frame with 384 rows and 10 variables:
 #' \describe{
@@ -23,6 +23,6 @@
 #' @keywords datasets
 #'
 #' @examples
-#' data(solarGainValue)
-#' head(solarGainValue)
-"solarGainValue"
+#' data(solarGainValues)
+#' head(solarGainValues)
+"solarGainValues"
