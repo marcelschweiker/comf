@@ -66,20 +66,6 @@ bisect <- function(fn, lower, upper, tol=1.e-07, ...) {
 # }
 # }
 
-
-cutTSV <- function(pred){
-  cut(pred, breaks = c(-300, -2.5, -1.5, -.5, .5, 1.5, 2.5, 300), labels = c("-3", "-2", "-1", "0", "1", "2", "3"))
-}
-
-
-# percentage of fit ThermalsensationSQ001 to pmv
-calcTPRTSV <- function(ref, pred){
-  (table(ref, pred)[1, 1] + table(ref, pred)[2, 2] + table(ref, pred)[3, 3] + table(ref, pred)[4, 4] + table(ref, pred)[5, 5] + table(ref, pred)[6, 6] + table(ref, pred)[7, 7]) / sum(table(ref, pred))
-}
-
-
-
-
 ###############################################
 ## definitions of necessary functions for HBx-calculation
 ###############################################

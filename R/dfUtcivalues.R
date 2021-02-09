@@ -9,7 +9,7 @@
 #'	\item{\code{tr}}{a numeric value presenting mean radiant temperature in [degree C]}
 #'  \item{\code{vel}}{a numeric value presenting air velocity in [m/s]}
 #'	\item{\code{rh}}{a numeric value presenting relative humidity [\%]}
-#'	\item{\code{utci_value}}{a numeric value presenting the UTCI value}
+#'	\item{\code{utci}}{a numeric value presenting the UTCI value}
 #' }
 #'
 #' @keywords datasets
