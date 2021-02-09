@@ -6,7 +6,7 @@
 \alias{calcapCoeff}
 \alias{calcasCoeff}
 \alias{calcesCoeff}
-\title{Calculating Adaptive Comfort Temperatures or Neutral Temperatures}
+\title{Calculation of Coefficients for aPMV, ePMV, aPTS, ePTS}
 \usage{
 calcapCoeff(lsCond)
 

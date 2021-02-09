@@ -80,7 +80,7 @@ calcEnth(ta, rh, 760)
 ## Calc set of values of enthalpy
 ta <- 25:30
 rh <- 50
-calcEnth(ta, rh, 760))
+calcEnth(ta, rh, 760)
 }
 \references{
 Rajib Ranaa, Brano Kusya, Raja Jurdaka, Josh Wallb and Wen Hua, Feasibility analysis of using humidex as an indoor thermal comfort predictor, Energy and Buildings 64 (2013) 17-25.

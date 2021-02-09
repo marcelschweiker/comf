@@ -3,6 +3,7 @@
 \name{calctAdapt15251}
 \alias{calctAdapt15251}
 \alias{calctadapt}
+\alias{calctAdapt}
 \alias{calctAdaptASHRAE}
 \alias{calctnAuliciems}
 \alias{calctnHumphreysNV}

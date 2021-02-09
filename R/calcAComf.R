@@ -1,6 +1,7 @@
 #' @title Calculating Adaptive Comfort Temperatures or Neutral Temperatures
 #' @description \code{calctadapt} are three functions to calculate adaptive comfort or neutral temperatures based on a given outdoor temperature value.
 #' @aliases calctadapt
+#' @aliases calctAdapt
 #' @aliases calctAdapt15251
 #' @aliases calctAdaptASHRAE
 #' @aliases calctnAuliciems

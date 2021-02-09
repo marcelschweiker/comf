@@ -1,10 +1,11 @@
 #' Calculating the Predicted Thermal Sensation based on 2-Node Model adjusted 
-#' for Adaptation or Expectancy
+#' for Adaptation
 #'
 #' @aliases calcPtsa ptsa calcptsa Ptsa
 #' @description 
 #' \code{calcPtsa} calculates Predicted Thermal Sensation based on the 
-#' 2-Node-Model by Gagge et al.
+#' 2-Node-Model by Gagge et al. and adjusts its output according to adaptive
+#' coefficient
 #' 
 #' @usage 
 #' calcPtsa(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
@@ -58,7 +59,7 @@
 #' of human response to the thermal environment, ASHRAE transactions, 1986, 92 (2B), 
 #' 709-731.
 #' 
-#' @seealso see also \code{\link{calcComfInd}}
+#' @seealso see also \code{\link{calcComfInd}} and \code{\link{calc2Node}}
 #' @export
 #'
 #' @examples

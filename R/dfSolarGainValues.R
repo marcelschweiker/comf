@@ -15,7 +15,6 @@
 #'	\item{\code{fBes}}{a numeric value presenting fraction of the possible body surface exposed to sun, ranges from 0 to 1}
 #'  \item{\code{asw}}{a numeric value presenting the average short-wave absorptivity of the occupant. Set to 0.7 by default}
 #'	\item{\code{posture}}{Default 'seated' list of available options 'standing', 'supine' or 'seated'}
-#'  \item{\code{floorRef}}{a numeric value presenting floor refectance. It is assumed to be constant and equal to 0.6}
 #'  \item{\code{erf}}{Solar gain to the human body using the Effective Radiant Field [W/m2]}
 #'  \item{\code{delMrt}}{Delta mean radiant temperature [Degree C]}   
 #' }

@@ -19,7 +19,7 @@ calcUTCI(ta, tr, vel, rh)
 \item{rh}{a numeric value presenting relative humidity [\%]}
 }
 \value{
-the \code{utci_value} value rounded to one decimal
+the \code{utciValue} value rounded to one decimal
 }
 \description{
 Functions to calculate UTCI.
@@ -30,8 +30,12 @@ air temperature and mean radiant temperature should be in Degree C unit. Air vel
 \examples{
 calcUTCI(25, 25, 1.0, 50) # Returns 24.6
 }
+\references{
+\url	{http://www.utci.org/}{UTCI} 
+Original code in Python by Tartarini & Schiavon (2020) \ref{https://doi.org/10.1016/j.softx.2020.100578}
+}
 \seealso{
-see also calcComfInd
+see also \code{\link{calcComfInd}}
 }
 \author{
 Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.

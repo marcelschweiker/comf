@@ -1,10 +1,11 @@
 #' Calculating the Predicted Thermal Sensation based on 2-Node Model adjusted 
-#' for Adaptation or Expectancy
+#' for Expectancy
 #'
 #' @aliases calcPtse ptse calcptse Ptse
 #' @description 
 #' \code{calcPtse} calculates Predicted Thermal Sensation based on the 
-#' 2-Node-Model by Gagge et al.
+#' 2-Node-Model by Gagge et al. and adjusts its output according to expectancy
+#' factor
 #' 
 #' @usage 
 #' calcPtse(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
@@ -22,7 +23,7 @@
 #' @param ht a numeric value presenting body height in [cm]
 #' @param wt a numeric value presenting body weight in [kg]
 #' @param tu a numeric value presenting turbulence intensity in [\%]
-#' @param esCoeff a numeric values presenting adaptive coefficient [-]
+#' @param esCoeff a numeric values presenting expectancy factor [-]
 #' 
 #' @details 
 #' All variables must have the same length 1. For the calculation of several 
@@ -58,7 +59,7 @@
 #' of human response to the thermal environment, ASHRAE transactions, 1986, 92 (2B), 
 #' 709-731.
 #' 
-#' @seealso see also \code{\link{calcComfInd}}
+#' @seealso see also \code{\link{calcComfInd}} and \code{\link{calc2Node}}
 #' @export
 #'
 #' @examples
