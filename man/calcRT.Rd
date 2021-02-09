@@ -9,7 +9,7 @@
 \usage{
 calcRT(M,W,ta,tr,p,w,v,rh,clo)
 
-clacrt(M,W,ta,tr,p,w,v,rh,clo)
+calcrt(M,W,ta,tr,p,w,v,rh,clo)
 
 RT(M,W,ta,tr,p,w,v,rh,clo)
 

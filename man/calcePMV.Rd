@@ -66,7 +66,7 @@ epmv
 epmv is based on Fanger, P. and Toftum, J. Extension of the PMV model to non-air-conditioned buildings in warm climates Energy and Buildings, 2002, 34, 533-536
 }
 \seealso{
-\code{\link{calcComfInd}} , \code{\link{calcepCoeff}}
+\code{\link{calcComfInd}}, \code{\link{calcepCoeff}}
 }
 \author{
 Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.

@@ -59,7 +59,7 @@ The performance criteria included in this package are presented below. Again you
 \author{
 Marcel Schweiker in cooperation with Sophia Mueller
 
-Contact: marcel.schweiker@kit.edu
+Contact: mschweiker@ukaachen.de
 
 }
 \references{

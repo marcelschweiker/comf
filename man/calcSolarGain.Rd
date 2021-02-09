@@ -27,7 +27,7 @@ calcSolarGain(solAlt, solAzi, solRadDir, solTrans,
 
 \item{posture}{Default 'seated' list of available options 'standing', 'supine' or 'seated'}
 
-\item{floorRef}{a numeric value presenting floor refectance. It is assumed to be constant and equal to 0.6.}
+\item{floorRef}{a numeric value presenting floor reflectance. It is assumed to be constant and equal to 0.6.}
 }
 \value{
 An array of 2 values

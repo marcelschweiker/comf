@@ -6,7 +6,7 @@
 \alias{calcptsa}
 \alias{Ptsa}
 \title{Calculating the Predicted Thermal Sensation based on 2-Node Model adjusted 
-for Adaptation or Expectancy}
+for Adaptation}
 \usage{
 calcPtsa(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
                      ltime = 60, ht = 171, wt = 70, tu = 40, asCoeff)
@@ -44,7 +44,8 @@ Sensation value
 }
 \description{
 \code{calcPtsa} calculates Predicted Thermal Sensation based on the 
-2-Node-Model by Gagge et al.
+2-Node-Model by Gagge et al. and adjusts its output according to adaptive
+coefficient
 }
 \details{
 All variables must have the same length 1. For the calculation of several 
@@ -83,7 +84,7 @@ of human response to the thermal environment, ASHRAE transactions, 1986, 92 (2B)
 709-731.
 }
 \seealso{
-see also \code{\link{calcComfInd}}
+see also \code{\link{calcComfInd}} and \code{\link{calc2Node}}
 }
 \author{
 The code for \code{calc2Node} is based on the code in BASIC and C++ presented 

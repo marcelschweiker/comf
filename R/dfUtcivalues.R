@@ -1,7 +1,7 @@
-#' Dataset with Different Combination of Inputs to Calculate UTCI
+#' Dataset with Different Combinations of Inputs to Calculate UTCI
 #'
 #' @docType data
-#' @usage data(dfUtcivalues)
+#' @usage data(dfUTCIValues)
 #'
 #' @format A data frame with 81 rows and 5 variables:
 #' \describe{
@@ -14,7 +14,8 @@
 #'
 #' @keywords datasets
 #'
+#' @seealso see also \code{\link{calcUTCI}}
 #' @examples
-#' data(dfUtcivalues)
-#' head(dfUtcivalues)
-"dfUtcivalues"
+#' data(dfUTCIValues)
+#' head(dfUTCIValues)
+"dfUTCIValues"
