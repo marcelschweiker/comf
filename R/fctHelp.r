@@ -3,94 +3,6 @@
 
 utils::globalVariables(c("solarGainRange", "utciRange"))
 
-calcepCoeff <- function(lsCond){
-  
-  pmv     <- calcComfInd(lsCond, request = "epCoeff")
-  pmv     <- cutTSV(pmv$epCoeff)
-  pmv     <- as.numeric(as.character(pmv))
-  amv     <- lsCond$asv
-  amvpmv  <- pmv * amv
-  pmvpmv  <- pmv * pmv
-  sumA    <- sum(amvpmv)
-  sumP    <- sum(pmvpmv)
-  epCoeff <- sumA / sumP
-  data.frame(epCoeff = epCoeff)
-}
-
-calcapCoeff <- function(lsCond){
-  
-  pmv <- calcComfInd(lsCond, request = "apCoeff")
-  pmv <- cutTSV(pmv$apCoeff)
-  pmv <- as.numeric(as.character(pmv))
-  amv <- lsCond$asv
-  
-  if (sum(which(pmv == 0)) > 0){pmv[which(pmv == 0)] <- NA}
-  if (sum(which(amv == 0)) > 0){amv[which(amv == 0)] <- NA}
-  
-  df <- data.frame(pmv, amv)
-  df <- na.omit(df)
-  
-  amvi <- 1 / (df$amv)
-  pmvi <- 1 / (df$pmv)
-  sumA <- sum(amvi)
-  sumP <- sum(pmvi)
-  
-  apCoeff <- (sumA-sumP) / length(lsCond$asv)
-  data.frame(apCoeff = apCoeff)
-}
-
-calcesCoeff <- function(lsCond){
-  
-  pts <- calcComfInd(lsCond, request = "esCoeff")
-  pts <- cutTSV(pts$esCoeff)
-  pts <- as.numeric(as.character(pts))
-  amv <- lsCond$asv
-  
-  amvpts <- pts*amv
-  ptspts <- pts*pts
-  
-  sumA <- sum(amvpts)
-  sumP <- sum(ptspts)
-  
-  esCoeff <- sumA/sumP
-  data.frame(esCoeff = esCoeff)
-}
-
-calcasCoeff <- function(lsCond){
-  
-  pts <- calcComfInd(lsCond, request = "asCoeff")
-  pts <- cutTSV(pts$asCoeff)
-  pts <- as.numeric(as.character(pts))
-  amv <- lsCond$asv
-  
-  if (sum(which(pts == 0)) > 0){pts[which(pts == 0)] <- NA}
-  if (sum(which(amv == 0)) > 0){amv[which(amv == 0)] <- NA}
-  
-  df <- data.frame(pts, amv)
-  df <- na.omit(df)
-  
-  amvi <- 1 / (df$amv)
-  ptsi <- 1 / (df$pts)
-  sumA <- sum(amvi)
-  sumP <- sum(ptsi)
-  
-  asCoeff <- (sumA - sumP) / length(lsCond$asv)
-  data.frame(asCoeff = asCoeff)
-}
-
-# CALCULATION of operative temperature for standard globe measurement according to DIN EN IsO 7726 Equation (9)
-
-calcTroin <- function(vel, tg, ta, met){
-  
-  ifelse(vel <= 0, 0, vel)
-  met<-as.numeric(met*58) #w/m2
-  varIn<-vel+0.0052*(met-58) # see EN IsO 7730:2005 Appendix C.2
-  vara<-ifelse(varIn<0.2,0.5,ifelse(varIn>0.6,0.7,0.6)) # see appendix G.3 of EN IsO 7726:2001
-  tr<-((tg+273)^4+2.5*10^8*vel^0.6*(tg-ta))^0.25-273 # see equation 9 of EN IsO 7726:2001
-  to<-(vara*ta)+(1-vara)*tr # see appendix G.3 of EN IsO 7726:2001
-  data.frame(tr, to)
-  
-}
 
 #### function bisect ####
 ## used for bisection method in search for ta.adj for calculation of adjusted pmv including cooling effect of elevaated air speed using set according to ASHRAE 55-2013
@@ -153,42 +65,6 @@ bisect <- function(fn, lower, upper, tol=1.e-07, ...) {
 # }
 # }
 # }
-
-
-# function to calculate mean bias between predicted and actual votes
-calcBias <- function(ref, pred){
-  ref <- ifelse(rep(is.factor(ref),length(ref)), as.numeric(as.character(ref)), ref)
-  pred <- ifelse(rep(is.factor(pred),length(pred)), as.numeric(as.character(pred)), pred)
-  bias <- pred - ref
-  meanBias <- mean(bias, na.rm = T)
-  sdBias <- sd(bias)
-  seBias <- sdBias/sqrt(length(ref))
-  
-  data.frame(meanBias, sdBias, seBias)
-}
-
-
-# function to calculate average accuracy according to sokolova and Lapalme 2009
-calcAvgAcc <- function(ref, pred){
-  classes    <- sort(unique(c(unique(as.numeric(as.character(ref))), unique(as.numeric(as.character(pred))))))
-  
-  tp <- tn <- fp <- fn <- NA
-  for (i in 1:length(classes)){ # calculation tp, tn, fn, fp for each class
-    tp[i] <- length(which(ref == classes[i] & pred == classes[i]))
-    tn[i] <- length(which(ref != classes[i] & pred != classes[i]))
-    fn[i] <- length(which(ref == classes[i] & pred != classes[i]))
-    fp[i] <- length(which(ref != classes[i] & pred == classes[i]))
-  }
-  
-  tptn <- tp + tn
-  n <- tp + tn + fn + fp
-  acci <- tptn / n # vector with accuracy of each class
-  
-  acc <- sum(acci) / length(classes)
-  acc
-}
-
-
 
 ###############################################
 ## definitions of necessary functions for HBx-calculation
