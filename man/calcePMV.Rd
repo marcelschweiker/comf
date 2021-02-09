@@ -4,7 +4,7 @@
 \alias{calcePMV}
 \alias{ePMV}
 \alias{epmv}
-\title{Calculating Adjusted Predicted Mean Votes}
+\title{Calculating Adjusted Predicted Mean Votes with Expectancy Factor}
 \usage{
 calcePMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, epCoeff)
 
@@ -30,10 +30,10 @@ epmv(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, epCoeff)
 \item{epCoeff}{expectancy factor e}
 }
 \value{
-\code{calcePMV} returns the predicted mean vote adjusted through the expectancy factor.
+\code{calcePMV} returns the predicted mean vote adjusted by the expectancy factor.
 }
 \description{
-Function to calculate predicted mean votes (pmv) adjusted for cooling effect of elevated air speed, through the expectancy factor by using the function PMVPPD.
+Function to calculate Predicted Mean Votes (PMV) adjusted by the expectancy factor.
 }
 \details{
 \code{epCoeff} can be derived using \code{calcepCoeff}.

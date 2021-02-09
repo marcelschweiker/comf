@@ -9,27 +9,8 @@
 #' fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38,
 #' plotZone = FALSE, gridTaMin = 20, gridTaMax = 30, gridTskMin = 30, gridTskMax = 42,
 #' gridTa = 1000, gridTsk = 1000, sa = 1.86, IbMax = 0.124, IbMin = 0.03, alphaIn = 0.08,
-#' metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", trm = 15, TcPreAdapt = 37.2)
-#' @usage TNZPDF(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh,
-#' fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38,
-#' plotZone = FALSE, gridTaMin = 20, gridTaMax = 30, gridTskMin = 30, gridTskMax = 42,
-#' gridTa = 1000, gridTsk = 1000, sa = 1.86, IbMax = 0.124, IbMin = 0.03, alphaIn = 0.08,
-#' metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", trm = 15, TcPreAdapt = 37.2)
-#' @usage tnzpdf(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh,
-#' fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38,
-#' plotZone = FALSE, gridTaMin = 20, gridTaMax = 30, gridTskMin = 30, gridTskMax = 42,
-#' gridTa = 1000, gridTsk = 1000, sa = 1.86, IbMax = 0.124, IbMin = 0.03, alphaIn = 0.08,
-#' metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", trm = 15, TcPreAdapt = 37.2)
-#' @usage TPDF(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh,
-#' fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38,
-#' plotZone = FALSE, gridTaMin = 20, gridTaMax = 30, gridTskMin = 30, gridTskMax = 42,
-#' gridTa = 1000, gridTsk = 1000, sa = 1.86, IbMax = 0.124, IbMin = 0.03, alphaIn = 0.08,
-#' metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", trm = 15, TcPreAdapt = 37.2)
-#' @usage tpdf(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh,
-#' fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38,
-#' plotZone = FALSE, gridTaMin = 20, gridTaMax = 30, gridTskMin = 30, gridTskMax = 42,
-#' gridTa = 1000, gridTsk = 1000, sa = 1.86, IbMax = 0.124, IbMin = 0.03, alphaIn = 0.08,
-#' metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", trm = 15, TcPreAdapt = 37.2)
+#' metMin = 55.3, metMax = 57.3, metDiff = .1, forPDF = FALSE, metAdapt = "none", 
+#' trm = 15, TcPreAdapt = 37.2)
 #' @param ht a numeric value presenting body height in [cm].
 #' @param wt a numeric value presenting body weight in [kg].
 #' @param age a numeric value presenting the age in [years].
@@ -40,7 +21,9 @@
 #' @param taObs a numeric value presenting actual air temperature in [degree C].
 #' @param met a numeric value presenting metabolic rate (activity related) in [met].
 #' @param rh a numeric value presenting realtive humidity in [\%].
-#' @param fBasMet a string presenting the method of calculating basal metbolic rate. Needs to be one of "rosa", "harris", "miflin", "fixed", or "direct". Fixed will result in the value of 58.2 W/m2. Direct requires definition of metMin and metMax.
+#' @param fBasMet a string presenting the method of calculating basal metbolic rate. 
+#' Needs to be one of "rosa", "harris", "miflin", "fixed", or "direct". 
+#' Fixed will result in the value of 58.2 W/m2. Direct requires definition of metMin and metMax.
 #' @param fSA a string presenting the method of calculating the surface area. Needs to be one of "duBois", "mosteller", or "direct".
 #' @param percCov a numeric value between 0 and 1 presenting the percentage of the body covered by clothes in [\%].
 #' @param TcMin a numeric value presenting the minimum allowed core temperature in [degree C].
@@ -71,11 +54,12 @@
 #' @examples
 #' ## Calculate and draw pdf of TNZ for a young non-obese male
 #' longTcYoungMale <- calcTNZPDF(ht = 178, wt = 70, age = 30, gender = 2, clo = 0.5,
-#'                              vel = 0.2, tskObs = 36.2, taObs = 26, met = 1,
-#'                              rh = 50, fBasMet = "rosa", fSA = "duBois", percCov = 0.6,
-#'                              TcMin = 36, TcMax = 38, plotZone = FALSE, gridTaMin = 20, gridTaMax = 30,
-#'                              gridTskMin = 20, gridTskMax = 42, gridTa = 1000, gridTsk = 1000, sa = 2.0335, IbMax = 0.124,
-#'                              IbMin = 0.03, alphaIn = 0, metMin = 55.3, metMax = 57.3, metDiff = 0.1, forPDF = TRUE)
+#'            vel = 0.2, tskObs = 36.2, taObs = 26, met = 1,
+#'            rh = 50, fBasMet = "rosa", fSA = "duBois", percCov = 0.6,
+#'            TcMin = 36, TcMax = 38, plotZone = FALSE, gridTaMin = 20, gridTaMax = 30,
+#'            gridTskMin = 20, gridTskMax = 42, gridTa = 1000, gridTsk = 1000, 
+#'            sa = 2.0335, IbMax = 0.124, IbMin = 0.03, alphaIn = 0, metMin = 55.3, 
+#'            metMax = 57.3, metDiff = 0.1, forPDF = TRUE)
 #'
 #' plot(density(longTcYoungMale$X2), main="", xlim=c(14,36), ylim=c(0,.50),
 #'     xlab="Operative temperature [degree C]")
@@ -357,8 +341,3 @@ calcTNZPDF <- function(ht, wt, age, gender, clo, vel, tskObs, taObs, met,
                topCentroidTscMin, topCentroidTscMax)
   }
 }
-TNZPDF <- calcTNZPDF
-tnzpdf <- calcTNZPDF
-tpdf <- calcTNZPDF
-TPDF  <- calcTNZPDF
-

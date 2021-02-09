@@ -4,13 +4,9 @@
 \alias{calcPMVadj}
 \alias{PMVadj}
 \alias{pmvadj}
-\title{Calculating Adjusted Predicted Mean Votes}
+\title{Calculating Predicted Mean Votes adjusted for elevated air speed}
 \usage{
 calcPMVadj(ta, tr, vel, rh, clo, met, wme = 0)
-
-PMVadj(ta, tr, vel, rh, clo, met, wme = 0)
-
-pmvadj(ta, tr, vel, rh, clo, met, wme = 0)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -31,7 +27,7 @@ pmvadj(ta, tr, vel, rh, clo, met, wme = 0)
 \code{calcpmvadj} returns the predicted mean vote adjusted for the cooling effect of elevated air speed.
 }
 \description{
-Function to calculate predicted mean votes (pmv) adjusted for cooling effect of elevated air speed, by using the function Two node model(\code{calc2Node}).
+Function to calculate Predicted Mean Votes (PMV) adjusted for cooling effect of elevated air speed.
 }
 \details{
 Calculated through function Two node model(\code{calc2Node}

@@ -4,8 +4,7 @@
 \alias{calcPMVStar}
 \alias{PMVStar}
 \alias{star}
-\title{Calculating Fanger's PMV except that dry is calculated using SET* rather than 
-the Operative Temperature based on the 2-Node-Model}
+\title{Calculating Fanger's PMV using SET* for DRY}
 \usage{
 calcPMVStar(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, 
 ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
@@ -45,13 +44,13 @@ cstr = 0.5)
 \item{cstr}{a numeric value presenting the driving coefficient for vasoconstriction}
 }
 \value{
-\code{calcPMVStar} returns the Fanger's PMV except that dry is calculated 
+\code{calcPMVStar} returns Fanger's PMV except that DRY is calculated 
 using SET* rather than the operative temperature
 }
 \description{
-\code{calcPMVStar} calculates Fanger's PMV except that dry is calculated 
-using SET* rather than the operative temperature based on the 2-Node-Model by 
-Gagge et al.
+\code{calcPMVStar} calculates Fanger's PMV based on the 2-Node-Model by 
+Gagge et al. except that DRY is calculated using SET* rather than 
+the operative temperature
 }
 \details{
 All variables must have the same length 1. For the calculation of several 

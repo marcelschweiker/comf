@@ -4,13 +4,9 @@
 \alias{calcaPMV}
 \alias{aPMV}
 \alias{apmv}
-\title{Calculating Adjusted Predicted Mean Votes}
+\title{Calculating Adaptive Predicted Mean Votes}
 \usage{
 calcaPMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
-
-aPMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
-
-apmv(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -33,7 +29,7 @@ apmv(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
 \code{calcaPMV} returns the predicted mean vote adjusted through the adaptive coefficients.
 }
 \description{
-Function to calculate predicted mean votes (pmv) adjusted for cooling effect of elevated air speed, through the adaptive coefficient by using the function PMVPPD.
+Function to calculate adaptive Predicted Mean Vote (aPMV) adjusted through the adaptive coefficient.
 }
 \details{
 \code{apCoeff} can be derived using \code{calcapCoeff}.

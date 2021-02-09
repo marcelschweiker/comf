@@ -8,12 +8,6 @@
 \title{Calculates RT.}
 \usage{
 calcRT(M,W,ta,tr,p,w,v,rh,clo)
-
-calcrt(M,W,ta,tr,p,w,v,rh,clo)
-
-RT(M,W,ta,tr,p,w,v,rh,clo)
-
-rt(M,W,ta,tr,p,w,v,rh,clo)
 }
 \arguments{
 \item{M}{a numeric value presenting metabolic energy production (58 to 400 W/m2) in [W/m2]}
@@ -40,21 +34,15 @@ returns required recovery time in [hours]
 \description{
 Function to calculate Required recovery time, RT in hours.
 }
-\details{
-The function gives Temperature interval within which the body maintains thermal equilibrium solely through vasomotor responses.
-}
 \note{
 The authors disclaim all obligations and liabilities for damages arising from the use or attempted use of the information, including, but not limited to, direct, indirect, special and consequential damages, and attorneys' and experts' fees and court costs. Any use of the information will be at the risk of the user.
 }
 \examples{
 calcRT(90,0,25,25,8,0.2,0.4,50,1.5)
-calcrt(90,0,25,25,8,0.2,0.4,50,1.5)
-rt(90,0,25,25,8,0.2,0.4,50,1.5)
-RT(90,0,25,25,8,0.2,0.4,50,1.5)
 }
 \references{
 ISO 11079, 2007-12-15, ERGONOMICS OF THE THERMAL ENVIRONMENT - DETERMINATION AND INTERPRETATION OF COLD STRESS WHEN USING REQUIRED CLOTHING INSULATION (IREQ) AND LOCAL COOLING EFFECTS
 }
 \author{
-Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and Modified in R by Shoaib Sarwar.
+Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 in java and transferred to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 }

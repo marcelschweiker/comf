@@ -1,4 +1,4 @@
-#' Calculating Standard Effective Temperature based on the 2-Node-Model
+#' Calculating Standard Effective Temperature
 #'
 #' @aliases SET
 #' @description 
@@ -36,7 +36,7 @@
 #' can only be seen at higher values of met.
 #' 
 #' @return
-#' \code{calcSET} returns the Standard Effective Temperature
+#' \code{calcSET} returns the Standard Effective Temperature (SET)
 #' 
 #' @note 
 #' In case one of the variables is not given, a standard value will be taken 

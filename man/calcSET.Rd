@@ -3,7 +3,7 @@
 \name{calcSET}
 \alias{calcSET}
 \alias{SET}
-\title{Calculating Standard Effective Temperature based on the 2-Node-Model}
+\title{Calculating Standard Effective Temperature}
 \usage{
 calcSET(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, 
 ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
@@ -42,7 +42,7 @@ ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
 \item{cstr}{a numeric value presenting the driving coefficient for vasoconstriction}
 }
 \value{
-\code{calcSET} returns the Standard Effective Temperature
+\code{calcSET} returns the Standard Effective Temperature (SET)
 }
 \description{
 \code{calcSET} calculates Standard Effective Temperature based on the 

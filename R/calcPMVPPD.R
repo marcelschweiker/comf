@@ -1,8 +1,7 @@
 #' @title Calculate PMV and PPD
-#' @description Function to calculate Predicted Mean Vote (PMV) and Predicted Percentage of Dissatisfied (PPD).The Function is calculated in accordance to main thermal comfort Standards.
+#' @description Function to calculate Predicted Mean Vote (PMV) and Predicted Percentage of Dissatisfied (PPD).
 #' @aliases pmvppd
 #' @usage calcPMVPPD(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
-#' @usage pmvppd(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
@@ -11,7 +10,7 @@
 #' @param met a numeric value presenting metabolic rate in [met]
 #' @param wme a numeric value presenting external work in [met]
 #' @param basMet a numeric value presenting basal metabolic rate [w/m2]
-#' @details The PMV is an index that predicts the mean value of the thermal sensation votes (self-reported perceptions) of a large group of people on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, neutral, slightly warm, warm and hot. The PPD is an index that establishes a quantitative prediction of the percentage of thermally dissatisfied people determined from PMV. PMV model is limited to air speeds below 0.20 m/s (40 fpm). When air speeds exceed 0.20 m/s (40 fpm), the comfort zone boundaries are adjusted accordingly.
+#' @details The PMV is an index that predicts the mean value of the thermal sensation of a large group of people on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, neutral, slightly warm, warm and hot. The PPD is an index that establishes a quantitative prediction of the percentage of thermally dissatisfied people determined from PMV. 
 #' @details Note that the adjustments in the value for basMet need to be made with great cautiousness as the PMV calculation is an empirical model and might not be valid for other values of basMet than the one commonly used.
 #' @returns PMV - Predicted Mean Vote
 #' @returns PPD - Predicted Percentage of Dissatisfied occupants in [\%]
@@ -89,4 +88,3 @@ calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
   ppd <- 100 - 95 * exp(-.03353 * pmv ^ 4 - .2179 * pmv ^ 2)
   data.frame(pmv, ppd)
 }
-pmvppd <- calcPMVPPD

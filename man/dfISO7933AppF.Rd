@@ -29,7 +29,7 @@ A data frame with 10 rows and 16 variables:
 data(dfISO7933AppF)
 }
 \description{
-Data from ISO 7933 Appendix F to callibrate values given by the proposed model
+Data from ISO 7933 Appendix F to calibrate values given by the proposed model
 }
 \examples{
 data(dfISO7933AppF)

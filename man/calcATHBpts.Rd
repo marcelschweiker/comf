@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcATHBpts.R
 \name{calcATHBpts}
 \alias{calcATHBpts}
-\title{Calculation of Adaptive Thermal Heat Balance Indices with PTS}
+\title{Calculation of PTS using Adaptive Thermal Heat Balance approach}
 \usage{
 calcATHBpts(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 }
@@ -32,10 +32,11 @@ calcATHBpts(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 \item{wt}{- a numeric value presenting body weight in [kg]}
 }
 \value{
-\code{calcATHBpts} value adapted through the ATHB appoach
+\code{calcATHBpts} returns the predicted thermal sensation adapted through the ATHB approach
 }
 \description{
-\code{calcATHB} calculates three different indices related to the adaptive thermal heat balance framework according to PTS
+\code{calcATHB} calculates predicted thermal sensation based on the adaptive thermal heat balance approach 
+using Gagge's 2 Node Model
 }
 \details{
 All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
@@ -48,7 +49,7 @@ Schweiker, M. & Wagner, A. A framework for an adaptive thermal heat balance mode
 Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 }
 \seealso{
-see also \code{\link{calcComfInd}}
+see also \code{\link{calcComfInd}}, \code{link{calcATHBpmv}}, \code{link{calcATHBset}}
 }
 \author{
 Marcel Schweiker

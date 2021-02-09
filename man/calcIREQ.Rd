@@ -8,8 +8,6 @@
 \title{Calculates IREQ and Dlim}
 \usage{
 calcIREQ(M,W,ta,tr,p,w,v,rh,clo)
-
-calcireq(M,W,ta,tr,p,w,v,rh,clo)
 }
 \arguments{
 \item{M}{a numeric value presenting metabolic energy production (58 to 400 W/m2) in [W/m2]}
@@ -50,11 +48,10 @@ The authors disclaim all obligations and liabilities for damages arising from th
 }
 \examples{
 calcIREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
-calcireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
 }
 \references{
 ISO 11079, 2007-12-15, ERGONOMICS OF THE THERMAL ENVIRONMENT - DETERMINATION AND INTERPRETATION OF COLD STRESS WHEN USING REQUIRED CLOTHING INSULATION (IREQ) AND LOCAL COOLING EFFECTS
 }
 \author{
-Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and transferred to R by Shoaib Sarwar and Marcel Schweiker.
+Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 in java and transferred to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 }

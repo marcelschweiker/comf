@@ -1,6 +1,7 @@
-#' Calculation of Adaptive Thermal Heat Balance Indices with PTS
+#' Calculation of PTS using Adaptive Thermal Heat Balance approach
 #' 
-#' @description \code{calcATHB} calculates three different indices related to the adaptive thermal heat balance framework according to PTS
+#' @description \code{calcATHB} calculates predicted thermal sensation based on the adaptive thermal heat balance approach 
+#' using Gagge's 2 Node Model
 #' 
 #' @usage calcATHBpts(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 #'
@@ -17,7 +18,7 @@
 #' @param ht - a numeric value presenting body height in [cm]
 #' @param wt - a numeric value presenting body weight in [kg]
 #'
-#' @return \code{calcATHBpts} value adapted through the ATHB appoach
+#' @return \code{calcATHBpts} returns the predicted thermal sensation adapted through the ATHB approach
 #' 
 #' @details All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
 #' 
@@ -26,7 +27,7 @@
 #' Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 #' 
 #' @author Marcel Schweiker
-#' @seealso see also \code{\link{calcComfInd}}
+#' @seealso see also \code{\link{calcComfInd}}, \code{link{calcATHBpmv}}, \code{link{calcATHBset}}
 #' @export
 #'
 #' @examples calcATHBpts(20, 0, 25, 25, .1, 50, 1.1, 0, 760, 60, 171, 70)

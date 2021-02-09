@@ -1,5 +1,5 @@
-#' @title Creating a List with Standard Values
-#' @description \code{createCond} creates a list with standard variables to be used as an input parameter for calculating comfort indices using the function "calcComfInd".
+#' @title Creating a list with Standard Values
+#' @description \code{createCond} creates a list with standard variables to be used as an input parameter for calculating comfort indices using the function \code{calcComfInd}.
 #' @aliases createCond
 #' @aliases createcond
 #' @usage createCond(a = TRUE)

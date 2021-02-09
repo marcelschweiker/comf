@@ -1,5 +1,5 @@
-#' @title Calculating Adjusted Predicted Mean Votes
-#' @description Function to calculate predicted mean votes (pmv) adjusted for cooling effect of elevated air speed, through the expectancy factor by using the function PMVPPD.
+#' @title Calculating Adjusted Predicted Mean Votes with Expectancy Factor
+#' @description Function to calculate Predicted Mean Votes (PMV) adjusted by the expectancy factor.
 #' @aliases ePMV
 #' @aliases epmv
 #' @usage calcePMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, epCoeff)
@@ -15,7 +15,7 @@
 #' @param epCoeff expectancy factor e
 #' @details \code{epCoeff} can be derived using \code{calcepCoeff}.
 #' @details \code{calcePMV} requires the actual sensation vote related to the physical data as it is required to alter the metabolic rate.
-#' @returns \code{calcePMV} returns the predicted mean vote adjusted through the expectancy factor.
+#' @returns \code{calcePMV} returns the predicted mean vote adjusted by the expectancy factor.
 #' @examples
 #' ## Note. Due to random generated asv values. The values for the coefficients will not be meaningful.
 #' ## Create sample data

@@ -1,8 +1,8 @@
-#' Calculating Predicted Thermal Sensation Vote based on set by the 2-Node-Model
+#' Calculating Predicted Thermal Sensation Vote based on SET
 #'
 #' @aliases calcPTS pts PTS calcpts
 #' @description 
-#' \code{calcPTS} calculates Predicted Thermal Sensation Vote based on set by 
+#' \code{calcPTS} calculates Predicted Thermal Sensation Vote based on SET by 
 #' the 2-Node-Model by Gagge et al.
 #' 
 #' @usage 
@@ -36,7 +36,7 @@
 #' can only be seen at higher values of met.
 #' 
 #' @return
-#' \code{calcPTS} returns the Predicted Thermal Sensation Vote based on set
+#' \code{calcPTS} returns the Predicted Thermal Sensation Vote based on SET
 #' 
 #' @note 
 #' In case one of the variables is not given, a standard value will be taken 

@@ -5,7 +5,7 @@ Version: 0.1.10
 Date: 2021-01-30
 Imports: plyr, graphics, reshape
 Author: Marcel Schweiker [aut, cre] and Sophia Mueller [aut] and Michael Kleber [ctr] and Boris Kingma [ctr] and Masanori Shukuya [ctr] and Shaomi Rahman [ctr] and Shoaib Sarwar [ctr] 
-Maintainer: Marcel Schweiker <marcel.schweiker@kit.edu>
+Maintainer: Marcel Schweiker <mschweiker@ukaachen.de>
 Description: Functions to calculate various common and less common thermal comfort indices, convert physical variables, and evaluate the performance of thermal comfort indices.
 License: GPL-2
 LazyLoad: yes

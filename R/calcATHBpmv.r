@@ -1,6 +1,7 @@
-#' Calculation of Adaptive Thermal Heat Balance Indices with PMV
+#' Calculation of PMV based on Adaptive Thermal Heat Balance Framework
 #' 
-#' @description \code{calcATHBpmv} calculates three different indices related to the adaptive thermal heat balance framework according to PMV
+#' aliases athb ATHB
+#' @description \code{calcATHBpmv} calculates the PMV based on adaptive thermal heat balance framework
 #' 
 #' @usage calcATHBpmv(trm, psych, ta, tr, vel, rh, met, wme)
 #'
@@ -13,7 +14,7 @@
 #' @param met - a numeric value presenting metabolic rate in [met]
 #' @param wme - a numeric value presenting external work in [met]
 #'
-#' @return \code{calcATHBpmv} pmv value adapted through the ATHB appoach
+#' @return \code{calcATHBpmv} PMV value adapted through the ATHB appoach
 #' 
 #' @details All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
 #' 
@@ -22,7 +23,7 @@
 #' Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 #' 
 #' @author Marcel Schweiker
-#' @seealso see also \code{\link{calcComfInd}}
+#' @seealso see also \code{\link{calcComfInd}}, \code{link{calcATHBpts}}, \code{link{calcATHBset}}
 #' @export
 #'
 #' @examples calcATHBpmv(20, 0, 25, 25, .1, 50, 1.1, 0)
