@@ -1,10 +1,8 @@
-#' @title Calculating Adjusted Predicted Mean Votes
-#' @description Function to calculate predicted mean votes (pmv) adjusted for cooling effect of elevated air speed, by using the function Two node model(\code{calc2Node}).
+#' @title Calculating Predicted Mean Votes adjusted for elevated air speed
+#' @description Function to calculate Predicted Mean Votes (PMV) adjusted for cooling effect of elevated air speed.
 #' @aliases PMVadj
 #' @aliases pmvadj
 #' @usage calcPMVadj(ta, tr, vel, rh, clo, met, wme = 0)
-#' @usage PMVadj(ta, tr, vel, rh, clo, met, wme = 0)
-#' @usage pmvadj(ta, tr, vel, rh, clo, met, wme = 0)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
@@ -29,5 +27,3 @@ calcPMVadj <- function(ta, tr, vel, rh, clo, met, wme = 0){
   names(pmvadj) <- "pmvadj"
   data.frame(pmvadj=pmvadj)
 }
-pmvadj <- calcPMVadj
-PMVadj <- calcPMVadj

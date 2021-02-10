@@ -3,9 +3,9 @@
 #' @aliases calcHbExUnsteady
 #' @aliases hbexunsteady
 #' @aliases exunsteady
-#' @usage calcHbExUnsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2, warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
-#' @usage hbexunsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2, warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
-#' @usage exunsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2, warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
+#' @usage calcHbExUnsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, 
+#' eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2,
+#' warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
@@ -643,5 +643,3 @@ calcHbExUnsteady <- function(ta, tr, rh, vel, clo, met, tao, rho, frad = .7, eps
 
   results
 } # end of main program
-hbexunsteady <- calcHbExUnsteady
-exunsteady <- calcHbExUnsteady

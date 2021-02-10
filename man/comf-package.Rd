@@ -12,8 +12,8 @@ This package contains several functions to calculate and evaluate a series of co
 \tabular{ll}{
 Package: \tab comf\cr
 Type: \tab Package\cr
-Version: \tab 0.1.8\cr
-Date: \tab 2018-01-06\cr
+Version: \tab 0.1.10\cr
+Date: \tab 2021-02-16\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
@@ -57,9 +57,9 @@ The performance criteria included in this package are presented below. Again you
 }
 }
 \author{
-Marcel Schweiker in cooperation with Sophia Mueller
+Marcel Schweiker in cooperation with Sophia Mueller and many others.
 
-Contact: marcel.schweiker@kit.edu
+Contact: mschweiker@ukaachen.de
 
 }
 \references{

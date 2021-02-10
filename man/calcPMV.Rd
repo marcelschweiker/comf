@@ -3,11 +3,9 @@
 \name{calcPMV}
 \alias{calcPMV}
 \alias{pmv}
-\title{Calculate Predicted Mean Votes (PMV)}
+\title{Calculates Predicted Mean Votes (PMV)}
 \usage{
 calcPMV(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
-
-pmv(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -30,10 +28,10 @@ pmv(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 PMV - Predicted Mean Vote
 }
 \description{
-Function to calculate Predicted Mean Vote (PMV) and .The Function is calculated in accordance to main thermal comfort Standards.
+Function to calculate Predicted Mean Vote (PMV).
 }
 \details{
-The PMV is an index that predicts the mean value of the thermal sensation votes (self-reported perceptions) of a large group of people on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, neutral, slightly warm, warm and hot. PMV model is limited to air speeds below 0.20 m/s (40 fpm). When air speeds exceed 0.20 m/s (40 fpm), the comfort zone boundaries are adjusted accordingly.
+The PMV is an index that predicts the mean value of the thermal sensation of a large group of people on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, neutral, slightly warm, warm and hot. PMV model is limited to air speeds below 0.20 m/s.
 
 Note that the adjustments in the value for basMet need to be made with great cautiousness as the PMV calculation is an empirical model and might not be valid for other values of basMet than the one commonly used.
 }

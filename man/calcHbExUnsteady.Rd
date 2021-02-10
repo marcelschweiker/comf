@@ -6,11 +6,9 @@
 \alias{exunsteady}
 \title{Calculates Human Body Exergy Consumption Rate using Unsteady State Method}
 \usage{
-calcHbExUnsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2, warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
-
-hbexunsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2, warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
-
-exunsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2, warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
+calcHbExUnsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, 
+eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2,
+warmUp = 60, cdil = 100, sigmatr = 0.25, dateTime)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}

@@ -4,9 +4,6 @@
 #' @aliases  IREQ
 #' @aliases  ireq
 #' @usage calcIREQ(M,W,ta,tr,p,w,v,rh,clo)
-#' @usage calcireq(M,W,ta,tr,p,w,v,rh,clo)
-#' @usage IREQ(M,W,ta,tr,p,w,v,rh,clo)
-#' @usage ireq(M,W,ta,tr,p,w,v,rh,clo)
 #' @param M a numeric value presenting metabolic energy production (58 to 400 W/m2) in [W/m2]
 #' @param W a numeric value presenting Rate of mechanical work, (normally 0) in [W/m2]
 #' @param ta a numeric value presenting ambiant air temperature in [degree C]
@@ -25,12 +22,9 @@
 #' \item{DLEminimal }{Lower bound of duration limited exposure in [hours]}
 #' \item{DLEneutral }{upper bound of duration limited exposure in [hours]}
 #' @examples calcIREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
-#' @examples calcireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
-#' @examples ireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
-#' @examples IREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
 #' @references ISO 11079, 2007-12-15, ERGONOMICS OF THE THERMAL ENVIRONMENT - DETERMINATION AND INTERPRETATION OF COLD STRESS WHEN USING REQUIRED CLOTHING INSULATION (IREQ) AND LOCAL COOLING EFFECTS
 #' @note The authors disclaim all obligations and liabilities for damages arising from the use or attempted use of the information, including, but not limited to, direct, indirect, special and consequential damages, and attorneys' and experts' fees and court costs. Any use of the information will be at the risk of the user.
-#' @author Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and transferred to R by Shoaib Sarwar and Marcel Schweiker.
+#' @author Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 in java and transferred to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 #' @export
 
 
@@ -183,8 +177,3 @@ calcIREQ <- function(M,W,ta,tr,p,w,v,rh,clo){
 
   data.frame(IREQminimal,IREQneutral, ICLminimal,ICLneutral,DLEminimal,DLEneutral)
 }
-
-IREQ <- calcIREQ
-ireq <- calcIREQ
-calcireq<- calcIREQ
-

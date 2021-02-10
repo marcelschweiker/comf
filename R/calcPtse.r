@@ -1,10 +1,11 @@
 #' Calculating the Predicted Thermal Sensation based on 2-Node Model adjusted 
-#' for Adaptation or Expectancy
+#' for Expectancy
 #'
 #' @aliases calcPtse ptse calcptse Ptse
 #' @description 
 #' \code{calcPtse} calculates Predicted Thermal Sensation based on the 
-#' 2-Node-Model by Gagge et al.
+#' 2-Node-Model by Gagge et al. and adjusts its output according to expectancy
+#' factor
 #' 
 #' @usage 
 #' calcPtse(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
@@ -22,7 +23,7 @@
 #' @param ht a numeric value presenting body height in [cm]
 #' @param wt a numeric value presenting body weight in [kg]
 #' @param tu a numeric value presenting turbulence intensity in [\%]
-#' @param esCoeff a numeric values presenting adaptive coefficient [-]
+#' @param esCoeff a numeric values presenting expectancy factor [-]
 #' 
 #' @details 
 #' All variables must have the same length 1. For the calculation of several 
@@ -50,15 +51,14 @@
 #' ASHRAE Standard 55-2013. Thermal environmental conditions for human occupancy. 
 #' American society of heating, Refrigerating and Air-Conditioning Engineering, 
 #' Atlanta, USA, 2013.
-#' 
 #' Fountain, M. & Huizenga, C. A thermal sensation model for use by the 
 #' engineering profession ASHRAE RP-781 Final report, 1995
-#'
 #' Gagge, A. P., Fobelets, A. P. and Berglund, L. G. A standard predictive index 
 #' of human response to the thermal environment, ASHRAE transactions, 1986, 92 (2B), 
 #' 709-731.
-#' 
-#' @seealso see also \code{\link{calcComfInd}}
+#' Coefficients are calculated based on Gao, J.; Wang, Y. and Wargocki, P. Comparative analysis of modified PMV models and set models to predict human thermal sensation in naturally ventilated buildings Building and Environment, 2015, 92, 200-208.
+#' The epmv concept was introudced by Fanger, P. and Toftum, J. Extension of the PMV model to non-air-conditioned buildings in warm climates Energy and Buildings, 2002, 34, 533-536.
+#' @seealso see also \code{\link{calcComfInd}} and \code{\link{calc2Node}}
 #' @export
 #'
 #' @examples
@@ -70,7 +70,8 @@
 #' esCoeff <- 0.5
 #' 
 #' maxLength <- max(sapply(list(ta, tr, vel, rh), length))
-#' ptse <- sapply(seq(maxLength), function(x) { calcPtse(ta[x], tr[x], vel[x], rh[x], esCoeff=esCoeff) } )
+#' ptse <- sapply(seq(maxLength), function(x) { calcPtse(ta[x], tr[x], vel[x], 
+#' rh[x], esCoeff=esCoeff) } )
 calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
                      ltime = 60, ht = 171, wt = 70, tu = 40, esCoeff){
   

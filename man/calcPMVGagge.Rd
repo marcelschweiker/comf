@@ -44,7 +44,7 @@ cstr = 0.5)
 \item{cstr}{a numeric value presenting the driving coefficient for vasoconstriction}
 }
 \value{
-\code{calcPMVGagge} returns the Gagge's Version of Fanger's PMV
+\code{calcPMVGagge} returns Gagge's Version of Fanger's PMV
 }
 \description{
 \code{calcPMVGagge} calculates Gagge's Version of Fanger's PMV based on the 

@@ -5,7 +5,7 @@
 \alias{pts}
 \alias{PTS}
 \alias{calcpts}
-\title{Calculating Predicted Thermal Sensation Vote based on set by the 2-Node-Model}
+\title{Calculating Predicted Thermal Sensation Vote based on SET}
 \usage{
 calcPTS(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, 
 ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
@@ -44,10 +44,10 @@ ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
 \item{cstr}{a numeric value presenting the driving coefficient for vasoconstriction}
 }
 \value{
-\code{calcPTS} returns the Predicted Thermal Sensation Vote based on set
+\code{calcPTS} returns the Predicted Thermal Sensation Vote based on SET
 }
 \description{
-\code{calcPTS} calculates Predicted Thermal Sensation Vote based on set by 
+\code{calcPTS} calculates Predicted Thermal Sensation Vote based on SET by 
 the 2-Node-Model by Gagge et al.
 }
 \details{

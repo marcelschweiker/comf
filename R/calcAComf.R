@@ -1,6 +1,7 @@
 #' @title Calculating Adaptive Comfort Temperatures or Neutral Temperatures
 #' @description \code{calctadapt} are three functions to calculate adaptive comfort or neutral temperatures based on a given outdoor temperature value.
 #' @aliases calctadapt
+#' @aliases calctAdapt
 #' @aliases calctAdapt15251
 #' @aliases calctAdaptASHRAE
 #' @aliases calctnAuliciems
@@ -39,27 +40,20 @@
 calctAdapt15251 <- function(trm=20){
   data.frame(tAdapt15251 = 0.33*trm + 18.8)
 }
-tadapt <- calctAdapt15251
-calctadapt <- calctAdapt15251
-tAdapt15251 <-calctAdapt15251
 
 calctAdaptASHRAE <- function(tmmo){
   data.frame(tAdaptASHRAE = 0.33*tmmo + 17.8)
 }
-tAdaptASHRAE <- calctAdaptASHRAE
 
 calctnAuliciems <- function(ta, tmmo){
   data.frame(tnAuliciems = 9.22+0.48*ta+0.14*tmmo)
 }
-tnAuliciems <- calctnAuliciems
 
 calctnHumphreysNV <- function(tmmo){
   data.frame(tnHumphreysNV = .534*tmmo + 11.9)
 }
-tnHumphreysNV <- calctnHumphreysNV
 
 calctnHumphreysAC <- function(tmmo){
   data.frame(tnHumphreysAC = 23.9+.295*(tmmo-22)*exp(-((tmmo-22)/(24*2 ^ .5)) ^ 2))
 }
-tnHumphreysAC <- calctnHumphreysAC
 

@@ -37,7 +37,7 @@
 #' can only be seen at higher values of met.
 #' 
 #' @return
-#' \code{calcPMVGagge} returns the Gagge's Version of Fanger's PMV
+#' \code{calcPMVGagge} returns Gagge's Version of Fanger's PMV
 #' 
 #' @note 
 #' In case one of the variables is not given, a standard value will be taken 

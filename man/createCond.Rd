@@ -3,7 +3,7 @@
 \name{createCond}
 \alias{createCond}
 \alias{createcond}
-\title{Creating a List with Standard Values}
+\title{Creating a list with Standard Values}
 \usage{
 createCond(a = TRUE)
 
@@ -17,7 +17,7 @@ createcond(a = TRUE)
 \item{lsEmpty}{List, which is created for a = FALSE; contains empty variables to be modified manually.} indices listed as \code{request}. For details see details above.
 }
 \description{
-\code{createCond} creates a list with standard variables to be used as an input parameter for calculating comfort indices using the function "calcComfInd".
+\code{createCond} creates a list with standard variables to be used as an input parameter for calculating comfort indices using the function \code{calcComfInd}.
 }
 \details{
 \code{lsstrd} and \code{lsEmpty} contain the following elements

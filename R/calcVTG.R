@@ -1,11 +1,9 @@
 #' @title Calculate PPD with Vertical Air Temperature Gradient
-#' @description Function to calculate vertical air temperature gradient using the function predicted percentage of dissatisfied.
+#' @description Function to calculate vertical air temperature gradient using the predicted percentage of dissatisfied.
 #' @aliases  vairtepgrad
 #' @aliases  vtg
 #' @aliases  vairtmpgrad
 #' @usage calcVTG(ta, tr, vel, rh, clo, met, v_tmp_grad)
-#' @usage vtg(ta, tr, vel, rh, clo, met, v_tmp_grad)
-#' @usage vairtmpgrad(ta, tr, vel, rh, clo, met, v_tmp_grad)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
@@ -13,10 +11,13 @@
 #' @param clo a numeric value presenting clothing insulation level in [clo]
 #' @param met a numeric value presenting metabolic rate in [met]
 #' @param v_tmp_grad vertical temperature gradient between the feet and the head [degree C/m]
-#' @details  Calculates the percentage of thermally dissatisfied people with a vertical temperature gradient between feet and head.This equation is only applicable for velocity(vel) < 0.2 m/s (40 fps)
-#' @returns Predicted Percentage of Dissatisfied occupants with vertical temperature gradient in [\%]
+#' @details  Calculates the percentage of thermally dissatisfied persons with a vertical temperature gradient between feet and head. Applicable only for velocity(vel) < 0.2 m/s
+#' @returns Predicted Percentage of Dissatisfied with vertical temperature gradient in [\%]
 #' @returns Acceptability in [boolean]
-#' @examples calcVTG(25,25,0.1,50,0.5,1.2,7) # returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
+#' @references 
+#' Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+#' @examples calcVTG(25,25,0.1,50,0.5,1.2,7) 
+#' # returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 #' @export
 
@@ -51,5 +52,3 @@ calcVTG <- function(ta,tr,vel,rh,clo,met,v_tmp_grad){
 
 
 }
-vtg <- calcVTG
-vairtmpgrad <- calcVTG

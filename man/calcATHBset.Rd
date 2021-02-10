@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcATHBset.R
 \name{calcATHBset}
 \alias{calcATHBset}
-\title{Calculation of Adaptive Thermal Heat Balance Indices with SET}
+\title{Calculation of SET based on Adaptive Thermal Heat Balance Framework}
 \usage{
 calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 }
@@ -35,7 +35,7 @@ calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 ATHBset set value adapted through the ATHB appoach
 }
 \description{
-Calculation of Adaptive Thermal Heat Balance Indices with SET
+Calculation of SET based on Adaptive Thermal Heat Balance framework using Gagge's 2-node model
 }
 \details{
 All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
@@ -48,7 +48,7 @@ Schweiker, M. & Wagner, A. A framework for an adaptive thermal heat balance mode
 Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 }
 \seealso{
-see also \code{\link{calcComfInd}}
+see also \code{\link{calcComfInd}}, \code{link{calcATHBpmv}}, \code{link{calcATHBpts}}
 }
 \author{
 Marcel Schweiker

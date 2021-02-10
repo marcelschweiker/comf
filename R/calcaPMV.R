@@ -1,10 +1,8 @@
-#' @title Calculating Adjusted Predicted Mean Votes
-#' @description Function to calculate predicted mean votes (pmv) adjusted for cooling effect of elevated air speed, through the adaptive coefficient by using the function PMVPPD.
+#' @title Calculating Adaptive Predicted Mean Votes
+#' @description Function to calculate adaptive Predicted Mean Vote (aPMV) adjusted through the adaptive coefficient.
 #' @aliases aPMV
 #' @aliases apmv
 #' @usage calcaPMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
-#' @usage aPMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
-#' @usage apmv(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
@@ -51,6 +49,3 @@ calcaPMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, apCoeff){
   data.frame(apmv = apmv)
 
 }
-
-aPMV <- calcaPMV
-apmv <- calcaPMV

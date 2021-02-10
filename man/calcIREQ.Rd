@@ -8,12 +8,6 @@
 \title{Calculates IREQ and Dlim}
 \usage{
 calcIREQ(M,W,ta,tr,p,w,v,rh,clo)
-
-calcireq(M,W,ta,tr,p,w,v,rh,clo)
-
-IREQ(M,W,ta,tr,p,w,v,rh,clo)
-
-ireq(M,W,ta,tr,p,w,v,rh,clo)
 }
 \arguments{
 \item{M}{a numeric value presenting metabolic energy production (58 to 400 W/m2) in [W/m2]}
@@ -37,7 +31,7 @@ ireq(M,W,ta,tr,p,w,v,rh,clo)
 \value{
 \code{calcIREQ} returns
 \item{IREQminimal }{Lower bound of insulation required in [clo]}
-\item{IREQneutral }{Upper bound bound of insulation required in [clo]}
+\item{IREQneutral }{Upper bound of insulation required in [clo]}
 \item{ICLminimal }{Lower bound of REQUIRED basic clothing insulation (ISO 9920) in [clo]}
 \item{ICLneutral }{Upper bound of REQUIRED basic clothing insulation (ISO 9920) in [clo]}
 \item{DLEminimal }{Lower bound of duration limited exposure in [hours]}
@@ -54,13 +48,10 @@ The authors disclaim all obligations and liabilities for damages arising from th
 }
 \examples{
 calcIREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
-calcireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
-ireq(116,0,-15,-15,8,0.3,0.4,85,2.5)
-IREQ(116,0,-15,-15,8,0.3,0.4,85,2.5)
 }
 \references{
 ISO 11079, 2007-12-15, ERGONOMICS OF THE THERMAL ENVIRONMENT - DETERMINATION AND INTERPRETATION OF COLD STRESS WHEN USING REQUIRED CLOTHING INSULATION (IREQ) AND LOCAL COOLING EFFECTS
 }
 \author{
-Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 and transferred to R by Shoaib Sarwar and Marcel Schweiker.
+Developed by Ingvar Holmer and Hakan O. Nilsson, 1990 in java and transferred to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 }

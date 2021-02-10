@@ -1,6 +1,6 @@
-#' Calculation of Adaptive Thermal Heat Balance Indices with SET
+#' Calculation of SET based on Adaptive Thermal Heat Balance Framework
 #' 
-#' @description Calculation of Adaptive Thermal Heat Balance Indices with SET
+#' @description Calculation of SET based on Adaptive Thermal Heat Balance framework using Gagge's 2-node model
 #' 
 #' @usage calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 #'
@@ -26,7 +26,7 @@
 #' Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 #' 
 #' @author Marcel Schweiker
-#' @seealso see also \code{\link{calcComfInd}}
+#' @seealso see also \code{\link{calcComfInd}}, \code{link{calcATHBpmv}}, \code{link{calcATHBpts}}
 #' @export
 #'
 #' @examples calcATHBset(20, 0, 25, 25, .1, 50, 1.1, 0, 760, 60, 171, 70)

@@ -80,7 +80,7 @@
 #' calcComfInd(lsCond, request="pmv")
 #' ## Requesting multiple indices
 #' calcComfInd(lsCond, request=c("pmv", "ptse"))
-#' @author Sophia Mueller and Marcel Schweiker.
+#' @author Sophia Mueller and Marcel Schweiker. Further contribution by Shaomi Rahman.
 #' @seealso see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHBpmv}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctAdapt}}
 #' @references For references see individual functions.
 #' @note In case one of the variables is not given, a standard value will be taken from a list (see \code{\link{createCond}} for details.
