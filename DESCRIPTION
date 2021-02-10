@@ -2,7 +2,7 @@ Package: comf
 Type: Package
 Title: Functions for Thermal Comfort Research
 Version: 0.1.10
-Date: 2021-01-30
+Date: 2021-02-10
 Imports: plyr, graphics, reshape
 Author: Marcel Schweiker [aut, cre] and Sophia Mueller [aut] and Michael Kleber [ctr] and Boris Kingma [ctr] and Masanori Shukuya [ctr] and Shaomi Rahman [ctr] and Shoaib Sarwar [ctr] 
 Maintainer: Marcel Schweiker <mschweiker@ukaachen.de>

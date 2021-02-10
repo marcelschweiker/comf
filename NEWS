@@ -1,10 +1,10 @@
-comf v0.1.10 (Release date: 2021-02-16)
+comf v0.1.10 (Release date: 2021-02-10)
 ==============
 
 Changes:
 
 * documentation implemented via roxygen
-* added new functions to calculate UTCI, solar gains, cooling effect
+* added new functions to calculate UTCI, solar gains, cooling effect, IREQ
 * minor adjustments to comments
 
 comf v0.1.9 (Release date: 2019-04-11)
