@@ -40,8 +40,8 @@ calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans,
   
   solarGainRange = c(0.0, 463.3, 0.0, 110.9)
   
-  check_range(solarGainRes[1], solarGainRange[1],solarGainRange[2])
-  check_range(solarGainRes[2], solarGainRange[3],solarGainRange[4])
+  checkRange(solarGainRes[1], solarGainRange[1],solarGainRange[2])
+  checkRange(solarGainRes[2], solarGainRange[3],solarGainRange[4])
 
   solarGainRes
 }
