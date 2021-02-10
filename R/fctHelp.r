@@ -1,9 +1,6 @@
 #' @keywords internal
 # help functions
 
-utils::globalVariables(c("solarGainRange", "utciRange"))
-
-
 #### function bisect ####
 ## used for bisection method in search for ta.adj for calculation of adjusted pmv including cooling effect of elevaated air speed using set according to ASHRAE 55-2013
 ## code based on forum entry by ravi Varadhan rvaradhan at jhmi.edu 

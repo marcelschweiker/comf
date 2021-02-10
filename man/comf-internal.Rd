@@ -29,8 +29,6 @@
 \alias{validateUTCI}
 \alias{validateSolarGain}
 \alias{checkRange}
-\alias{getUtciRange}
-\alias{getSolarGainRange}
 
 \title{
 Internal Functions Used by Other Functions of this Package
@@ -71,8 +69,6 @@ validateUTCI(ta, tr, vel, rh)
 validateSolarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, 
                               fBes, asw=0.7, posture)
 checkRange(parameter, lower_bound, upper_bound) 
-getUtciRange()
-getSolarGainRange()
 }
 \arguments{
 depending on the function

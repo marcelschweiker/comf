@@ -37,11 +37,12 @@ calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans,
                     posture)
   solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
                            posture, floorRef=0.6)
-  if(!exists("solarGainRange")){
-    assign("solarGainRange", getSolarGainRange(), envir = .GlobalEnv)
-  }
-  checkRange(solarGainRes[1], solarGainRange[1],solarGainRange[2])
-  checkRange(solarGainRes[2], solarGainRange[3],solarGainRange[4])
+  
+  solarGainRange = c(0.0, 463.3, 0.0, 110.9)
+  
+  check_range(solarGainRes[1], solarGainRange[1],solarGainRange[2])
+  check_range(solarGainRes[2], solarGainRange[3],solarGainRange[4])
+
   solarGainRes
 }
 
