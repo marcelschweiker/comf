@@ -31,7 +31,7 @@ calcUTCI <- function(ta, tr, vel, rh) {
   #check if utci value is within acceptable range
   utciRange = c(-27, 96)
   
-  check_range(utci_value, utciRange[1], utciRange[2])
+  checkRange(utciValue, utciRange[1], utciRange[2])
   
   #return the value
   utciValue
