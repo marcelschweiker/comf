@@ -29,8 +29,6 @@
 \alias{validateUTCI}
 \alias{validateSolarGain}
 \alias{checkRange}
-\alias{getUtciRange}
-\alias{getSolarGainRange}
 
 \title{
 Internal Functions Used by Other Functions of this Package
