@@ -3,7 +3,7 @@
 \name{calcPMV}
 \alias{calcPMV}
 \alias{pmv}
-\title{Calculates Predicted Mean Votes (PMV)}
+\title{Predicted Mean Votes (PMV)}
 \usage{
 calcPMV(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 }
@@ -39,9 +39,9 @@ Note that the adjustments in the value for basMet need to be made with great cau
 calcPMV(25,25,0.3,50,0.5,1)
 }
 \references{
-Fanger, P. O. Thermal Comfort Analysis and Applications in Environmental Engineering McGraw-Hill, New York, 1970.
+Fanger (1970) Thermal Comfort Analysis and Applications in Environmental Engineering McGraw-Hill, New York.
 
-ISO 7730 Ergonomics of the thermal environment analytical determination and interpretation of thermal comfort using calculation of the pmv and ppd indices and local thermal comfort criteria 2005.
+ISO 7730 (2005) Ergonomics of the thermal environment analytical determination and interpretation of thermal comfort using calculation of the pmv and ppd indices and local thermal comfort criteria.
 }
 \author{
 Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.

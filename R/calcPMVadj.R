@@ -1,4 +1,4 @@
-#' @title Calculating Predicted Mean Votes adjusted for elevated air speed
+#' @title Predicted Mean Votes adjusted for elevated air speed
 #' @description Function to calculate Predicted Mean Votes (PMV) adjusted for cooling effect of elevated air speed.
 #' @aliases PMVadj
 #' @aliases pmvadj
@@ -14,7 +14,7 @@
 #' @returns \code{calcpmvadj} returns the predicted mean vote adjusted for the cooling effect of elevated air speed.
 #' @examples calcPMVadj(25,25,0.3,50,0.5,1)
 #' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
-#' @references pmvadj is based on ASHRAE standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, Usa, 2013
+#' @references pmvadj is based on ASHRAE standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, USA, 2013.
 #' @export
 
 

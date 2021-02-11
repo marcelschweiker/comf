@@ -4,7 +4,7 @@
 \alias{calcTPRTSV}
 \alias{TPR}
 \alias{tpr}
-\title{Calculating the True Positive Rate between Predicted and Actual Thermal Sensation Vote}
+\title{True Positive Rate between Predicted and Actual Thermal Sensation Vote}
 \usage{
 calcTPRTSV(ref, pred)
 }
@@ -33,8 +33,7 @@ calcTPRTSV(ref, pred)
 
 }
 \references{
-Schweiker, M. and Wagner, A. A framework for an adaptive thermal
-heat balance model (ATHB) Building and Environment, 2015, 94, 252-262
+Schweiker & Wagner (2015) <doi:10.1016/j.buildenv.2015.08.018>
 }
 \seealso{
 see also \code{\link{calcMeanBias}}, \code{\link{calcAvgAcc}}

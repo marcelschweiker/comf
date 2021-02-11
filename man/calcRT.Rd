@@ -5,7 +5,7 @@
 \alias{calcrt}
 \alias{RT}
 \alias{rt}
-\title{Calculates RT.}
+\title{Required recovery time}
 \usage{
 calcRT(M,W,ta,tr,p,w,v,rh,clo)
 }

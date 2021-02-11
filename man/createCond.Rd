@@ -3,7 +3,7 @@
 \name{createCond}
 \alias{createCond}
 \alias{createcond}
-\title{Creating a list with Standard Values}
+\title{Creating a List with Standard Values}
 \usage{
 createCond(a = TRUE)
 

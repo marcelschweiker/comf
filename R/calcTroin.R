@@ -1,4 +1,4 @@
-#' @title Calculation of Radiative and Operative Temperature
+#' @title Radiative and Operative Temperature
 #' @description The functions \code{calcTroin} calculates radiative and operative temperature based on air temperature, globe temperature, air velocity and metabolic rate. Globe temperature needs to be measured using a standard globe with a diameter of 0.15m and an emissivity of .95 (black coloured).
 #' @aliases calctroin
 #' @aliases Troin
@@ -22,8 +22,8 @@
 #'
 #' calcTroin(vel, tg, ta, met)
 #' @author  Marcel Schweiker. Further contribution by Shoaib Sarwar.
-#' @references IsO 7726 Ergonomics of the Thermal Environment, Instruments for measuring Physical Quantities Geneva: International standard Organization, 1998.
-#' @references IsO 7730 Ergonomics of the thermal environment - analytical determination and interpretation of thermal comfort using calculation of the pmv and ppd indices and local thermal comfort criteria 2005.
+#' @references ISO 7726 Ergonomics of the Thermal Environment, Instruments for measuring Physical Quantities Geneva: International standard Organization, 1998.
+#' @references ISO 7730 Ergonomics of the thermal environment - analytical determination and interpretation of thermal comfort using calculation of the pmv and ppd indices and local thermal comfort criteria 2005.
 #' @export
 
 

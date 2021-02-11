@@ -5,7 +5,7 @@
 \alias{calcsolargain}
 \alias{SolarGain}
 \alias{solargain}
-\title{Calculating Solar Gain}
+\title{Solar Gain}
 \usage{
 calcSolarGain(solAlt, solAzi, solRadDir, solTrans,
  fSvv, fBes, asw=0.7, posture="seated", floorRef=0.6)
@@ -42,7 +42,7 @@ Function to calculate effective radiant field and delta mean radiant temperature
 calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") # Returns [42.9, 10.3]
 }
 \references{
-Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 }
 \seealso{
 see also \code{\link{calcComfInd}}

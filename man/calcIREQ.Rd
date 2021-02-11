@@ -5,7 +5,7 @@
 \alias{calcireq}
 \alias{IREQ}
 \alias{ireq}
-\title{Calculates IREQ and Dlim}
+\title{IREQ and Dlim}
 \usage{
 calcIREQ(M,W,ta,tr,p,w,v,rh,clo)
 }
@@ -38,7 +38,7 @@ calcIREQ(M,W,ta,tr,p,w,v,rh,clo)
 \item{DLEneutral }{upper bound of duration limited exposure in [hours]}
 }
 \description{
-Function to calculate minimal and neutral values of REQUIRED CLOTHING INSULATION (IREQ) and DURATION LIMITED EXPOSURE (Dlim).
+Calculate minimal and neutral values of REQUIRED CLOTHING INSULATION (IREQ) and DURATION LIMITED EXPOSURE (Dlim).
 }
 \details{
 The function gives IREQ Insulation of clothing required to maintain thermal equilibrium of the body at specified levels of physiological stress.

@@ -1,4 +1,4 @@
-#' @title Calculating Adaptive Comfort Temperatures or Neutral Temperatures
+#' @title Adaptive Comfort or Neutral Temperatures
 #' @description \code{calctadapt} are three functions to calculate adaptive comfort or neutral temperatures based on a given outdoor temperature value.
 #' @aliases calctadapt
 #' @aliases calctAdapt
@@ -30,9 +30,9 @@
 #' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
 #' @seealso see also \code{\link{calcComfInd}}
 #' @references \code{calctAdapt15251} is based on DIN EN 15251 Indoor environmental input parameters for design and assessment of energy performance of buildings addressing indoor air quality, thermal environment, lighting and acoustics; German version EN 15251:2012 2012.
-#' @references \code{calcAdaptASHRAE} is based on Brager, G. S. & de Dear, R. Climate, comfort, & natural ventilation: a new adaptive comfort standard for ASHRAE standard 55 Center for the Built Environment. UC Berkeley, 2001.
-#' @references \code{calctnAuliciems} is based on Auliciems, A. Psycho-physiological criteria for global thermal zones of building design Int J Biometeorol, springer, 1981, 26, 69-86.
-#' @references \code{calctnHumphreysNV} and \code{calctnHumphreysAC} are based on Humphreys, M. A., Outdoor temperatures and comfort indoors. Batiment International, Building Research and Practice, Taylor and Francis, 1978, 6, 92-92.
+#' @references \code{calcAdaptASHRAE} is based on Brager & de Dear (2001) Climate, comfort, & natural ventilation: a new adaptive comfort standard for ASHRAE standard 55.
+#' @references \code{calctnAuliciems} is based on Auliciems (1981) Psycho-physiological criteria for global thermal zones of building design.
+#' @references \code{calctnHumphreysNV} and \code{calctnHumphreysAC} are based on Humphreys (1978) Outdoor temperatures and comfort indoors. Batiment International, Building Research and Practice, Taylor and Francis.
 #' @export
 
 

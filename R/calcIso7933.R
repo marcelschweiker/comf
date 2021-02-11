@@ -3,7 +3,7 @@
 # Function: fctCalcISO7933 ################
 ###########################################
 
-#' Calculating Heat Strain Indices based on ISO 7933
+#' Heat Strain Indices based on ISO 7933
 #'
 #' @param accl a numeric value presenting state of acclimation [100 if acclimatised subject, 0 otherwise]
 #' @param posture a numeric value presenting posture of person [sitting=1, standing=2, crouching=3]
@@ -54,16 +54,10 @@
 #' Addendum E of EN ISO 7933. The translation into R-language conducted by Michael Kleber.
 #' 
 #' @references 
-#' Ergonomics of the thermal environment - Analytical determination and 
-#' interpretation of heat stress using calculation of the predicted heat strain
-#' (ISO 7933:2004) Malchaire J., Piette A., Kampmann B., Mehnert P., Gebhardt 
-#' H. J., Havenith G., Den Hartog E., Holmer I., Parsons K., Alfano G., 
-#' Griefahn B. (2000), Development and validation of the predicted heat strain 
-#' model, The Annals of Occupational Hygiene The Annals of Occupational Hygene,
-#' 45, pp 123-135 Malchaire J., Kampmann B., Havenith G., Mehnert P., 
-#' Gebhardt H. J. (2000), Criteria for estimating acceptable exposure times in
-#' hot work environment, a review, International Archives of Occupational and
-#' Environmental Health, 73(4), pp. 215-220.
+#' ISO 7933 (2004) Ergonomics of the thermal environment - Analytical determination and 
+#' interpretation of heat stress using calculation of the predicted heat strain 
+#' Malchaire, Piette, Kampmann, Mehnert, Gebhardt, Havenith, Den Hartog, Holmer, Parsons, Alfano, Griefahn (2000) <doi:10.1016/S0003-4878(00)00030-2>
+#' Malchaire, Kampmann, Havenith, Mehnert, Gebhardt (2000) <doi:10.1007/s004200050420>
 #' 
 #' @return \code{calcISO7933} returns a data.frame with the following items: \cr{
 #'  \cr

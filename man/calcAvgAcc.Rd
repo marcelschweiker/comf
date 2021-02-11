@@ -5,7 +5,7 @@
 \alias{calcavgacc}
 \alias{AvgAcc}
 \alias{avgacc}
-\title{Calculating Average Accuracy between Predicted and Actual Thermal Sensation Vote}
+\title{Average Accuracy between Predicted and Actual Thermal Sensation Vote}
 \usage{
 calcAvgAcc(ref, pred)
 
@@ -40,7 +40,7 @@ pred <- cutTSV(pred)
 calcAvgAcc(ref, pred)
 }
 \references{
-Sokolova, M. and Lapalme, G. A systematic analysis of performance measures for classification tasks, Information Processing & Management, Elsevier, 2009, 45, 427-437.
+Sokolova and Lapalme (2009) <doi:10.1016/j.ipm.2009.03.002>
 }
 \seealso{
 \code{\link{calcTPRTSV}}, \code{\link{calcMeanBias}}

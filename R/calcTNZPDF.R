@@ -1,4 +1,4 @@
-#' @title Calculate values related to TNZ approach
+#' @title Values related to TNZ approach
 #' @description \code{calcTNZPDF} calculates the distance from the thermoneutral zone, either skin temperature or room air related. Also calculates the probability function (PDF) of the thermoneutral zone.
 #' @aliases clacTNZ
 #' @aliases tnzpdf
@@ -65,10 +65,15 @@
 #'     xlab="Operative temperature [degree C]")
 #' @seealso  \code{\link{calcdTNZ}}
 #' @author Marcel Schweiker and Boris Kingma
-#' @references Schweiker, M., Huebner, G. M., Kingma, B. R. M., Kramer, R., and Pallubinsky, H. Drivers of diversity in human thermal perception - A review for holistic comfort models. Temperature, 2018, 1 - 35.
-#' @references Kingma, B. R., Schweiker, M., Wagner, A. and van Marken Lichtenbelt, W. D. Exploring the potential of a biophysical model to understand thermal sensation Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
-#' @references Kingma, B. and van Marken Lichtenbelt, W. Energy consumption in buildings and female thermal demand Nature. Clim. Change, 2015, 5, 1054 - 1056.
-#' @references Kingma, B. R.; Frijns, A. J.; Schellen, L. and van Marken Lichtenbelt, W. D. Beyond the classic thermoneutral zone. Temperature, 2014, 1, 142 - 149.
+#' @references 
+#' Schweiker, Huebner, Kingma, Kramer & Pallubinsky (2018) <doi:10.1080/23328940.2018.1534490>
+#' Kingma, Schweiker, Wagner & van Marken Lichtenbelt 
+#' Exploring the potential of a biophysical model to understand thermal sensation 
+#' Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland 
+#' Lodge, Windsor, UK, 2016.
+#' Kingma & van Marken Lichtenbelt (2015) <doi:10.1038/nclimate2741>
+#' Kingma, Frijns, Schellen & van Marken Lichtenbelt (2014) <doi:10.4161/temp.29702>
+#'
 #' @note This function was used for the review paper by Schweiker et al. (2018) (see reference above). Some of the equations implemented are still to be validated further - therefore, use this function and its parameters with great care.
 #' @note This function is not (yet) implemented in \code{calcComfInd}, \code{calcdTNZ} is applied there.
 #' @export

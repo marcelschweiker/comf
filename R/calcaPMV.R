@@ -1,4 +1,4 @@
-#' @title Calculating Adaptive Predicted Mean Votes
+#' @title Adaptive Predicted Mean Votes
 #' @description Function to calculate adaptive Predicted Mean Vote (aPMV) adjusted through the adaptive coefficient.
 #' @aliases aPMV
 #' @aliases apmv
@@ -37,7 +37,7 @@
 #' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
 #' @note In case one of \code{apCoeff} is not given, a standard value will be taken from a list (see \code{\link{createCond}} for details.
 #' @seealso \code{\link{calcComfInd}}, \code{\link{calcapCoeff}}
-#' @references apmv is based on Yao, R., Li, B. and Liu, J. A theoretical adaptive model of thermal comfort - Adaptive Predicted mean Vote (aPMV) Building and Environment, 2009, 44, 2089-209
+#' @references aPMV is based on Yao, Li and Liu (2009) <doi:10.1016/j.buildenv.2009.02.014>
 #' @export
 
 

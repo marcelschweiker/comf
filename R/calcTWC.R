@@ -1,5 +1,5 @@
-#' @title Calculates TWC.
-#' @description Function to calculate WINDCHILL TEMPERATURE, TWC in Degrees.
+#' @title Windchill temperature (TWC)
+#' @description Function to calculate windchill temperature, TWC, in Degrees.
 #' @aliases  calctwc
 #' @aliases  windchill
 #' @aliases  TWC

@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcATHBpts.R
 \name{calcATHBpts}
 \alias{calcATHBpts}
-\title{Calculation of PTS using Adaptive Thermal Heat Balance approach}
+\title{Predicted Thermal Sensation by Gagge using Adaptive Thermal Heat Balance approach}
 \usage{
 calcATHBpts(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
 }
@@ -45,8 +45,8 @@ All variables must have the same length 1. For the calculation of several values
 calcATHBpts(20, 0, 25, 25, .1, 50, 1.1, 0, 760, 60, 171, 70)
 }
 \references{
-Schweiker, M. & Wagner, A. A framework for an adaptive thermal heat balance model (ATHB), Building and Environment, 2015, 94, 252 - 262
-Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
+Schweiker & Wagner (2015) <doi:10.1016/j.buildenv.2015.08.018>
+Schweiker & Wagner (2016) Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 }
 \seealso{
 see also \code{\link{calcComfInd}}, \code{link{calcATHBpmv}}, \code{link{calcATHBset}}

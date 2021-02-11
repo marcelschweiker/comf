@@ -5,7 +5,7 @@
 \alias{Hbexsteady}
 \alias{HbExSteady}
 \alias{HbEx}
-\title{Calculates Human Body Exergy Consumption Rate Using Steady State Method}
+\title{Human Body Exergy Consumption Rate Using Steady State Method}
 \usage{
 calcHbExSteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, eps = 0.95, 
 ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2, warmUp = 60, 
@@ -113,7 +113,7 @@ and 225 and 'sigma-tr' between 0.25 and 0.75. There is a note in the appendix
 of his paper saying two things: 1) whatever the values taken for cdil and 
 sigma-tr, there must be no significant change in resulting thermal equilibrium. 
 But, the values taken for cdil and sigmaTr do affect time to equilibrium. 
-According to the analysis of schweiker et al. (2015), the values of 100 and 
+According to the analysis of Schweiker et al. (2016), the values of 100 and 
 .25 lead to the best fit of calculated and observed skin temperature.
 }
 \examples{
@@ -128,13 +128,11 @@ dfResult[i,] <- calcHbExSteady(dfData$ta[i], dfData$tr[i], 50, .1, .5, 1.1, 5, 8
 }
 }
 \references{
-Schweiker, M., Kolarik, J., Dovjak, M. and Shukuya, M. Unsteady-state 
-human-body exergy consumption rate and its relation to subjective assessment 
-of dynamic thermal environments, Energy and Buildings , 2016, 116, 164 - 180
+Schweiker, Kolarik, Dovjak & Shukuya (2016) <doi:10.1016/j.enbuild.2016.01.002>
 
-Shukuya, M. Calculation of human body-core and skin-layer temperatures under 
+Shukuya (2015) Calculation of human body-core and skin-layer temperatures under 
 unsteady-state conditions-for unsteady-state human-body exergy analysis-, 
-internal report of exergy-research group, Tech. rep., KIT/TCU, 2015.
+internal report of exergy-research group, Tech. rep.
 }
 \seealso{
 see also \code{\link{calcComfInd}}, \code{\link{calcHbExUnsteady}}

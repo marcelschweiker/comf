@@ -10,7 +10,7 @@
 \alias{calcSVP}
 \alias{calcVP}
 \alias{calcVapourpressure}
-\title{Calculating Various Humidity Related Values.}
+\title{Various Humidity Related Values}
 \usage{
 calcDewp(ta, rh)
 
@@ -83,9 +83,9 @@ rh <- 50
 calcEnth(ta, rh, 760)
 }
 \references{
-Rajib Ranaa, Brano Kusya, Raja Jurdaka, Josh Wallb and Wen Hua, Feasibility analysis of using humidex as an indoor thermal comfort predictor, Energy and Buildings 64 (2013) 17-25.
+Ranaa, Kusya, Jurdaka, Wallb & Hua (2013) <doi:10.1016/j.enbuild.2013.04.019>
 
-Masterton, J. M., and Richardson, F. A., Humidex a method of quantifying humandiscomfort due to excessive heat and humidity, clI 1-79. Downsview, Ont: Environment Canada. Atmosheric Environment Service, 1979.
+Masterton & Richardson (1979) Humidex a method of quantifying humandiscomfort due to excessive heat and humidity, clI 1-79. Downsview, Ont: Environment Canada. Atmosheric Environment Service.
 }
 \author{
 Michael Kleber (code and documentation), Marcel Schweiker (documentation).

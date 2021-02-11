@@ -1,4 +1,4 @@
-#' Calculating the True Positive Rate between Predicted and Actual Thermal Sensation Vote
+#' True Positive Rate between Predicted and Actual Thermal Sensation Vote
 #' @description \code{calcTPRTSV} calculates the true positive rate between 
 #' predicted thermal sensation votes and actual obtained sensation votes
 #' @aliases TPR
@@ -12,8 +12,7 @@
 #' @return \code{calcTPRTSV} returns a single value presenting the true positive 
 #' rate between actual and predicted thermal sensation votes. 
 #' 
-#' @references Schweiker, M. and Wagner, A. A framework for an adaptive thermal
-#' heat balance model (ATHB) Building and Environment, 2015, 94, 252-262
+#' @references Schweiker & Wagner (2015) <doi:10.1016/j.buildenv.2015.08.018>
 #' 
 #' @author Marcel Schweiker
 #' 

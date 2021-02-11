@@ -1,4 +1,4 @@
-#' @title Calculate PPD with Vertical Air Temperature Gradient
+#' @title PPD with Vertical Air Temperature Gradient
 #' @description Function to calculate vertical air temperature gradient using the predicted percentage of dissatisfied.
 #' @aliases  vairtepgrad
 #' @aliases  vtg
@@ -15,7 +15,7 @@
 #' @returns Predicted Percentage of Dissatisfied with vertical temperature gradient in [\%]
 #' @returns Acceptability in [boolean]
 #' @references 
-#' Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+#' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 #' @examples calcVTG(25,25,0.1,50,0.5,1.2,7) 
 #' # returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.

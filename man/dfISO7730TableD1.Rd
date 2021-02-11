@@ -3,7 +3,7 @@
 \docType{data}
 \name{dfISO7730TableD1}
 \alias{dfISO7730TableD1}
-\title{Callibration data for PMV and PPD}
+\title{Calibration data for PMV and PPD}
 \format{
 A data frame with 13 rows and 8 variables:
 \describe{
@@ -21,7 +21,7 @@ A data frame with 13 rows and 8 variables:
 data(dfISO7730TableD1)
 }
 \description{
-Data from ISO 7730 to callibrate values given by PMV / PPD model
+Data from ISO 7730 to calibrate values given by PMV / PPD model
 }
 \examples{
 data(dfISO7730TableD1)

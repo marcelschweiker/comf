@@ -5,7 +5,7 @@
 \alias{vairtepgrad}
 \alias{vtg}
 \alias{vairtmpgrad}
-\title{Calculate PPD with Vertical Air Temperature Gradient}
+\title{PPD with Vertical Air Temperature Gradient}
 \usage{
 calcVTG(ta, tr, vel, rh, clo, met, v_tmp_grad)
 }
@@ -40,7 +40,7 @@ calcVTG(25,25,0.1,50,0.5,1.2,7)
 # returns Vertical Air Temperature Gradient:12.4, Acceptability:FALSE
 }
 \references{
-Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 }
 \author{
 Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.

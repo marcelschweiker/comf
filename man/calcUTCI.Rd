@@ -5,7 +5,7 @@
 \alias{calcutci}
 \alias{utci}
 \alias{UTCI}
-\title{Calculating Universal Thermal Comfort Index (UTCI)}
+\title{Universal Thermal Comfort Index (UTCI)}
 \usage{
 calcUTCI(ta, tr, vel, rh)
 }
@@ -32,7 +32,7 @@ calcUTCI(25, 25, 1.0, 50) # Returns 24.6
 }
 \references{
 UTCI project page on http://www.utci.org/ 
-Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 }
 \seealso{
 see also \code{\link{calcComfInd}}

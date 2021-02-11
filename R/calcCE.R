@@ -1,4 +1,4 @@
-#' @title Calculate Cooling Effect
+#' @title Cooling Effect
 #' @description Function to calculate cooling effect (CE) of elevated air velocities using the standard effective temperature (SET).
 #' @aliases coolingeffect
 #' @aliases ce
@@ -13,7 +13,7 @@
 #' @details The CE of the elevated air velocity is the difference in SET between conditions with given air velocities and still air. The cooling effect should be calculated only for air velocities higher than 0.2 m/s.
 #' @returns ce - Cooling Effect in [degree C]
 #' @references
-#' Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+#' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 #' @examples calcCE(25,25,0.3,50,0.5,1) # returns Cooling Effect: 1.3
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 #' @export

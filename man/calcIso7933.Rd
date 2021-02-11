@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcIso7933.R
 \name{calcIso7933}
 \alias{calcIso7933}
-\title{Calculating Heat Strain Indices based on ISO 7933}
+\title{Heat Strain Indices based on ISO 7933}
 \usage{
 calcIso7933(accl, posture, Ta, Pa, Tr, Va, Met, Icl, THETA, Walksp, Duration,
 weight, height, DRINK, Adu, spHeat, SWp, Tre, Tcr, Tsk, Tcreq, Work, imst, 
@@ -134,16 +134,10 @@ PHI <- sapply(seq(maxLength), function(x) {calcIso7933(accl, posture, Ta[x],
 Pa[x], Tr[x], Va, Met, Icl, THETA, Walksp, Duration) } ) 
 }
 \references{
-Ergonomics of the thermal environment - Analytical determination and 
-interpretation of heat stress using calculation of the predicted heat strain
-(ISO 7933:2004) Malchaire J., Piette A., Kampmann B., Mehnert P., Gebhardt 
-H. J., Havenith G., Den Hartog E., Holmer I., Parsons K., Alfano G., 
-Griefahn B. (2000), Development and validation of the predicted heat strain 
-model, The Annals of Occupational Hygiene The Annals of Occupational Hygene,
-45, pp 123-135 Malchaire J., Kampmann B., Havenith G., Mehnert P., 
-Gebhardt H. J. (2000), Criteria for estimating acceptable exposure times in
-hot work environment, a review, International Archives of Occupational and
-Environmental Health, 73(4), pp. 215-220.
+ISO 7933 (2004) Ergonomics of the thermal environment - Analytical determination and 
+interpretation of heat stress using calculation of the predicted heat strain 
+Malchaire, Piette, Kampmann, Mehnert, Gebhardt, Havenith, Den Hartog, Holmer, Parsons, Alfano, Griefahn (2000) <doi:10.1016/S0003-4878(00)00030-2>
+Malchaire, Kampmann, Havenith, Mehnert, Gebhardt (2000) <doi:10.1007/s004200050420>
 }
 \author{
 The code for calcISO7933 is based on the code in BASIC presented in 

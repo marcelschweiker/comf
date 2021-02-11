@@ -1,6 +1,6 @@
 # Function: Two Node model ################
 ###########################################
-#' Calculating Comfort Indices based on the 2-Node-Model
+#' Comfort Indices based on the 2-Node-Model
 #'
 #' @aliases calc2Node 2Node 2node
 #' @description 
@@ -67,12 +67,11 @@
 #' American society of heating, Refrigerating and Air-Conditioning Engineering, 
 #' Atlanta, USA, 2013.
 #' 
-#' Fountain, M. & Huizenga, C. A thermal sensation model for use by the 
-#' engineering profession ASHRAE RP-781 Final report, 1995
+#' Fountain & Huizenga (1995) A thermal sensation model for use by the 
+#' engineering profession ASHRAE RP-781 Final report.
 #'
-#' Gagge, A. P., Fobelets, A. P. and Berglund, L. G. A standard predictive index 
-#' of human response to the thermal environment, ASHRAE transactions, 1986, 92 (2B), 
-#' 709-731.
+#' Gagge, Fobelets & Berglund (1986) A standard predictive index 
+#' of human response to the thermal environment, ASHRAE transactions, 92 (2B), 709-731.
 #' 
 #' @seealso see also \code{\link{calcComfInd}}
 #' @export

@@ -1,4 +1,4 @@
-#' @title Calculates RT.
+#' @title Required recovery time
 #' @description Function to calculate Required recovery time, RT in hours.
 #' @aliases  calcrt
 #' @aliases  RT

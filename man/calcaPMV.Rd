@@ -4,7 +4,7 @@
 \alias{calcaPMV}
 \alias{aPMV}
 \alias{apmv}
-\title{Calculating Adaptive Predicted Mean Votes}
+\title{Adaptive Predicted Mean Votes}
 \usage{
 calcaPMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, apCoeff)
 }
@@ -57,7 +57,7 @@ for (i in 1:length(ta)){
 apmv
 }
 \references{
-apmv is based on Yao, R., Li, B. and Liu, J. A theoretical adaptive model of thermal comfort - Adaptive Predicted mean Vote (aPMV) Building and Environment, 2009, 44, 2089-209
+aPMV is based on Yao, Li and Liu (2009) <doi:10.1016/j.buildenv.2009.02.014>
 }
 \seealso{
 \code{\link{calcComfInd}}, \code{\link{calcapCoeff}}

@@ -1,4 +1,4 @@
-#' Callibration data for Tre, SWtotg, Dlimtre, Dlimloss50, Dlimloss95
+#' Calibration data for Tre, SWtotg, Dlimtre, Dlimloss50, Dlimloss95
 #'
 #' Data from ISO 7933 Appendix F to calibrate values given by the proposed model
 #'

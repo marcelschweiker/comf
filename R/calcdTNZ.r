@@ -1,6 +1,6 @@
 # Function: dTNZ ################
 ###########################################
-#' Calculating dTNZ, the Distance from the Thermoneutral Zone
+#' dTNZ, the Distance from the Thermoneutral Zone
 #'
 #' @description calcdTNZ calculates the distance from the thermoneutral zone,
 #' either skin temperature or room air related.
@@ -53,16 +53,12 @@
 #' @author Marcel Schweiker and Boris Kingma
 #' 
 #' @references 
-#' Kingma, B. R., Schweiker, M., Wagner, A. and van Marken Lichtenbelt, W. D. 
+#' Kingma, Schweiker, Wagner & van Marken Lichtenbelt 
 #' Exploring the potential of a biophysical model to understand thermal sensation 
 #' Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland 
 #' Lodge, Windsor, UK, 2016.
-#' 
-#' Kingma, B. and van Marken Lichtenbelt, W. Energy consumPtion in buildings and 
-#' female thermal demand Nature Clim. Change, 2015, 5, 1054 - 1056.
-#' 
-#' Kingma, B. R.; Frijns, A. J.; Schellen, L. and van Marken Lichtenbelt, W. D. 
-#' Beyond the classic thermoneutral zone Temperature, 2014, 1, 142-149.
+#' Kingma & van Marken Lichtenbelt (2015) <doi:10.1038/nclimate2741>
+#' Kingma, Frijns, Schellen & van Marken Lichtenbelt (2014) <doi:10.4161/temp.29702>
 #' 
 #' @seealso see also \code{\link{calcTNZPDF}} and \code{\link{calcComfInd}}
 #' 

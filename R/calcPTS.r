@@ -1,4 +1,4 @@
-#' Calculating Predicted Thermal Sensation Vote based on SET
+#' Predicted Thermal Sensation Vote based on SET
 #'
 #' @aliases calcPTS pts PTS calcpts
 #' @description 

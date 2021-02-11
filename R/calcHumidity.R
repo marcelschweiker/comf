@@ -1,4 +1,4 @@
-#' @title Calculating Various Humidity Related Values.
+#' @title Various Humidity Related Values
 #' @description This set of functions calculates different humidity related values based on the given entities.
 #' @aliases calcHumidity
 #' @aliases calcDewp
@@ -52,8 +52,10 @@
 #' rh <- 50
 #' calcEnth(ta, rh, 760)
 #' @author Michael Kleber (code and documentation), Marcel Schweiker (documentation).
-#' @references Rajib Ranaa, Brano Kusya, Raja Jurdaka, Josh Wallb and Wen Hua, Feasibility analysis of using humidex as an indoor thermal comfort predictor, Energy and Buildings 64 (2013) 17-25.
-#' @references Masterton, J. M., and Richardson, F. A., Humidex a method of quantifying humandiscomfort due to excessive heat and humidity, clI 1-79. Downsview, Ont: Environment Canada. Atmosheric Environment Service, 1979.
+#' @references 
+#' Ranaa, Kusya, Jurdaka, Wallb & Hua (2013) <doi:10.1016/j.enbuild.2013.04.019>
+#'
+#' Masterton & Richardson (1979) Humidex a method of quantifying humandiscomfort due to excessive heat and humidity, clI 1-79. Downsview, Ont: Environment Canada. Atmosheric Environment Service.
 #' @export
 
 # mixIng ratio of water in dry air

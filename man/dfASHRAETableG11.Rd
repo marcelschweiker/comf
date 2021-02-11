@@ -3,7 +3,7 @@
 \docType{data}
 \name{dfASHRAETableG11}
 \alias{dfASHRAETableG11}
-\title{Callibration data for SET}
+\title{Calibration data for SET}
 \format{
 A data frame with 22 rows and 11 variables:
 \describe{
@@ -24,13 +24,13 @@ A data frame with 22 rows and 11 variables:
 data(dfASHRAETableG11)
 }
 \description{
-Data from ASHRAE 55-2013 to callibrate values given by SET model
+Data from ASHRAE 55-2013 to calibrate values given by SET model
 }
 \examples{
 data(dfASHRAETableG11)
 head(dfASHRAETableG11)
 }
 \references{
-ASHRAE standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, Usa, 2013.
+ASHRAE Standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, USA, 2013.
 }
 \keyword{datasets}

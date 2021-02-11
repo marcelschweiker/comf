@@ -3,7 +3,7 @@
 \docType{data}
 \name{dfVariables}
 \alias{dfVariables}
-\title{List of all the variables used}
+\title{List of all the variables used in this package}
 \format{
 A data frame with 13 rows and 5 variables:
 \describe{
@@ -18,7 +18,7 @@ A data frame with 13 rows and 5 variables:
 data(dfVariables)
 }
 \description{
-List of all the variables used
+List of all the variables used in this package
 }
 \examples{
 data(dfVariables)

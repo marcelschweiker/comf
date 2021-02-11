@@ -5,7 +5,7 @@
 \alias{ps}
 \alias{PS}
 \alias{calcps}
-\title{Calculating Predicted Percentage Satisfied with the Level of Air Movement 
+\title{Predicted Percentage Satisfied with the Level of Air Movement 
 based on the 2-Node-Model}
 \usage{
 calcPS(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, 
@@ -80,12 +80,11 @@ ASHRAE Standard 55-2013. Thermal environmental conditions for human occupancy.
 American society of heating, Refrigerating and Air-Conditioning Engineering, 
 Atlanta, USA, 2013.
 
-Fountain, M. & Huizenga, C. A thermal sensation model for use by the 
-engineering profession ASHRAE RP-781 Final report, 1995
+Fountain & Huizenga (1995) A thermal sensation model for use by the 
+engineering profession ASHRAE RP-781 Final report.
 
-Gagge, A. P., Fobelets, A. P. and Berglund, L. G. A standard predictive index 
-of human response to the thermal environment, ASHRAE transactions, 1986, 92 (2B), 
-709-731.
+Gagge, Fobelets & Berglund (1986) A standard predictive index 
+of human response to the thermal environment, ASHRAE transactions, 92 (2B), 709-731.
 }
 \seealso{
 see also \code{\link{calcComfInd}}

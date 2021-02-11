@@ -1,4 +1,4 @@
-#' @title Calculating Average Accuracy between Predicted and Actual Thermal Sensation Vote
+#' @title Average Accuracy between Predicted and Actual Thermal Sensation Vote
 #' @description \code{calcAvgAcc} calculates the average accuracy between predicted thermal sensation votes and actual obtained sensation votes
 #' @aliases calcavgacc
 #' @aliases AvgAcc
@@ -19,7 +19,7 @@
 #'
 #' calcAvgAcc(ref, pred)
 #' @author  Marcel Schweiker. Further contribution by Shoaib Sarwar.
-#' @references  Sokolova, M. and Lapalme, G. A systematic analysis of performance measures for classification tasks, Information Processing & Management, Elsevier, 2009, 45, 427-437.
+#' @references  Sokolova and Lapalme (2009) <doi:10.1016/j.ipm.2009.03.002>
 #' @seealso \code{\link{calcTPRTSV}}, \code{\link{calcMeanBias}}
 #' @note The outcome heavily depends on the distribution of actual votes, i.e. in case most of the actual votes are in the same category, e.g. 'neutral', the average accuray is very high due to the fact that for the other categories the number of TRUE negative predicted votes is high as well.
 #' @export

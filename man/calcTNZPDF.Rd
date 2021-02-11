@@ -7,7 +7,7 @@
 \alias{TNZPDF}
 \alias{TPDF}
 \alias{tpdf}
-\title{Calculate values related to TNZ approach}
+\title{Values related to TNZ approach}
 \usage{
 calcTNZPDF(ht, wt, age, gender, clo, vel, tskObs, taObs, met, rh,
 fBasMet = "rosa", fSA = "duBois", percCov = 0, TcMin = 36, TcMax = 38,
@@ -116,13 +116,13 @@ plot(density(longTcYoungMale$X2), main="", xlim=c(14,36), ylim=c(0,.50),
     xlab="Operative temperature [degree C]")
 }
 \references{
-Schweiker, M., Huebner, G. M., Kingma, B. R. M., Kramer, R., and Pallubinsky, H. Drivers of diversity in human thermal perception - A review for holistic comfort models. Temperature, 2018, 1 - 35.
-
-Kingma, B. R., Schweiker, M., Wagner, A. and van Marken Lichtenbelt, W. D. Exploring the potential of a biophysical model to understand thermal sensation Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
-
-Kingma, B. and van Marken Lichtenbelt, W. Energy consumption in buildings and female thermal demand Nature. Clim. Change, 2015, 5, 1054 - 1056.
-
-Kingma, B. R.; Frijns, A. J.; Schellen, L. and van Marken Lichtenbelt, W. D. Beyond the classic thermoneutral zone. Temperature, 2014, 1, 142 - 149.
+Schweiker, Huebner, Kingma, Kramer & Pallubinsky (2018) <doi:10.1080/23328940.2018.1534490>
+Kingma, Schweiker, Wagner & van Marken Lichtenbelt 
+Exploring the potential of a biophysical model to understand thermal sensation 
+Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland 
+Lodge, Windsor, UK, 2016.
+Kingma & van Marken Lichtenbelt (2015) <doi:10.1038/nclimate2741>
+Kingma, Frijns, Schellen & van Marken Lichtenbelt (2014) <doi:10.4161/temp.29702>
 }
 \seealso{
 \code{\link{calcdTNZ}}

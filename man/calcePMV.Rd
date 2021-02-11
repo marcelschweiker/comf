@@ -4,7 +4,7 @@
 \alias{calcePMV}
 \alias{ePMV}
 \alias{epmv}
-\title{Calculating Adjusted Predicted Mean Votes with Expectancy Factor}
+\title{Adjusted Predicted Mean Votes with Expectancy Factor}
 \usage{
 calcePMV(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, epCoeff)
 
@@ -63,7 +63,7 @@ for (i in 1:length(ta)){
 epmv
 }
 \references{
-epmv is based on Fanger, P. and Toftum, J. Extension of the PMV model to non-air-conditioned buildings in warm climates Energy and Buildings, 2002, 34, 533-536
+epmv is based on Fanger & Toftum (2002) <doi:10.1016/S0378-7788(02)00003-8>
 }
 \seealso{
 \code{\link{calcComfInd}}, \code{\link{calcepCoeff}}

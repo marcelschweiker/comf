@@ -1,4 +1,4 @@
-#' @title Calculate PPD with Ankle Draft
+#' @title PPD with Ankle Draft
 #' @description Function to calculate ankle draft using the predicted percentage of dissatisfied.
 #' @aliases ankledraft
 #' @aliases ad
@@ -14,7 +14,7 @@
 #' @returns Predicted Percentage of Dissatisfied occupants with ankle draft in [\%]
 #' @returns Acceptability in [boolean]
 #' @references 
-#' Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+#' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 #' @examples calcAD(25,25,0.2,50,0.5,1.2,0.3) # returns Ankle_draft_ppd:18.6, Acceptability:TRUE
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker. 
 #' @export

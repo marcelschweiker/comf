@@ -6,7 +6,7 @@
 \alias{calcapCoeff}
 \alias{calcasCoeff}
 \alias{calcesCoeff}
-\title{Calculation of Coefficients for aPMV, ePMV, aPTS, ePTS}
+\title{Coefficients for aPMV, ePMV, aPTS, ePTS}
 \usage{
 calcapCoeff(lsCond)
 
@@ -57,9 +57,9 @@ calcComfInd(lsCond, request="apmv")
 \references{
 Coefficients are calculated based on Gao, J.; Wang, Y. and Wargocki, P. Comparative analysis of modified PMV models and set models to predict human thermal sensation in naturally ventilated buildings Building and Environment, 2015, 92, 200-208.
 
-The apmv concept was introduced by Yao, R.; Li, B. and Liu, J. A theoretical adaptive model of thermal comfort - Adaptive Predicted mean Vote (apmv) Building and Environment, 2009, 44, 2089-2096.
+The aPMV concept was introduced by Yao, Li & Liu (2009) <doi:10.1016/j.buildenv.2009.02.014>
 
-The epmv concept was introudced by Fanger, P. and Toftum, J. Extension of the PMV model to non-air-conditioned buildings in warm climates Energy and Buildings, 2002, 34, 533-536.
+The epmv concept was introudced by Fanger & Toftum (2002) <doi:10.1016/S0378-7788(02)00003-8>
 }
 \seealso{
 see also \code{\link{calcaPMV}}, \code{\link{calcePMV}}, \code{\link{calcPtsa}}, \code{\link{calcPtse}}

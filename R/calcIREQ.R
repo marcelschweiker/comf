@@ -1,5 +1,5 @@
-#' @title Calculates IREQ and Dlim
-#' @description Function to calculate minimal and neutral values of REQUIRED CLOTHING INSULATION (IREQ) and DURATION LIMITED EXPOSURE (Dlim).
+#' @title IREQ and Dlim
+#' @description Calculate minimal and neutral values of REQUIRED CLOTHING INSULATION (IREQ) and DURATION LIMITED EXPOSURE (Dlim).
 #' @aliases  calcireq
 #' @aliases  IREQ
 #' @aliases  ireq

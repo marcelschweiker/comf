@@ -1,4 +1,4 @@
-#' Calculating Solar Gain
+#' Solar Gain
 #'
 #' @aliases calcSolarGain calcsolargain SolarGain solargain
 #' @description Function to calculate effective radiant field and delta mean radiant temperature.
@@ -22,7 +22,7 @@
 #' in radiant temperature required without solar radiation [Degree C]
 #' 
 #' @references 
-#' Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+#' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 #' @examples
 #' calcSolarGain(0, 120, 800, 0.5, 0.5, 0.5, asw=0.7, posture="seated") # Returns [42.9, 10.3]
 #' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.

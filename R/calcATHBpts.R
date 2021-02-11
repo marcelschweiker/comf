@@ -1,4 +1,4 @@
-#' Calculation of PTS using Adaptive Thermal Heat Balance approach
+#' Predicted Thermal Sensation by Gagge using Adaptive Thermal Heat Balance approach
 #' 
 #' @description \code{calcATHB} calculates predicted thermal sensation based on the adaptive thermal heat balance approach 
 #' using Gagge's 2 Node Model
@@ -23,8 +23,8 @@
 #' @details All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
 #' 
 #' @references 
-#' Schweiker, M. & Wagner, A. A framework for an adaptive thermal heat balance model (ATHB), Building and Environment, 2015, 94, 252 - 262
-#' Schweiker, M. & Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
+#' Schweiker & Wagner (2015) <doi:10.1016/j.buildenv.2015.08.018>
+#' Schweiker & Wagner (2016) Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
 #' 
 #' @author Marcel Schweiker
 #' @seealso see also \code{\link{calcComfInd}}, \code{link{calcATHBpmv}}, \code{link{calcATHBset}}

@@ -10,7 +10,7 @@
 \alias{bias}
 \alias{calcSdBias}
 \alias{calcSeBias}
-\title{Calculating the Bias between Predicted and Actual Thermal Sensation Vote}
+\title{Bias between Predicted and Actual Thermal Sensation Vote}
 \usage{
 calcBias(ref, pred)
 
@@ -53,9 +53,9 @@ pred <- rnorm(5) # predicted thermal sensation votes
 calcBias(ref, pred)
 }
 \references{
-Humphreys, M. A. and Nicol, J. F. The validity of ISO-PMV for predicting comfort votes in every-day thermal environments, Energy and Buildings, 2002, 34, 667-684.
+Humphreys & Nicol (2002) <doi:10.1016/S0378-7788(02)00018-X>
 
-Schweiker, M. and Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
+Schweiker & Wagner (2016) Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
 }
 \seealso{
 \code{\link{calcTPRTSV}}, \code{\link{calcAvgAcc}}

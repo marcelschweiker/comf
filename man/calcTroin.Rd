@@ -5,7 +5,7 @@
 \alias{calctroin}
 \alias{Troin}
 \alias{troin}
-\title{Calculation of Radiative and Operative Temperature}
+\title{Radiative and Operative Temperature}
 \usage{
 calcTroin(vel, tg, ta, met)
 
@@ -44,9 +44,9 @@ tg <- 25:29       # vector with globe temperature values
 calcTroin(vel, tg, ta, met)
 }
 \references{
-IsO 7726 Ergonomics of the Thermal Environment, Instruments for measuring Physical Quantities Geneva: International standard Organization, 1998.
+ISO 7726 Ergonomics of the Thermal Environment, Instruments for measuring Physical Quantities Geneva: International standard Organization, 1998.
 
-IsO 7730 Ergonomics of the thermal environment - analytical determination and interpretation of thermal comfort using calculation of the pmv and ppd indices and local thermal comfort criteria 2005.
+ISO 7730 Ergonomics of the thermal environment - analytical determination and interpretation of thermal comfort using calculation of the pmv and ppd indices and local thermal comfort criteria 2005.
 }
 \author{
 Marcel Schweiker. Further contribution by Shoaib Sarwar.

@@ -1,4 +1,4 @@
-#' Calculating Universal Thermal Comfort Index (UTCI)
+#' Universal Thermal Comfort Index (UTCI)
 #'
 #' @aliases calcUTCI calcutci utci UTCI
 #'
@@ -16,7 +16,7 @@
 #' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 #' @references 
 #' UTCI project page on http://www.utci.org/ 
-#' Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+#' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 #' @seealso see also \code{\link{calcComfInd}}
 #' @examples 
 #' calcUTCI(25, 25, 1.0, 50) # Returns 24.6

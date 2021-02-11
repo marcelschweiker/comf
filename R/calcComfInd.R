@@ -1,4 +1,4 @@
-#' @title Calculating one or more Thermal Comfort Indices using a List of Climatic Conditions
+#' @title Thermal Comfort Indices using a List of Climatic Conditions
 #' @description \code{calcComfInd} calculates one or more thermal comfort indices using a list of climatic conditions.
 #' @aliases comfind
 #' @usage calcComfInd(lsCond, request = "all")

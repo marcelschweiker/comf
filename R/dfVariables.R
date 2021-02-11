@@ -1,4 +1,4 @@
-#' List of all the variables used
+#' List of all the variables used in this package
 #' 
 #' @docType data
 #' @usage data(dfVariables)

@@ -3,7 +3,7 @@
 \name{calcComfInd}
 \alias{calcComfInd}
 \alias{comfind}
-\title{Calculating one or more Thermal Comfort Indices using a List of Climatic Conditions}
+\title{Thermal Comfort Indices using a List of Climatic Conditions}
 \usage{
 calcComfInd(lsCond, request = "all")
 

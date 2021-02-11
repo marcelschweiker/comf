@@ -6,7 +6,7 @@
 \alias{windchill}
 \alias{TWC}
 \alias{twc}
-\title{Calculates TWC.}
+\title{Windchill temperature (TWC)}
 \usage{
 calcTWC(v,ta)
 
@@ -21,7 +21,7 @@ windchill(v,ta)
 returns (twc) Wind chill temperature in [Degree C]
 }
 \description{
-Function to calculate WINDCHILL TEMPERATURE, TWC in Degrees.
+Function to calculate windchill temperature, TWC, in Degrees.
 }
 \details{
 The function returns the temperature that considers the cooling effect on a localized skin segment.

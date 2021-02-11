@@ -4,7 +4,7 @@
 \alias{calcCE}
 \alias{coolingeffect}
 \alias{ce}
-\title{Calculate Cooling Effect}
+\title{Cooling Effect}
 \usage{
 calcCE(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0)
 }
@@ -36,7 +36,7 @@ The CE of the elevated air velocity is the difference in SET between conditions 
 calcCE(25,25,0.3,50,0.5,1) # returns Cooling Effect: 1.3
 }
 \references{
-Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 }
 \author{
 Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.

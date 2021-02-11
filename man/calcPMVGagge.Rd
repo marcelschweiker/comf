@@ -4,7 +4,7 @@
 \alias{calcPMVGagge}
 \alias{PMVGagge}
 \alias{Gagge}
-\title{Calculating Gagge's Version of Fanger's PMV based on the 2-Node-Model}
+\title{Gagge's Version of Fanger's PMV based on the 2-Node-Model}
 \usage{
 calcPMVGagge(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, 
 ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
@@ -78,12 +78,11 @@ ASHRAE Standard 55-2013. Thermal environmental conditions for human occupancy.
 American society of heating, Refrigerating and Air-Conditioning Engineering, 
 Atlanta, USA, 2013.
 
-Fountain, M. & Huizenga, C. A thermal sensation model for use by the 
-engineering profession ASHRAE RP-781 Final report, 1995
+Fountain & Huizenga (1995) A thermal sensation model for use by the 
+engineering profession ASHRAE RP-781 Final report.
 
-Gagge, A. P., Fobelets, A. P. and Berglund, L. G. A standard predictive index 
-of human response to the thermal environment, ASHRAE transactions, 1986, 92 (2B), 
-709-731.
+Gagge, Fobelets & Berglund (1986) A standard predictive index 
+of human response to the thermal environment, ASHRAE transactions, 92 (2B), 709-731.
 }
 \seealso{
 see also \code{\link{calcComfInd}}

@@ -4,7 +4,7 @@
 \alias{calcHbExUnsteady}
 \alias{hbexunsteady}
 \alias{exunsteady}
-\title{Calculates Human Body Exergy Consumption Rate using Unsteady State Method}
+\title{Human Body Exergy Consumption Rate using Unsteady State Method}
 \usage{
 calcHbExUnsteady(ta, tr, rh, vel, clo, met, tao, rho, frad = 0.7, 
 eps = 0.95, ic = 1.085, ht = 171, wt = 70, tcr = 37, tsk = 36, basMet = 58.2,
@@ -118,9 +118,11 @@ dateTime <- as.POSIXct(seq(0,by=60,length.out=length(ta)), origin="1970-01-01")
 calcHbExUnsteady(ta, tr, rh, vel, clo, met, tao, rho, dateTime = dateTime)$xconsu
 }
 \references{
-Schweiker, M., Kolarik, J., Dovjak, M. and Shukuya, M. Unsteady-state human-body exergy consumption rate and its relation to subjective assessment of dynamic thermal environments, Energy and Buildings , 2016, 116, 164 - 180
+Schweiker, Kolarik, Dovjak & Shukuya (2016) <doi:10.1016/j.enbuild.2016.01.002>
 
-Shukuya, M. Calculation of human body-core and skin-layer temperatures under unsteady-state conditions-for unsteady-state human-body exergy analysis-, internal report of exergy-research group, Tech. rep., KIT/TCU, 2015.
+Shukuya (2015) Calculation of human body-core and skin-layer temperatures under 
+unsteady-state conditions-for unsteady-state human-body exergy analysis-, 
+internal report of exergy-research group, Tech. rep.
 }
 \seealso{
 see also \code{\link{calcComfInd}}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{dfISO7933AppF}
 \alias{dfISO7933AppF}
-\title{Callibration data for Tre, SWtotg, Dlimtre, Dlimloss50, Dlimloss95}
+\title{Calibration data for Tre, SWtotg, Dlimtre, Dlimloss50, Dlimloss95}
 \format{
 A data frame with 10 rows and 16 variables:
 \describe{

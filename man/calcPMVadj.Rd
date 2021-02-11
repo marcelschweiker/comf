@@ -4,7 +4,7 @@
 \alias{calcPMVadj}
 \alias{PMVadj}
 \alias{pmvadj}
-\title{Calculating Predicted Mean Votes adjusted for elevated air speed}
+\title{Predicted Mean Votes adjusted for elevated air speed}
 \usage{
 calcPMVadj(ta, tr, vel, rh, clo, met, wme = 0)
 }
@@ -36,7 +36,7 @@ Calculated through function Two node model(\code{calc2Node}
 calcPMVadj(25,25,0.3,50,0.5,1)
 }
 \references{
-pmvadj is based on ASHRAE standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, Usa, 2013
+pmvadj is based on ASHRAE standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, USA, 2013.
 }
 \author{
 Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.

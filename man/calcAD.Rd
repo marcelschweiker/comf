@@ -4,7 +4,7 @@
 \alias{calcAD}
 \alias{ankledraft}
 \alias{ad}
-\title{Calculate PPD with Ankle Draft}
+\title{PPD with Ankle Draft}
 \usage{
 calcAD(ta, tr, vel, rh, clo, met, vAnkle)
 }
@@ -38,7 +38,7 @@ Calculates the percentage of thermally dissatisfied people with the ankle draft 
 calcAD(25,25,0.2,50,0.5,1.2,0.3) # returns Ankle_draft_ppd:18.6, Acceptability:TRUE
 }
 \references{
-Original code in Python by Tartarini & Schiavon (2020) https://doi.org/10.1016/j.softx.2020.100578
+Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
 }
 \author{
 Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
