@@ -1,6 +1,6 @@
-#' Callibration data for SET
+#' Calibration data for SET
 #'
-#' Data from ASHRAE 55-2013 to callibrate values given by SET model
+#' Data from ASHRAE 55-2013 to calibrate values given by SET model
 #'
 #' @docType data
 #'
@@ -23,7 +23,7 @@
 #'
 #' @keywords datasets
 #'
-#' @references ASHRAE standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, Usa, 2013.
+#' @references ASHRAE Standard 55-2013. Thermal environmental conditions for human occupancy. American society of heating, Refrigerating and Air-Conditioning Engineering, Atlanta, USA, 2013.
 #'
 #' @examples
 #' data(dfASHRAETableG11)

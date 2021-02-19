@@ -1,6 +1,6 @@
-#' Callibration data for PMV and PPD
+#' Calibration data for PMV and PPD
 #'
-#' Data from ISO 7730 to callibrate values given by PMV / PPD model
+#' Data from ISO 7730 to calibrate values given by PMV / PPD model
 #'
 #' @docType data
 #'
