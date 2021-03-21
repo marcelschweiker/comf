@@ -21,7 +21,7 @@ calcAntoine <- function(x){
 }
 # Tetens equation [kPa]
 calcTetens <- function(x){
-  return(0.61078*10**(7.5*x/(x+237.3)))
+  return(0.61078*10^(7.5*x/(x+237.3)))
 }
 
 ###############################################
