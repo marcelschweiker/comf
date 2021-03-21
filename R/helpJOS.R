@@ -1,5 +1,3 @@
-#run all these functions before running JOS3-functions
-
 calcDubois <- function(height,weight){
   return(0.2025 * (height ^ 0.725) * (weight ^ 0.425))
 }
@@ -12,8 +10,6 @@ calcFujimoto <- function(height,weight){
 calcKurazumi <- function(height,weight){
   return(0.2440 * (height ^ 0.693) * (weight ^ 0.383))
 }
-
-##############################################
 
 BSAst <- function(){
   c(0.110, 0.029, 0.175, 0.161, 0.221,0.096, 0.063, 0.050, 0.096, 0.063, 0.050,
@@ -127,9 +123,7 @@ calcIndexOrder <- function(){
 calcBodyTemp <- function(){
   numNodes <- calcIndexOrder()[[2]]
   bodyTemp = rep.int(36, 85)
-  
 }
-
 
 ##############################################
 
