@@ -1,5 +1,8 @@
+#######################################################
 #run all these functions before running JOS3-functions
+#######################################################
 
+#All Equations
 calcDubois <- function(height,weight){
   return(0.2025 * (height ^ 0.725) * (weight ^ 0.425))
 }
@@ -20,7 +23,7 @@ calcAntoine <- function(x){
 calcTetens <- function(x){
   return(0.61078*10^(7.5*x/(x+237.3)))
 }
-calcTetens(5)
+
 ###############################################
 
 BSAst <- function(){
@@ -86,16 +89,18 @@ calcdryR <- function(hc, hr, clo){
 #############################################
 
 calcwetR <- function(hc, clo, iclo=0.45, lewis_rate=16.5){
+ 
+fcl = calcCLOarea(clo)
+rcl = 0.155 * clo
+rea = 1 / (lewis_rate * hc)
+recl = rcl / (lewis_rate * iclo)
+ret = rea / fcl + recl
 
-fcl <- calcCLOarea(clo)
-rcl <- 0.155 * clo
-rea <- 1 / (lewis_rate * hc)
-recl <- rcl / (lewis_rate * iclo)
-ret <- rea / fcl + recl
 return(ret)
 }
 
 #############################################
+
 #Calculate local metabolic rate by work [W]
 calcMworklocal <- function(bmr, par){
 mwork_all <- (par-1) * bmr
@@ -107,3 +112,4 @@ mwork <- mwork_all * mwf
 return(mwork)
 }
 #############################################
+
