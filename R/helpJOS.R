@@ -78,7 +78,7 @@ return(fcl)
 ##############################################
 
 calcdryR <- function(hc, hr, clo){
-  
+
   fcl <- calcCLOarea(clo)
   ra <- 1/(hc+hr)
   rcl <- 0.155*clo
@@ -95,7 +95,21 @@ rcl = 0.155 * clo
 rea = 1 / (lewis_rate * hc)
 recl = rcl / (lewis_rate * iclo)
 ret = rea / fcl + recl
+
 return(ret)
 }
 
 #############################################
+
+#Calculate local metabolic rate by work [W]
+calcMworklocal <- function(bmr, par){
+mwork_all <- (par-1) * bmr
+mwf <- c(
+  0, 0, 0.091, 0.08, 0.129,
+  0.0262, 0.0139, 0.005, 0.0262, 0.0139, 0.005,
+  0.2010, 0.0990, 0.005, 0.2010, 0.0990, 0.005)
+mwork <- mwork_all * mwf
+return(mwork)
+}
+#############################################
+
