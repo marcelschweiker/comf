@@ -166,10 +166,10 @@ for (indexI in 1:50) {
 
 #set transparency
 alph = 0.6
+forcedVal = tail(sort(vForcedV),350)
 df = tbl_df(data.frame(temperature, saturation))
-df1 = tbl_df(data.frame(tempAir, psySat, vForcedV))
 
-abcd = ggplot(df, aes(x = temperature, y = saturation)) + ylim(0, 50) + 
+plot1 = ggplot(df, aes(x = temperature, y = saturation)) + ylim(0, 50) + 
   geom_line() + 
   geom_line(y = saturation*0.9, alpha = alph) + 
   geom_line(y = saturation*0.8, alpha = alph) + 
@@ -181,8 +181,17 @@ abcd = ggplot(df, aes(x = temperature, y = saturation)) + ylim(0, 50) +
   geom_line(y = saturation*0.2, alpha = alph) + 
   geom_line(y = saturation*0.1, alpha = alph)
 
-if (dep != 0){
+plot2 = plot.new()
+
+if(dep==0){
   levelsContour = seq(0.1, 2, length.out= 150)
-  CS3 = abcd +
-    stat_contour_filled(mapping = aes(x = temperature, y = saturation, z = temperature), binwidth=10)
+  filteredVforcedV = vForcedV[,-(51:100)]
+  for (i in 2:ncol(tempAir)) {
+    plot2 = plot2 + filled.contour(x = tempAir[,i], y = psySat[,i], 
+                            z = filteredVforcedV, levels = levelsContour, 
+                            color.palette=colorRampPalette(c("blue","cyan", "yellow","orange","red")) 
+                            )
+  }
 }
+
+plot2
