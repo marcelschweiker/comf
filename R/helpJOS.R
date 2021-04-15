@@ -24,17 +24,18 @@ calcAntoine <- function(x){
 calcTetens <- function(x){
   return(0.61078*10^(7.5*x/(x+237.3)))
 }
-##############################################
+
+###############################################
 
 BSAst <- function(){
   c(0.110, 0.029, 0.175, 0.161, 0.221,0.096, 0.063, 0.050, 0.096, 0.063, 0.050,
     0.209, 0.112, 0.056, 0.209, 0.112, 0.056)
 }
 
-##############################################
+###############################################
 
 calcWeightrate <- function(weight=74.43){
-  
+
   rate <- weight / 74.43
   return(rate)
 }
@@ -69,14 +70,6 @@ calcPreferredTemp <- function(va=0.1, rh =50, met=1, clo=0){
     else to <- to - vpmv/3
   }
   to
-}
-
-##############################################
-
-options <- function(){
-  list("nonshivering_thermogenesis"= TRUE, "cold_acclimated"= FALSE,
-       "shivering_threshold"= FALSE, "limit_dshiv/dt"= FALSE,
-       "bat_positive"= FALSE, "ava_zero"= FALSE, "shivering"= FALSE)
 }
 
 ##############################################
@@ -631,7 +624,6 @@ return(fcl)
 ##############################################
 
 calcdryR <- function(hc, hr, clo){
-  
   fcl <- calcCLOarea(clo)
   ra <- 1/(hc+hr)
   rcl <- 0.155*clo
@@ -651,4 +643,16 @@ ret = rea / fcl + recl
 return(ret)
 }
 
+#############################################
+
+#Calculate local metabolic rate by work [W]
+calcMworklocal <- function(bmr, par){
+mwork_all <- (par-1) * bmr
+mwf <- c(
+  0, 0, 0.091, 0.08, 0.129,
+  0.0262, 0.0139, 0.005, 0.0262, 0.0139, 0.005,
+  0.2010, 0.0990, 0.005, 0.2010, 0.0990, 0.005)
+mwork <- mwork_all * mwf
+return(mwork)
+}
 #############################################
