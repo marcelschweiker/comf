@@ -2,6 +2,66 @@
 #run all these functions before running JOS3-functions
 #######################################################
 
+#Global Variables 
+height <- 1.72
+weight <- 74.43
+fat <- 15
+sex <- "male"
+age <- 20
+ci <- 2.59
+bmrEquation <- "harris-benedict"
+bsaEquation <- "dubois"
+exOutput <- NULL
+
+# Body surface area [m2]
+bsaRate <- calcBSArate(height, weight, bsaEquation)
+# Body surface area rate [-]
+bsa <- localBsa(height, weight, bsaEquation)
+# Basal blood flow rate [-]
+bfbRate <- calcBFBrate(height, weight, bsaEquation, age, ci)
+# Thermal conductance [W/K]
+cdt <- calcConductance(height, weight, bsaEquation, fat)
+# Thermal capacity [J/K]
+cap <- capacity(height, weight, bsaEquation, age, ci)
+
+# Set point temp [oC]
+setptCr <- rep(37, 17)
+setptSk <- rep(34, 17)
+
+# Initial body temp [oC]
+numNodes <- calcIndexOrder()[[2]]
+bodytemp <- rep(36, numNodes)
+
+# Default values of input condition
+ta <- rep(28.8, 17)
+tr <- rep(28.8, 17)
+rh <- rep(50, 17)
+va <- rep(0.1, 17)
+clo <- rep(0, 17)
+iclo <- rep(0.45, 17)
+par <- 1.25  # Physical activity ratio
+posture <- "standing"
+hc <- NULL
+hr <- NULL
+exQ <- rep(0, numNodes)
+startTime <- Sys.time()
+t <- 0 # Elapsed time
+cycle <- 0 # Cycle time
+modelName <- "JOS3"
+options <- list("nonshivering_thermogenesis" = TRUE, 
+                "cold_acclimated" = FALSE, 
+                "shivering_threshold" = FALSE, 
+                "limit_dshiv/dt" = FALSE, 
+                "bat_positive" = FALSE, 
+                "ava_zero" = FALSE,
+                "shivering" = FALSE)
+preSHIV <- 0 # reset
+history <- c()
+
+# Reset setpoint temperature
+dictout <- resetSetpt()
+history <- append(history, dictout)
+
 #All Equations
 calcDubois <- function(height,weight){
   return(0.2025 * (height ^ 0.725) * (weight ^ 0.425))
@@ -127,7 +187,6 @@ run <- function(dtime=60, passive=False, output=True, exOutput = NULL,
   bfSk <- skinBloodflow(errCr, errSk, height, weight, bsaEquation, age, ci)
   
   # Hand, Foot AVA blood flow [L/h]
-  options <- options()
   bfAvaHand <- avaBloodflow(errCr, errSk, height, weight, bsaEquation, age, ci)
   bfAvaFoot <- bfAvaHand
   if(options[["ava_zero"]] & passive){
@@ -503,18 +562,6 @@ radCoef <- function(posture){
 
 ##############################################
 
-options <- function(){
-  list("nonshivering_thermogenesis" = TRUE, 
-       "cold_acclimated" = FALSE, 
-       "shivering_threshold" = FALSE, 
-       "limit_dshiv/dt" = FALSE, 
-       "bat_positive" = FALSE, 
-       "ava_zero" = FALSE,
-       "shivering" = FALSE)
-}
-
-##############################################
-
 localMbase <- function(){
   return(mapply(c, c(1,2), c(2,3), SIMPLIFY<-FALSE))
 }
@@ -655,4 +702,31 @@ mwf <- c(
 mwork <- mwork_all * mwf
 return(mwork)
 }
+
 #############################################
+
+resetSetpt <- function(){
+  # Set operative temperature under PMV=0 environment. 
+  # Metabolic rate at PAR = 1.25
+  # 1 met = 58.15 W/m2
+  
+  met = calcBMR() * 1.25 / 58.15 / sum(BSAst())
+  to = calcPreferredTemp(met=met)
+  RH = 50
+  va = 0.1
+  icl = 0
+  PAR = 1.25
+  
+  options <- options()
+  options[["ava_zero"]] = TRUE
+  for(i in seq(1,10)){
+    dictout <- run(dtime=60000, passive=True)
+  }
+  
+  # Set new setpoint temperatures
+  setptCr <- Tcr()
+  setptSk <- Tsk()
+  options[["ava_zero"]] = FALSE
+  
+  dictout
+}
