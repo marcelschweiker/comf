@@ -113,3 +113,16 @@ return(mwork)
 }
 #############################################
 
+#options <- function(){
+  options <- list(
+    nonshivering_thermogenesis = TRUE,
+    cold_acclimated = FALSE,
+    shivering_threshold = FALSE,
+    limit_dshivdt = FALSE,
+    bat_positive = FALSE,
+    ava_zero = FALSE,
+    shivering = FALSE )
+#}
+
+#############################################
+
