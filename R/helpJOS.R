@@ -123,6 +123,50 @@ return(mwork)
     ava_zero = FALSE,
     shivering = FALSE )
 #}
+#############################################
+calcSUMbf <- function(bf_cr, bf_ms, bf_fat, bf_sk, bf_ava_hand, bf_ava_foot){
+co = 0
+co <- co + bf_cr.sum()
+co <- co + bf_ms.sum()
+co <- co + bf_fat.sum()
+co <- co + bf_sk.sum()
+co <- co + 2*bf_ava_hand
+co <- co + 2*bf_ava_foot
+return(co)
+}
 
 #############################################
+calcHeatloss <- function(t, p, met){
+res_sh = 0.0014 * met * (34 - t) #sensible heat
+res_lh = 0.0173 * met * (5.87 - p) #latent heat
+return (list(res_sh =res_sh,res_lh=res_lh ))
+}
+
+############################################
+calcgetlts <- function(ta){
+  return(2.418*1000)
+}
+
+############################################
+calcSUMm <- function(mbase, mwork, mshiv, mnst){
+  qcr = mbase[1]
+  qms = mbase[2]
+  qfat = mbase[3]
+  qsk = mbase[4]
+  Dict = calcIndexOrder()
+  IDict = Dict$indexDict
+  for(i  in seq_along(bodyNames())){
+    for (bn in seq_along(bodyNames())){
+      if (!is.null( IDict[[bn]][["muscle"]])) { qms[i] <-  qms[i] + mwork[i] + mshiv[i]}
+      else {qcr[i] <-  qcr[i] + mwork[i] + mshiv[i]}
+      qcr <- qcr + mnst
+    }
+  }
+  return(list(qcr=qcr, qms=qms, qfat=qfat, qsk=qsk))
+}
+
+###############################################
+
+
+
 
