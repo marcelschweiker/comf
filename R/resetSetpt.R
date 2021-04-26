@@ -17,14 +17,14 @@ resetSetpt <- function(){
   # Metabolic rate at PAR = 1.25
   # 1 met = 58.15 W/m2
   
-  met = calcBMR() * 1.25 / 58.15 / sum(BSAst())
-  to = calcPreferredTemp(met=met)
-  RH = 50
-  va = 0.1
-  icl = 0
-  PAR = 1.25
+  met <- calcMETbasal(height, weight, age, sex, bmrEquation) *  1.25 / 58.15 / 
+    sum(BSAst)
+  to <- calcPreferredTemp(met=met)
+  RH <- 50
+  va <- 0.1
+  icl <- 0
+  PAR <- 1.25
   
-  options <- options()
   options[["ava_zero"]] = TRUE
   for(i in seq(1,10)){
     dictout <- run(dtime=60000, passive=True)

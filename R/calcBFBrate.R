@@ -17,24 +17,27 @@
 #' @seealso \code{\link{helpJOS}}
 #' @export
 
-calcBFBrate <- function(height=1.72, weight=74.43, age=20, ci=2.59, equation="dubois"){
-
+calcBFBrate <- function(height=1.72, weight=74.43, equation="dubois", age=20, 
+                        ci=2.59){
 
   ci <- ci * 60  # Change unit [L/min/㎡] to [L/h/㎡]
 
   # Decrease of BFB by aging
   if (age < 50){
-    ci <- ci * 1}
+    ci <- ci * 1
+    }
   else if (age < 60){
-    ci <- ci * 0.85}
+    ci <- ci * 0.85
+    }
   else if (age < 70){
-    ci <- ci * 0.75}
+    ci <- ci * 0.75
+    }
   else{
-    ci <- ci * 0.7}  # age >= 70
+    ci <- ci * 0.7
+    }  # age >= 70
 
 
-  bfb_all <- ci * calcBSArate(height, weight, equation) * sum(BSAst())  # [L/h]
-  bfb_rate <- bfb_all / 290
-  return(bfb_rate)
+  bfbAll <- ci * calcBSArate(height, weight, equation) * sum(BSAst())  # [L/h]
+  bfbRate <- bfbAll / 290
+  bfbRate
 }
-

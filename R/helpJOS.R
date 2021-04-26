@@ -16,21 +16,34 @@ exOutput <- NULL
 # Body surface area [m2]
 bsaRate <- calcBSArate(height, weight, bsaEquation)
 # Body surface area rate [-]
-bsa <- localBsa(height, weight, bsaEquation)
+bsa <- calcBSAlocal(height, weight, bsaEquation)
 # Basal blood flow rate [-]
 bfbRate <- calcBFBrate(height, weight, bsaEquation, age, ci)
 # Thermal conductance [W/K]
 cdt <- calcConductance(height, weight, bsaEquation, fat)
 # Thermal capacity [J/K]
-cap <- capacity(height, weight, bsaEquation, age, ci)
+cap <- calcCapacity(height, weight, bsaEquation, age, ci)
 
 # Set point temp [oC]
 setptCr <- rep(37, 17)
 setptSk <- rep(34, 17)
 
 # Initial body temp [oC]
-numNodes <- calcIndexOrder()[[2]]
+indexOrderRes <- calcIndexOrder()
+idict <- indexOrderRes[[1]]
+numNodes <- indexOrderRes[[2]]
 bodytemp <- rep(36, numNodes)
+
+layerNames <- c("artery", "vein", "sfvein", "core", "muscle", "fat", "skin")
+bodyNames <-c("Head", "Neck", "Chest", "Back", "Pelvis", "LShoulder", "LArm", 
+              "LHand", "RShoulder", "RArm", "RHand","LThigh", "LLeg", "LFoot", 
+              "RThigh", "RLeg", "RFoot")
+
+
+# Constant parameters of the matrix' indicies
+indexValuesRes <- calcIndexValues()
+index <- indexValuesRes[[1]]
+vIndex <- indexValuesRes[[2]]
 
 # Default values of input condition
 ta <- rep(28.8, 17)
@@ -44,17 +57,17 @@ posture <- "standing"
 hc <- NULL
 hr <- NULL
 exQ <- rep(0, numNodes)
-startTime <- Sys.time()
 t <- 0 # Elapsed time
 cycle <- 0 # Cycle time
 modelName <- "JOS3"
-options <- list("nonshivering_thermogenesis" = TRUE, 
-                "cold_acclimated" = FALSE, 
-                "shivering_threshold" = FALSE, 
-                "limit_dshiv/dt" = FALSE, 
-                "bat_positive" = FALSE, 
-                "ava_zero" = FALSE,
-                "shivering" = FALSE)
+options <- list(
+  nonshivering_thermogenesis = TRUE,
+  cold_acclimated = FALSE,
+  shivering_threshold = FALSE,
+  limit_dshivdt = FALSE,
+  bat_positive = FALSE,
+  ava_zero = FALSE,
+  shivering = FALSE)
 preSHIV <- 0 # reset
 history <- c()
 
@@ -87,10 +100,8 @@ calcTetens <- function(x){
 
 ###############################################
 
-BSAst <- function(){
-  c(0.110, 0.029, 0.175, 0.161, 0.221,0.096, 0.063, 0.050, 0.096, 0.063, 0.050,
-    0.209, 0.112, 0.056, 0.209, 0.112, 0.056)
-}
+BSAst <- c(0.110, 0.029, 0.175, 0.161, 0.221,0.096, 0.063, 0.050, 0.096, 0.063, 
+           0.050, 0.209, 0.112, 0.056, 0.209, 0.112, 0.056)
 
 ###############################################
 
@@ -98,26 +109,6 @@ calcWeightrate <- function(weight=74.43){
 
   rate <- weight / 74.43
   return(rate)
-}
-
-##############################################
-
-calcBMR <- function(height = 1.72, weight = 74.43, age = 20, 
-                    sex="male", equation="harris-benedict"){
-  BMR = switch(
-    equation,
-    "harris-benedict" = {
-      if(sex=="male") 88.362 + 13.397*weight + 500.3*height - 5.677*age 
-      else 447.593 + 9.247*weight + 479.9*height - 4.330*age
-    },
-    "harris-benedict_origin" = {
-      if(sex=="male") 66.4730 + 13.7516*weight + 500.33*height - 6.7550*age 
-      else 655.0955 + 9.5634*weight + 184.96*height - 4.6756*age},
-    {
-      if(sex=="male") (0.0481*weight + 2.34*height - 0.0138*age - 0.4235) * 238.8915
-      else (0.0481*weight + 2.34*height - 0.0138*age - 0.9708) * 238.8915}
-  )
-  BMR * 0.048
 }
 
 ##############################################
@@ -134,15 +125,13 @@ calcPreferredTemp <- function(va=0.1, rh =50, met=1, clo=0){
 
 ##############################################
 
-run <- function(dtime=60, passive=False, output=True, exOutput = NULL, 
-                modelName = "JOS3"){
+run <- function(dtime=60, passive=False, output=True){
+  #  Run a model for a once and get model parameters.
+  
   tcr <- Tcr()
   tsk <- Tsk()
   
   # Convective and radiative heat transfer coefficient [W/K.m2]
-  posture <- "standing"
-  va <- rep(0.1,17)
-  ta <- rep(28.8,17)
   hc <- calcfixedHC(convCoef(posture, va, ta, tsk), va)
   hr <- calcfixedHR(radCoef(posture))
   
@@ -270,7 +259,6 @@ run <- function(dtime=60, passive=False, output=True, exOutput = NULL,
   
   bfLocal <- localArr(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot)
   bfWhole <- wholebody(bfArt, bfVein, bfAvaHand, bfAvaFoot)
-  numNodes <- calcIndexOrder()[[2]]
   arrBF <- matrix(0, nrow <- numNodes, ncol <- numNodes)
   for(i in 1:length()){
     pA[i] <- antoine[i] * rh[i] /100
@@ -469,20 +457,6 @@ run <- function(dtime=60, passive=False, output=True, exOutput = NULL,
 
 ##############################################
 
-bodyNames <- function(){
-  c("Head", "Neck", "Chest", "Back", "Pelvis", "LShoulder", "LArm", "LHand",
-    "RShoulder", "RArm", "RHand","LThigh", "LLeg", "LFoot", "RThigh", "RLeg", 
-    "RFoot")
-}
-
-##############################################
-
-layerNames <- function(){
-  c("artery", "vein", "sfvein", "core", "muscle", "fat", "skin")
-}
-
-##############################################
-
 calcIndexOrder <- function(){
   indexDict <- list()
   
@@ -498,15 +472,15 @@ calcIndexOrder <- function(){
     indexDict[[key]]= tempDict
   }
   
-  for(key in bodyNames()[-(1:5)]){
+  for(key in bodyNames[-(1:5)]){
     tempDict <- list("artery"= 1, "vein"= 1, "sfvein"= 1, "core"= 1, 
                     "muscle"= NA, "fat"= NA, "skin"= 1)
     indexDict[[key]]= tempDict
   }
   indexDict["CB"] = 0
   orderCount <- 1
-  for(bn in bodyNames()){
-    for(ln in layerNames()){
+  for(bn in bodyNames){
+    for(ln in layerNames){
       if(!is.na(indexDict[[bn]][[ln]])){
         indexDict[[bn]][[ln]] = orderCount
         orderCount <- orderCount + 1
@@ -528,36 +502,118 @@ calcBodyTemp <- function(){
 
 calcIndexByLayer <- function(layer){
   outIndex <- c()
-  for(bn in bodyNames()){
-    for(ln in layerNames()){
-      
+  for(bn in bodyNames){
+    for(ln in layerNames){
+      if((tolower(layer) == ln) & (!is.null(idict[[bn]][[ln]]))){
+        outIndex <- append(outIndex, idict[[bn]][[ln]])
+      }
     }
   }
-    
+  outIndex
+}
+
+##############################################
+
+calcValidIndexByLayer <- function(layer){
+  # Get indices of the matrix by the layer name
+  outIndex <- c()
+  for(i in 1:length(bodyNames)){
+    layerValue <- idict[[bodyNames[i]]][[layer]]
+    if(!is.null(layerValue)){
+      outIndex <- append(outIndex, i)
+    }
+  }
+  outIndex
+}
+
+##############################################
+
+calcIndexValues <- function(){
+  index <- list()
+  vIndex <- list()
+  for(key in layerNames){
+    index[[key]] <- calcIndexByLayer(key)
+    vIndex[[key]] <- calcValidIndexByLayer(key)
+  }
+  return(list(index, vIndex))
 }
 
 ##############################################
 
 Tcr <- function(){
-  10
+  bodytemp[index[["core"]]]
 }
 
 ##############################################
 
 Tsk <- function(){
-  10
+  bodytemp[index[["skin"]]]
 }
 
 ##############################################
 
-convCoef <- function(hc, va) {
+calcConvCoef <- function(posture="standing", va=0.1, ta=28.8, tsk=34.0) {
+  # Calculate convective heat transfer coefficient (hc) [W/K.m2]
+  hcA <- NULL
+  hcB <- NULL
+  hcNatural <- NULL
   
+  # Natural convection
+  if(tolower(posture) == 'standing'){
+    # Ichihara et al., 1997, https://doi.org/10.3130/aija.62.45_5
+    hcNatural <- c(4.48, 4.48, 2.97, 2.91, 2.85, 3.61, 3.55, 3.67, 3.61, 3.55, 
+                   3.67, 2.80, 2.04, 2.04, 2.80, 2.04, 2.04)
+  }
+  else if(tolower(posture) %in% c("sitting", "sedentary")){
+    # Ichihara et al., 1997, https://doi.org/10.3130/aija.62.45_5
+    hcNatural <- c(4.75, 4.75, 3.12, 2.48, 1.84, 3.76, 3.62, 2.06, 3.76, 3.62, 
+                   2.06, 2.98, 2.98, 2.62, 2.98, 2.98, 2.62)
+  }
+  else if(tolower(posture) %in% c("lying", "supine")){
+    # Kurazumi et al., 2008, https://doi.org/10.20718/jjpa.13.1_17
+    # The values are applied under cold environment.
+    hcA <- c(1.105, 1.105, 1.211, 1.211, 1.211, 0.913, 2.081, 2.178, 0.913, 
+             2.081, 2.178, 0.945, 0.385, 0.200, 0.945, 0.385, 0.200)
+    hcB <- c(0.345, 0.345, 0.046, 0.046, 0.046, 0.373, 0.850, 0.297, 0.373, 
+             0.850, 0.297, 0.447, 0.580, 0.966, 0.447, 0.580, 0.966)
+    hcNatural <- hcA * (abs(ta - tsk) ^ hcB)
+  }
+  
+  # Forced convection
+  # Ichihara et al., 1997, https://doi.org/10.3130/aija.62.45_5
+  hcA <- c(15.0, 15.0, 11.0, 17.0, 13.0, 17.0, 17.0, 20.0, 17.0, 17.0, 20.0,
+          14.0, 15.8, 15.1, 14.0, 15.8, 15.1)
+  hcB <- c(0.62, 0.62, 0.67, 0.49, 0.60, 0.59, 0.61, 0.60, 0.59, 0.61, 0.60,
+          0.61, 0.74, 0.62, 0.61, 0.74, 0.62)
+  hcForced <- hcA * (va ^ hcB)
+  
+  # Select natural or forced hc.
+  # If local va is under 0.2 m/s, the hc valuse is natural.
+  ifelse(va<0.2, hc <- hcNatural, hc <- hcForced)
+  hc
 }
 
 ##############################################
 
-radCoef <- function(posture){
+calcRadCoef <- function(posture = "standing"){
+  # Calculate radiative heat transfer coefficient (hr) [W/K.m2]
   
+  if(tolower(posture) == "standing"){
+    # Ichihara et al., 1997, https://doi.org/10.3130/aija.62.45_5
+    hr <- c(4.89, 4.89, 4.32, 4.09, 4.32, 4.55, 4.43, 4.21, 4.55, 4.43, 4.21,
+      4.77, 5.34, 6.14, 4.77, 5.34, 6.14)
+  }
+  else if(tolower(posture) %in% c("sitting", "sedentary")){
+    # Ichihara et al., 1997, https://doi.org/10.3130/aija.62.45_5
+    hr <- c(4.96, 4.96, 3.99, 4.64, 4.21, 4.96, 4.21, 4.74, 4.96, 4.21, 4.74,
+           4.10, 4.74, 6.36, 4.10, 4.74, 6.36)
+  }
+  else if(tolower(posture) %in% c("lying", "supine")){
+    # Kurazumi et al., 2008, https://doi.org/10.20718/jjpa.13.1_17
+    hr <- c(5.475, 5.475, 3.463, 3.463, 3.463, 4.249, 4.835, 4.119, 4.249, 4.835, 
+            4.119, 4.440, 5.547, 6.085, 4.440, 5.547, 6.085)
+    }
+  hr
 }
 
 ##############################################
@@ -587,12 +643,6 @@ respHeatloss <- function(t, p, met){
 
 ##############################################
 
-localBsa <- function(height=1.72, weight=74.43, equation="dubois"){
-  return(1)
-}
-
-##############################################
-
 sumBf <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
   return(1)
 }
@@ -617,14 +667,82 @@ wholebody <- function(bfArt, bfVein, bfAvaHand, bfAvaFoot){
 
 ##############################################
 
-capacity <- function(height, weight, bsaEquation, age, ci){
-  return(rep(1, 85))
-}
-
-##############################################
-
-indexBylayer <- function(layer){
+# Calculate the thermal capacity [J/K]
+calcCapacity <- function(height = 1.72, weight = 74.43, equation = "dubois", 
+                         age = 20, ci = 2.59){
   
+  # artery [Wh/K]
+  capArt <- c(0.096, 0.025, 0.12, 0.111, 0.265, 0.0186, 0.0091, 0.0044, 0.0186, 
+              0.0091, 0.0044, 0.0813, 0.04, 0.0103, 0.0813, 0.04, 0.0103)
+  
+  # vein [Wh/K]
+  capVein <- c(0.321, 0.085, 0.424, 0.39, 0.832, 0.046, 0.024, 0.01, 0.046, 0.024, 
+              0.01, 0.207, 0.1, 0.024, 0.207, 0.1, 0.024)
+  
+  # superficial vein [Wh/K]
+  capSfv <- c(0, 0, 0, 0, 0, 0.025, 0.015, 0.011, 0.025, 0.015, 0.011, 0.074, 
+             0.05, 0.021, 0.074, 0.05, 0.021)
+  
+  # central blood [Wh/K]
+  capCb <- 1.999
+  
+  # core [Wh/K]
+  capCr <- c(1.7229, 0.564, 10.2975, 9.3935, 13.834, 1.6994, 1.1209, 0.1536, 
+            1.6994, 1.1209, 0.1536, 5.3117, 2.867, 0.2097, 5.3117, 2.867, 0.2097)
+  
+  # muscle [Wh/K]
+  capMs <- c(0.305, 0.0, 0.0, 0.0, 7.409, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+  
+  # fat [Wh/K]
+  capFat <- c(0.203, 0.0, 0.0, 0.0, 1.947, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
+             0.0, 0.0, 0.0, 0.0)
+  
+  # skin [Wh/K]
+  capSk <- c(0.1885, 0.058, 0.441, 0.406, 0.556, 0.126, 0.084, 0.088, 0.126, 
+            0.084, 0.088, 0.334, 0.169, 0.107, 0.334, 0.169, 0.107)
+  
+  # Changes the values based on the standard body
+  bfbr <- calcBFBrate(height, weight, equation, age, ci)
+  wr <- calcWeightrate(weight)
+  
+  capArt <- capArt * bfbr
+  capVein <- capVein * bfbr
+  capSfv <- capSfv * bfbr
+  capCb <-  capCb * bfbr
+  capCr <- capCr * wr
+  capMs <- capMs * wr
+  capFat <- capFat *wr
+  capSk <- capSk * wr
+  
+  capWhole <- rep(0, numNodes)
+  capWhole[1] <- capCb
+  
+  for(i in 1:length(bodyNames)){
+    # Dictionary of indecies in each body segment
+    # key = layer name, value = index of matrix
+    indexof <- idict[[bodyNames[i]]]
+    
+    # Common
+    capWhole[indexof[["artery"]] + 1] <- capArt[i]
+    capWhole[indexof[["vein"]] + 1] <- capVein[i]
+    capWhole[indexof[["core"]] + 1] <- capCr[i]
+    capWhole[indexof[["skin"]] + 1] <- capSk[i]
+    
+    # Only limbs
+    if(i>5){
+      capWhole[indexof[["sfvein"]] + 1] <- capSfv[i]
+    }
+    
+    # If the segment has a muscle or fat layer
+    if(!is.null(indexof[["muscle"]])){
+      capWhole[indexof[["muscle"]] +1] <- capMs[i]
+      capWhole[indexof[["fat"]] + 1] <- capFat[i]
+    }
+  }
+
+  capWhole <- capWhole * 3600  # Changes unit [Wh/K] to [J/K]
+  capWhole
 }
 
 ##############################################
@@ -717,7 +835,6 @@ resetSetpt <- function(){
   icl = 0
   PAR = 1.25
   
-  options <- options()
   options[["ava_zero"]] = TRUE
   for(i in seq(1,10)){
     dictout <- run(dtime=60000, passive=True)
@@ -730,14 +847,5 @@ resetSetpt <- function(){
   
   dictout
 }
-
-options <- list(
-  nonshivering_thermogenesis = TRUE,
-  cold_acclimated = FALSE,
-  shivering_threshold = FALSE,
-  limit_dshivdt = FALSE,
-  bat_positive = FALSE,
-  ava_zero = FALSE,
-  shivering = FALSE )
 
 #############################################
