@@ -868,3 +868,124 @@ calcSUMm <- function(mbase, mwork, mshiv, mnst){
 }
 
 ###############################################
+calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois"){
+
+ if (fat < 12.5){
+  cdt_cr_sk <- c(
+      1.341, 0.930, 1.879, 1.729, 2.370,
+      1.557, 1.018, 2.210, 1.557, 1.018, 2.210,
+      2.565, 1.378, 3.404, 2.565, 1.378, 3.404)
+}
+ else if (fat < 17.5){
+      cdt_cr_sk = c(
+        1.311, 0.909, 1.785, 1.643, 2.251,
+        1.501, 0.982, 2.183, 1.501, 0.982, 2.183,
+        2.468, 1.326, 3.370, 2.468, 1.326, 3.370)
+ }
+ else if (fat < 22.5){
+   cdt_cr_sk = c(
+        1.282, 0.889, 1.698, 1.563, 2.142,
+        1.448, 0.947, 2.156, 1.448, 0.947, 2.156,
+        2.375, 1.276, 3.337, 2.375, 1.276, 3.337)}
+ else if (fat < 27.5){
+  cdt_cr_sk = c(
+        1.255, 0.870, 1.618, 1.488, 2.040,
+        1.396, 0.913, 2.130, 1.396, 0.913, 2.130,
+        2.285, 1.227, 3.304, 2.285, 1.227, 3.304)}
+ else{ #fat >= 27.5
+      cdt_cr_sk = c(
+        1.227, 0.852, 1.542, 1.419, 1.945,
+        1.346, 0.880, 1.945, 1.346, 0.880, 1.945,
+        2.198, 1.181, 3.271, 2.198, 1.181, 3.271
+      )}
+
+    cdt_cr_ms = rep(0, 17)  # core to muscle [W/K]
+    cdt_ms_fat = rep(0, 17)  # muscle to fat [W/K]
+    cdt_fat_sk = rep(0, 17)  # fat to skin [W/K]
+
+    # Head and Pelvis consists of 65MN's conductances
+    cdt_cr_ms[1] = 1.601  # Head
+    cdt_ms_fat[1] = 13.222
+    cdt_fat_sk[1] = 16.008
+    cdt_cr_ms[5] = 3.0813  # Pelvis
+    cdt_ms_fat[5] = 0.3738
+    cdt_fat_sk[5] = 41.4954
+
+    # vessel to core
+    # The shape is a cylinder.
+    # It is assumed that the inner is vascular radius, 2.5mm and the outer is
+    # stolwijk's core radius.
+    # The heat transer coefficient of the core is assumed as the Michel's
+    # counter-flow model 0.66816 [W/(m･K)].
+    cdt_ves_cr = c(
+      0, 0, 0, 0, 0,
+      0.586, 0.383, 1.534, 0.586, 0.383, 1.534,
+      0.810, 0.435, 1.816, 0.810, 0.435, 1.816)
+    #superficial vein to skin
+    cdt_sfv_sk = c(
+      0, 0, 0, 0, 0,
+      57.735, 37.768, 16.634, 57.735, 37.768, 16.634,
+      102.012, 54.784, 24.277, 102.012, 54.784, 24.277)
+
+    # art to vein (counter-flow) [W/K]
+    # The data has been derived Mitchell's model.
+    # THe values = 15.869 [W/(m･K)] * the segment lenght [m]
+    cdt_art_vein = c(
+      0, 0, 0, 0, 0,
+      0.537, 0.351, 0.762, 0.537, 0.351, 0.762,
+      0.826, 0.444, 0.992, 0.826, 0.444, 0.992)
+
+    # Changes values by body size based on the standard body.
+    wr = calcWeightrate(weight)
+    bsar = calcBSArate(height, weight, equation)
+    # Head, Neck (Sphere shape)
+    cdt_cr_sk[1:2] = cdt_cr_sk[1:2]* wr/bsar
+    cdt_cr_ms[1:2]  = cdt_cr_ms[1:2]*wr/bsar
+    cdt_ms_fat[1:2] =cdt_ms_fat[1:2] *wr/bsar
+    cdt_fat_sk[1:2] = cdt_fat_sk[1:2]*wr/bsar
+    cdt_ves_cr[1:2] =cdt_ves_cr[1:2] *wr/bsar
+    cdt_sfv_sk[1:2] = cdt_sfv_sk[1:2]*wr/bsar
+    cdt_art_vein[1:2] = cdt_art_vein[1:2]* wr/bsar
+    # Others (Cylinder shape)
+    cdt_cr_sk[3:17] = cdt_cr_sk[3:17]*bsar^2/wr
+    cdt_cr_ms[3:17] = cdt_cr_ms[3:17]*bsar^2/wr
+    cdt_ms_fat[3:17] = cdt_ms_fat[3:17]*bsar^2/wr
+    cdt_fat_sk[3:17] = cdt_fat_sk[3:17]*bsar^2/wr
+    cdt_ves_cr[3:17] = cdt_ves_cr[3:17]*bsar^2/wr
+    cdt_sfv_sk[3:17] = cdt_sfv_sk[3:17]*bsar^2/wr
+    cdt_art_vein[3:17] = cdt_art_vein[3:17]*bsar^2/wr
+
+   
+    cdt_whole = matrix( rep( 0, len=numNodes*numNodes), nrow = numNodes)
+    for(i  in seq_along(bodyNames)){
+      for(bn  in seq_along(bodyNames)){
+        indexof <- idict[[bodyNames[bn]]]
+        
+        # Common
+        cdt_whole[indexof[["artery"]], indexof[["vein"]]] = cdt_art_vein[i]  # art to vein
+        cdt_whole[indexof[["artery"]], indexof[["core"]]] = cdt_ves_cr[i]  # art to cr
+        cdt_whole[indexof[["vein"]], indexof[["core"]]] = cdt_ves_cr[i]  # vein to cr
+        
+        # Only limbs
+        if (i >= 5){
+          cdt_whole[indexof[["sfvein"]], indexof[["skin"]]] = cdt_sfv_sk[i] }# sfv to sk
+        
+        # If the segment has a muscle or fat layer
+        if (!is.null( indexof[["m]uscle"]])){ # or not indexof["fat"] is None
+        cdt_whole[indexof[["core"]], indexof[["muscle"]]] = cdt_cr_ms[i]  # cr to ms
+        cdt_whole[indexof[["muscle"]], indexof[["fat"]]]= cdt_ms_fat[i]  # ms to fat
+        cdt_whole[indexof[["fat"]], indexof[["skin"]]] = cdt_fat_sk[i]  # fat to sk
+        }
+        else{
+          cdt_whole[indexof[["core"]], indexof[["skin"]]] = cdt_cr_sk[i] } # cr to sk
+        
+        
+      }
+    } 
+    
+    cdt_whole = cdt_whole + t(cdt_whole)
+
+    return(cdt_whole)
+  }
+
+#############################################################################################################################################
