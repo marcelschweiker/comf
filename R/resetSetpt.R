@@ -12,22 +12,22 @@
 #' @export
 #'
 
-resetSetpt <- function(){
+resetSetpt <- function(height, weight, age, sex, bmrEquation, options, posture,
+                       ta, bsa, va, tr, clo, iclo, bsaEquation, ci, par){
   # Set operative temperature under PMV=0 environment. 
   # Metabolic rate at PAR = 1.25
   # 1 met = 58.15 W/m2
-  
-  met <- calcMETbasal(height, weight, age, sex, bmrEquation) *  1.25 / 58.15 / 
-    sum(BSAst)
-  to <- calcPreferredTemp(met=met)
+  met <- calcMETbasal(height, weight, age, sex, bmrEquation) *  1.25 / 58.15 / sum(bsa)
+  to <- rep(calcPreferredTemp(met=met), 17)
   RH <- 50
-  va <- 0.1
   icl <- 0
-  PAR <- 1.25
   
   options[["ava_zero"]] = TRUE
   for(i in seq(1,10)){
-    dictout <- run(dtime=60000, passive=True)
+    dictout <- run(dtime=60000, passive=TRUE, posture=posture, va=va, ta=ta, 
+                   options = options, tr = tr, clo = clo, iclo = iclo, 
+                   height = height, bsaEquation = bsaEquation, weight = weight, 
+                   age = age, ci = ci, sex = sex, par = par)
   }
   
   # Set new setpoint temperatures

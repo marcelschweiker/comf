@@ -27,7 +27,7 @@ cap_bcr = c(10.2975, 9.3935, 13.834)  # Thermal capacity at Chest, Back and Pelv
 err_bcr = weighted.mean(err_cr[3:5], weights=cap_bcr)
 
 #Cal. mean error skin temp.
-bsa = BSAst()
+bsa = BSAst
 err_msk =weighted.mean(err_sk, weights=bsa)
 
 # Openbess of AVA [-]
@@ -39,10 +39,10 @@ sig_ava_hand = max(sig_ava_hand, 0)
 sig_ava_foot = min(sig_ava_foot, 1)
 sig_ava_foot = max(sig_ava_foot, 0)
 
-bfbr = calcBFBrate(height, weight,age, ci, equation)
+bfbr = calcBFBrate(height, weight, equation, age, ci)
 # AVA blood flow rate [L/h]
 bf_ava_hand = 1.71 * bfbr * sig_ava_hand  # Hand
 bf_ava_foot = 2.16 * bfbr * sig_ava_foot  # Foot
-return(list(blooflowfoot = bf_ava_hand,blooflowhand= bf_ava_foot))
+return(list(blooflowfoot = bf_ava_foot,blooflowhand= bf_ava_hand))
 }
 

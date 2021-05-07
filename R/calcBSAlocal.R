@@ -20,7 +20,7 @@ calcBSAlocal <- function(height=1.72, weight=74.43, equation="dubois"){
 
 # The BSA ratio to the standard body (1.87m2)
 bsa_rate <- calcBSArate(height, weight, equation)
-bsa <- BSAst() * bsa_rate
+bsa <- BSAst * bsa_rate
 return(bsa)
 
 }
