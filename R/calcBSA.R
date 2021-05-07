@@ -16,8 +16,6 @@
 #' @export
 
 calcBSA <- function(height=1.72, weight=74.43, equation="dubois"){
-  
-  bsa <- NULL
   if (equation == "dubois")
   {
     bsa <- calcDubois(height, weight)}

@@ -63,7 +63,7 @@ else{ #age >= 60
 bf_sk <- (1 + skin_dilat * sd_dilat * sig_dilat) /
 (1 + skin_stric * sd_stric * sig_stric) * bfb_sk * 2^(err_sk/6)
 
-bfbr <- calcBFBrate(height, weight,age,ci, equation)
+bfbr <- calcBFBrate(height, weight, equation, age, ci)
 bf_sk <- bf_sk * bfbr
 return(bf_sk)
 }

@@ -2,32 +2,6 @@
 #run all these functions before running JOS3-functions
 #######################################################
 
-#Global Variables 
-height <- 1.72
-weight <- 74.43
-fat <- 15
-sex <- "male"
-age <- 20
-ci <- 2.59
-bmrEquation <- "harris-benedict"
-bsaEquation <- "dubois"
-exOutput <- NULL
-
-# Body surface area [m2]
-bsaRate <- calcBSArate(height, weight, bsaEquation)
-# Body surface area rate [-]
-bsa <- calcBSAlocal(height, weight, bsaEquation)
-# Basal blood flow rate [-]
-bfbRate <- calcBFBrate(height, weight, bsaEquation, age, ci)
-# Thermal conductance [W/K]
-cdt <- calcConductance(height, weight, bsaEquation, fat)
-# Thermal capacity [J/K]
-cap <- calcCapacity(height, weight, bsaEquation, age, ci)
-
-# Set point temp [oC]
-setptCr <- rep(37, 17)
-setptSk <- rep(34, 17)
-
 # Initial body temp [oC]
 indexOrderRes <- calcIndexOrder()
 idict <- indexOrderRes[[1]]
@@ -44,36 +18,6 @@ bodyNames <-c("Head", "Neck", "Chest", "Back", "Pelvis", "LShoulder", "LArm",
 indexValuesRes <- calcIndexValues()
 index <- indexValuesRes[[1]]
 vIndex <- indexValuesRes[[2]]
-
-# Default values of input condition
-ta <- rep(28.8, 17)
-tr <- rep(28.8, 17)
-rh <- rep(50, 17)
-va <- rep(0.1, 17)
-clo <- rep(0, 17)
-iclo <- rep(0.45, 17)
-par <- 1.25  # Physical activity ratio
-posture <- "standing"
-hc <- NULL
-hr <- NULL
-exQ <- rep(0, numNodes)
-t <- 0 # Elapsed time
-cycle <- 0 # Cycle time
-modelName <- "JOS3"
-options <- list(
-  nonshivering_thermogenesis = TRUE,
-  cold_acclimated = FALSE,
-  shivering_threshold = FALSE,
-  limit_dshivdt = FALSE,
-  bat_positive = FALSE,
-  ava_zero = FALSE,
-  shivering = FALSE)
-preSHIV <- 0 # reset
-history <- c()
-
-# Reset setpoint temperature
-dictout <- resetSetpt()
-history <- append(history, dictout)
 
 #All Equations
 calcDubois <- function(height,weight){
@@ -125,20 +69,21 @@ calcPreferredTemp <- function(va=0.1, rh =50, met=1, clo=0){
 
 ##############################################
 
-run <- function(dtime=60, passive=False, output=True){
+run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va, 
+                ta, options, tr, clo, iclo, height, bsaEquation, weight, age, ci,
+                sex, par){
   #  Run a model for a once and get model parameters.
   
   tcr <- Tcr()
   tsk <- Tsk()
   
   # Convective and radiative heat transfer coefficient [W/K.m2]
-  hc <- calcfixedHC(convCoef(posture, va, ta, tsk), va)
-  hr <- calcfixedHR(radCoef(posture))
-  
+  #hc <- calcfixedHC(calcConvCoef(posture, va, ta, tsk), va)
+  #hr <- calcfixedHR(calcRadCoef(posture))
+  hc <- c(4.47993,4.47993,2.96995,2.90995,2.84995,3.60994,3.54994,3.66994,3.60994,3.54994,3.66994,2.79996,2.03997,2.03997,2.79996,2.03997,2.03997)
+  hr <- c(4.89011,4.89011,4.32010,4.09009,4.32010,4.55010,4.43010,4.21010,4.55010,4.43010,4.21010,4.77011,5.34012,6.14014,4.77011,5.34012,6.14014)
+
   # Operarive temp. [oC], heat and evaporative heat resistance [K/W], [kPa/W]
-  tr <- rep(28.8,17)
-  clo <- rep(0, 17)
-  iclo <- rep(0.45, 17)
   to <- calcoperativeTEMP(ta, tr, hc, hr)
   rT <- calcdryR(hc, hr, clo)
   rEt <- calcwetR(hc, clo, iclo) 
@@ -160,37 +105,33 @@ run <- function(dtime=60, passive=False, output=True){
   errSk <- tsk - setptSk
   
   # Skinwettedness [-], Esk, Emax, Esw [W]
-  rh <- rep(50, 17)
-  height <- 1.72
-  weight <- 74.43
-  bsaEquation <- "dubois"
-  age <- 20
-  wet <- evaporation(errCr, errSk, tsk, ta, rh, rEt, height, weight, bsaEquation,
-                     age)
-  eSk <- wet
-  eMax <- wet
-  eSweat <- wet
+  evaporationMetrics <- calcEvaporation(errCr, errSk, tsk, ta, rh, rEt, height, 
+                                        weight, bsaEquation, age)
+  wet <- evaporationMetrics$wet
+  eSk <- evaporationMetrics$e_sk
+  eMax <- evaporationMetrics$e_max
+  eSweat <- evaporationMetrics$e_sweat
   
   # Skin blood flow, basal skin blood flow [L/h]
-  ci <- 2.59
-  bfSk <- skinBloodflow(errCr, errSk, height, weight, bsaEquation, age, ci)
-  
+  bfSk <- calcSKINbloodflow(errCr, errSk, height, weight, bsaEquation, age, ci)
   # Hand, Foot AVA blood flow [L/h]
-  bfAvaHand <- avaBloodflow(errCr, errSk, height, weight, bsaEquation, age, ci)
-  bfAvaFoot <- bfAvaHand
+  avaBloodflow <- calcAVAbloodflow(errCr, errSk, height, weight, bsaEquation, 
+                                   age, ci)
+  bfAvaHand <- avaBloodflow$blooflowhand
+  bfAvaFoot <- avaBloodflow$blooflowfoot
+
   if(options[["ava_zero"]] & passive){
     bfAvaHand <- 0
     bfAvaFoot <- 0
   }
   
   # Thermogenesis by shivering [W]
-  sex <- "male"
-  mshiv <- shivering(errCr, errSk, tcr, tsk, height, weight, bsaEquation, age, 
+  mshiv <- calcShivering(errCr, errSk, tcr, tsk, height, weight, bsaEquation, age, 
                      sex, dtime, options)
   
   # Thermogenesis by non-shivering [W]
   if(options[["nonshivering_thermogenesis"]]){
-    mnst <- nonshivering(errCr, errSk, height, weight, bsaEquation, age, 
+    mnst <- calcNOshivering(errCr, errSk, height, weight, bsaEquation, age, 
                         options[["cold_acclimated"]], options[["bat_positive"]])
   }
   else{
@@ -199,18 +140,19 @@ run <- function(dtime=60, passive=False, output=True){
   
   # Thermogenesis
   # Basal thermogenesis [W]
-  mbase <- localMbase(height, weight, age, sex, bsaEquation)
+  mbase <- calcMbaselocal(height, weight, age, sex, bsaEquation)
   mbaseAll <- 0
   for(m in mbase){
     mbaseAll <- mbaseAll + sum(m) 
   }
+  #this will be removed
+  mbaseAll <- 87.96
   
   # Thermogenesis by work [W]
-  par <- 1.25
-  mwork <- localMwork(mbaseAll, par)
-  
+  mwork <- calcMworklocal(mbaseAll, par)
+
   # Sum of thermogenesis in core, muscle, fat, skin [W]
-  sumMRes <- sumM(mbase, mwork, mshiv, mnst)
+  sumM <- calcSUMm(mbase, mwork, mshiv, mnst)
   qcr <- sumMRes$qcr
   qms <- sumMRes$qms
   qfat <- sumMRes$qfat
@@ -228,16 +170,16 @@ run <- function(dtime=60, passive=False, output=True){
   
   # Heat loss by respiratory
   pA <- rep(NA, 17)
-  antoineRes <- antoine(ta)
-  for(i in 1:length(pa)){
-    pA[i] <- antoine[i] * rh[i] /100
+  antoineRes <- calcAntoine(ta)
+  for(i in 1:length(pA)){
+    pA[i] <- antoineRes[i] * rh[i] /100
   }
   respHeatlossRes <- respHeatloss(ta[0], pA[0], qall)
   resSh <- respHeatlossRes[1]
   resLh <- respHeatlossRes[2]
   
   # Sensible heat loss [W]
-  bsa <- localBsa(height, weight, bsaEquation)
+  bsa <- calcBSAlocal(height, weight, bsaEquation)
   shlsk <- (tsk - to) / rT * bsa
   
   # Cardiac output [L/h]
@@ -273,7 +215,7 @@ run <- function(dtime=60, passive=False, output=True){
     }
   }
   
-  cdt <- conductance(height, weight, bsaEquation, fat)
+  cdt <- calcConductance(height, weight, bsaEquation, fat)
   arrCdt <- cdt
   for (i in 1:nrow(arrCdt)) {
     for (j in 1:ncol(arrCdt)) {
@@ -612,7 +554,7 @@ calcRadCoef <- function(posture = "standing"){
     # Kurazumi et al., 2008, https://doi.org/10.20718/jjpa.13.1_17
     hr <- c(5.475, 5.475, 3.463, 3.463, 3.463, 4.249, 4.835, 4.119, 4.249, 4.835, 
             4.119, 4.440, 5.547, 6.085, 4.440, 5.547, 6.085)
-    }
+  }
   hr
 }
 
@@ -620,12 +562,6 @@ calcRadCoef <- function(posture = "standing"){
 
 localMbase <- function(){
   return(mapply(c, c(1,2), c(2,3), SIMPLIFY<-FALSE))
-}
-
-##############################################
-
-sumM <- function(mbase, mwork, mshiv, mnst){
- list(qcr <- c(1,2), qms <- c(1,2), qfat <- c(1,2), qsk <- c(1,2)) 
 }
 
 ##############################################
@@ -753,8 +689,8 @@ calcIndex <- function(){
 ###############################################
 
 calcfixedHC <- function(hc, va){
-mean_hc <- weighted.mean(hc, weights=BSAst())
-mean_va <- weighted.mean(va, weights=BSAst())
+mean_hc <- weighted.mean(hc, weights=BSAst)
+mean_va <- weighted.mean(va, weights=BSAst)
 mean_hc_whole <- max(3, 8.600001*(mean_va**0.53))
 fixed_hc <- hc * mean_hc_whole/mean_hc
 return(fixed_hc)
@@ -763,7 +699,7 @@ return(fixed_hc)
 ##############################################
 
 calcfixedHR <- function(hr){
-mean_hr <- weighted.mean(hr, weights=BSAst())
+mean_hr <- weighted.mean(hr, weights=BSAst)
 fixed_hr <- hr * 4.7/mean_hr
 return(fixed_hr)
 }
@@ -857,18 +793,22 @@ calcSUMm <- function(mbase, mwork, mshiv, mnst){
   qsk = mbase[4]
   Dict = calcIndexOrder()
   IDict = Dict$indexDict
-  for(i  in seq_along(bodyNames())){
-    for (bn in seq_along(bodyNames())){
-      if (!is.null( IDict[[bn]][["muscle"]])) { qms[i] <-  qms[i] + mwork[i] + mshiv[i]}
-      else {qcr[i] <-  qcr[i] + mwork[i] + mshiv[i]}
-      qcr <- qcr + mnst
+  for(i  in seq_along(bodyNames)){
+    for (bn in seq_along(bodyNames)){
+      if (!is.null( IDict[[bn]][["muscle"]])) {
+        qms[i] <-  qms[i] + mwork[i] + mshiv[i]
+        }
+      else {
+        qcr[i] <-  qcr[i] + mwork[i] + mshiv[i]
+        }
     }
   }
+  qcr <- qcr + mnst
   return(list(qcr=qcr, qms=qms, qfat=qfat, qsk=qsk))
 }
 
 ###############################################
-calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois"){
+calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =15){
 
  if (fat < 12.5){
   cdt_cr_sk <- c(
@@ -978,8 +918,6 @@ calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois
         }
         else{
           cdt_whole[indexof[["core"]], indexof[["skin"]]] = cdt_cr_sk[i] } # cr to sk
-        
-        
       }
     } 
     

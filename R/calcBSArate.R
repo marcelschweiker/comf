@@ -18,7 +18,7 @@
 calcBSArate <- function(height=1.72, weight=74.43, equation="dubois"){
 
 bsa_all <- calcBSA(height, weight, equation)
-bsa_rate <- bsa_all/sum(BSAst())
+bsa_rate <- bsa_all/sum(BSAst)
 return(bsa_rate)
 }
 

@@ -37,7 +37,7 @@ calcBFBrate <- function(height=1.72, weight=74.43, equation="dubois", age=20,
     }  # age >= 70
 
 
-  bfbAll <- ci * calcBSArate(height, weight, equation) * sum(BSAst())  # [L/h]
+  bfbAll <- ci * calcBSArate(height, weight, equation) * sum(BSAst)  # [L/h]
   bfbRate <- bfbAll / 290
   bfbRate
 }
