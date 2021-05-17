@@ -71,7 +71,7 @@ calcPreferredTemp <- function(va=0.1, rh =50, met=1, clo=0){
 
 run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va, 
                 ta, options, tr, clo, iclo, height, bsaEquation, weight, age, ci,
-                sex, par){
+                sex, par, fat){
   #  Run a model for a once and get model parameters.
   
   tcr <- Tcr()
@@ -145,34 +145,30 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
   for(m in mbase){
     mbaseAll <- mbaseAll + sum(m) 
   }
-  #this will be removed
-  mbaseAll <- 87.96
   
   # Thermogenesis by work [W]
   mwork <- calcMworklocal(mbaseAll, par)
 
   # Sum of thermogenesis in core, muscle, fat, skin [W]
   sumM <- calcSUMm(mbase, mwork, mshiv, mnst)
-  qcr <- sumMRes$qcr
-  qms <- sumMRes$qms
-  qfat <- sumMRes$qfat
-  qsk <- sumMRes$qsk
-  
-  qall <-  sum(qcr) + sum(qms) + sum(qfat) + sum(qsk)
-  
+  print("summ")
+  print(sumM)
+  qall <- 109.95
+
   # Other
   # Blood flow in core, muscle, fat [L/h]
-  crmsfatBloodflowRes <- crmsfatBloodflow(mwork, mshiv, height, weight, 
+  crmsfatBloodflowRes <- calcFATbloodflow(mwork, mshiv, height, weight, 
                                           bsaEquation, age, ci)
-  bfCr <- crmsfatBloodflowRes$bfCr
-  bfMs <- crmsfatBloodflowRes$bfMs
-  bfFat <- crmsfatBloodflowRes$bfFat
+
+  bfCr <- crmsfatBloodflowRes$bf_cr
+  bfMs <- crmsfatBloodflowRes$bf_ms
+  bfFat <- crmsfatBloodflowRes$bf_fat
   
   # Heat loss by respiratory
   pA <- rep(NA, 17)
-  antoineRes <- calcAntoine(ta)
+  antoine <- calcAntoine(ta)
   for(i in 1:length(pA)){
-    pA[i] <- antoineRes[i] * rh[i] /100
+    pA[i] <- antoine[i] * rh[i] /100
   }
   respHeatlossRes <- respHeatloss(ta[0], pA[0], qall)
   resSh <- respHeatlossRes[1]
@@ -185,28 +181,29 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
   # Cardiac output [L/h]
   co <- sumBf(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot)
   
+
   # Weight loss rate by evaporation [g/sec]
   wlesk = (eSweat + 0.06*eMax) / 2418
-  wleres <- resLh / 2418
+  wleres <- resLh[[1]] / 2418
   
   #------------------------------------------------------------------
   # Matrix
   #------------------------------------------------------------------
   # Matrix A
   # (83, 83,) ndarray
-  vesselBloodflowRes <- vesselBloodflow(bfCr, bfMs, bfFat, bfSk, bfAvaHand, 
-                                         bfAvaFoot)
+  vesselBloodflowRes <- calcVesselBloodflow(bfCr, bfMs, bfFat, bfSk, bfAvaHand, 
+                                            bfAvaFoot)
   bfArt <- vesselBloodflowRes[1]
   bfVein <- vesselBloodflowRes[2]
   
-  bfLocal <- localArr(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot)
-  bfWhole <- wholebody(bfArt, bfVein, bfAvaHand, bfAvaFoot)
+  bfLocal <- calcLocalArr(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot)
+  bfWhole <- calcWholebody(bfArt, bfVein, bfAvaHand, bfAvaFoot)
   arrBF <- matrix(0, nrow <- numNodes, ncol <- numNodes)
-  for(i in 1:length()){
+  for(i in 1:length(pA)){
     pA[i] <- antoine[i] * rh[i] /100
   }
-  cap <- capacity(height, weight, bsaEquation, age, ci)
-  
+  cap <- calcCapacity(height, weight, bsaEquation, age, ci)
+
   for (i in 1:nrow(arrBF)) {
     for (j in 1:ncol(arrBF)) {
       arrBF[i,j] <- arrBF[i,j] + bfLocal[i,j] + bfWhole[i,j]
@@ -243,21 +240,16 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
   arrADia <- matrix(0, nrow <- numNodes, ncol <- numNodes)
   for (i in 1:nrow(arrADia)) {
     for (j in 1:ncol(arrADia)) {
-      arrADia[i,j] <- arrADia[i,j] + (arrCdt[i,j] + arrBF[i,j])
+      arrADia[i,j] <- arrADia[i,j] + arrCdt[i,j] + arrBF[i,j]
     }
   }
   for (i in 1:nrow(arrADia)) {
     for (j in 1:ncol(arrADia)) {
-      arrADia[i,j] <- arrADia[i,j] + sum(arrADiai[i,]) + arrB[i]
+      arrADia[i,j] <- arrADia[i,j] + sum(arrADia[i,]) + arrB[i]
     }
   }
-  diagArray <- diag(numNodes)
-  for (i in 1:nrow(arrADia)) {
-    for (j in 1:ncol(arrADia)) {
-      arrADia[i,j] <- diag(arrADia, names <- TRUE)
-      arrADia[i,j] <-  arrADia[i,j] + diagArray[i,j]
-    }
-  }
+  
+  #needs to get some work done
   
   arrA <- matrix(0, nrow <- numNodes, ncol <- numNodes)
   for (i in 1:nrow(arrA)) {
@@ -270,7 +262,6 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
   
   # Matrix Q [W] / [J/K] * [sec] = [-]
   # Thermogensis
-  vIndex <- calcVIndex()
   arrQ <- rep(0, numNodes)
   arrQ[index["core"]] <- arrQ[index["core"]] + qcr
   arrQ[index["muscle"]] <- arrQ[index["muscle"]] + qms[vIndex["muscle"]]
@@ -566,13 +557,6 @@ localMbase <- function(){
 
 ##############################################
 
-crmsfatBloodflow <- function(mwork, mshiv, height=1.72, weight=74.43, 
-                             equation="dubois", age=20, ci=2.59){
-  list(bfCr <- c(1,2), bfMs <- c(1,2), bfFat <- c(1,2)) 
-}
-
-##############################################
-
 respHeatloss <- function(t, p, met){
   list(1,2)
 }
@@ -585,20 +569,212 @@ sumBf <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
 
 ##############################################
 
-vesselBloodflow <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
-  return(NULL)
+calcVesselBloodflow <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
+  # Get artery and vein blood flow rate [l/h]
+  xbf <- bfCr + bfMs + bfFat + bfSk
+  
+  bfArt <- rep(0, 17)
+  bfVein <- rep(0, 17)
+  
+  #Head
+  bfArt[1] <- xbf[1]
+  bfVein[1] <- xbf[1]
+  
+  #Neck (+Head)
+  bfArt[2] <- xbf[2] + xbf[1]
+  bfVein[2] <- xbf[2] + xbf[1]
+  
+  #Chest
+  bfArt[3] <- xbf[3]
+  bfVein[3] <- xbf[3]
+  
+  #Back
+  bfArt[4] <- xbf[4]
+  bfVein[4] <- xbf[4]
+  
+  #Pelvis (+Thighs, Legs, Feet, AVA_Feet)
+  bfArt[5] <- xbf[5] + sum(xbf[12:18]) + 2*bfAvaFoot
+  bfVein[5] <- xbf[5] + sum(xbf[12:18]) + 2*bfAvaFoot
+  
+  #L.Shoulder (+Arm, Hand, (arteryのみAVA_Hand))
+  bfArt[6] <- sum(xbf[6:9]) + bfAvaHand
+  bfVein[6] <- sum(xbf[6:9])
+  
+  #L.Arm (+Hand)
+  bfArt[7] <- sum(xbf[7:9]) + bfAvaHand
+  bfVein[7] <- sum(xbf[7:9])
+  
+  #L.Hand
+  bfArt[8] <- xbf[8] + bfAvaHand
+  bfVein[8] <- xbf[8]
+  
+  #R.Shoulder (+Arm, Hand, (arteryのみAVA_Hand))
+  bfArt[9] <- sum(xbf[9:12]) + bfAvaHand
+  bfVein[9] <- sum(xbf[9:12])
+  
+  #R.Arm (+Hand)
+  bfArt[10] <- sum(xbf[10:12]) + bfAvaHand
+  bfVein[10] <- sum(xbf[10:12])
+  
+  #R.Hand
+  bfArt[11] <- xbf[11] + bfAvaHand
+  bfVein[11] <- xbf[11]
+  
+  #L.Thigh (+Leg, Foot, (arteryのみAVA_Foot))
+  bfArt[12] <- sum(xbf[12:15]) + bfAvaFoot
+  bfVein[12] <- sum(xbf[12:15])
+  
+  #L.Leg (+Foot)
+  bfArt[13] <- sum(xbf[13:15]) + bfAvaFoot
+  bfVein[13] <- sum(xbf[13:15])
+  
+  #L.Foot
+  bfArt[14] <- xbf[14] + bfAvaFoot
+  bfVein[14] <- xbf[14]
+  
+  #R.Thigh (+Leg, Foot, (arteryのみAVA_Foot))
+  bfArt[15] <- sum(xbf[15:18]) + bfAvaFoot
+  bfVein[15] <- sum(xbf[15:18])
+  
+  #R.Leg (+Foot)
+  bfArt[16] <- sum(xbf[16:18]) + bfAvaFoot
+  bfVein[16] <- sum(xbf[16:18])
+  
+  #R.Foot
+  bfArt[17] <- xbf[17] + bfAvaFoot
+  bfVein[17] <- xbf[17]
+  
+  c(bfArt, bfVein)
 }
 
 ##############################################
 
-localArr <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
-  return(NULL)
+calcLocalArr <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
+  # Create matrix to calculate heat exchage by blood flow in each segment [W/K]
+  # 1.067 [Wh/(L･K)] * Bloodflow [L/h] = [W/K]
+  bfLocal <- matrix(0, nrow <- numNodes, ncol <- numNodes)
+  for (i in 1:length(bodyNames)) {
+    bn <- bodyNames[i]
+    indexof <- idict[[bn]]
+    
+    # Common
+    bfLocal[indexof$core, indexof$artery] <- 1.067 * bfCr[i]  # art to cr
+    bfLocal[indexof$skin, indexof$artery] <- 1.067 * bfSk[i]  # art to sk
+    bfLocal[indexof$vein, indexof$core] <- 1.067 * bfCr[i]  # vein to cr
+    bfLocal[indexof$vein, indexof$skin] <- 1.067 * bfSk[i]  # vein to sk
+    
+    # If the segment has a muslce or fat layer
+    if(!is.na(indexof$muscle)){
+      bfLocal[indexof$muscle, indexof$artery] <- 1.067 * bfMs[i]  # art to ms
+      bfLocal[indexof$vein, indexof$muscle] <- 1.067 * bfMs[i]  # vein to ms
+    }
+    if(!is.na(indexof$fat)){
+      bfLocal[indexof$fat, indexof$artery] <- 1.067 * bfFat[i]  # art to fat
+      bfLocal[indexof$vein, indexof$fat] <- 1.067 * bfFat[i]  # vein to fat
+    }
+    
+    # Only hand
+    if(i == 8 || i == 11){
+      bfLocal[indexof$sfvein, indexof$artery] <- 1.067 * bfAvaHand  # art to sfvein
+    }
+    # Only foot
+    if(i == 14 || i == 11){
+      bfLocal[indexof$sfvein, indexof$artery] <- 1.067 * bfAvaFoot  # art to sfvein
+    }
+  }
+  bfLocal
 }
 
 ##############################################
 
-wholebody <- function(bfArt, bfVein, bfAvaHand, bfAvaFoot){
-  return(NULL)
+flow <- function(up, down, bloodflow){
+  arr <- matrix(0, nrow <- numNodes, ncol <- numNodes)
+  # Coefficient = 1.067 [Wh/L.K]
+  arr[down,up] <- 1.067 * bloodflow  # Change unit [L/h] to [W/K]
+  arr
+}
+
+##############################################
+
+calcWholebody <- function(bfArt, bfVein, bfAvaHand, bfAvaFoot){
+  #Create matrix to calculate heat exchage by blood flow between segments [W/K]
+  arr83 <- matrix(0, nrow <- numNodes, ncol <- numNodes)
+  
+  # Matrix offsets of segments
+  CB <- idict[["CB"]] + 1 
+  Head <- idict[["Head"]][["artery"]] + 1 
+  Neck <- idict[["Neck"]][["artery"]] + 1 
+  Chest <- idict[["Chest"]][["artery"]] + 1 
+  Back <- idict[["Back"]][["artery"]] + 1 
+  Pelvis <- idict[["Pelvis"]][["artery"]] + 1 
+  LShoulder <- idict[["LShoulder"]][["artery"]] + 1 
+  LArm <- idict[["LArm"]][["artery"]] + 1 
+  LHand <- idict[["LHand"]][["artery"]] + 1 
+  RShoulder <- idict[["RShoulder"]][["artery"]] + 1 
+  RArm <- idict[["RArm"]][["artery"]] + 1 
+  RHand <- idict[["RHand"]][["artery"]] + 1 
+  LThigh <- idict[["LThigh"]][["artery"]] + 1 
+  LLeg <- idict[["LLeg"]][["artery"]] + 1 
+  LFoot <- idict[["LFoot"]][["artery"]] + 1 
+  RThigh <- idict[["RThigh"]][["artery"]] + 1 
+  RLeg <- idict[["RLeg"]][["artery"]] + 1 
+  RFoot <- idict[["RFoot"]][["artery"]] + 1 
+  
+  arr83 <- arr83 + flow(CB, Neck, bfArt[2]) #CB to Neck.art
+  arr83 <- arr83 +flow(Neck, Head, bfArt[1]) #Neck.art to Head.art
+  arr83 <- arr83 +flow(Head+1, Neck+1, bfVein[1]) #Head.vein to Neck.vein
+  arr83 <- arr83 +flow(Neck+1, CB, bfVein[2]) #Neck.vein to CB
+  
+  arr83 <- arr83 +flow(CB, Chest, bfArt[3]) #CB to Chest.art
+  arr83 <- arr83 +flow(Chest+1, CB, bfVein[3]) #Chest.vein to CB
+  
+  arr83 <- arr83 +flow(CB, Back, bfArt[4]) #CB to Back.art
+  arr83 <- arr83 +flow(Back+1, CB, bfVein[4]) #Back.vein to CB
+  
+  arr83 <- arr83 +flow(CB, Pelvis, bfArt[5]) #CB to Pelvis.art
+  arr83 <- arr83 +flow(Pelvis+1, CB, bfVein[5]) #Pelvis.vein to CB
+  
+  arr83 <- arr83 +flow(CB, LShoulder, bfArt[6]) #CB to LShoulder.art
+  arr83 <- arr83 +flow(LShoulder, LArm, bfArt[7]) #LShoulder.art to LArm.art
+  arr83 <- arr83 +flow(LArm, LHand, bfArt[8]) #LArm.art to LHand.art
+  arr83 <- arr83 +flow(LHand+1, LArm+1, bfVein[8]) #LHand.vein to LArm.vein
+  arr83 <- arr83 +flow(LArm+1, LShoulder+1, bfVein[7]) #LArm.vein to LShoulder.vein
+  arr83 <- arr83 +flow(LShoulder+1, CB, bfVein[6]) #LShoulder.vein to CB
+  arr83 <- arr83 +flow(LHand+2, LArm+2, bfAvaHand) #LHand.sfvein to LArm.sfvein
+  arr83 <- arr83 +flow(LArm+2, LShoulder+2, bfAvaHand) #LArm.sfvein to LShoulder.sfvein
+  arr83 <- arr83 +flow(LShoulder+2, CB, bfAvaHand) #LShoulder.sfvein to CB
+  
+  arr83 <- arr83 +flow(CB, RShoulder, bfArt[9]) #CB to RShoulder.art
+  arr83 <- arr83 +flow(RShoulder, RArm, bfArt[10]) #RShoulder.art to RArm.art
+  arr83 <- arr83 +flow(RArm, RHand, bfArt[11]) #RArm.art to RHand.art
+  arr83 <- arr83 +flow(RHand+1, RArm+1, bfVein[11]) #RHand.vein to RArm.vein
+  arr83 <- arr83 +flow(RArm+1, RShoulder+1, bfVein[10]) #RArm.vein to RShoulder.vein
+  arr83 <- arr83 +flow(RShoulder+1, CB, bfVein[9]) #RShoulder.vein to CB
+  arr83 <- arr83 +flow(RHand+2, RArm+2, bfAvaHand) #RHand.sfvein to RArm.sfvein
+  arr83 <- arr83 +flow(RArm+2, RShoulder+2, bfAvaHand) #RArm.sfvein to RShoulder.sfvein
+  arr83 <- arr83 +flow(RShoulder+2, CB, bfAvaHand) #RShoulder.sfvein to CB
+  
+  arr83 <- arr83 +flow(Pelvis, LThigh, bfArt[12]) #Pelvis to LThigh.art
+  arr83 <- arr83 +flow(LThigh, LLeg, bfArt[13]) #LThigh.art to LLeg.art
+  arr83 <- arr83 +flow(LLeg, LFoot, bfArt[14]) #LLeg.art to LFoot.art
+  arr83 <- arr83 +flow(LFoot+1, LLeg+1, bfVein[14]) #LFoot.vein to LLeg.vein
+  arr83 <- arr83 +flow(LLeg+1, LThigh+1, bfVein[13]) #LLeg.vein to LThigh.vein
+  arr83 <- arr83 +flow(LThigh+1, Pelvis+1, bfVein[12]) #LThigh.vein to Pelvis
+  arr83 <- arr83 +flow(LFoot+2, LLeg+2, bfAvaFoot) #LFoot.sfvein to LLeg.sfvein
+  arr83 <- arr83 +flow(LLeg+2, LThigh+2, bfAvaFoot) #LLeg.sfvein to LThigh.sfvein
+  arr83 <- arr83 +flow(LThigh+2, Pelvis+1, bfAvaFoot) #LThigh.vein to Pelvis
+  
+  arr83 <- arr83 +flow(Pelvis, RThigh, bfArt[15]) #Pelvis to RThigh.art
+  arr83 <- arr83 +flow(RThigh, RLeg, bfArt[16]) #RThigh.art to RLeg.art
+  arr83 <- arr83 +flow(RLeg, RFoot, bfArt[17]) #RLeg.art to RFoot.art
+  arr83 <- arr83 +flow(RFoot+1, RLeg+1, bfVein[18]) #RFoot.vein to RLeg.vein
+  arr83 <- arr83 +flow(RLeg+1, RThigh+1, bfVein[16]) #RLeg.vein to RThigh.vein
+  arr83 <- arr83 +flow(RThigh+1, Pelvis+1, bfVein[15]) #RThigh.vein to Pelvis
+  arr83 <- arr83 +flow(RFoot+2, RLeg+2, bfAvaFoot) #RFoot.sfvein to RLeg.sfvein
+  arr83 <- arr83 +flow(RLeg+2, RThigh+2, bfAvaFoot) #RLeg.sfvein to RThigh.sfvein
+  arr83 <- arr83 +flow(RThigh+2, Pelvis+1, bfAvaFoot) #RThigh.vein to Pelvis
+  
+  arr83
 }
 
 ##############################################
@@ -791,11 +967,9 @@ calcSUMm <- function(mbase, mwork, mshiv, mnst){
   qms = mbase[2]
   qfat = mbase[3]
   qsk = mbase[4]
-  Dict = calcIndexOrder()
-  IDict = Dict$indexDict
   for(i  in seq_along(bodyNames)){
     for (bn in seq_along(bodyNames)){
-      if (!is.null( IDict[[bn]][["muscle"]])) {
+      if (!is.null(idict[[bn]][["muscle"]])) {
         qms[i] <-  qms[i] + mwork[i] + mshiv[i]
         }
       else {
