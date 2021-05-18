@@ -967,22 +967,25 @@ calcSUMm <- function(mbase, mwork, mshiv, mnst){
   qms = mbase[2]
   qfat = mbase[3]
   qsk = mbase[4]
-  for(i  in seq_along(bodyNames)){
-    for (bn in seq_along(bodyNames)){
-      if (!is.null(idict[[bn]][["muscle"]])) {
+  for(i in 1:length(bodyNames)){
+    # Dictionary of indecies in each body segment
+    # key = layer name, value = index of matrix
+    indexof <- idict[[bodyNames[i]]]
+    
+      if (!is.null(indexof[["muscle"]])) {
         qms[i] <-  qms[i] + mwork[i] + mshiv[i]
-        }
+      }
       else {
         qcr[i] <-  qcr[i] + mwork[i] + mshiv[i]
-        }
-    }
+      }
+    
   }
   qcr <- qcr + mnst
   return(list(qcr=qcr, qms=qms, qfat=qfat, qsk=qsk))
 }
 
 ###############################################
-calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =15){
+calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois"){
 
  if (fat < 12.5){
   cdt_cr_sk <- c(
@@ -1069,21 +1072,21 @@ calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =1
     cdt_sfv_sk[3:17] = cdt_sfv_sk[3:17]*bsar^2/wr
     cdt_art_vein[3:17] = cdt_art_vein[3:17]*bsar^2/wr
 
-   
+
     cdt_whole = matrix( rep( 0, len=numNodes*numNodes), nrow = numNodes)
-    for(i  in seq_along(bodyNames)){
-      for(bn  in seq_along(bodyNames)){
-        indexof <- idict[[bodyNames[bn]]]
-        
+    for(i in 1:length(bodyNames)){
+      # Dictionary of indecies in each body segment
+      # key = layer name, value = index of matrix
+      indexof <- idict[[bodyNames[i]]]
         # Common
         cdt_whole[indexof[["artery"]], indexof[["vein"]]] = cdt_art_vein[i]  # art to vein
         cdt_whole[indexof[["artery"]], indexof[["core"]]] = cdt_ves_cr[i]  # art to cr
         cdt_whole[indexof[["vein"]], indexof[["core"]]] = cdt_ves_cr[i]  # vein to cr
-        
+
         # Only limbs
         if (i >= 5){
           cdt_whole[indexof[["sfvein"]], indexof[["skin"]]] = cdt_sfv_sk[i] }# sfv to sk
-        
+
         # If the segment has a muscle or fat layer
         if (!is.null( indexof[["m]uscle"]])){ # or not indexof["fat"] is None
         cdt_whole[indexof[["core"]], indexof[["muscle"]]] = cdt_cr_ms[i]  # cr to ms
@@ -1092,12 +1095,15 @@ calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =1
         }
         else{
           cdt_whole[indexof[["core"]], indexof[["skin"]]] = cdt_cr_sk[i] } # cr to sk
+
+
       }
-    } 
-    
+
+
     cdt_whole = cdt_whole + t(cdt_whole)
 
     return(cdt_whole)
   }
+
 
 #############################################################################################################################################
