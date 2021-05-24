@@ -13,7 +13,7 @@
 #' @seealso \code{\link{helpJOS}}
 #' @export
 calcFATbloodflow <- function(mwork, mshiv, height=1.72, weight=74.43, 
-                             equation="dubois", age=20, ci=2.59){
+                             equation="dubois", age=20, ci=2.59, idict){
 # Basal blood flow rate [L/h]
 # core, CBFB
 bfb_cr = c(
@@ -35,21 +35,16 @@ bfbr = calcBFBrate(height, weight, equation, age, ci)
 bf_cr = bfb_cr * bfbr
 bf_ms = bfb_ms * bfbr
 bf_fat = bfb_fat * bfbr
-Dict = calcIndexOrder()
-IDict = Dict$indexDict
-for(i  in seq_along(bodyNames)){
-  for(bn in seq_along(bodyNames)){
-    if (!is.null( IDict[[bn]][["muscle"]])){
-      bf_ms[i] = bf_ms[i]  + (mwork[i] + mshiv$mshiv[i])/1.163
-      }
-    else {
-      bf_cr[i] = bf_cr[i] + (mwork[i] + mshiv$mshiv[i])/1.163}
+for(i  in 1:length(bodyNames)){
+  bn <- bodyNames[i]
+  if (!is.na( idict[[bn]][["muscle"]])){
+    bf_ms[i] = bf_ms[i]  + (mwork[i] + mshiv$mshiv[i])/1.163
+  }
+  else {
+    bf_cr[i] = bf_cr[i] + (mwork[i] + mshiv$mshiv[i])/1.163
   }
 }
-
-
 return(list(bf_cr=bf_cr, bf_ms=bf_ms, bf_fat=bf_fat))
-
 }
 
 #calcFATbloodflow(c(11,22,33,44,55,33,34,33,45,66,77,45,46,78,98,67,56),
