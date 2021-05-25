@@ -1005,6 +1005,7 @@ calcgetlts <- function(ta){
 ############################################
 
 calcSUMm <- function(mbase, mwork, mshiv, mnst){
+
   qcr = mbase[[1]]
   qms = mbase[[2]]
   qfat = mbase[[3]]
@@ -1024,7 +1025,8 @@ calcSUMm <- function(mbase, mwork, mshiv, mnst){
 }
 
 ###############################################
-calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =15){
+
+calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois"){
 
  if (fat < 12.5){
   cdt_cr_sk <- c(
@@ -1109,6 +1111,7 @@ calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =1
     cdt_ves_cr[3:17] = cdt_ves_cr[3:17]*bsar^2/wr
     cdt_sfv_sk[3:17] = cdt_sfv_sk[3:17]*bsar^2/wr
     cdt_art_vein[3:17] = cdt_art_vein[3:17]*bsar^2/wr
+
     cdt_whole <- matrix(0, nrow <- numNodes, ncol <- numNodes)
     
     for(i  in 1:length(bodyNames)){
@@ -1133,7 +1136,6 @@ calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =1
       else{
         cdt_whole[indexof[["core"]]+1, indexof[["skin"]]+1] = cdt_cr_sk[i] } # cr to sk
       }
-    
     cdt_whole = cdt_whole + t(cdt_whole)
 
     return(cdt_whole)

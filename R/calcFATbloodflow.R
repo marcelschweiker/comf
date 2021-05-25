@@ -31,10 +31,11 @@ bfb_fat = c(
   0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
   0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
-bfbr = calcBFBrate(height, weight, equation, age, ci)
+bfbr = calcBFBrate(height, weight, age, ci, equation)
 bf_cr = bfb_cr * bfbr
 bf_ms = bfb_ms * bfbr
 bf_fat = bfb_fat * bfbr
+
 for(i  in 1:length(bodyNames)){
   bn <- bodyNames[i]
   if (!is.na( idict[[bn]][["muscle"]])){
@@ -47,6 +48,4 @@ for(i  in 1:length(bodyNames)){
 return(list(bf_cr=bf_cr, bf_ms=bf_ms, bf_fat=bf_fat))
 }
 
-#calcFATbloodflow(c(11,22,33,44,55,33,34,33,45,66,77,45,46,78,98,67,56),
-                 #c(11,22,33,44,55,33,34,33,45,66,77,45,46,78,98,67,56))
 
