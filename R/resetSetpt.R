@@ -36,6 +36,4 @@ resetSetpt <- function(height, weight, age, sex, bmrEquation, options, posture,
   setptCr <- Tcr()
   setptSk <- Tsk()
   options[["ava_zero"]] = FALSE
-  
-  dictout
 }

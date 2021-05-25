@@ -50,7 +50,6 @@ BSAst <- c(0.110, 0.029, 0.175, 0.161, 0.221,0.096, 0.063, 0.050, 0.096, 0.063,
 ###############################################
 
 calcWeightrate <- function(weight=74.43){
-
   rate <- weight / 74.43
   return(rate)
 }
@@ -422,7 +421,7 @@ run <- function(dtime=60, passive=FALSE, output=TRUE, posture = "standing", va,
     dictout["RESlh"] <- resLh
   }
   
-  if(exists('exOutput')){
+  if(!is.null(exOutput) && exOutput =="all" ){
     dictout <- c(dictout, detailout)
   } else if(typeof(exOutput) == "list"){  # if ex_out type is list
     outkeys <- names(detailout)
@@ -473,7 +472,6 @@ calcIndexOrder <- function(){
 ##############################################
 
 calcBodyTemp <- function(){
-  numNodes <- calcIndexOrder()[[2]]
   bodyTemp <- rep.int(36, numNodes)
   bodyTemp
 }
