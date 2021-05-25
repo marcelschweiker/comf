@@ -117,9 +117,9 @@ calcJosPMV <- function(ta, tr, va, rh, met, clo, wmet=0){
 
 ##############################################
 
-run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va, 
+run <- function(dtime=60, passive=FALSE, output=TRUE, posture = "standing", va, 
                 ta, options, tr, clo, iclo, height, bsaEquation, weight, age, ci,
-                sex, par, fat, rh, bmrEquation, bsa, to){
+                sex, par, fat, rh, bmrEquation, bsa, to, exOutput){
   #  Run a model for a once and get model parameters.
   
   tcr <- Tcr()
@@ -252,95 +252,98 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
     arrBF[i,] <- arrBF[i,] /cap[i]
   }
   
-  arrBF <- arrBF*dt
-  print("arrbf")
-  print(arrBF)
+  arrBF <- arrBF*dtime
   
   cdt <- calcConductance(height, weight, bsaEquation, fat)
   arrCdt <- cdt
-  
-  for (i in 1:nrow(arrCdt)) {
-    for (j in 1:ncol(arrCdt)) {
-      arrCdt[i,j] <- arrCdt[i,j]/cdt[i,j] # # Change unit [W/K] to [/sec]
-      arrCdt[i,j] <- arrCdt[i,j]*dtime # Change unit [/sec] to [-]
-    }
+  for (i in 1:length(cap)) {
+    arrCdt[i,] <- arrCdt[i,] /cap[i]
   }
   
+  arrCdt <- arrCdt*dtime
   arrB <- rep(0, numNodes)
-  calcIndexRes <- calcIndex()
-  index <- calcIndexRes$index
-  vIndex <- calcIndexRes$vIndex
-  arrB[index["skin"]] = arrB[index["skin"]] + (1/rT*bsa)
-  
+  skinIndex <- index[["skin"]]
+  for(i in 1:length(skinIndex)){
+   arrBIndex <- skinIndex[i] +1
+   arrB[arrBIndex] <- arrB[arrBIndex] + (1/rT[i]*bsa[i])
+  }
   for (i in 1:length(arrB)) {
     arrB[i] <- arrB[i] / cap[i] # Change unit [W/K] to [/sec]
     arrB[i] <- arrB[i] * dtime # Change unit [/sec] to [-]
   }
-
-  arrATria <- matrix(0, nrow <- numNodes, ncol <- numNodes)
-  for (i in 1:nrow(arrATria)) {
-    for (j in 1:ncol(arrATria)) {
-      arrATria[i,j] <- arrATria[i,j] - (arrCdt[i,j] + arrBF[i,j])
-    }
-  }
-
-  arrADia <- matrix(0, nrow <- numNodes, ncol <- numNodes)
-  for (i in 1:nrow(arrADia)) {
-    for (j in 1:ncol(arrADia)) {
-      arrADia[i,j] <- arrADia[i,j] + arrCdt[i,j] + arrBF[i,j]
-    }
-  }
-  for (i in 1:nrow(arrADia)) {
-    for (j in 1:ncol(arrADia)) {
-      arrADia[i,j] <- arrADia[i,j] + sum(arrADia[i,]) + arrB[i]
-    }
-  }
   
-  
-  arrA <- matrix(0, nrow <- numNodes, ncol <- numNodes)
+  arrATria <- -(arrCdt + arrBF)
+
+  arrADia <- arrCdt + arrBF
+  aDiagArray <- rep(0, numNodes)
+  for (i in 1:length(aDiagArray)){
+    aDiagArray[i] <- sum(arrADia[i,]) + arrB[i]
+  }
+  arrADia <- diag(aDiagArray, numNodes, numNodes)
+  arrADia <- arrADia + diag(1, numNodes, numNodes)
   
   arrA <- arrADia + arrATria
-  
-
   arraAInv <- arrA
   
   # Matrix Q [W] / [J/K] * [sec] = [-]
-  # Thermogensis
+  # Thermogensisxs
   arrQ <- rep(0, numNodes)
-  arrQ[index["core"]] <- arrQ[index["core"]] + qcr
-  arrQ[index["muscle"]] <- arrQ[index["muscle"]] + qms[vIndex[["muscle"]]]
-  arrQ[index["fat"]] <-  arrQ[index["fat"]] + qfat[vIndex[["fat"]]]
-  arrQ[index["skin"]] <- arrQ[index["skin"]] + qsk
+  
+  for(i in 1:length(skinIndex)){
+    arrQIndex <- skinIndex[i]+1
+    arrQ[arrQIndex] <- arrQ[arrQIndex] + qsk[i]
+  }
+  
+  coreIndex <- index[["core"]]
+  for (i in 1:length(coreIndex)) {
+    arrQIndex <- coreIndex[i]+1
+    arrQ[arrQIndex] <- arrQ[arrQIndex] + qcr[i]
+  }
+  
+  muscleIndex <- index[["muscle"]]
+  for (i in 1:length(muscleIndex)) {
+    arrQIndex <- muscleIndex[i]+1
+    arrQ[arrQIndex] <- arrQ[arrQIndex] + qms[vIndex[["muscle"]]][i]
+  }
+  
+  fatIndex <- index[["fat"]]
+  for (i in 1:length(fatIndex)) {
+    arrQIndex <- fatIndex[i]+1
+    arrQ[arrQIndex] <- arrQ[arrQIndex] + qfat[vIndex[["fat"]]][i]
+  }
   
   # Respiratory [W]
-  arrQ[index["core"][3]] <- arrQ[index["core"][3]] - (resSh + resLh) #Chest core
+  arrQ[coreIndex[3]+1] <- arrQ[coreIndex[3]+1] - (resSh + resLh) #Chest core
   
   # Sweating [W]
-  arrQ[index["skin"]] <- arrQ[index["skin"]] - eSk
+  for (i in 1:length(skinIndex)) {
+    arrQIndex <- skinIndex[i] +1
+    arrQ[arrQIndex] <- arrQ[arrQIndex] - eSk[i]
+  }
   
   # Extra heat gain [W]
   exQ <- rep(0, numNodes)
-  for (i in 1:length(arrQ)) {
-    arrQ[i] <- arrQ[i] + exQ[i]
-    arrQ[i] <- arrQ[i]/cap[i] # Change unit [W]/[J/K] to [K/sec]
-    arrQ[i] <- arrQ[i] * dtime # Change unit [K/sec] to [K]
-  }
+  arrQ <- arrQ + exQ
+  arrQ <- arrQ/cap # Change unit [W]/[J/K] to [K/sec]
+  arrQ <- arrQ * dtime # Change unit [K/sec] to [K]
   
   # Boundary batrix [℃]
   arrTo <- rep(0, numNodes)
-  arrTo[index["skin"]] <- arrTo[index["skin"]] + to
-  
+  for (i in 1:length(skinIndex)) {
+    arrToIndex <- skinIndex[i] +1
+    arrTo[arrQIndex] <- arrTo[arrQIndex] - to[i]
+  }
+
   # all
   bodyTemp <- calcBodyTemp()
-  arr <- rep(0, length(bodyTemp))
-  for (i in length(arr)) {
-    arr[i] <- arr[i] + bodyTemp[i] + arrB[i] * arrTo[i] + arrQ[i]
-  }
+  
+  arr <- bodytemp + arrB * arrTo + arrQ
+  
   #------------------------------------------------------------------
   # New body temp. [oC]
   #------------------------------------------------------------------
   bodyTemp <- (arraAInv %*% arr)
-  
+
   #------------------------------------------------------------------
   # Output paramters
   #------------------------------------------------------------------
@@ -351,12 +354,12 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
     t <- 0
     dictout["ModTime"] <- t
     dictout["dt"] <- dtime
-    dictout["TskMean"] <- calcTskMean()
+    dictout["TskMean"] <- calcTskMean(bodytemp, BSAst)
     dictout["Tsk"] <- tsk
     dictout["Tcr"] <- tcr
     sumWet <- 0
     for (i in 1:length(wet)) {
-      sumWet <- sumWet + (wet[i] * BSAst()[i])
+      sumWet <- sumWet + (wet[i] * BSAst[i])
     }
     dictout["WetMean"] <- sumWet/length(wet)
     dictout["Wet"] <- wet
@@ -368,7 +371,7 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
   }
   
   detailout <- list()
-  if(exOutput){
+  if(!is.null(exOutput)){
     detailout["Name"] <- model_name
     detailout["Height"] <- height
     detailout["Weight"] <- weight
@@ -419,9 +422,9 @@ run <- function(dtime=60, passive=FALSE, output=True, posture = "standing", va,
     dictout["RESlh"] <- resLh
   }
   
-  if(exOutput == "all"){
+  if(exists('exOutput')){
     dictout <- c(dictout, detailout)
-  } else if(typeof(ex_output) == "list"){  # if ex_out type is list
+  } else if(typeof(exOutput) == "list"){  # if ex_out type is list
     outkeys <- names(detailout)
     for (i in exOutput) {
       if(i %in% outkeys){
@@ -501,18 +504,6 @@ calcValidIndexByLayer <- function(layer){
     }
   }
   outIndex
-}
-
-##############################################
-
-calcIndex <- function(){
-  index <- c()
-  vIndex <- c()
-  for (key in layerNames) {
-    index[key] <- calcIndexByLayer(key)
-    vIndex[key] <- calcValidIndexByLayer(key)
-  }
-  list(index = index, vIndex = vIndex)
 }
 
 ##############################################
@@ -1065,29 +1056,28 @@ calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =1
         1.346, 0.880, 1.945, 1.346, 0.880, 1.945,
         2.198, 1.181, 3.271, 2.198, 1.181, 3.271
       )}
+ cdt_cr_ms = rep(0, 17)  # core to muscle [W/K]
+ cdt_ms_fat = rep(0, 17)  # muscle to fat [W/K]
+ cdt_fat_sk = rep(0, 17)  # fat to skin [W/K]
 
-    cdt_cr_ms = rep(0, 17)  # core to muscle [W/K]
-    cdt_ms_fat = rep(0, 17)  # muscle to fat [W/K]
-    cdt_fat_sk = rep(0, 17)  # fat to skin [W/K]
+ # Head and Pelvis consists of 65MN's conductances
+ cdt_cr_ms[1] = 1.601  # Head
+ cdt_ms_fat[1] = 13.222
+ cdt_fat_sk[1] = 16.008
+ cdt_cr_ms[5] = 3.0813  # Pelvis
+ cdt_ms_fat[5] = 0.3738
+ cdt_fat_sk[5] = 41.4954
 
-    # Head and Pelvis consists of 65MN's conductances
-    cdt_cr_ms[1] = 1.601  # Head
-    cdt_ms_fat[1] = 13.222
-    cdt_fat_sk[1] = 16.008
-    cdt_cr_ms[5] = 3.0813  # Pelvis
-    cdt_ms_fat[5] = 0.3738
-    cdt_fat_sk[5] = 41.4954
-
-    # vessel to core
-    # The shape is a cylinder.
-    # It is assumed that the inner is vascular radius, 2.5mm and the outer is
-    # stolwijk's core radius.
-    # The heat transer coefficient of the core is assumed as the Michel's
-    # counter-flow model 0.66816 [W/(m･K)].
-    cdt_ves_cr = c(
-      0, 0, 0, 0, 0,
-      0.586, 0.383, 1.534, 0.586, 0.383, 1.534,
-      0.810, 0.435, 1.816, 0.810, 0.435, 1.816)
+  # vessel to core
+  # The shape is a cylinder.
+  # It is assumed that the inner is vascular radius, 2.5mm and the outer is
+  # stolwijk's core radius.
+  # The heat transer coefficient of the core is assumed as the Michel's
+  # counter-flow model 0.66816 [W/(m･K)].
+  cdt_ves_cr = c(
+    0, 0, 0, 0, 0,
+    0.586, 0.383, 1.534, 0.586, 0.383, 1.534,
+    0.810, 0.435, 1.816, 0.810, 0.435, 1.816)
     #superficial vein to skin
     cdt_sfv_sk = c(
       0, 0, 0, 0, 0,
@@ -1121,36 +1111,50 @@ calcConductance <- function(height=1.72, weight=74.43, equation="dubois", fat =1
     cdt_ves_cr[3:17] = cdt_ves_cr[3:17]*bsar^2/wr
     cdt_sfv_sk[3:17] = cdt_sfv_sk[3:17]*bsar^2/wr
     cdt_art_vein[3:17] = cdt_art_vein[3:17]*bsar^2/wr
+    cdt_whole <- matrix(0, nrow <- numNodes, ncol <- numNodes)
+    
+    for(i  in 1:length(bodyNames)){
+      bn <- bodyNames[i]
+      indexof <- idict[[bn]]
 
-   
-    cdt_whole = matrix( rep( 0, len=numNodes*numNodes), nrow = numNodes)
-    for(i  in seq_along(bodyNames)){
-      for(bn  in seq_along(bodyNames)){
-        indexof <- idict[[bodyNames[bn]]]
+      # Common
+      cdt_whole[indexof[["artery"]]+1, indexof[["vein"]]+1] = cdt_art_vein[i]  # art to vein
+      cdt_whole[indexof[["artery"]]+1, indexof[["core"]]+1] = cdt_ves_cr[i]  # art to cr
+      cdt_whole[indexof[["vein"]]+1, indexof[["core"]]+1] = cdt_ves_cr[i]  # vein to cr
         
-        # Common
-        cdt_whole[indexof[["artery"]], indexof[["vein"]]] = cdt_art_vein[i]  # art to vein
-        cdt_whole[indexof[["artery"]], indexof[["core"]]] = cdt_ves_cr[i]  # art to cr
-        cdt_whole[indexof[["vein"]], indexof[["core"]]] = cdt_ves_cr[i]  # vein to cr
+      # Only limbs
+      if (i >= 5){
+        cdt_whole[indexof[["sfvein"]]+1, indexof[["skin"]]+1] = cdt_sfv_sk[i] }# sfv to sk
         
-        # Only limbs
-        if (i >= 5){
-          cdt_whole[indexof[["sfvein"]], indexof[["skin"]]] = cdt_sfv_sk[i] }# sfv to sk
-        
-        # If the segment has a muscle or fat layer
-        if (!is.null( indexof[["m]uscle"]])){ # or not indexof["fat"] is None
-        cdt_whole[indexof[["core"]], indexof[["muscle"]]] = cdt_cr_ms[i]  # cr to ms
-        cdt_whole[indexof[["muscle"]], indexof[["fat"]]]= cdt_ms_fat[i]  # ms to fat
-        cdt_whole[indexof[["fat"]], indexof[["skin"]]] = cdt_fat_sk[i]  # fat to sk
-        }
-        else{
-          cdt_whole[indexof[["core"]], indexof[["skin"]]] = cdt_cr_sk[i] } # cr to sk
+      # If the segment has a muscle or fat layer
+      if (!is.na(indexof[["muscle"]])){ # or not indexof["fat"] is None
+        cdt_whole[indexof[["core"]]+1, indexof[["muscle"]]+1] = cdt_cr_ms[i]  # cr to ms
+        cdt_whole[indexof[["muscle"]]+1, indexof[["fat"]]+1]= cdt_ms_fat[i]  # ms to fat
+        cdt_whole[indexof[["fat"]]+1, indexof[["skin"]]+1] = cdt_fat_sk[i]  # fat to sk
       }
-    } 
+      else{
+        cdt_whole[indexof[["core"]]+1, indexof[["skin"]]+1] = cdt_cr_sk[i] } # cr to sk
+      }
     
     cdt_whole = cdt_whole + t(cdt_whole)
 
     return(cdt_whole)
   }
+
+#############################################################################################################################################
+
+calcTskMean <- function(bodytemp, BSAst){
+  bodyTempArray <- c()
+  indexSkin <- index[["skin"]]
+  for (i in 1:length(indexSkin)) {
+    tskIndex <- indexSkin[i] +1
+    bodyTempArray <- append(bodyTempArray, bodytemp[tskIndex])
+  }
+  sumTsk <- 0
+  for (i in 1:length(bodyTempArray)) {
+    sumTsk <- sumTsk + (BSAst[i]*bodyTempArray[i])
+  }
+  sumTsk/sum(BSAst)
+}
 
 #############################################################################################################################################
