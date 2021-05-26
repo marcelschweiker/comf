@@ -1,6 +1,6 @@
 jos3 <- function(height=1.72, weight=74.43, fat=15, age=20, sex="male", ci=2.59, 
                  bmrEquation="harris-benedict", bsaEquation="dubois", 
-                 exOutput=NULL){
+                 exOutput=NULL, modelName = "JOS"){
   
   # Body surface area [m2]
   bsaRate <- calcBSArate(height, weight, bsaEquation)
@@ -49,7 +49,7 @@ jos3 <- function(height=1.72, weight=74.43, fat=15, age=20, sex="male", ci=2.59,
   # Reset setpoint temperature
   dictout <- resetSetpt(height, weight, age, sex, bmrEquation, options, posture,
                         ta, bsa, va, tr, clo, iclo, bsaEquation, ci, par, fat, 
-                        rh, exOutput)
+                        rh, exOutput, modelName)
   history <- append(history, dictout)
-  
+  dictout
 }

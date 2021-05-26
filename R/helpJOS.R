@@ -6,13 +6,12 @@
 indexOrderRes <- calcIndexOrder()
 idict <- indexOrderRes[[1]]
 numNodes <- indexOrderRes[[2]]
-bodytemp <- rep(36, numNodes)
+bodyTemp <- rep(36, numNodes)
 
 layerNames <- c("artery", "vein", "sfvein", "core", "muscle", "fat", "skin")
 bodyNames <-c("Head", "Neck", "Chest", "Back", "Pelvis", "LShoulder", "LArm", 
               "LHand", "RShoulder", "RArm", "RHand","LThigh", "LLeg", "LFoot", 
               "RThigh", "RLeg", "RFoot")
-
 
 # Constant parameters of the matrix' indicies
 indexValuesRes <- calcIndexValues()
@@ -118,7 +117,7 @@ calcJosPMV <- function(ta, tr, va, rh, met, clo, wmet=0){
 
 run <- function(dtime=60, passive=FALSE, output=TRUE, posture = "standing", va, 
                 ta, options, tr, clo, iclo, height, bsaEquation, weight, age, ci,
-                sex, par, fat, rh, bmrEquation, bsa, to, exOutput){
+                sex, par, fat, rh, bmrEquation, bsa, to, exOutput, modelName){
   #  Run a model for a once and get model parameters.
   
   tcr <- Tcr()
@@ -253,7 +252,7 @@ run <- function(dtime=60, passive=FALSE, output=TRUE, posture = "standing", va,
   
   arrBF <- arrBF*dtime
   
-  cdt <- calcConductance(height, weight, bsaEquation, fat)
+  cdt <- calcConductance(height, weight, fat, bsaEquation)
   arrCdt <- cdt
   for (i in 1:length(cap)) {
     arrCdt[i,] <- arrCdt[i,] /cap[i]
@@ -272,7 +271,6 @@ run <- function(dtime=60, passive=FALSE, output=TRUE, posture = "standing", va,
   }
   
   arrATria <- -(arrCdt + arrBF)
-
   arrADia <- arrCdt + arrBF
   aDiagArray <- rep(0, numNodes)
   for (i in 1:length(aDiagArray)){
@@ -282,7 +280,7 @@ run <- function(dtime=60, passive=FALSE, output=TRUE, posture = "standing", va,
   arrADia <- arrADia + diag(1, numNodes, numNodes)
   
   arrA <- arrADia + arrATria
-  arraAInv <- arrA
+  arraAInv <- solve(arrA)
   
   # Matrix Q [W] / [J/K] * [sec] = [-]
   # Thermogensisxs
@@ -330,95 +328,68 @@ run <- function(dtime=60, passive=FALSE, output=TRUE, posture = "standing", va,
   arrTo <- rep(0, numNodes)
   for (i in 1:length(skinIndex)) {
     arrToIndex <- skinIndex[i] +1
-    arrTo[arrQIndex] <- arrTo[arrQIndex] - to[i]
+    arrTo[arrToIndex] <- arrTo[arrToIndex] + to[i]
   }
-
-  # all
-  bodyTemp <- calcBodyTemp()
   
-  arr <- bodytemp + arrB * arrTo + arrQ
+  arr <- bodyTemp + arrB * arrTo + arrQ
   
   #------------------------------------------------------------------
   # New body temp. [oC]
   #------------------------------------------------------------------
   bodyTemp <- (arraAInv %*% arr)
-
+  
   #------------------------------------------------------------------
   # Output paramters
   #------------------------------------------------------------------
   dictout <- list()
   if(output){
     cycle <- 0
-    dictout["CycleTime"] <- cycle
     t <- 0
-    dictout["ModTime"] <- t
-    dictout["dt"] <- dtime
-    dictout["TskMean"] <- calcTskMean(bodytemp, BSAst)
-    dictout["Tsk"] <- tsk
-    dictout["Tcr"] <- tcr
-    sumWet <- 0
-    for (i in 1:length(wet)) {
-      sumWet <- sumWet + (wet[i] * BSAst[i])
-    }
-    dictout["WetMean"] <- sumWet/length(wet)
-    dictout["Wet"] <- wet
-    dictout["Wle"] <- sum(wlesk) + wleres
-    dictout["CO"] <- co
-    dictout["Met"] <- qall
-    dictout["RES"] <- resSh + resLh
-    dictout["THLsk"] <- shlsk + eSk
+    TskMean <- calcTskMean(bodyTemp, skinIndex)
+    Tsk <- calcTsk(bodyTemp, skinIndex)
+    Tcr <- calcTsk(bodyTemp, coreIndex)
+    WetMean <- calcWetMean(wet)
+    Wle <- sum(wlesk) + wleres
+    RES <- resSh + resLh
+    THLsk <- shlsk + eSk
+    dictout <- list(CycleTime = cycle, ModTime = t, dt = dtime, 
+                    TskMean = TskMean, Tsk = Tsk, Tcr = Tcr, WetMean = WetMean,
+                    Wet = wet, Wle = Wle, Co = co, Met = qall, RES = RES, 
+                    THLsk = THLsk)
   }
-  
+
   detailout <- list()
   if(!is.null(exOutput)){
-    detailout["Name"] <- model_name
-    detailout["Height"] <- height
-    detailout["Weight"] <- weight
-    detailout["BSA"] <- bsa
-    detailout["Fat"] <- fat
-    detailout["Sex"] <- sex
-    detailout["Age"] <- age
-    detailout["Setptcr"] <- setptCr
-    detailout["Setptcr"] <- setptSk
-    detailout["Tcb"] <- Tcb()
-    detailout["Tar"] <- Tar()
-    detailout["Tve"] <- Tve()
-    detailout["Tsve"] <- Tsve()
-    detailout["Tms"] <- Tms()
-    detailout["Tfat"] <- Tfat()
-    detailout["To"] <- to
-    detailout["Rt"] <- rT
-    detailout["Ret"] <- rEt
-    detailout["Ta"] <- ta
-    detailout["Tr"] <- tr
-    detailout["RH"] <- rh
-    detailout["Va"] <- va
-    detailout["PAR"] <- par
-    detailout["Icl"] <- clo
-    detailout["Esk"] <- eSk
-    detailout["Emax"] <- eMax
-    detailout["Esweat"] <- eSweat
-    detailout["BFcr"] <- bfCr
-    detailout["BFms"] <- bfMs[vIndex["muscle"]]
-    detailout["BFfat"] <- bfFat[vIndex["fat"]]
-    detailout["BFsk"] <- bfSk
-    detailout["BFava_hand"] <- bfAvaHand
-    detailout["BFava_foot"] <- bfAvaFoot
-    detailout["Mbasecr"] <- mbase[1]
-    detailout["Mbasems"] <- mbase[2][vIndex["muscle"]]
-    detailout["Mbasefat"] <- mbase[3][vIndex["fat"]]
-    detailout["Mbasesk"] <- mbase[4]
-    detailout["Mwork"] <- mwork
-    detailout["Mshiv"] <- mshiv
-    detailout["Mnst"] <- mnst
-    detailout["Qcr"] <- qcr
-    detailout["Qms"] <- qms[vIndex["muscle"]]
-    detailout["Qfat"] <- qfat[vIndex["fat"]]
-    detailout["Qsk"] <- qsk
-    dictout["SHLsk"] <- shlsk
-    dictout["LHLsk"] <- eSk
-    dictout["RESsh"] <- resSh
-    dictout["RESlh"] <- resLh
+    muscleVIndex <- vIndex[["muscle"]]
+    fatVIndex <- vIndex[["fat"]]
+    Tar <- calcTsk(bodyTemp, index[["artery"]])
+    Tve <- calcTsk(bodyTemp, index[["vein"]])
+    Tsve <- calcTsk(bodyTemp, index[["sfvein"]])
+    Tms <- calcTsk(bodyTemp, muscleIndex)
+    Tfat<- calcTsk(bodyTemp, fatIndex)
+    BFms <- calcTsk(bfMs, muscleVIndex)
+    BFfat <- calcTsk(bfFat, fatVIndex)
+    Mbasecr <- mbase[1]
+    Mbasems <- calcTsk(mbase[[2]], muscleVIndex)
+    Mbasefat <- calcTsk(mbase[[3]], fatVIndex)
+    Mbasesk <- mbase[4]
+    Qms <- calcTsk(qms, muscleVIndex)
+    Qfat <- calcTsk(qfat, fatVIndex)
+    
+    detailout <- list(Name = modelName, Height = height, Weight = weight,
+                      BSA = bsa, Fat = fat, Sex = sex, Age = age, 
+                      Setptcr = setptSk, Tcb = bodyTemp[1], Tar = Tar, Tve = Tve, 
+                      Tsve = Tsve, Tms = Tms, Tfat = Tfat, To = to, Rt = rT, 
+                      Ret = rEt, Ta = ta, Tr = tr, RH = rh, Va = va, PAR = par, 
+                      Icl = clo, Esk = eSk, Emax = eMax, Esweat = eSweat, 
+                      BFcr = bfCr, BFms = BFms, BFfat = BFfat, BFsk = bfSk, 
+                      BFavaHand = bfAvaHand, BFavaFoot = bfAvaFoot, 
+                      Mbasecr = Mbasecr, Mbasems = Mbasems, Mbasefat = Mbasefat,
+                      Mbasesk = Mbasesk, Mwork = mwork, Mshiv = mshiv, 
+                      Mnst = mnst, Qcr = qcr, Qms = Qms, Qfat = Qfat, Qsk = qsk)
+    
+  dictout <- append(dictout, list(SHLsk = shlsk, LHLsk = eSk, RESsh = resSh,
+                                  RESlh = resLh))                    
   }
   
   if(!is.null(exOutput) && exOutput =="all" ){
@@ -471,13 +442,6 @@ calcIndexOrder <- function(){
 
 ##############################################
 
-calcBodyTemp <- function(){
-  bodyTemp <- rep.int(36, numNodes)
-  bodyTemp
-}
-
-##############################################
-
 calcIndexByLayer <- function(layer){
   outIndex <- c()
   for(bn in bodyNames){
@@ -519,13 +483,13 @@ calcIndexValues <- function(){
 ##############################################
 
 Tcr <- function(){
-  bodytemp[index[["core"]]]
+  bodyTemp[index[["core"]]]
 }
 
 ##############################################
 
 Tsk <- function(){
-  bodytemp[index[["skin"]]]
+  bodyTemp[index[["skin"]]]
 }
 
 ##############################################
@@ -804,13 +768,12 @@ calcWholebody <- function(bfArt, bfVein, bfAvaHand, bfAvaFoot){
   arr83 <- arr83 +flow(Pelvis, RThigh, bfArt[15]) #Pelvis to RThigh.art
   arr83 <- arr83 +flow(RThigh, RLeg, bfArt[16]) #RThigh.art to RLeg.art
   arr83 <- arr83 +flow(RLeg, RFoot, bfArt[17]) #RLeg.art to RFoot.art
-  arr83 <- arr83 +flow(RFoot+1, RLeg+1, bfVein[18]) #RFoot.vein to RLeg.vein
+  arr83 <- arr83 +flow(RFoot+1, RLeg+1, bfVein[17]) #RFoot.vein to RLeg.vein
   arr83 <- arr83 +flow(RLeg+1, RThigh+1, bfVein[16]) #RLeg.vein to RThigh.vein
   arr83 <- arr83 +flow(RThigh+1, Pelvis+1, bfVein[15]) #RThigh.vein to Pelvis
   arr83 <- arr83 +flow(RFoot+2, RLeg+2, bfAvaFoot) #RFoot.sfvein to RLeg.sfvein
   arr83 <- arr83 +flow(RLeg+2, RThigh+2, bfAvaFoot) #RLeg.sfvein to RThigh.sfvein
   arr83 <- arr83 +flow(RThigh+2, Pelvis+1, bfAvaFoot) #RThigh.vein to Pelvis
-  
   arr83
 }
 
@@ -1027,7 +990,6 @@ calcSUMm <- function(mbase, mwork, mshiv, mnst){
 ###############################################
 
 calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois"){
-
  if (fat < 12.5){
   cdt_cr_sk <- c(
       1.341, 0.930, 1.879, 1.729, 2.370,
@@ -1137,24 +1099,39 @@ calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois
         cdt_whole[indexof[["core"]]+1, indexof[["skin"]]+1] = cdt_cr_sk[i] } # cr to sk
       }
     cdt_whole = cdt_whole + t(cdt_whole)
-
     return(cdt_whole)
   }
 
-#############################################################################################################################################
+###############################################
 
-calcTskMean <- function(bodytemp, BSAst){
-  bodyTempArray <- c()
-  indexSkin <- index[["skin"]]
-  for (i in 1:length(indexSkin)) {
-    tskIndex <- indexSkin[i] +1
-    bodyTempArray <- append(bodyTempArray, bodytemp[tskIndex])
-  }
+calcTskMean <- function(bodyTemp, skinIndex){
+  bodyTempArray <- calcTsk(bodyTemp, skinIndex)
   sumTsk <- 0
   for (i in 1:length(bodyTempArray)) {
     sumTsk <- sumTsk + (BSAst[i]*bodyTempArray[i])
   }
   sumTsk/sum(BSAst)
+}
+
+###############################################
+
+calcTsk <- function(bodyTemp, skinIndex){
+  tskArray <- c()
+  for (i in 1:length(skinIndex)) {
+    tskIndex <- skinIndex[i] +1
+    tskArray <- append(tskArray, bodyTemp[tskIndex])
+  }
+  tskArray
+}
+
+###############################################
+
+calcWetMean <- function(wet){
+  sumWet <- 0
+  for (i in 1:length(wet)) {
+    sumWet <- sumWet + (wet[i] * BSAst[i])
+  }
+  sumWet/sum(BSAst)
 }
 
 #############################################################################################################################################

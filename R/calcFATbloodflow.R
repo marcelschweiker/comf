@@ -31,7 +31,7 @@ bfb_fat = c(
   0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
   0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
-bfbr = calcBFBrate(height, weight, age, ci, equation)
+bfbr = calcBFBrate(height, weight, equation, age, ci)
 bf_cr = bfb_cr * bfbr
 bf_ms = bfb_ms * bfbr
 bf_fat = bfb_fat * bfbr
