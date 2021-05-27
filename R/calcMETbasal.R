@@ -22,9 +22,15 @@ calcMETbasal <- function(height=1.72, weight=74.43, age=20,
     "harris-benedict_origin" = {
       if(sex=="male") 66.4730 + 13.7516*weight + 500.33*height - 6.7550*age 
       else 655.0955 + 9.5634*weight + 184.96*height - 4.6756*age},
+    "japanese" = {
+      if(sex=="male") (0.0481*weight + 2.34*height - 0.0138*age - 0.4235)*238.8915
+      else (0.0481*weight + 2.34*height - 0.0138*age - 0.9708)*238.8915}, 
+    "ganpule" = {
+      if(sex=="male") (0.0481*weight + 2.34*height - 0.0138*age - 0.4235)*238.8915
+      else (0.0481*weight + 2.34*height - 0.0138*age - 0.9708)*238.8915},
     {
-      if(sex=="male") (0.0481*weight + 2.34*height - 0.0138*age - 0.4235) * 238.8915
-      else (0.0481*weight + 2.34*height - 0.0138*age - 0.9708) * 238.8915}
+      if(sex=="male") (0.0481*weight + 2.34*height - 0.0138*age - 0.9708)
+      else (0.0481*weight + 2.34*height - 0.0138*age - 0.9708)}
   )
   BMR * 0.048
 }
