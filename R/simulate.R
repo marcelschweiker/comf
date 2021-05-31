@@ -1,7 +1,7 @@
 #' Execute JOS3 model.
 #' 
 #' @description Function to execute JOS3 model 
-#' @usage simulate(times, dtime, output)
+#' @usage simulate(times, dtime, output, object)
 #' @param times Number of loops of a simulation
 #' @param dtime Time delta [sec]. The default is 60
 #' @param output If you don't record paramters, set False. The default is True. It is optional.
@@ -13,13 +13,16 @@
 #' @seealso \code{\link{helpJOS}}
 #' @export
 #'
-simulate <- function(times, dtime = 60, output = TRUE){
+simulate <- function(times, dtime = 60, output = TRUE, object){
   for(t in seq(1, times)){
     t = t + dtime
-    cycle <- cycle + 1
-    dictdata <- run(dtime = dtime, output = output)
+    object$cycle <- object$cycle + 1
+    result <- run(dtime = dtime, output = output, object = object)
+    dictdata <- result$dictout
+    object <- result$updatedVariables
     if(output){
-      history <- history + dictdata
+      object$history <- append(object$history, dictdata)
     }
   }
+  object
 }

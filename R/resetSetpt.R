@@ -12,30 +12,24 @@
 #' @export
 #'
 
-resetSetpt <- function(height, weight, age, sex, bmrEquation, options, posture,
-                       ta, bsa, va, tr, clo, iclo, bsaEquation, ci, par, fat, rh,
-                       exOutput, modelName){
+resetSetpt <- function(object){
   # Set operative temperature under PMV=0 environment. 
   # Metabolic rate at PAR = 1.25
   # 1 met = 58.15 W/m2
-  met <- calcMETbasal(height, weight, age, sex, bmrEquation) *  1.25 / 58.15 / sum(bsa)
-  to <- rep(calcPreferredTemp(met=met), 17)
-  RH <- 50
-  icl <- 0
+  met <- calcMETbasal(object$height, object$weight, object$age, object$sex, 
+                      object$bmrEquation) *  1.25 / 58.15 / sum(object$bsa)
+  object$to <- rep(calcPreferredTemp(met=met), 17)
+  result <- NULL
+  object$options[["ava_zero"]] <- TRUE
   
-  options[["ava_zero"]] = TRUE
   for(i in seq(1,10)){
-    dictout <- run(dtime=60000, passive=TRUE, posture=posture, va=va, ta=ta, 
-                   options = options, tr = tr, clo = clo, iclo = iclo, 
-                   height = height, bsaEquation = bsaEquation, weight = weight, 
-                   age = age, ci = ci, sex = sex, par = par, fat = fat, rh=rh, 
-                   bmrEquation = bmrEquation, bsa = bsa, to = to, exOutput= exOutput, 
-                   modelName = modelName)
+    result <- run(dtime=60000, passive=TRUE, output = TRUE, object)
   }
-  
+  dictout <- result$dictout
+  object <- result$updatedVariables
   # Set new setpoint temperatures
-  setptCr <- Tcr()
-  setptSk <- Tsk()
-  options[["ava_zero"]] = FALSE
-  dictout
+  object$setptCr <- Tcr(object$bodyTemp)
+  object$setptSk <- Tsk(object$bodyTemp)
+  object$options[["ava_zero"]] <- FALSE
+  list(dictout = dictout, object = object)
 }
