@@ -20,7 +20,8 @@
 calcBFBrate <- function(height=1.72, weight=74.43, equation="dubois", age=20, 
                         ci=2.59){
 
-  ci <- ci * 60  # Change unit [L/min/㎡] to [L/h/㎡]
+  # Change unit [L/min/m2] to [L/h/m2]
+  ci <- ci * 60  
 
   # Decrease of BFB by aging
   if (age < 50){

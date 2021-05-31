@@ -1,3 +1,25 @@
+#' Create JOS3 model.
+#' @aliases simulate Simulate jos3 Jos3 JOS3 resetSetpt resetsetpt
+#' @usage jos3(height, weight, fat, age, sex, ci, bmrEquation, bsaEquation, exOutput, modelName)
+#' @description Function to create JOS3 model. The returned object can be saved and used for another simulation. 
+#' @param height Body height. The default is 1.72[m]
+#' @param weight Body weight [kg]
+#' @param fat Fat rate [%]
+#' @param age Age [years]
+#' @param sex Sex ("male" or "female")
+#' @param ci Cardiac index [L/min/m2]
+#' @param bmrEquation Choose a BMR equation.
+#' @param bsaEquation Choose a BSA equation.
+#' @param exOutput Extra output parameters. If "all", all parameters are output.
+#' @details Creates the model on which all the other functions of JOS model will be executed. Returns the result and updated variables of the model. 
+#' @return the object with all the updated variables after the simulation. [list]
+#' @examples model1 <- jos3()
+#' @examples model2 <- jos3(bmrEquation <- "harris-benedict_origin")
+#' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
+#' @seealso \code{\link{resetSetpt}}
+#' @seealso \code{\link{simulate}}
+#' @export
+#'
 jos3 <- function(height=1.72, weight=74.43, fat=15, age=20, sex="male", ci=2.59, 
                  bmrEquation="harris-benedict", bsaEquation="dubois", 
                  exOutput=NULL, modelName = "JOS"){

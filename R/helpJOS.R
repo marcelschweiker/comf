@@ -79,8 +79,7 @@ index <- indexValuesRes[[1]]
 vIndex <- indexValuesRes[[2]]
 
 calcLocalArr <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
-  # Create matrix to calculate heat exchage by blood flow in each segment [W/K]
-  # 1.067 [Wh/(L･K)] * Bloodflow [L/h] = [W/K]
+  # Create matrix to calculate heat exchage by blood flow in each segment [W\K]
   bfLocal <- matrix(0, nrow <- numNodes, ncol <- numNodes)
   for (i in 1:length(bodyNames)) {
     bn <- bodyNames[i]
@@ -143,7 +142,7 @@ calcVesselBloodflow <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
   bfArt[5] <- value
   bfVein[5] <- value
   
-  #L.Shoulder (+Arm, Hand, (arteryのみAVA_Hand))
+  # L.Shoulder (+Arm, Hand, (artery AVA_Hand))
   value <- sum(xbf[6:8])
   bfArt[6] <- value + + bfAvaHand
   bfVein[6] <- value
@@ -157,7 +156,7 @@ calcVesselBloodflow <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
   bfArt[8] <- xbf[8] + bfAvaHand
   bfVein[8] <- xbf[8]
   
-  #R.Shoulder (+Arm, Hand, (arteryのみAVA_Hand))
+  #R.Shoulder (+Arm, Hand, (artery AVA_Hand))
   value <- sum(xbf[9:11])
   bfArt[9] <- value + bfAvaHand
   bfVein[9] <- value
@@ -171,7 +170,7 @@ calcVesselBloodflow <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
   bfArt[11] <- xbf[11] + bfAvaHand
   bfVein[11] <- xbf[11]
   
-  #L.Thigh (+Leg, Foot, (arteryのみAVA_Foot))
+  #L.Thigh (+Leg, Foot, (artery AVA_Foot))
   value <- sum(xbf[12:14])
   bfArt[12] <- value + bfAvaFoot
   bfVein[12] <- value
@@ -185,7 +184,7 @@ calcVesselBloodflow <- function(bfCr, bfMs, bfFat, bfSk, bfAvaHand, bfAvaFoot){
   bfArt[14] <- xbf[14] + bfAvaFoot
   bfVein[14] <- xbf[14]
   
-  #R.Thigh (+Leg, Foot, (arteryのみAVA_Foot))
+  #R.Thigh (+Leg, Foot, (arter AVA_Foot))
   value <- sum(xbf[15:17])
   bfArt[15] <- value + bfAvaFoot
   bfVein[15] <- value
@@ -339,7 +338,7 @@ calcWeightrate <- function(weight=74.43){
 calcBFBrate <- function(height=1.72, weight=74.43, equation="dubois", age=20, 
                         ci=2.59){
   
-  ci <- ci * 60  # Change unit [L/min/㎡] to [L/h/㎡]
+  ci <- ci * 60  # Change unit [L/min/m2] to [L/h/m2]
   
   # Decrease of BFB by aging
   if (age < 50){
@@ -405,8 +404,8 @@ calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois
   # The shape is a cylinder.
   # It is assumed that the inner is vascular radius, 2.5mm and the outer is
   # stolwijk's core radius.
-  # The heat transer coefficient of the core is assumed as the Michel's
-  # counter-flow model 0.66816 [W/(m･K)].
+  # The heat transer coefficient of the core is assumed as the Michels
+  # counter flow model 0.66816 [W/(mK)]
   cdt_ves_cr = c(
     0, 0, 0, 0, 0,
     0.586, 0.383, 1.534, 0.586, 0.383, 1.534,
@@ -419,7 +418,7 @@ calcConductance <- function(height=1.72, weight=74.43, fat =15, equation="dubois
   
   # art to vein (counter-flow) [W/K]
   # The data has been derived Mitchell's model.
-  # THe values = 15.869 [W/(m･K)] * the segment lenght [m]
+  # THe values = 15.869 [W/(mK)] * the segment lenght [m]
   cdt_art_vein = c(
     0, 0, 0, 0, 0,
     0.537, 0.351, 0.762, 0.537, 0.351, 0.762,
@@ -551,7 +550,7 @@ calcCapacity <- function(height = 1.72, weight = 74.43, equation = "dubois",
   capWhole
 }
 calcJosPMV <- function(ta, tr, va, rh, met, clo, wmet=0){
-  #Get PMV value based on the 2017 ASHRAE Handbook—Fundamentals, Chapter 9:
+  #Get PMV value based on the 2017 ASHRAE Handbook Fundamentals, Chapter 9
   #Thermal Comfort, Equations 63 - 68.
   met <- met * 58.15 # change unit [met] to [W/m2]
   wmet <- wmet * 58.15 # change unit [met] to [W/m2]
@@ -1378,7 +1377,7 @@ run <- function(dtime=60, passive=FALSE, output=TRUE, object){
   arrQ <- arrQ/cap # Change unit [W]/[J/K] to [K/sec]
   arrQ <- arrQ * dtime # Change unit [K/sec] to [K]
   
-  # Boundary batrix [℃]
+  # Boundary batrix [degree C]
   arrTo <- rep(0, numNodes)
   for (i in 1:length(skinIndex)) {
     arrToIndex <- skinIndex[i] +1
