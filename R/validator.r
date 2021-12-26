@@ -1,5 +1,7 @@
 #' @keywords internal
 #' @noRd
+
+library("jsonlite")
 validateUTCI <- function(ta, tr, vel, rh) {
   parameters <- c(ta, tr, vel, rh)
   
@@ -62,3 +64,25 @@ checkRange <- function(parameter, lower_bound, upper_bound) {
   if( parameter < lower_bound || parameter > upper_bound)
     stop(paste(parameter, " is out of range. Has to be between ",lower_bound, " and ",upper_bound))
 }
+
+# validate calcPMV and calcPPD
+validate_pmv_ppd <- function(){
+  validate_pmv_ppd_data <- as.data.frame(jsonlite::fromJSON("https://raw.githubusercontent.com/FedericoTartarini/validation-data-comfort-models/main/validation_data.json"))$pmv_ppd[[1]]$data[-(1:2),]
+  
+  inputs <- validate_pmv_ppd_data$inputs
+  outputs <- validate_pmv_ppd_data$outputs
+  
+  pmv_result <- round(calcPMV(inputs$ta, inputs$tr, inputs$v, inputs$rh, inputs$clo, inputs$met),1)
+  ppd_result <- round(calcPPD(inputs$ta, inputs$tr, inputs$v, inputs$rh, inputs$clo, inputs$met),1)
+  
+  return (pmv_result == outputs$pmv) && (ppd_result == outputs$ppd)
+}
+
+# validate all methods
+validate_all_functions <- function(){
+  pmv_ppd_validation_result <- validate_pmv_ppd()
+  
+  return(pmv_ppd_validation_result)
+}
+
+validate_all_functions()
