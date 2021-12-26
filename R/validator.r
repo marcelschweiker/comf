@@ -1,7 +1,5 @@
 #' @keywords internal
 #' @noRd
-
-library("jsonlite")
 validateUTCI <- function(ta, tr, vel, rh) {
   parameters <- c(ta, tr, vel, rh)
   
@@ -63,17 +61,4 @@ validateSolarGain <- function(solAlt, solAzi, solRadDir, solTrans, fSvv,
 checkRange <- function(parameter, lower_bound, upper_bound) {
   if( parameter < lower_bound || parameter > upper_bound)
     stop(paste(parameter, " is out of range. Has to be between ",lower_bound, " and ",upper_bound))
-}
-
-# validate calcPMV and calcPPD
-validate_pmv_ppd <- function(){
-  validate_pmv_ppd_data <- jsonlite::fromJSON("https://raw.githubusercontent.com/FedericoTartarini/validation-data-comfort-models/main/validation_data.json")$reference_data$pmv_ppd[[1]]$data
-  
-  inputs <- validate_pmv_ppd_data$inputs[-(1:2),]
-  outputs <- validate_pmv_ppd_data$outputs[-(1:2),]
-  
-  pmv_result <- calcPMV(inputs$ta, inputs$tr, inputs$v, inputs$rh, inputs$clo, inputs$met)
-  ppd_result <- calcPPD(inputs$ta, inputs$tr, inputs$v, inputs$rh, inputs$clo, inputs$met)
-  
-  return (pmv_result == outputs$pmv) && (ppd_result == outputs$ppd)
 }
