@@ -28,12 +28,11 @@
 #' @author Code implemented in to R by Shaomi Rahman. Further contribution by Marcel Schweiker.
 #' @seealso see also \code{\link{calcComfInd}}
 #' @export
-calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans, 
-                          fSvv, fBes, asw=0.7, 
-                          posture="seated", floorRef=0.6){
+calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
+                          posture, floorRef=0.6){
   
   posture = tolower(posture)
-  validateSolarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
+  validateSolarGainRange(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
                     posture)
   solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
                            posture, floorRef=0.6)

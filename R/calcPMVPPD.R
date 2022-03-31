@@ -24,7 +24,7 @@
 
 
 
-calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
+calcPMVPPD <- function(ta, tr, vel, rh, clo, met, wme=0, basMet=58.15){
 
   m   <- met * basMet
   w   <- wme * basMet

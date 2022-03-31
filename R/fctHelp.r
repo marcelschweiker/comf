@@ -312,9 +312,8 @@ pckgCheck <- function(){
 ########### help functions for solarGain
 
 #' @keywords internal
-solarGain <- function(solAlt, solAzi, solRadDir, solTrans, 
-                      fSvv, fBes, asw=0.7, 
-                      posture="seated", floorRef=0.6){
+solarGain <- function(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
+                      posture, floorRef=0.6){
   
   deg_to_rad = 0.0174532925
   hr = 6

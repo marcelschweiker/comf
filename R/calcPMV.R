@@ -19,6 +19,6 @@
 #' @references ISO 7730 (2005) Ergonomics of the thermal environment analytical determination and interpretation of thermal comfort using calculation of the pmv and ppd indices and local thermal comfort criteria.
 #' @export
 
-calcPMV <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
+calcPMV <- function(ta, tr, rh, vel, met, clo, wme=0, basMet=58.15){
   calcPMVPPD(ta, tr, vel, rh, clo, met, wme, basMet)$pmv
 }

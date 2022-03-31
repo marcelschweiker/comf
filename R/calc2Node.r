@@ -80,7 +80,7 @@
 #' ## Calculation of a single set of values.
 #' calc2Node(22, 25, .50, 50)
 
-calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
+calc2Node <- function(ta, tr, vel, rh, clo, met, wme = 0, pb = 760, 
                       ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
                       csw = 170, cdil = 120, cstr = .5, varOut="else"){
   

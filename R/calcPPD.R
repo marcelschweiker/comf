@@ -20,6 +20,6 @@
 #' @export
 
 
-calcPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
+calcPPD <- function(ta, tr, vel, rh, clo, met, wme=0, basMet=58.15){
   calcPMVPPD(ta, tr, vel, rh, clo, met, wme, basMet)$ppd
 }
