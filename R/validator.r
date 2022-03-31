@@ -1,7 +1,5 @@
 #' @keywords internal
 #' @noRd
-
-library("jsonlite")
 validateUTCI <- function(ta, tr, vel, rh) {
   parameters <- c(ta, tr, vel, rh)
   
