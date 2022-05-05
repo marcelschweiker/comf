@@ -51,4 +51,3 @@ TAir <- 24
 vAir <- 0.0
 
 calcMRT(TGlobe, TAir, vAir)
-

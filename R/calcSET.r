@@ -72,7 +72,9 @@
 #' SET <- sapply(seq(maxLength), function(x) { calcSET(ta[x], tr[x], vel[x], rh[x]) } ) 
 
 calcSET <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
-                    ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
+                    ltime = 60, ht = 171, wt = 69.9, tu = 40, obj = "set", 
                     csw = 170, cdil = 120, cstr = .5){
   calc2Node(ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr)$set
 }
+
+calcSET(25, 25, 0.15, 10)

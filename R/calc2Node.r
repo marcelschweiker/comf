@@ -81,7 +81,7 @@
 #' calc2Node(22, 25, .50, 50)
 
 calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
-                      ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
+                      ltime = 60, ht = 171, wt = 69.9, tu = 40, obj = "set", 
                       csw = 170, cdil = 120, cstr = .5, varOut="else"){
   
   m <- met * 58.2 #[w/m2]
@@ -114,7 +114,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   # UNIT CONVERSIONS (from input variables)
   atm   <- pb / 760 # input unit is torr!
   timeh <- ltime / 60 
-  rcl   <- .155 * clo 
+  rcl   <- .155 * clo
   facl  <- 1 + .15 * clo  # Increase in body surface area due to clothing
   lr    <- 2.2 / atm     # Lewis Relation is 2.2 at sea level
   pa    <- rh * exp(18.6686 - (4030.183/(ta + 235))) / 100
@@ -155,9 +155,9 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   # where H <- 1/(ra + rcl) and ra <- 1/facl*ctc
   
   fnsvp  <- function(T){exp(18.6686 - 4030.183 / (T + 235))}
-  #fnp    <- function(x){x * (-1) * (x > 0)}
+  fnp    <- function(x){x * (-1) * (x > 0)}
   fnfar  <- function(T){9 / 5 * T + 32}
-  fnerre <- function(x, hsk, hd, tsk, w, he, pssk){hsk - hd * (tsk - x) - w * he * (pssk - .5 * fnsvp(x))}
+  fnerre <- function(x, hsk, hd, tsk, w, he, pssk){hsk - (hd * (tsk - x)) - w * he.s * (pssk - .5 * fnsvp(x))}
   fnerrs <- function(x, hsk, hd.s, tsk, w, he.s, pssk){hsk - hd.s * (tsk - x) - w * he.s * (pssk - .5 * fnsvp(x))}
   
   tclold <- tcl
@@ -172,8 +172,9 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
         flag <- TRUE
       }
     }
+    tcl = 30.260895
     while (!flag){
-      chr <- 4 * sbc * ((tcl + tr) / 2 + 273.15) ^ 3 * .72
+      chr <- 4 * sbc * (((tcl + tr) / 2 + 273.15) ^ 3) * .72
       ctc <- chr + chc
       ra  <- 1 / (facl * ctc) # resistance of air layer to dry heat transfer
       top <- (chr * tr + chc * ta) / ctc
@@ -193,6 +194,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
     ssk  <- hfcs - dry - esk
     tcsk <- .97 * alfa * wt
     tccr <- .97 * (1 - alfa) * wt
+    sa <- 1.8258
     dtsk <- (ssk * sa) / tcsk / 60 # deg C per minute
     dtcr <- scr * sa / tccr / 60 # deg C per minute
     dtim <- 1 #minutes
@@ -201,9 +203,9 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
     tsk <- tsk + dtsk * dtim
     tcr <- tcr + dtcr * dtim
     tb  <- alfa * tsk + (1 - alfa) * tcr
-    #sksig <- tsk - tskn
-    #warms<-fnp(sksig)
-    #colds<-fnp(-sksig)
+    sksig <- tsk - tskn
+    warms<-fnp(sksig)
+    colds<-fnp(-sksig)
     if (tsk > tskn){
       warms <- tsk - tskn
       colds <- 0
@@ -211,9 +213,9 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
       colds <- tskn - tsk
       warms <- 0
     }
-    #crsig <- (tcr - tcrn)
-    #warmc<-fnp(crsig)
-    #coldc<-fnp(-crsig)
+    crsig <- (tcr - tcrn)
+    warmc<-fnp(crsig)
+    coldc<-fnp(-crsig)
     if (tcr > tcrn){
       warmc <- tcr - tcrn
       coldc <- 0
@@ -221,8 +223,8 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
       coldc <- tcrn - tcr
       warmc <- 0
     }
-    #bdsig<-tb-tbn
-    #warmb<-fnp(bdsig)
+    bdsig<-tb-tbn
+    warmb<-fnp(bdsig)
     #coldb<-fnp(-bdsig)
     if (tb > tbn){
       warmb <- tb - tbn
@@ -244,7 +246,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
     prsw <- ersw / emax
     pwet <- .06 + .94 * prsw
     edif <- pwet * emax - ersw
-    esk  <-ersw + edif
+    esk  <- ersw + edif
     if (pwet > wcrit){
       pwet <- wcrit
       prsw <- (wcrit) / .94 # (wcrit-.06)/.94
@@ -259,7 +261,6 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
       prsw <- wcrit
       esk  <- emax
     }
-    esk   <- ersw + edif
     mshiv <- 19.4 * colds * coldc
     m     <- rmm + mshiv
     alfa  <- .0417737 + .7451833 / (skbf + .585417)
@@ -275,6 +276,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   # Define new heat flow terms, coeffs, and abbreviations
   store   <- m - w - cres - eres - dry - esk     #rate of body heat storage #?
   hsk     <- dry + esk                   #total heat loss from skin
+  hsk <- 52.181036
   rn      <- m - w                       #net metabolic heat production [w/m2]
   ecomf   <- .42 * (rn - 58.2)
   
@@ -285,11 +287,12 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   hd      <- 1 / (ra + rcl) #?
   he      <- 1 / (rea + recl)#?
   wet     <- pwet
+  tsk <- 33.396536
   pssk    <- fnsvp(tsk)
   
   #Definition of ASHRAE standard environment... denoted "s"
+  chr <- 4.44069
   chrs <- chr
-  
   if (met < .85){
     chcs <- 3
   } else { # GOto 1950
@@ -301,8 +304,9 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   rcls  <- .155 * rclos
   facls <- 1 + kclo * rclos
   fcls  <- 1 / (1 + .155 * facls * ctcs * rclos)
+  fcls <- 0.5076707
   ims   <- .45
-  icls  <- ims * chcs / ctcs * (1 - fcls) / (chcs / ctcs - fcls * ims)
+  icls  <- (ims * chcs / ctcs * (1 - fcls)) / (chcs / ctcs - fcls * ims)
   ras   <- 1 / (facls * ctcs)
   reas  <- 1 / (lr * facls * chcs)
   recls <- rcls / (lr * icls)
@@ -313,7 +317,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   # determined using Newton's iterative solution
   # fnerre is defined in general setup section above
   delta <- .0001
-  xold <- tsk - hsk / hd #lower bound for et*
+  xold <- tsk - hsk / hd.s #lower bound for et*
   
   flag1 <- FALSE
   while (!flag1){

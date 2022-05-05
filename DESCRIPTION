@@ -13,3 +13,4 @@ LazyData: true
 Suggests: R.rsp
 VignetteBuilder: R.rsp
 RoxygenNote: 7.1.1
+Encoding: UTF-8
