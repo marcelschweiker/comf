@@ -7,6 +7,7 @@
 #' @param equation str, optional. The equation name (str) of bsa calculation. Choose a name from "dubois","takahira", "fujimoto", or "kurazumi". The default is "dubois".
 #' @param age The default is 20 in [years].
 #' @param ci  float, optional Cardiac index [L/min/㎡]. The default is 2.59.
+#' @param idict nested dictionary, keys are body_name and layer_names
 #' @returns  BFcr, BFms, BFfat : array Core, muslce and fat blood flow rate [L/h].
 #' @example
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.

@@ -3,8 +3,6 @@
 #' @aliases calcbsarate
 #' @aliases bsarate
 #' @usage calcBSArate(height=1.72, weight=74.43, equation="dubois")
-#' @usage calcbsarate(height=1.72, weight=74.43, equation="dubois")
-#' @usage bsarate(height=1.72, weight=74.43, equation="dubois")
 #' @param height Body height. The default is 1.72 in [m]
 #' @param weight Body height. The default is 74.43 [kg]
 #' @param equation The equation name of bsa calculation. The default is "dubois" in [str]

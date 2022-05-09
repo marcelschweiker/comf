@@ -1,20 +1,16 @@
 #' @title Calculate areteriovenous anastmoses (AVA) blood flow rate [L/h]
 #' @description Function to Calculate areteriovenous anastmoses (AVA) blood flow rate [L/h] based on Takemori's model, 1995.
-#' @aliases calcEvap
-#' @usage calcEvaporation(err_cr, err_sk, tsk, ta, rh, ret, height=1.72, weight=74.43, equation="dubois", age=20)
-#' @usage calcEvap(err_cr, err_sk, tsk, ta, rh, ret, height=1.72, weight=74.43, equation="dubois", age=20)
+#' @aliases calcAVAbloodflow 
+#' @usage calcAVAbloodflow(err_cr, err_sk, height=1.72, weight=74.43, equation="dubois", age=20, ci=2.59)
 #' @param err_cr Float or array, optional. Difference between setpoint and body temperatures.The default is 0.
 #' @param err_sk Float or array, optional. Difference between setpoint and body temperatures.The default is 0.
-#' @param tsk Skin temperatures in [Degree Celcius]
-#' @param ta Air temperatures at local body segments in [Degree Celcius]
-#' @param rh  Relative humidity at local body segments [%]
-#' @param ret Total evaporative thermal resistances [m2.K/W]
 #' @param height Body height [m]. The default is 1.72.
 #' @param weight Body weight [kg]. The default is 74.43.
-#' @param equation
+#' @param equation equation to calculate AVAbloodflow
 #' @param age Age [years]. The default is 20.
-#' @returns  BFava_hand: AVA blood flow rate at hand [L/h].
-#' @returns BFava_foot : AVA blood flow rate at foot [L/h].
+#' @param ci Cardiac index [L/min/m2]
+#' @return BFava_hand: AVA blood flow rate at hand [L/h].
+#' @return BFava_foot : AVA blood flow rate at foot [L/h].
 #' @example
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 #' @seealso \code{\link{helpJOS}}

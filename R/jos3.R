@@ -4,13 +4,14 @@
 #' @description Function to create JOS3 model. The returned object can be saved and used for another simulation. 
 #' @param height Body height. The default is 1.72[m]
 #' @param weight Body weight [kg]
-#' @param fat Fat rate [%]
+#' @param fat Fat rate [percentage]
 #' @param age Age [years]
 #' @param sex Sex ("male" or "female")
 #' @param ci Cardiac index [L/min/m2]
 #' @param bmrEquation Choose a BMR equation.
 #' @param bsaEquation Choose a BSA equation.
 #' @param exOutput Extra output parameters. If "all", all parameters are output.
+#' @param modelName Name of the model that is being implemented. JOS by default.
 #' @details Creates the model on which all the other functions of JOS model will be executed. Returns the result and updated variables of the model. 
 #' @return the object with all the updated variables after the simulation. [list]
 #' @examples model1 <- jos3()

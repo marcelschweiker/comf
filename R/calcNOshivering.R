@@ -1,18 +1,15 @@
 #' @title Calculate Calculate local metabolic rate by non-shivering [W]
 #' @description Function to Calculate local metabolic rate by non-shivering [W]
 #' @aliases calcnoshiver
-#' @usage calcNOshivering(err_cr, err_sk, tcr, tsk,height=1.72, weight=74.43, equation="dubois", age=20, sex="male", dtime=60,options)
+#' @usage calcNOshivering(err_cr, err_sk, height=1.72, weight=74.43, equation="dubois", age=20, coldacclimation= FALSE, batpositive= TRUE)
 #' @param err_cr Float or array, optional. Difference between setpoint and body temperatures.The default is 0.
 #' @param err_sk Float or array, optional. Difference between setpoint and body temperatures.The default is 0.
-#' @param tsk Skin temperatures in [Degree Celcius]
-#' @param tcr core temperatures at local body segments in [Degree Celcius]
 #' @param height Body height [m]. The default is 1.72.
 #' @param weight Body weight [kg]. The default is 74.43.
 #' @param equation helpjos
 #' @param age Age [years]. The default is 20.
-#' @param sex [str] optional.Choose male or female. The default is "male".
-#' @param dtime float, optional Interval of analysis time. The default is 60.
-#' @param options see helpjos
+#' @param coldacclimation Whether the subject acclimates cold enviroment or not.
+#' @param batpositive Whether BAT ativity is positive or not.
 #' @returns  Mshiv : array Local metabolic rate by non-shivering [W].
 #' @example
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
