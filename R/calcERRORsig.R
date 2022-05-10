@@ -2,7 +2,6 @@
 #' @description Function to Calculate WRMS and CLDS signals of thermo-regulation
 #' @aliases calcerrorsig
 #' @usage calcERRORsig(err_cr=0, err_sk=0)
-#' @usage calcerrorsig(err_cr=0, err_sk=0)
 #' @param err_cr Float or array, optional. Difference between setpoint and body temperatures.The default is 0.
 #' @param err_sk Float or array, optional. Difference between setpoint and body temperatures.The default is 0.
 #' @returns  dataframe of WRMS and CLDS signals.

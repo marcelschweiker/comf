@@ -1,10 +1,7 @@
 #' @title Calculate the ratio of basal blood flow
 #' @description Function to Calculate the ratio of basal blood flow (BFB) of the standard body (290 L/h).
-#' @aliases calcbfbrate
-#' @aliases bfbrate
-#' @usage calcBFBrate(height=1.72, weight=74.43, age=20, ci=2.59, equation="dubois")
-#' @usage calcbfbrate(height=1.72, weight=74.43, age=20, ci=2.59, equation="dubois")
-#' @usage bfbrate(height=1.72, weight=74.43, age=20, ci=2.59, equation="dubois")
+#' @aliases calcbfbrate,bfbrate
+#' @usage calcBFBrate(height=1.72, weight=74.43, equation="dubois", age=20, ci=2.59)
 #' @param height Body height. The default is 1.72 in [m]
 #' @param weight Body height. The default is 74.43 in [kg]
 #' @param age Age. The default is 20 in [years]

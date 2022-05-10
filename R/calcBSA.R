@@ -1,10 +1,7 @@
 #' @title Calculate Body Surface Area
 #' @description Function to calculate body surface area (BSA) in [m2]
-#' @aliases calcbsa
-#' @aliases bsa
+#' @aliases calcbsa,bsa
 #' @usage calcBSA(height=1.72, weight=74.43, equation="dubois")
-#' @usage calcbsa(height=1.72, weight=74.43, equation="dubois")
-#' @usage bsa(height=1.72, weight=74.43, equation="dubois")
 #' @param height Body height. The default is 1.72 in [m]
 #' @param weight Body height. The default is 74.43 [kg]
 #' @param equation The equation name of bsa calculation. The default is "dubois" in [str]
