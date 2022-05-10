@@ -12,8 +12,8 @@ This package contains several functions to calculate and evaluate a series of co
 \tabular{ll}{
 Package: \tab comf\cr
 Type: \tab Package\cr
-Version: \tab 0.1.10\cr
-Date: \tab 2021-02-10\cr
+Version: \tab 0.1.11\cr
+Date: \tab 2021-05-12\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }

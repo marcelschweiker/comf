@@ -1,18 +1,17 @@
 #' PMV based on Adaptive Thermal Heat Balance Framework
 #' 
 #' aliases athb ATHB
-#' @description \code{calcATHBpmv} calculates the PMV based on adaptive thermal heat balance framework
+#' @description \code{calcATHBpmv} calculates the PMV based on adaptive thermal heat balance framework 
+#' @description based on the newest version (2022)
 #' 
-#' @usage calcATHBpmv(trm, psych, ta, tr, vel, rh, met, wme)
+#' @usage calcATHBpmv(trm, ta, tr, vel, rh, met)
 #'
 #' @param trm - Running mean outdoor temperature in [degree C]
-#' @param psych - factor related to fixed effect on perceived control
 #' @param ta - a numeric value presenting air temperature in [degree C]
 #' @param tr - a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel - a numeric value presenting air velocity in [m/s]
 #' @param rh - a numeric value presenting relative humidity [\%]
 #' @param met - a numeric value presenting metabolic rate in [met]
-#' @param wme - a numeric value presenting external work in [met]
 #'
 #' @return \code{calcATHBpmv} PMV value adapted through the ATHB appoach
 #' 
@@ -20,15 +19,16 @@
 #' 
 #' @references 
 #' Schweiker & Wagner (2015) <doi:10.1016/j.buildenv.2015.08.018>
-#' Schweiker & Wagner (2016) Exploring potentials and limitations of the adaptive thermal heat balance framework Proceedings of 9th Windsor Conference: making comfort relevant Cumberland Lodge, Windsor, UK, 2016
+#' Schweiker (2022) <doi:10.1111/ina.13018>
 #' 
 #' @author Marcel Schweiker
-#' @seealso see also \code{\link{calcComfInd}}, \code{link{calcATHBpts}}, \code{link{calcATHBset}}
+#' @seealso see also \code{\link{calcComfInd}}, \code{link{calcATHBpts}}, \code{link{calcATHBset},
+#' \code{link{calcATHBpmv2015}}
 #' @export
 #'
-#' @examples calcATHBpmv(20, 0, 25, 25, .1, 50, 1.1, 0)
+#' @examples calcATHBpmv(20, 25, 25, .1, 50, 1.1)
 
-calcATHBpmvNew <- function(trm, ta, tr, vel, rh, met){
+calcATHBpmv <- function(trm, ta, tr, vel, rh, met){
   # metabolic rate through physiological adaptation
   metAdpt <- met - (0.234 * trm) / 58.2
   
