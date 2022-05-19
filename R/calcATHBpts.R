@@ -3,7 +3,8 @@
 #' @description \code{calcATHB} calculates predicted thermal sensation based on the adaptive thermal heat balance approach 
 #' using Gagge's 2 Node Model
 #' 
-#' @usage calcATHBpts(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
+#' @usage calcATHBpts(trm, psych, ta, tr, vel, rh, met, wme = 0, pb = 760, 
+#'                       ltime = 60, ht = 171, wt = 69.9)
 #'
 #' @param trm - Running mean outdoor temperature in [degree C]
 #' @param psych - factor related to fixed effect on perceived control
@@ -31,7 +32,8 @@
 #' @export
 #'
 #' @examples calcATHBpts(20, 0, 25, 25, .1, 50, 1.1, 0, 760, 60, 171, 70)
-calcATHBpts <- function(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt){
+calcATHBpts <- function(trm, psych, ta, tr, vel, rh, met, wme = 0, pb = 760, 
+                      ltime = 60, ht = 171, wt = 69.9){
   
   set <- calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
   ATHBpts <- .25 * set - 6.03

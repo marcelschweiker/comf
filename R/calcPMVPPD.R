@@ -1,7 +1,7 @@
 #' @title PMV and PPD
 #' @description Function to calculate Predicted Mean Vote (PMV) and Predicted Percentage of Dissatisfied (PPD).
 #' @aliases pmvppd
-#' @usage calcPMVPPD(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
+#' @usage calcPMVPPD(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15, getLoad = FALSE)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
@@ -10,10 +10,13 @@
 #' @param met a numeric value presenting metabolic rate in [met]
 #' @param wme a numeric value presenting external work in [met]
 #' @param basMet a numeric value presenting basal metabolic rate [w/m2]
+#' @param getLoad a boolean value. Set to true to get thermal load as output instead of PMV/PPD
+
 #' @details The PMV is an index that predicts the mean value of the thermal sensation of a large group of people on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, neutral, slightly warm, warm and hot. The PPD is an index that establishes a quantitative prediction of the percentage of thermally dissatisfied people determined from PMV. 
 #' @details Note that the adjustments in the value for basMet need to be made with great cautiousness as the PMV calculation is an empirical model and might not be valid for other values of basMet than the one commonly used.
 #' @returns PMV - Predicted Mean Vote
 #' @returns PPD - Predicted Percentage of Dissatisfied occupants in [\%]
+#' @returns Lraw - thermal load (only when getLoad was set to TRUE)
 #' @examples calcPMVPPD(25,25,0.3,50,0.5,1)
 #' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
 #' @seealso see also \code{\link{calcComfInd}}
@@ -22,9 +25,7 @@
 #' @export
 
 
-
-
-calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
+calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15, getLoad = FALSE){
 
   m   <- met * basMet
   w   <- wme * basMet
@@ -83,8 +84,13 @@ calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15){
   }
   pm5 <- 3.05 * .001 * (5733 - 6.99 * mw - pa)
   pm6 <- 1.7 * .00001 * m * (5867 - pa) + .0014 * m * (34 - ta)
-  pmv <- pm3 * (mw - pm5 - pm4 - pm6 - pm1 - pm2)
+  Lraw <- (mw - pm5 - pm4 - pm6 - pm1 - pm2)
+  pmv <- pm3 * Lraw
 
   ppd <- 100 - 95 * exp(-.03353 * pmv ^ 4 - .2179 * pmv ^ 2)
-  data.frame(pmv, ppd)
+  if(getLoad == FALSE){
+	data.frame(pmv, ppd)
+	} else {
+	data.frame(pmv, ppd, Lraw)
+	}
 }

@@ -1,9 +1,10 @@
 #' PMV based on Adaptive Thermal Heat Balance Framework
 #' 
-#' aliases athb ATHB
-#' @description \code{calcATHBpmv} calculates the PMV based on adaptive thermal heat balance framework
+#' aliases athb2015 ATHB2015 athbOld ATHBOLD
+#' @description \code{calcATHBpmv2015} calculates the PMV based on adaptive thermal heat balance framework
+#' @description based on the original method published 2015
 #' 
-#' @usage calcATHBpmv(trm, psych, ta, tr, vel, rh, met, wme)
+#' @usage calcATHBpmv2015(trm, psych, ta, tr, vel, rh, met, wme = 0)
 #'
 #' @param trm - Running mean outdoor temperature in [degree C]
 #' @param psych - factor related to fixed effect on perceived control
@@ -14,7 +15,7 @@
 #' @param met - a numeric value presenting metabolic rate in [met]
 #' @param wme - a numeric value presenting external work in [met]
 #'
-#' @return \code{calcATHBpmv} PMV value adapted through the ATHB appoach
+#' @return \code{calcATHBpmv2015} PMV value adapted through the ATHB appoach
 #' 
 #' @details All variables must have the same length 1. For the calculation of several values use function \code{calcComfInd}.
 #' 
@@ -26,9 +27,9 @@
 #' @seealso see also \code{\link{calcComfInd}}, \code{link{calcATHBpts}}, \code{link{calcATHBset}}
 #' @export
 #'
-#' @examples calcATHBpmv(20, 0, 25, 25, .1, 50, 1.1, 0)
+#' @examples calcATHBpmv2015(20, 0, 25, 25, .1, 50, 1.1)
 
-calcATHBpmv <- function(trm, psych, ta, tr, vel, rh, met, wme){
+calcATHBpmv2015 <- function(trm, psych, ta, tr, vel, rh, met, wme = 0){
 
   #calc with clo according to fix effects
 	HFtomet <- .092
