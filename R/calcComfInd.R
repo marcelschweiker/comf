@@ -81,7 +81,7 @@
 #' ## Requesting multiple indices
 #' calcComfInd(lsCond, request=c("pmv", "ptse"))
 #' @author Sophia Mueller and Marcel Schweiker. Further contribution by Shaomi Rahman.
-#' @seealso see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHBpmv}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctAdapt}}
+#' @seealso see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHBpmv2015}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctAdapt}}
 #' @references For references see individual functions.
 #' @note In case one of the variables is not given, a standard value will be taken from a list (see \code{\link{createCond}} for details.
 #' @export
@@ -224,7 +224,7 @@ calcComfInd <- function(lsCond, request="all"){
                             calctnHumphreysAC(tmmo[i]),
                             calctAdapt15251(trm[i]),
                             calcdTNZ(ht[i], wt[i], age[i], gender[i], clo[i], vel[i], tsk[i], ta[i], met[i], rh[i], deltaT =.1),
-                            ATHBpmv = calcATHBpmv(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]),
+                            ATHBpmv = calcATHBpmv2015(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]),
                             ATHBset = calcATHBset(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i]),
                             ATHBpts = calcATHBpts(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i]),
                             apmv = calcaPMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], apCoeff[i]),
@@ -284,7 +284,7 @@ calcComfInd <- function(lsCond, request="all"){
 
         } else if (request[nparam] == "ATHBpmv"){
 
-          giveDat <- data.frame(calcATHBpmv(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]))
+          giveDat <- data.frame(calcATHBpmv2015(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]))
           if (nparam == 1){
             giveDatas<-giveDat
           } else {giveDatas<-cbind(giveDatas, giveDat)}

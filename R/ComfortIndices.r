@@ -170,7 +170,7 @@ calcComfInd <- function(lsCond, request="all"){
                             calctnHumphreysAC(tmmo[i]), 
                             calctAdapt15251(trm[i]), 
                             #calcdTNZ(ht[i], wt[i], age[i], gender[i], clo[i], vel[i], tsk[i], ta[i], met[i], rh[i], deltaT =.1), 
-                            ATHBpmv = calcATHBpmv(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]), 
+                            ATHBpmv = calcATHBpmv2015(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]), 
                             ATHBset = calcATHBset(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i]), 
                             ATHBpts = calcATHBpts(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i]), 
                             apmv = calcaPMV(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], apCoeff[i]), 
@@ -231,7 +231,7 @@ calcComfInd <- function(lsCond, request="all"){
           
         } else if (request[nparam] == "ATHBpmv"){
           
-          giveDat <- data.frame(calcATHBpmv(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]))
+          giveDat <- data.frame(calcATHBpmv2015(trm[i], psych[i], ta[i], tr[i], vel[i], rh[i], met[i], wme[i]))
           if (nparam == 1){
             giveDatas<-giveDat
           } else {giveDatas<-cbind(giveDatas, giveDat)}
