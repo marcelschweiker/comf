@@ -30,9 +30,9 @@
 
 calcATHBpmv <- function(trm, ta, tr, vel, rh, met){
   
-  PTSVATHBpmv_model1 <- calcATHBPmvModel1(trm, ta, tr, vel, rh, met)
-  PTSVATHBpmv_model2 <- calcATHBPmvModel2(trm, ta, tr, vel, rh, met)
-  PTSVATHBpmv_model3 <- calcATHBPmvModel3(trm, ta, tr, vel, rh, met)
+  PTSVATHBpmv_model1 <- calcATHBpmvModel1(trm, ta, tr, vel, rh, met)
+  PTSVATHBpmv_model2 <- calcATHBpmvModel2(trm, ta, tr, vel, rh, met)
+  PTSVATHBpmv_model3 <- calcATHBpmvModel3(trm, ta, tr, vel, rh, met)
   
   c(PTSVATHBpmv_model1, PTSVATHBpmv_model2, PTSVATHBpmv_model3)
 }
