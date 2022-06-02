@@ -32,7 +32,7 @@ calcATHBpmvModel3 <- function(trm, ta, tr, vel, rh, met){
   metAdpt <- met - (0.234 * trm) / 58.2
   
   # adapted clothing insulation level through behavioural adaptation
-  cloAdpt <- 10 ^ (-0.1531721 - 0.0013373 * trm + 0.0627243 * metAdpt - 0.0042002 * trm * metAdpt)
+  cloAdpt <- 10 ^ (-0.1716848 - 0.0004853 * trm + 0.0817623 * metAdpt - 0.0052730 * trm * metAdpt)
   
   # adapted thermal load according to Fanger’s PMV mode
   LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)

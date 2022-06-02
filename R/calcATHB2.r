@@ -4,7 +4,8 @@
 #' @description \code{calcATHBpmv} calculates the PMV based on adaptive thermal heat balance framework 
 #' @description based on the newest version (2022)
 #' 
-#' @usage calcATHBpmv(trm, ta, tr, vel, rh, met)
+#' @usage calcATHBpmv(trm, ta, tr, vel, rh, met, coolingStrategyBuilding, 
+#' buildingType)
 #'
 #' @param trm - Running mean outdoor temperature in [degree C]
 #' @param ta - a numeric value presenting air temperature in [degree C]
@@ -12,6 +13,10 @@
 #' @param vel - a numeric value presenting air velocity in [m/s]
 #' @param rh - a numeric value presenting relative humidity [\%]
 #' @param met - a numeric value presenting metabolic rate in [met]
+#' @param coolingStrategyBuilding - the process in which the building was 
+#' ventilated. Value can be among Mixed Mode','Naturally Ventilated' as a String 
+#' @param buildingType - building type. Value can be among Multifamily housing, 
+#' Office, Others, as a string
 #'
 #' @return \code{calcATHBpmv} an array of PMV values of different models adapted 
 #' through the ATHB appoach 
@@ -28,11 +33,15 @@
 #'
 #' @examples calcATHBpmv(20, 25, 25, .1, 50, 1.1)
 
-calcATHBpmv <- function(trm, ta, tr, vel, rh, met){
+calcATHBpmv <- function(trm, ta, tr, vel, rh, met, coolingStrategyBuilding, 
+                        buildingType){
   
   PTSVATHBpmv_model1 <- calcATHBpmvModel1(trm, ta, tr, vel, rh, met)
   PTSVATHBpmv_model2 <- calcATHBpmvModel2(trm, ta, tr, vel, rh, met)
   PTSVATHBpmv_model3 <- calcATHBpmvModel3(trm, ta, tr, vel, rh, met)
-  
-  c(PTSVATHBpmv_model1, PTSVATHBpmv_model2, PTSVATHBpmv_model3)
+  PTSVATHBpmv_model4 <- calcATHBpmvModel4(trm, ta, tr, vel, rh, met, coolingStrategyBuilding)
+  PTSVATHBpmv_model5 <- calcATHBpmvModel5(trm, ta, tr, vel, rh, met, buildingType)
+  PTSVATHBpmv_model6 <- calcATHBpmvModel6(trm, ta, tr, vel, rh, met, coolingStrategyBuilding)
+  c(PTSVATHBpmv_model1, PTSVATHBpmv_model2, PTSVATHBpmv_model3, PTSVATHBpmv_model4,
+    PTSVATHBpmv_model5, PTSVATHBpmv_model6)
 }
