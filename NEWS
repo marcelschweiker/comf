@@ -76,3 +76,5 @@ Changes:
 
 * Added data set with exemplary field data
 * Changed calcMeanBias to calcBias and added output of standard deviation and standard error
+* Corrected calcSolarGain function according to ANSI/ASHRAE Addendum d to
+ANSI/ASHRAE Standard 55-2020
