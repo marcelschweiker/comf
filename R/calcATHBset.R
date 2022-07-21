@@ -2,7 +2,8 @@
 #' 
 #' @description Calculation of SET based on Adaptive Thermal Heat Balance framework using Gagge's 2-node model
 #' 
-#' @usage calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
+#' @usage calcATHBset(trm, psych, ta, tr, vel, rh, met, wme = 0, pb = 760, 
+#'                       ltime = 60, ht = 171, wt = 69.9)
 #'
 #' @param trm - Running mean outdoor temperature in [degree C]
 #' @param psych - factor related to fixed effect on perceived control
@@ -31,7 +32,8 @@
 #'
 #' @examples calcATHBset(20, 0, 25, 25, .1, 50, 1.1, 0, 760, 60, 171, 70)
 
-calcATHBset <- function(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt){
+calcATHBset <- function(trm, psych, ta, tr, vel, rh, met, wme = 0, pb = 760, 
+                        ltime = 60, ht = 171, wt = 69.9){
   
   ### calc with clo according to fix effects
   

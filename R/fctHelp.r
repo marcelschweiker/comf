@@ -316,9 +316,9 @@ solarGain <- function(solAlt, solAzi, solRadDir, solTrans,
                       fSvv, fBes, asw=0.7, 
                       posture="seated", floorRef=0.6){
   
-  deg_to_rad = 0.0174532925
-  hr = 6
-  i_diff = 0.2 * solRadDir
+  degToRad <- 0.0174532925
+  hr <- 6
+  i_diff <- 0.2 * solRadDir
   
   fp_table = rbind(
     c(0.25, 0.25, 0.23, 0.19, 0.15, 0.10, 0.06),
@@ -392,7 +392,7 @@ solarGain <- function(solAlt, solAzi, solRadDir, solTrans,
     * fSvv 
     * 0.5 
     * solTrans 
-    * (solRadDir * sin(solAlt * deg_to_rad) + i_diff) 
+    * (solRadDir * sin(solAlt * degToRad) + i_diff) 
     * floorRef
   )
   e_solar = e_diff + e_direct + e_refl
@@ -410,9 +410,6 @@ findSpan <- function(arr, x){
   }
   return(-1)
 }
-
-
-
 
 ###### help functions for calcUTCI
 
