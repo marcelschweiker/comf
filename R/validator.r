@@ -62,3 +62,56 @@ checkRange <- function(parameter, lower_bound, upper_bound) {
   if( parameter < lower_bound || parameter > upper_bound)
     stop(paste(parameter, " is out of range. Has to be between ",lower_bound, " and ",upper_bound))
 }
+
+validateStaticPartDTS_df <- data.frame(matrix(ncol = 8, nrow = 0))
+validateStaticPartDTS_colname <- c("ta", "tr", "rh","vel","clo", "met", "StaticPartDTS_comf", "StaticPartDTS")
+colnames(validateStaticPartDTS_df) <- validateStaticPartDTS_colname
+validateStaticPartDTS <- function(){
+  load('dfDPD.RData')
+  for (i in seq(1, nrow(output))) {
+    data_row <- output[i,]
+    ta <- data_row$TA
+    tr <- data_row$TR
+    rh <- data_row$RH
+    vel <- data_row$VEL
+    clo <- data_row$CLO
+    met <- data_row$MET
+    output_comf <- calcStaticPartDTS(ta, tr, rh, vel, clo, met)
+    validateStaticPartDTS_df[nrow(validateStaticPartDTS_df)+1,] <- c(ta, tr, rh, vel, clo, met, output_comf, data_row$STS)
+  }
+}
+
+validateNewDTS_df <- data.frame(matrix(ncol = 8, nrow = 0))
+validateNewDTS_colname <- c("ta", "tr", "rh","vel","clo", "met", "NewDTS_comf", "NewDTS")
+colnames(validateNewDTS_df) <- validateNewDTS_colname
+validateNewDTS <- function(){
+  for (i in seq(1, nrow(output))) {
+    data_row <- output[i,]
+    ta <- data_row$TA
+    tr <- data_row$TR
+    rh <- data_row$RH
+    vel <- data_row$VEL
+    clo <- data_row$CLO
+    met <- data_row$MET
+    output_comf <- calcNewDTS(ta, tr, rh, vel, clo, met)
+    validateNewDTS_df[nrow(validateNewDTS_df)+1,] <- c(ta, tr, rh, vel, clo, met, output_comf, data_row$DTS)
+  }
+}
+
+
+validateDPD_df <- data.frame(matrix(ncol = 8, nrow = 0))
+validateDPD_colname <- c("ta", "tr", "rh","vel","clo", "met", "NewDTS_comf", "NewDTS")
+colnames(validateDPD_df) <- validateDPD_colname
+validateDPD <- function(){
+  for (i in seq(1, nrow(output))) {
+    data_row <- output[i,]
+    ta <- data_row$TA
+    tr <- data_row$TR
+    rh <- data_row$RH
+    vel <- data_row$VEL
+    clo <- data_row$CLO
+    met <- data_row$MET
+    output_comf <- calcDPD(ta, tr, rh, vel, clo, met)
+    validateDPD_df[nrow(validateDPD_df)+1,] <- c(ta, tr, rh, vel, clo, met, output_comf, data_row$DPD)
+  }
+}

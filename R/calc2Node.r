@@ -397,7 +397,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   if(varOut=="skinWet"){
     output <- data.frame(wet)
   } else {
-    output <- data.frame(et, set, tsens, disc, pd, ps, pts, pmvg, pmvstar)
+    output <- data.frame(et, set, tsens, disc, pd, ps, pts, pmvg, pmvstar, tsk, dtsk, tcr, dtcr)
   }
   rm(et, set, tsens, disc, pd, ps, pts)
   output
