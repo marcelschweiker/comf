@@ -67,7 +67,6 @@ validateStaticPartDTS_df <- data.frame(matrix(ncol = 8, nrow = 0))
 validateStaticPartDTS_colname <- c("ta", "tr", "rh","vel","clo", "met", "StaticPartDTS_comf", "StaticPartDTS")
 colnames(validateStaticPartDTS_df) <- validateStaticPartDTS_colname
 validateStaticPartDTS <- function(){
-  load('dfDPD.RData')
   for (i in seq(1, nrow(output))) {
     data_row <- output[i,]
     ta <- data_row$TA

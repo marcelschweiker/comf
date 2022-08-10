@@ -22,7 +22,7 @@ calcStaticPartDTS <- function(ta, tr, rh, vel, clo, met){
   
   calc2NodeVal <- calc2Node(ta, tr, vel, rh, clo, met)
   
-  dtSkin <- calc2NodeVal$tsk - tskinS et
+  dtSkin <- calc2NodeVal$tsk - tskinSet
   dtCore <- calc2NodeVal$tcr - tcoreSet
   
   if((dtCore > -0.4) & (dtSkin < 4)){
