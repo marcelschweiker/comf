@@ -35,7 +35,7 @@ calcATHBpmvModel3 <- function(trm, ta, tr, vel, rh, met){
   cloAdpt <- 10 ^ (-0.1716848 - 0.0004853 * trm + 0.0817623 * metAdpt - 0.0052730 * trm * metAdpt)
   
   # adapted thermal load according to Fanger’s PMV mode
-  LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)
+  LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)$Lraw
   
   # predicted thermal sensation vote 
   PTSVATHBpmv <- 4.254359 + 0.01745583 * LAdpt - 0.006497189 * trm + 0.000184154 * LAdpt * trm

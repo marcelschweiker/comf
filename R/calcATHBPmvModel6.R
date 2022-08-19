@@ -4,7 +4,8 @@
 #' @description \code{calcATHBpmvModel6} calculates the PMV based on adaptive thermal heat balance framework 
 #' @description based on the newest version (2022)
 #' 
-#' @usage calcATHBpmvModel6(trm, ta, tr, vel, rh, met, buildingTypeSimple)
+#' @usage calcATHBpmvModel6(trm, ta, tr, vel, rh, met, buildingTypeSimple, 
+#' coolingStrategyBuilding)
 #'
 #' @param trm - Running mean outdoor temperature in [degree C]
 #' @param ta - a numeric value presenting air temperature in [degree C]
@@ -14,7 +15,9 @@
 #' @param met - a numeric value presenting metabolic rate in [met]
 #' @param buildingTypeSimple - simple building type. Value can be among Multifamily housing, 
 #' Office as a string
-#'
+#' @param coolingStrategyBuilding - the process in which the building was 
+#' ventilated. Value can be among Mixed Mode','Naturally Ventilated' as a String
+#' 
 #' @return \code{calcATHBpmvModel6} PMV value adapted through the ATHB approach with model 6
 #'
 #' @references 
@@ -26,13 +29,18 @@
 #' @seealso \code{link{calcATHBpmv2015}}
 #' @export
 #'
-#' @examples calcATHBpmvModel6(20, 25, 25, .1, 50, 1.1, 'Office')
+#' @examples calcATHBpmvModel6(20, 25, 25, .1, 50, 1.1, 'Office', 'mixed Mode')
 
-calcATHBpmvModel6 <- function(trm, ta, tr, vel, rh, met, coolingStrategyBuilding){
-  
+calcATHBpmvModel6 <- function(trm, ta, tr, vel, rh, met, buildingTypeSimple, 
+                              coolingStrategyBuilding){
   coolingStrategyBuildingValues <- calcCoolingStrategyBuilding(coolingStrategyBuilding)
   mixedMode <- coolingStrategyBuildingValues[1]
   naturallyVentilated <- coolingStrategyBuildingValues[2]
+  
+  buildingTypeValues <- calcbuildingType(buildingTypeSimple)
+  multifamilyhousing <- buildingTypeValues[1]
+  office <- buildingTypeValues[2]
+  others <- buildingTypeValues[3]
   
   # metabolic rate through physiological adaptation
   metAdpt <- met - (0.234 * trm) / 58.2
@@ -44,7 +52,7 @@ calcATHBpmvModel6 <- function(trm, ta, tr, vel, rh, met, coolingStrategyBuilding
                    - 0.004613393 * trm * metAdpt * office)
   
   # adapted thermal load according to Fanger’s PMV mode
-  LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)
+  LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)$Lraw
   
   # predicted thermal sensation vote 
   PTSVATHBpmv <- 5.44284 + 0.05631419 * LAdpt - 0.8013034 * metAdpt - 0.01383006 *
@@ -62,3 +70,4 @@ calcATHBpmvModel6 <- function(trm, ta, tr, vel, rh, met, coolingStrategyBuilding
     
   PTSVATHBpmv
 }
+calcATHBpmvModel6(38.1, 27.7, 27.7, 0.07, 57, 1, 'Office', 'Mixed Mode')
