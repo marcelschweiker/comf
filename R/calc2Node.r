@@ -7,9 +7,9 @@
 #' \code{calc2Node} calculates Comfort Indices based on the 2-Node-Model by Gagge et al.
 #' 
 #' @usage 
-#' calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, sa, wme = 0, pb = 760, ltime = 60,
-#' ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5,
-#' varOut = "else")
+#' calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, sa = NULL, pb = 760, 
+#' ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
+#' cstr = 0.5, varOut = "else",  body_position = 'sitting')
 #' 
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
@@ -17,8 +17,8 @@
 #' @param rh a numeric value presenting relative humidity [\%]
 #' @param clo a numeric value presenting clothing insulation level in [clo] 
 #' @param met a numeric value presenting metabolic rate in [met]
-#' @param sa (optional)surface Area according to mosteller formula [m^2]
 #' @param wme a numeric value presenting external work in [met]
+#' @param sa (optional)surface Area according to mosteller formula [m^2]
 #' @param pb a numeric value presenting barometric pressure in [torr] or [mmHg]
 #' @param ltime a numeric value presenting exposure time in [minutes]
 #' @param ht a numeric value presenting body height in [cm]
@@ -82,9 +82,14 @@
 #' ## Calculation of a single set of values.
 #' calc2Node(22, 25, .50, 50)
 
-calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
+calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
                       ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
-                      csw = 170, cdil = 120, cstr = .5, varOut="else"){
+                      csw = 170, cdil = 120, cstr = .5, varOut="else", 
+                      body_position = 'sitting'){
+  
+  if(sa == 0 || is.null(sa)){
+    sa    <- ((ht * wt) / 3600 ) ^ .5 # surface Area (m2) according to mosteller formula 
+  }
   
   m <- met * 58.2 #[w/m2]
   w <- wme * 58.2 #[w/m2]
@@ -100,11 +105,6 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   tbn   <- 36.49 #setpoint for tb (.1*tskn + .9*tcrn)
   skbfn <- 6.3   #neutral value for skbf
   sbc   <- 5.6697 * 10 ^ (-08) #stephan-Boltzmann constant
-  
-  if(missing(sa)){
-    print("came here")
-    sa    <- ((ht * wt) / 3600 ) ^ .5 # surface Area (m2) according to mosteller formula 
-  }
   
   vel <- max(vel, 0.1) # set minimum va to .1 m/s
   

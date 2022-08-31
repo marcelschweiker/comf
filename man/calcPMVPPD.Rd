@@ -5,7 +5,7 @@
 \alias{pmvppd}
 \title{PMV and PPD}
 \usage{
-calcPMVPPD(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
+calcPMVPPD(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15, getLoad = FALSE)
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -23,11 +23,15 @@ calcPMVPPD(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15)
 \item{wme}{a numeric value presenting external work in [met]}
 
 \item{basMet}{a numeric value presenting basal metabolic rate [w/m2]}
+
+\item{getLoad}{a boolean value. Set to true to get thermal load as output instead of PMV/PPD}
 }
 \value{
 PMV - Predicted Mean Vote
 
 PPD - Predicted Percentage of Dissatisfied occupants in [\%]
+
+Lraw - thermal load (only when getLoad was set to TRUE)
 }
 \description{
 Function to calculate Predicted Mean Vote (PMV) and Predicted Percentage of Dissatisfied (PPD).

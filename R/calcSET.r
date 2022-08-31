@@ -6,9 +6,9 @@
 #' 2-Node-Model by Gagge et al.
 #' 
 #' @usage 
-#' calcSET(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, 
-#' ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5, 
-#' body_position = 'sitting')
+#' calcSET(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
+#' ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
+#' cstr = .5, body_position = 'sitting')
 #' 
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
@@ -16,8 +16,8 @@
 #' @param rh a numeric value presenting relative humidity [\%]
 #' @param clo a numeric value presenting clothing insulation level in [clo] 
 #' @param met a numeric value presenting metabolic rate in [met]
-#' @param sa (optional)surface Area according to mosteller formula [m^2]
 #' @param wme a numeric value presenting external work in [met]
+#' @param sa (optional)surface Area according to mosteller formula [m^2]
 #' @param pb a numeric value presenting barometric pressure in [torr] or [mmHg]
 #' @param ltime a numeric value presenting exposure time in [minutes]
 #' @param ht a numeric value presenting body height in [cm]
@@ -74,10 +74,8 @@
 #' maxLength <- max(sapply(list(ta, tr, vel, rh), length))
 #' SET <- sapply(seq(maxLength), function(x) { calcSET(ta[x], tr[x], vel[x], rh[x]) } ) 
 
-calcSET <- function(ta, tr, vel, rh, clo = .5, met = 1, sa, wme = 0, pb = 760, 
+calcSET <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
                     ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
-                    csw = 170, cdil = 120, cstr = .5, body_position){
-  calc2Node(ta, tr, vel, rh, clo, met, sa, wme, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr, body_position)$set
+                    csw = 170, cdil = 120, cstr = .5, body_position = 'sitting'){
+  calc2Node(ta, tr, vel, rh, clo, met, wme, sa, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr, body_position)$set
 }
-
-calcSET(25, 25, 0.15, 10)

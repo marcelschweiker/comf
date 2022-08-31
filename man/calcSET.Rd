@@ -5,8 +5,9 @@
 \alias{SET}
 \title{Standard Effective Temperature (SET)}
 \usage{
-calcSET(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60, 
-ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
+calcSET(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
+ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
+cstr = .5, body_position = 'sitting')
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -22,6 +23,8 @@ ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
 \item{met}{a numeric value presenting metabolic rate in [met]}
 
 \item{wme}{a numeric value presenting external work in [met]}
+
+\item{sa}{(optional)surface Area according to mosteller formula [m^2]}
 
 \item{pb}{a numeric value presenting barometric pressure in [torr] or [mmHg]}
 
@@ -40,6 +43,8 @@ ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5)
 \item{cdil}{a numeric value presenting the driving coefficient for vasodilation}
 
 \item{cstr}{a numeric value presenting the driving coefficient for vasoconstriction}
+
+\item{body_position}{a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting'}
 }
 \value{
 \code{calcSET} returns the Standard Effective Temperature (SET)

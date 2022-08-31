@@ -4,7 +4,8 @@
 \alias{calcATHBset}
 \title{SET based on Adaptive Thermal Heat Balance Framework}
 \usage{
-calcATHBset(trm, psych, ta, tr, vel, rh, met, wme, pb, ltime, ht, wt)
+calcATHBset(trm, psych, ta, tr, vel, rh, met, wme = 0, pb = 760, 
+                      ltime = 60, ht = 171, wt = 69.9)
 }
 \arguments{
 \item{trm}{- Running mean outdoor temperature in [degree C]}
