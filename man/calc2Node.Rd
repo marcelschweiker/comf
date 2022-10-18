@@ -25,6 +25,8 @@ cstr = 0.5, varOut = "else",  body_position = 'sitting')
 
 \item{wme}{a numeric value presenting external work in [met]}
 
+\item{sa}{(optional)surface Area according to mosteller formula [m^2]}
+
 \item{pb}{a numeric value presenting barometric pressure in [torr] or [mmHg]}
 
 \item{ltime}{a numeric value presenting exposure time in [minutes]}

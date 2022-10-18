@@ -90,7 +90,6 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb
   if(sa == 0 || is.null(sa)){
     sa    <- ((ht * wt) / 3600 ) ^ .5 # surface Area (m2) according to mosteller formula 
   }
-  
   m <- met * 58.2 #[w/m2]
   w <- wme * 58.2 #[w/m2]
   mw <- m - w 

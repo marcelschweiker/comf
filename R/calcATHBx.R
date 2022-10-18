@@ -95,29 +95,29 @@ calcATHBx <- function(trm, ta, tr, vel, rh, met, buildingTypeSimple,
   LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)$Lraw
   
   # predicted thermal sensation vote 
-  PTSVATHBpmv <- 1.475068 + 0.04250174 * LAdpt - 1.239833 * metAdpt - 0.08618044
-  * trm + 0.6653757 * mixedMode + 0.9725228 * naturallyVentilated + 0.3406048 * 
+  PTSVATHBpmv <- 1.475068 + 0.04250174 * LAdpt - 1.239833 * metAdpt - 0.08618044 * 
+    trm + 0.6653757 * mixedMode + 0.9725228 * naturallyVentilated + 0.3406048 * 
     office_simple + 0.001059505 * LAdpt * trm + 0.07425959 * metAdpt * trm + 
     0.009698339 * LAdpt * mixedMode - 0.01544092 * LAdpt * naturallyVentilated - 
-    0.2863978 * metAdpt * mixedMode - 0.1753708 * metAdpt * naturallyVentilated
-  + 0.1043185 * trm * mixedMode + 0.00622867 * trm * naturallyVentilated - 
-    0.002370277 * LAdpt * office_simple + 0.2078216 * metAdpt * office_simple +
+    0.2863978 * metAdpt * mixedMode - 0.1753708 * metAdpt * naturallyVentilated + 
+    0.1043185 * trm * mixedMode + 0.00622867 * trm * naturallyVentilated - 
+    0.002370277 * LAdpt * office_simple + 0.2078216 * metAdpt * office_simple + 
     0.07463154 * trm * office_simple - 1.565381 * mixedMode * office_simple - 
-    2.063706 * naturallyVentilated * office_simple - 0.001703518 * LAdpt * metAdpt
-  * trm - 0.002568801 * LAdpt * trm * mixedMode - 0.001266842 * LAdpt * trm * 
-    naturallyVentilated - 0.1081008 * metAdpt * trm * mixedMode - 0.02605285 * 
-    metAdpt * trm * naturallyVentilated - 0.001371535 * LAdpt * trm * office_simple
-  - 0.08895577 * metAdpt * trm * office_simple - 0.05012175 * LAdpt * mixedMode
-  * office_simple + 0.001086241 * LAdpt * naturallyVentilated * office_simple +
+    2.063706 * naturallyVentilated * office_simple - 0.001703518 * LAdpt * 
+    metAdpt * trm - 0.002568801 * LAdpt * trm * mixedMode - 0.001266842 * LAdpt * 
+    trm * naturallyVentilated - 0.1081008 * metAdpt * trm * mixedMode - 0.02605285 * 
+    metAdpt * trm * naturallyVentilated - 0.001371535 * LAdpt * trm * office_simple - 
+    0.08895577 * metAdpt * trm * office_simple - 0.05012175 * LAdpt * mixedMode * 
+    office_simple + 0.001086241 * LAdpt * naturallyVentilated * office_simple + 
     0.6610309 * metAdpt * mixedMode * office_simple + 0.5801628 * metAdpt * 
     naturallyVentilated * office_simple - 0.1246268 * trm * mixedMode * 
     office_simple + 0.003203511 * trm * naturallyVentilated * office_simple + 
     0.002534486 * LAdpt * metAdpt * trm * mixedMode + 0.001697271 * LAdpt * 
     metAdpt * trm * naturallyVentilated + 0.001934518 * LAdpt * metAdpt * 
     office_simple + 0.004850281 * LAdpt * trm * mixedMode * office_simple + 
-    0.002049072 * LAdpt * trm * naturallyVentilated * office_simple + 0.1469868
-  * metAdpt * trm * mixedMode * office_simple + 0.05113367 * metAdpt * trm *
-    naturallyVentilated * office_simple - 0.003778733 * LAdpt * metAdpt * trm *
+    0.002049072 * LAdpt * trm * naturallyVentilated * office_simple + 0.1469868 * 
+    metAdpt * trm * mixedMode * office_simple + 0.05113367 * metAdpt * trm * 
+    naturallyVentilated * office_simple - 0.003778733 * LAdpt * metAdpt * trm * 
     mixedMode * office_simple - 0.002529804 * LAdpt * metAdpt * trm * 
     naturallyVentilated * office_simple
   

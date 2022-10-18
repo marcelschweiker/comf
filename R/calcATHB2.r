@@ -4,8 +4,9 @@
 #' @description \code{calcATHBpmv} calculates the PMV based on adaptive thermal heat balance framework 
 #' @description based on the newest version (2022)
 #' 
-#' @usage calcATHBpmv(trm, ta, tr, vel, rh, met, coolingStrategyBuilding, 
-#' buildingType)
+#' @usage calcATHBpmv(trm, ta, tr, vel, rh, met, 
+#' coolingStrategyBuilding = 'naturallyventilated', 
+#' buildingTypeSimple = 'office', seasonSimple = 'spring')
 #'
 #' @param trm - Running mean outdoor temperature in [degree C]
 #' @param ta - a numeric value presenting air temperature in [degree C]
@@ -37,7 +38,7 @@
 
 calcATHBpmv <- function(trm, ta, tr, vel, rh, met, coolingStrategyBuilding = 
                           'naturallyventilated', buildingTypeSimple = 'office', 
-                        season = 'spring'){
+                        seasonSimple = 'spring'){
   
   PTSVATHBstandard <- calcATHBstandard(trm, ta, tr, vel, rh, met)
   PTSVATHBx <- calcATHBx(trm, ta, tr, vel, rh, met, buildingTypeSimple, 
