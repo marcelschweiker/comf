@@ -54,7 +54,7 @@ of times, loop is running for HBx calculation}
 \item{sigmatr}{a numeric value presenting value for cdil in 2-node model of Gagge}
 }
 \value{
-Returns a data.frame with the following columns \cr{
+Returns a data.frame with the following columns \cr
 \cr
 Exergy input\cr
 \code{xInmets} Exergy input through metabolism [W/m2]\cr
@@ -100,7 +100,6 @@ Additional values\cr
 \code{tsks} Calculated skin temperature [degree C]\cr
 \code{tcrs} Calculated core temperature [degree C]\cr
 \code{ws} Calculated skin wettedness [degree C]\cr
-}
 }
 \description{
 \code{calcHbExSteady} calculates the human body exergy 

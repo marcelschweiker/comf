@@ -7,7 +7,7 @@
 \usage{
 calcSET(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
 ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
-cstr = .5, body_position = 'sitting')
+cstr = .5, bodyPosition = 'sitting')
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -44,7 +44,7 @@ cstr = .5, body_position = 'sitting')
 
 \item{cstr}{a numeric value presenting the driving coefficient for vasoconstriction}
 
-\item{body_position}{a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting'}
+\item{bodyPosition}{a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting'}
 }
 \value{
 \code{calcSET} returns the Standard Effective Temperature (SET)

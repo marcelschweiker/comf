@@ -9,7 +9,7 @@
 #' @usage 
 #' calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, sa = NULL, pb = 760, 
 #' ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
-#' cstr = 0.5, varOut = "else",  body_position = 'sitting')
+#' cstr = 0.5, varOut = "else", bodyPosition = 'sitting')
 #' 
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
@@ -29,7 +29,7 @@
 #' @param cdil a numeric value presenting the driving coefficient for vasodilation
 #' @param cstr a numeric value presenting the driving coefficient for vasoconstriction
 #' @param varOut a string value either "else" for normal output of SET or "skinWet" to report value of skin wettedness
-#' @param body_position a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting' 
+#' @param bodyPosition a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting' 
 #'
 #' @details 
 #' All variables must have the same length 1. For the calculation of several 
@@ -85,7 +85,7 @@
 calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
                       ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
                       csw = 170, cdil = 120, cstr = .5, varOut="else", 
-                      body_position = 'sitting'){
+                      bodyPosition = 'sitting'){
   
   if(sa == 0 || is.null(sa)){
     sa    <- ((ht * wt) / 3600 ) ^ .5 # surface Area (m2) according to mosteller formula 
@@ -178,7 +178,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb
       }
     }
     while (!flag){
-      if(tolower(gsub(" ", "", body_position, fixed = TRUE)) == 'sitting'){
+      if(tolower(gsub(" ", "", bodyPosition, fixed = TRUE)) == 'sitting'){
         chr <- 4.0 * 0.95 * sbc * (((tcl + tr) / 2.0 + 273.15) ^ 3.0) * 0.7
       }
       else{

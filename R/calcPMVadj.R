@@ -20,7 +20,7 @@
 
 calcPMVadj <- function(ta, tr, vel, rh, clo, met, wme = 0){
 
-  f <- function(x){calc2Node(ta, tr, vel, rh, clo, met, wme, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "pmvadj")[2] - calc2Node(ta + x, tr + x, .1, rh, clo, met, wme, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "pmvadj")[2]}
+  f <- function(x){calc2Node(ta, tr, vel, rh, clo, met, wme, NULL, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "pmvadj")[2] - calc2Node(ta + x, tr + x, .1, rh, clo, met, wme, NULL, pb = 760, ltime = 60, ht = 171, wt = 70, tu = 40, obj = "pmvadj")[2]}
   ce <- bisect(f, -15, 1)$x
 
   pmvadj <- calcPMVPPD(ta + ce, tr + ce, .1, rh, clo, met, wme)[1]

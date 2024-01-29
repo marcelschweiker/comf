@@ -58,7 +58,7 @@ calcATHBset <- function(trm, psych, ta, tr, vel, rh, met, wme = 0, pb = 760,
   
   metadapt <- met - dmetadaptPhys + dmetadaptpsychVar + dmetadaptpsychFix
   
-  comfortData <- data.frame(calc2Node(ta, tr, vel, rh, cloeq, metadapt, wme, pb, ltime, ht, wt, obj = "set"))
+  comfortData <- data.frame(calc2Node(ta, tr, vel, rh, cloeq, metadapt, wme, NULL, pb, ltime, ht, wt, obj = "set"))
   giveDat <- with(comfortData, get("set"))
   giveDat
 }

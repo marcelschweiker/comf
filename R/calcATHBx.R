@@ -40,8 +40,8 @@ calcATHBx <- function(trm, ta, tr, vel, rh, met, buildingTypeSimple,
   mixedMode <- coolingStrategyBuildingValues[1]
   naturallyVentilated <- coolingStrategyBuildingValues[2]
   
-  buildingTypeSimpleValues <- calcbuildingTypeSimple(buildingTypeSimple)
-  multifamilyhousing_simple <- buildingTypeSimpleValues[1]
+  buildingTypeSimpleValues <- calcBuildingTypeSimple(buildingTypeSimple)
+  multiFamilyHousing_simple <- buildingTypeSimpleValues[1]
   office_simple <- buildingTypeSimpleValues[2]
   
   seasonValues <- calcSeason(seasonSimple)
@@ -54,42 +54,42 @@ calcATHBx <- function(trm, ta, tr, vel, rh, met, buildingTypeSimple,
   
   # adapted clothing insulation level through behavioural adaptation
   cloAdpt <- 10 ^ (0.0492898 - 0.009406446 * trm - 0.05899411 * metAdpt - 
-                     0.5095279 * mixedMode - 0.3772523 * naturallyVentilated - 
-                     0.2533458 * office_simple + 0.423494 * winter + 0.00007407631
-                   * trm * metAdpt + 0.01321753 * trm * mixedMode + 0.005853607
-                   * trm * naturallyVentilated + 0.3503273 * metAdpt * mixedMode
-                   + 0.214488 * metAdpt * naturallyVentilated + 0.01067182 * trm
-                   * office_simple + 0.05307894 * metAdpt * office_simple + 
-                     0.1881751 * mixedMode * office_simple + 0.4381925 * 
-                     naturallyVentilated * office_simple - 0.04706885 * trm * 
-                     winter - 0.3280129 * metAdpt * winter + 0.1632258 * mixedMode
-                   * winter + 0.5761067 * naturallyVentilated * winter - 0.251526
-                   * office_simple * winter - 0.01066394 * trm * metAdpt * 
-                     mixedMode - 0.003778129 * trm * metAdpt * naturallyVentilated
-                   - 0.00079101 * trm * metAdpt * office_simple +  0.002877893 *
-                     trm * mixedMode * office_simple - 0.01057294 * trm * 
-                     naturallyVentilated * office_simple - 0.1087657 * metAdpt *
-                     mixedMode * office_simple - 0.2429825 * metAdpt * 
-                     naturallyVentilated * office_simple + 0.0418354 * trm * 
-                     metAdpt * winter + 0.03122896 * trm * mixedMode * winter +
-                     0.0006722416 * trm * naturallyVentilated * winter - 
-                     0.03861212 * metAdpt * mixedMode * winter - 0.2371913 * 
-                     metAdpt * naturallyVentilated * winter + 0.03909724 * trm *
-                     office_simple * winter + 0.3107031 * metAdpt * office_simple
-                   * winter - 0.1825792 * mixedMode * office_simple * winter -
-                     0.6964134 * naturallyVentilated * office_simple * winter - 
-                     0.003304702 * trm * metAdpt * mixedMode * office_simple + 
-                     0.005696653 * trm * metAdpt * naturallyVentilated * 
-                     office_simple - 0.02786317 * trm * metAdpt * mixedMode *
-                     winter - 0.01318766 * trm * metAdpt * naturallyVentilated *
-                     winter - 0.03615926 * trm * metAdpt * office_simple * winter
-                   - 0.03047268 * trm * mixedMode * office_simple * winter + 
-                     0.009780934 * trm * naturallyVentilated * office_simple * 
-                     winter + 0.1920736 * metAdpt * mixedMode * office_simple * 
-                     winter + 0.3590954 * metAdpt * naturallyVentilated * 
-                     office_simple * winter + 0.02060399 * trm * metAdpt * 
-                     mixedMode * office_simple * winter + 0.004416077 * trm * 
-                     metAdpt * naturallyVentilated * office_simple * winter)
+                   0.5095279 * mixedMode - 0.3772523 * naturallyVentilated - 
+                   0.2533458 * office_simple + 0.423494 * winter + 0.00007407631 *
+                   trm * metAdpt + 0.01321753 * trm * mixedMode + 0.005853607 *
+                   trm * naturallyVentilated + 0.3503273 * metAdpt * mixedMode +
+                   0.214488 * metAdpt * naturallyVentilated + 0.01067182 * trm *
+                   office_simple + 0.05307894 * metAdpt * office_simple + 
+                   0.1881751 * mixedMode * office_simple + 0.4381925 * 
+                   naturallyVentilated * office_simple - 0.04706885 * trm * 
+                   winter - 0.3280129 * metAdpt * winter + 0.1632258 * mixedMode *
+                   winter + 0.5761067 * naturallyVentilated * winter - 0.251526 *
+                   office_simple * winter - 0.01066394 * trm * metAdpt * 
+                   mixedMode - 0.003778129 * trm * metAdpt * naturallyVentilated -
+                   0.00079101 * trm * metAdpt * office_simple +  0.002877893 *
+                   trm * mixedMode * office_simple - 0.01057294 * trm * 
+                   naturallyVentilated * office_simple - 0.1087657 * metAdpt *
+                   mixedMode * office_simple - 0.2429825 * metAdpt * 
+                   naturallyVentilated * office_simple + 0.0418354 * trm * 
+                   metAdpt * winter + 0.03122896 * trm * mixedMode * winter +
+                   0.0006722416 * trm * naturallyVentilated * winter - 
+                   0.03861212 * metAdpt * mixedMode * winter - 0.2371913 * 
+                   metAdpt * naturallyVentilated * winter + 0.03909724 * trm *
+                   office_simple * winter + 0.3107031 * metAdpt * office_simple *
+                   winter - 0.1825792 * mixedMode * office_simple * winter -
+                   0.6964134 * naturallyVentilated * office_simple * winter - 
+                   0.003304702 * trm * metAdpt * mixedMode * office_simple + 
+                   0.005696653 * trm * metAdpt * naturallyVentilated * 
+                   office_simple - 0.02786317 * trm * metAdpt * mixedMode *
+                   winter - 0.01318766 * trm * metAdpt * naturallyVentilated *
+                   winter - 0.03615926 * trm * metAdpt * office_simple * winter -
+                   0.03047268 * trm * mixedMode * office_simple * winter + 
+                   0.009780934 * trm * naturallyVentilated * office_simple * 
+                   winter + 0.1920736 * metAdpt * mixedMode * office_simple * 
+                   winter + 0.3590954 * metAdpt * naturallyVentilated * 
+                   office_simple * winter + 0.02060399 * trm * metAdpt * 
+                   mixedMode * office_simple * winter + 0.004416077 * trm * 
+                   metAdpt * naturallyVentilated * office_simple * winter)
   
   # adapted thermal load according to Fanger’s PMV mode
   LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)$Lraw

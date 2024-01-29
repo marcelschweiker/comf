@@ -1,4 +1,3 @@
-#' @keywords internal
 #' @noRd
 
 calcCoolingStrategyBuilding <- function(coolingStrategyBuilding){
@@ -6,17 +5,17 @@ calcCoolingStrategyBuilding <- function(coolingStrategyBuilding){
   return(ifelse(c('mixedmode', 'naturallyventilated')==coolingStrategyBuildingValue, 1, 0))
 }
 
-calcbuildingType <- function(buildingType){
+calcBuildingType <- function(buildingType){
   buildingTypeValue <- tolower(gsub(" ", "", buildingType))
-  multifamilyhousing <- if(buildingType=='multifamilyhousing') 1 else 0
+  multiFamilyHousing <- if(buildingType=='multiFamilyHousing') 1 else 0
   office <- if(buildingType=='office') 1 else 0
   others <- if(buildingType=='others') 1 else 0
-  return(c(multifamilyhousing, office, others))
+  return(c(multiFamilyHousing, office, others))
 }
 
-calcbuildingTypeSimple <- function(buildingTypeSimple){
+calcBuildingTypeSimple <- function(buildingTypeSimple){
   buildingTypeSimpleValue <- tolower(gsub(" ", "", buildingTypeSimple))
-  return(ifelse(c('multifamilyhousing', 'office')==buildingTypeSimpleValue, 1, 0))
+  return(ifelse(c('multiFamilyHousing', 'office')==buildingTypeSimpleValue, 1, 0))
 }
 
 calcSeason <- function(season){

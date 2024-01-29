@@ -8,7 +8,7 @@
 \usage{
 calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, sa = NULL, pb = 760, 
 ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
-cstr = 0.5, varOut = "else",  body_position = 'sitting')
+cstr = 0.5, varOut = "else", bodyPosition = 'sitting')
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -47,7 +47,7 @@ cstr = 0.5, varOut = "else",  body_position = 'sitting')
 
 \item{varOut}{a string value either "else" for normal output of SET or "skinWet" to report value of skin wettedness}
 
-\item{body_position}{a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting'}
+\item{bodyPosition}{a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting'}
 }
 \value{
 returns a data.frame with the following items:

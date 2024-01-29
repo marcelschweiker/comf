@@ -12,15 +12,15 @@ This package contains several functions to calculate and evaluate a series of co
 \tabular{ll}{
 Package: \tab comf\cr
 Type: \tab Package\cr
-Version: \tab 0.1.11\cr
-Date: \tab 2021-05-12\cr
+Version: \tab 0.1.12\cr
+Date: \tab 2024-01-29\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
 To create input parameters, the function \code{createCond}, which creates a list of input parameters may be helpful.
 The main function of this packages is \code{calcComfInd}, which returns the desired comfort parameters. However, each index can be computed using its own function, e.g. to calculate only PMV the function \code{calcPMV} can be used.
 
-The comfort indices calculated within this package are as follows. To get further information, go to the help page, which can be accessed using the index below e.g. ?pmv:
+The comfort indices calculated within this package are for example as follows. To get further information, go to the help page, which can be accessed using the index below e.g. ?pmv:
 \tabular{ll}{
 	Index \tab Description  \cr
 	pmv \tab Predicted mean vote (PMV) \cr

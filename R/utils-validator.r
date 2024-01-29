@@ -1,4 +1,9 @@
-#' @keywords internal
+#' Internal function
+#' @aliases validateUTCI
+#' @param ta the air temperature
+#' @param tr the radiant temperature
+#' @param vel the air velocity
+#' @param rh the relative humidity
 #' @noRd
 validateUTCI <- function(ta, tr, vel, rh) {
   parameters <- c(ta, tr, vel, rh)
@@ -21,6 +26,7 @@ validateUTCI <- function(ta, tr, vel, rh) {
   checkRange(rh, 0, 100)
 }
 
+#' @noRd
 #validation for Solar Gain Input
 validateSolarGainRange <- function(solAlt, solAzi, solRadDir, solTrans, fSvv, 
                               fBes, asw=0.7, posture) {
@@ -58,19 +64,21 @@ validateSolarGainRange <- function(solAlt, solAzi, solRadDir, solTrans, fSvv,
 }
 
 #check range for parameters
+#' @noRd
 checkRange <- function(parameter, lower_bound, upper_bound) {
   if( parameter < lower_bound || parameter > upper_bound)
     stop(paste(parameter, " is out of range. Has to be between ",lower_bound, " and ",upper_bound))
 }
 
+#' @noRd
 # validate calcPMV and calcPPD
-validate_pmv_ppd <- function(pmv_ppd_data){
+validatePMVPPD <- function(pmv_ppd_data){
   
-  for(pmv_ppd_data_row in pmv_ppd_data){
-    for(pmv_ppd_data_row_index in 1:nrow(pmv_ppd_data_row)){
-      data_row <- pmv_ppd_data_row[pmv_ppd_data_row_index,]
-      inputs <- data_row$inputs
-      outputs <- data_row$outputs
+  for(pmv_ppd_dataRow in pmv_ppd_data){
+    for(pmv_ppd_dataRow_index in 1:nrow(pmv_ppd_dataRow)){
+      dataRow <- pmv_ppd_dataRow[pmv_ppd_dataRow_index,]
+      inputs <- dataRow$inputs
+      outputs <- dataRow$outputs
       pmv_output <- round(calcPMV(inputs$ta, inputs$tr,inputs$rh, inputs$v, inputs$met, inputs$clo),1)
       ppd_output <- round(calcPPD(inputs$ta, inputs$tr,inputs$rh, inputs$v, inputs$met, inputs$clo),1)
       if((pmv_output!= outputs$pmv) || (ppd_output !=  outputs$ppd)){
@@ -87,12 +95,13 @@ validate_pmv_ppd <- function(pmv_ppd_data){
 }
 
 #validate Solar Gain
-validate_solar_gain <- function(solar_gain_data){
-  for (solar_gain_data_row in solar_gain_data) {
-    for(solar_gain_data_row_index in 1:nrow(solar_gain_data_row)){
-      data_row <- solar_gain_data_row[solar_gain_data_row_index,]
-      inputs <- data_row$inputs
-      outputs <- data_row$outputs
+#' @noRd
+validateSolarGain <- function(solar_gain_data){
+  for (solar_gain_dataRow in solar_gain_data) {
+    for(solar_gain_dataRow_index in 1:nrow(solar_gain_dataRow)){
+      dataRow <- solar_gain_dataRow[solar_gain_dataRow_index,]
+      inputs <- dataRow$inputs
+      outputs <- dataRow$outputs
       solar_gain_result <- calcSolarGain(inputs$alt, inputs$sharp, inputs$I_dir, inputs$t_sol, inputs$f_svv, inputs$f_bes, inputs$asa, inputs$posture)
       if((solar_gain_result[1] != outputs$erf) || (solar_gain_result[2] !=  outputs$t_rsw)){
         print(paste("Outputs did not match for these inputs ->  alt:",inputs$alt, 
@@ -110,12 +119,13 @@ validate_solar_gain <- function(solar_gain_data){
 }
 
 #validate SET
-validate_set <- function(set_data){
-  for(set_data_row in set_data){
-    for(set_data_row_index in 1:nrow(set_data_row)){
-      data_row <- set_data_row[set_data_row_index,]
-      inputs <- data_row$inputs
-      output <- data_row$outputs$set
+#' @noRd
+validateSET <- function(set_data){
+  for(setDataRow in set_data){
+    for(setDataRow_index in 1:nrow(setDataRow)){
+      dataRow <- setDataRow[setDataRow_index,]
+      inputs <- dataRow$inputs
+      output <- dataRow$outputs$set
       set_result <- round(calcSET(inputs$ta, inputs$tr, inputs$v, inputs$rh, inputs$clo, inputs$met),1)
       if(set_result != output){
         print(paste("Outputs did not match for these inputs ->  ta:",inputs$ta, 
@@ -130,11 +140,12 @@ validate_set <- function(set_data){
 }
 
 # validate all methods
-validate_all_functions <- function(){
-  validation_data <- as.data.frame(jsonlite::fromJSON("https://raw.githubusercontent.com/FedericoTartarini/validation-data-comfort-models/main/validation_data.json"))
-  pmv_ppd_validation_result <- validate_pmv_ppd(validation_data$reference_data.pmv_ppd.data)
-  solar_gain_validation_result <- validate_solar_gain(validation_data$reference_data.solar_gain.data)
-  set_validation_result <- validate_set(validation_data$reference_data.set.data)
+#' @noRd
+validateAllFunctions <- function(){
+  validationData <- as.data.frame(jsonlite::fromJSON("https://raw.githubusercontent.com/FedericoTartarini/validation-data-comfort-models/main/validationData.json"))
+  pmv_ppd_validation_result <- validatePMVPPD(validationData$reference_data.pmv_ppd.data)
+  solar_gain_validation_result <- validateSolarGain(validationData$reference_data.solar_gain.data)
+  set_validation_result <- validateSET(validationData$reference_data.set.data)
 }
 
-validate_all_functions()
+#validate_all_functions()

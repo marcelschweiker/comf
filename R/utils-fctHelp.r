@@ -1,8 +1,9 @@
+#' @noRd
 #' @keywords internal
 # help functions
 
 #### function bisect ####
-## used for bisection method in search for ta.adj for calculation of adjusted pmv including cooling effect of elevaated air speed using set according to ASHRAE 55-2013
+## used for bisection method in search for ta.adj for calculation of adjusted pmv including cooling effect of elevated air speed using set according to ASHRAE 55-2013
 ## code based on forum entry by ravi Varadhan rvaradhan at jhmi.edu 
 ## https://stat.ethz.ch/pipermail/r-help/2010-september/253236.html
 
@@ -69,7 +70,7 @@ bisect <- function(fn, lower, upper, tol=1.e-07, ...) {
 
 ## mshiv  # program following function of hypothalamus
 ## Calculation of thermal-energy genration by shivering by stolwijk and Hardy
-mshiv <-function(tcrSet, tskSet, tcr, tsk){
+mshiv <- function(tcrSet, tskSet, tcr, tsk){
   signalCr <- tcrSet - tcr; 
   signalCr <- ifelse (signalCr < 0, 0, signalCr)
   signalSk <- tskSet - tsk; 
@@ -320,7 +321,7 @@ solarGain <- function(solAlt, solAzi, solRadDir, solTrans,
   hr <- 6
   i_diff <- 0.2 * solRadDir
   
-  fp_table = rbind(
+  fp_table <- rbind(
     c(0.25, 0.25, 0.23, 0.19, 0.15, 0.10, 0.06),
     c(0.25, 0.25, 0.23, 0.18, 0.15, 0.10, 0.06),
     c(0.24, 0.24, 0.22, 0.18, 0.14, 0.10, 0.06),
@@ -337,7 +338,7 @@ solarGain <- function(solAlt, solAzi, solRadDir, solTrans,
   )
   
   if(posture == "seated"){
-    fp_table = rbind(
+    fp_table <- rbind(
       c(0.20, 0.23, 0.21, 0.21, 0.18, 0.16, 0.12),
       c(0.20, 0.23, 0.20, 0.20, 0.19, 0.16, 0.12),
       c(0.20, 0.23, 0.21, 0.20, 0.18, 0.15, 0.12),
@@ -355,39 +356,39 @@ solarGain <- function(solAlt, solAzi, solRadDir, solTrans,
   }
 
   if(posture == "supine"){
-    alt_temp = solAlt
-    solAlt = abs(90 - solAzi)
-    solAzi = alt_temp
+    alt_temp <- solAlt
+    solAlt <- abs(90 - solAzi)
+    solAzi <- alt_temp
   }
   
-  alt_range = c(0, 15, 30, 45, 60, 75, 90)
-  az_range = c(0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180)
-  alt_i = findSpan(alt_range, solAlt)
-  az_i = findSpan(az_range, solAzi)
-  fp11 = fp_table[az_i,alt_i]
-  fp12 = fp_table[az_i,alt_i + 1]
-  fp21 = fp_table[az_i + 1,alt_i]
-  fp22 = fp_table[az_i + 1,alt_i + 1]
-  az1 = az_range[az_i]
-  az2 = az_range[az_i + 1]
-  alt1 = alt_range[alt_i]
-  alt2 = alt_range[alt_i + 1]
-  fp = fp11 * (az2 - solAzi) * (alt2 - solAlt)
-  fp = fp + (fp21 * (solAzi - az1) * (alt2 - solAlt))
-  fp = fp +(fp12 * (az2 - solAzi) * (solAlt - alt1))
-  fp = fp +(fp22 * (solAzi - az1) * (solAlt - alt1))
-  fp = fp/((az2 - az1) * (alt2 - alt1))
-  f_eff = 0.725
+  alt_range <- c(0, 15, 30, 45, 60, 75, 90)
+  az_range <- c(0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180)
+  alt_i <- findSpan(alt_range, solAlt)
+  az_i <- findSpan(az_range, solAzi)
+  fp11 <- fp_table[az_i,alt_i]
+  fp12 <- fp_table[az_i,alt_i + 1]
+  fp21 <- fp_table[az_i + 1,alt_i]
+  fp22 <- fp_table[az_i + 1,alt_i + 1]
+  az1 <- az_range[az_i]
+  az2 <- az_range[az_i + 1]
+  alt1 <- alt_range[alt_i]
+  alt2 <- alt_range[alt_i + 1]
+  fp <- fp11 * (az2 - solAzi) * (alt2 - solAlt)
+  fp <- fp + (fp21 * (solAzi - az1) * (alt2 - solAlt))
+  fp <- fp +(fp12 * (az2 - solAzi) * (solAlt - alt1))
+  fp <- fp +(fp22 * (solAzi - az1) * (solAlt - alt1))
+  fp <- fp/((az2 - az1) * (alt2 - alt1))
+  f_eff <- 0.725
   
   if(posture == "seated")
-    f_eff = 0.696
+    f_eff <- 0.696
   
-  sw_abs = asw
-  lw_abs = 0.95
+  sw_abs <- asw
+  lw_abs <- 0.95
   
-  e_diff = f_eff * fSvv * 0.5 * solTrans * i_diff
-  e_direct = fp * solTrans * fBes * solRadDir
-  e_refl = (
+  e_diff <- f_eff * fSvv * 0.5 * solTrans * i_diff
+  e_direct <- fp * solTrans * fBes * solRadDir
+  e_refl <- (
     f_eff 
     * fSvv 
     * 0.5 
@@ -395,9 +396,9 @@ solarGain <- function(solAlt, solAzi, solRadDir, solTrans,
     * (solRadDir * sin(solAlt * degToRad) + i_diff) 
     * floorRef
   )
-  e_solar = e_diff + e_direct + e_refl
-  erf = e_solar * (sw_abs / lw_abs)
-  delMrt = erf / (hr * f_eff)
+  e_solar <- e_diff + e_direct + e_refl
+  erf <- e_solar * (sw_abs / lw_abs)
+  delMrt <- erf / (hr * f_eff)
   return(c(round(erf,1),round(delMrt,1)))
 }
 
@@ -417,16 +418,16 @@ findSpan <- function(arr, x){
 #function for calculating UTCI Value
 #' @keywords internal
 utciApprox <- function(ta, tr, vel, rh) {
-  ehPa = es(ta) * (rh / 100.0)
-  delta_t_tr = tr - ta
+  ehPa <- es(ta) * (rh / 100.0)
+  delta_t_tr <- tr - ta
   
   # convelert velapour pressure to kPa
-  Pa = ehPa / 10.0
+  Pa <- ehPa / 10.0
   
   #calculation of the utci value
-  utci = (
-    ta
-    + (0.607562052)
+  utci <- (
+    ta +
+    (0.607562052)
     + (-0.0227712343) * ta
     + (8.06470249 * (10 ** (-4))) * ta * ta
     + (-1.54271372 * (10 ** (-4))) * ta * ta * ta
@@ -801,8 +802,36 @@ es <- function(ta) {
     es <- es + (g[i] * (tk ** (i - 3)))
   }
   # converting to hPa
-  es = exp(es) * 0.01
+  es <- exp(es) * 0.01
   es
 }
 
 
+#utils for ATHBPMV
+#' @noRd
+
+calcCoolingStrategyBuilding <- function(coolingStrategyBuilding){
+  coolingStrategyBuildingValue <- tolower(gsub(" ", "", coolingStrategyBuilding))
+  return(ifelse(c('mixedmode', 'naturallyventilated')==coolingStrategyBuildingValue, 1, 0))
+}
+
+calcBuildingType <- function(buildingType){
+  buildingTypeValue <- tolower(gsub(" ", "", buildingType))
+  multiFamilyHousing <- if(buildingType=='multiFamilyHousing') 1 else 0
+  office <- if(buildingType=='office') 1 else 0
+  others <- if(buildingType=='others') 1 else 0
+  return(c(multiFamilyHousing, office, others))
+}
+
+calcBuildingTypeSimple <- function(buildingTypeSimple){
+  buildingTypeSimpleValue <- tolower(gsub(" ", "", buildingTypeSimple))
+  return(ifelse(c('multiFamilyHousing', 'office')==buildingTypeSimpleValue, 1, 0))
+}
+
+calcSeason <- function(season){
+  seasonValue <- tolower(gsub(" ", "", season))
+  spring <- if(seasonValue=='spring') 1 else 0
+  summer <- if(seasonValue=='summer') 1 else 0
+  winter <- if(seasonValue=='winter') 1 else 0
+  return(c(spring, summer, winter))
+}

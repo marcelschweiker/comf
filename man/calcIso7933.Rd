@@ -68,7 +68,7 @@ Ap, Fr, defspeed, defdir, HR, pb)
 \item{pb}{a numeric value presenting normal barometric pressure in [Pa]}
 }
 \value{
-\code{calcISO7933} returns a data.frame with the following items: \cr{
+\code{calcISO7933} returns a data.frame with the following items: \cr
  \cr
  \code{Tre	final} rectal temperature [degrees Celsius] \cr
  \cr
@@ -97,7 +97,6 @@ Ap, Fr, defspeed, defdir, HR, pb)
  \code{Tsk} skin Temperature at the minute [degrees Celsius]\cr
  \cr
  \code{wp} predicted skin wettedness [-]\cr
-}
 }
 \description{
 \code{calcISO7933} calculates Tre, SWtotg, Dlimtre, Dlimloss50 and Dlimloss95 based 

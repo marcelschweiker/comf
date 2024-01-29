@@ -8,7 +8,7 @@
 #' @usage 
 #' calcSET(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
 #' ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
-#' cstr = .5, body_position = 'sitting')
+#' cstr = .5, bodyPosition = 'sitting')
 #' 
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
@@ -27,7 +27,7 @@
 #' @param csw a numeric value presenting the driving coefficient for regulatory sweating
 #' @param cdil a numeric value presenting the driving coefficient for vasodilation
 #' @param cstr a numeric value presenting the driving coefficient for vasoconstriction
-#' @param body_position a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting' 
+#' @param bodyPosition a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting' 
 #' 
 #' @details 
 #' All variables must have the same length 1. For the calculation of several 
@@ -76,6 +76,6 @@
 
 calcSET <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
                     ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
-                    csw = 170, cdil = 120, cstr = .5, body_position = 'sitting'){
-  calc2Node(ta, tr, vel, rh, clo, met, wme, sa, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr, body_position)$set
+                    csw = 170, cdil = 120, cstr = .5, bodyPosition = 'sitting'){
+  calc2Node(ta, tr, vel, rh, clo, met, wme, sa, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr, bodyPosition)$set
 }
