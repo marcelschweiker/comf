@@ -6,9 +6,9 @@
 \alias{2node}
 \title{Comfort Indices based on the 2-Node-Model}
 \usage{
-calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60,
-ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5,
-varOut = "else")
+calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, sa = NULL, pb = 760, 
+ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
+cstr = 0.5, varOut = "else", bodyPosition = 'sitting')
 }
 \arguments{
 \item{ta}{a numeric value presenting air temperature in [degree C]}
@@ -24,6 +24,8 @@ varOut = "else")
 \item{met}{a numeric value presenting metabolic rate in [met]}
 
 \item{wme}{a numeric value presenting external work in [met]}
+
+\item{sa}{(optional)surface Area according to mosteller formula [m^2]}
 
 \item{pb}{a numeric value presenting barometric pressure in [torr] or [mmHg]}
 
@@ -44,6 +46,8 @@ varOut = "else")
 \item{cstr}{a numeric value presenting the driving coefficient for vasoconstriction}
 
 \item{varOut}{a string value either "else" for normal output of SET or "skinWet" to report value of skin wettedness}
+
+\item{bodyPosition}{a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting'}
 }
 \value{
 returns a data.frame with the following items:

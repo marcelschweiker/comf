@@ -50,11 +50,10 @@ in [degree C].}
 be plotted or not.}
 }
 \value{
-\code{calcdTNZ} returns a dataframe with the columns dTNZ, dTNZTs, dTNZTa. Thereby \cr{
+\code{calcdTNZ} returns a dataframe with the columns dTNZ, dTNZTs, dTNZTa. Thereby \cr
  \code{dTNZ}    The absolute distance to the centroid of the thermoneutral zone \cr
  \code{dTNZTs}  Relative value of distance assuming skin temperature to be dominant for sensation\cr
  \code{dTNZTa}  Relative value of distance assuming ambient temperature to be dominant for sensation \cr
-}
 }
 \description{
 calcdTNZ calculates the distance from the thermoneutral zone,

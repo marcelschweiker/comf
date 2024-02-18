@@ -23,8 +23,9 @@
 #'
 #' @keywords datasets
 #'
-#' @references Schweiker, M. and Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework. Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
-#' (\href{https://windsorconference.com/}{nceub})
+#' @references Schweiker, M. and Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework. 
+#' Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
+#' <https://windsorconference.com/>
 #'
 #' @examples
 #' data(dfField)

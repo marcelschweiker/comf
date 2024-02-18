@@ -28,7 +28,16 @@
 \alias{es}
 \alias{validateUTCI}
 \alias{validateSolarGain}
+\alias{validateSolarGainRange}
 \alias{checkRange}
+\alias{calcCoolingStrategyBuilding}
+\alias{calcBuildingType}
+\alias{calcBuildingTypeSimple}
+\alias{calcSeason}
+\alias{validatePMVPPD}
+\alias{validateSET}
+\alias{validateAllFunctions}
+
 
 \title{
 Internal Functions Used by Other Functions of this Package
@@ -38,7 +47,6 @@ A few internal functions called by other functions in this package
 }
 \usage{
 bisect(fn, lower, upper, tol = 1e-07, ...)
-calcet(top, ta, pha, w, im, phaEt, imStar)
 hcvF(v, tcl, ta)
 hcvG(va, met, basMet)
 hcvM(v)
@@ -66,9 +74,17 @@ findSpan(arr, x)
 utciApprox(ta, tr, vel, rh)
 es(ta)
 validateUTCI(ta, tr, vel, rh)
-validateSolarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, 
-                              fBes, asw=0.7, posture)
+validateSolarGainRange(solAlt, solAzi, solRadDir, solTrans, fSvv, 
+                              fBes, asw=0.7, posture) 
+validatePMVPPD(pmv_ppd_data)
+validateSET(set_data)
+validateAllFunctions()
 checkRange(parameter, lower_bound, upper_bound) 
+calcCoolingStrategyBuilding(coolingStrategyBuilding)
+calcBuildingType(buildingType)
+calcBuildingTypeSimple(buildingTypeSimple)
+calcSeason(season)
+
 }
 \arguments{
 depending on the function

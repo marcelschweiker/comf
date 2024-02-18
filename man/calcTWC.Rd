@@ -31,7 +31,6 @@ The authors disclaim all obligations and liabilities for damages arising from th
 }
 \examples{
 calcTWC(6.8,-25)
-windchill(6.8,-25)
 }
 \references{
 ISO 11079, 2007-12-15, ERGONOMICS OF THE THERMAL ENVIRONMENT - DETERMINATION AND INTERPRETATION OF COLD STRESS WHEN USING REQUIRED CLOTHING INSULATION (IREQ) AND LOCAL COOLING EFFECTS

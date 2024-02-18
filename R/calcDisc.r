@@ -74,5 +74,7 @@
 calcDisc <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
                      ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
                      csw = 170, cdil = 120, cstr = .5){
-  calc2Node(ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt, tu, obj, csw, cdil, cstr)$disc
+  calc2Node(ta = ta, tr = tr, vel = vel, rh = rh, clo = clo, met = met, wme = wme, NULL, 
+            pb = pb, ltime = ltime, ht = ht, wt = wt, tu = tu, obj = obj, csw = csw, 
+            cdil = cdil, cstr = cstr)$disc
 }

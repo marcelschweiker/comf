@@ -19,11 +19,11 @@
 #' @export
 
 
-calcCE <- function(ta,tr,vel,rh,clo= .5,met=1,wme=0)
+calcCE <- function(ta, tr, vel, rh, clo= .5, met=1, wme=0)
   {
    if (vel <= 0.2){
    ce = 0
-   warning('For velocity less than or equal to 0.2, Cooling effect is Zero')
+   warning('For velocity less than or equal to 0.2, cooling effect is Zero')
    print(paste0("Cooling Effect: ", ce ))
   }
 
@@ -32,7 +32,7 @@ calcCE <- function(ta,tr,vel,rh,clo= .5,met=1,wme=0)
   initial_set_tmp = calcSET(ta=ta, tr=tr, vel=vel, rh=rh, clo=clo, met=met, wme=wme)
   initial_set_tmp = round(initial_set_tmp, 1)
   f <- function(x){
-    change =  calcSET(ta - x, tr - x, vel=still_air_threshold, rh=rh,  clo=clo,met=met, wme=wme)
+    change =  calcSET(ta - x, tr - x, vel=still_air_threshold, rh=rh, clo=clo, met=met, wme=wme)
     change = round(change, 1)
     return (change - initial_set_tmp)
 

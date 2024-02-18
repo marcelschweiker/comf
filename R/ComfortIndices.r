@@ -164,7 +164,7 @@ calcComfInd <- function(lsCond, request="all"){
       
       # (5)	
       giveDat <- data.frame(calcPMVPPD(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i]), 
-                            calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], obj = "set"), 
+                            calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], NULL, pb[i], ltime[i], ht[i], wt[i], tu[i], obj = "set"), 
                             calctnAuliciems(ta[i], tmmo[i]), 
                             calctnHumphreysNV(tmmo[i]), 
                             calctnHumphreysAC(tmmo[i]), 
@@ -302,14 +302,14 @@ calcComfInd <- function(lsCond, request="all"){
           
         } else if (request[nparam] == "esCoeff"){
           metadj <- ifelse(asv[i]>0, met[i]*(1+asv[i]*(-.067)), met[i])
-          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], obj = "set"))
+          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], NULL, pb[i], ltime[i], ht[i], wt[i], obj = "set"))
           giveDat <- with(comfortData, get("pts"))
           if (nparam == 1){
             giveDatas<-giveDat
           } else {giveDatas<-cbind(giveDatas, giveDat)}
           
         } else if (request[nparam] == "asCoeff"){
-          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], obj = "set"))
+          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], NULL, pb[i], ltime[i], ht[i], wt[i], obj = "set"))
           giveDat <- with(comfortData, get("pts"))
           if (nparam == 1){
             giveDatas<-giveDat
@@ -317,7 +317,7 @@ calcComfInd <- function(lsCond, request="all"){
           
         } else if (request[nparam] == "pd"){
           
-          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], tu[i], obj = "set"))
+          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], NULL, pb[i], ltime[i], ht[i], wt[i], tu[i], obj = "set"))
           giveDat <- with(comfortData, get(request[nparam]))
           if (nparam == 1){
             giveDatas<-giveDat
@@ -353,7 +353,7 @@ calcComfInd <- function(lsCond, request="all"){
         }
         else {
           
-          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], pb[i], ltime[i], ht[i], wt[i], obj = "set"))
+          comfortData <- data.frame(calc2Node(ta[i], tr[i], vel[i], rh[i], clo[i], met[i], wme[i], NULL, pb[i], ltime[i], ht[i], wt[i], obj = "set"))
           giveDat <- with(comfortData, get(request[nparam]))
           if (nparam == 1){
             giveDatas<-giveDat

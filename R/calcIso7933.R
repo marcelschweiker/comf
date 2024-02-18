@@ -59,7 +59,7 @@
 #' Malchaire, Piette, Kampmann, Mehnert, Gebhardt, Havenith, Den Hartog, Holmer, Parsons, Alfano, Griefahn (2000) <doi:10.1016/S0003-4878(00)00030-2>
 #' Malchaire, Kampmann, Havenith, Mehnert, Gebhardt (2000) <doi:10.1007/s004200050420>
 #' 
-#' @return \code{calcISO7933} returns a data.frame with the following items: \cr{
+#' @return \code{calcISO7933} returns a data.frame with the following items: \cr
 #'  \cr
 #'  \code{Tre	final} rectal temperature [degrees Celsius] \cr
 #'  \cr
@@ -88,7 +88,6 @@
 #'  \code{Tsk} skin Temperature at the minute [degrees Celsius]\cr
 #'  \cr
 #'  \code{wp} predicted skin wettedness [-]\cr
-#' }
 #'  
 #' @export
 #'

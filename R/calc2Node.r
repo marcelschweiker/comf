@@ -7,9 +7,9 @@
 #' \code{calc2Node} calculates Comfort Indices based on the 2-Node-Model by Gagge et al.
 #' 
 #' @usage 
-#' calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, pb = 760, ltime = 60,
-#' ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, cstr = 0.5,
-#' varOut = "else")
+#' calc2Node(ta, tr, vel, rh, clo = 0.5, met = 1, wme = 0, sa = NULL, pb = 760, 
+#' ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", csw = 170, cdil = 120, 
+#' cstr = 0.5, varOut = "else", bodyPosition = 'sitting')
 #' 
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
@@ -18,6 +18,7 @@
 #' @param clo a numeric value presenting clothing insulation level in [clo] 
 #' @param met a numeric value presenting metabolic rate in [met]
 #' @param wme a numeric value presenting external work in [met]
+#' @param sa (optional)surface Area according to mosteller formula [m^2]
 #' @param pb a numeric value presenting barometric pressure in [torr] or [mmHg]
 #' @param ltime a numeric value presenting exposure time in [minutes]
 #' @param ht a numeric value presenting body height in [cm]
@@ -28,6 +29,7 @@
 #' @param cdil a numeric value presenting the driving coefficient for vasodilation
 #' @param cstr a numeric value presenting the driving coefficient for vasoconstriction
 #' @param varOut a string value either "else" for normal output of SET or "skinWet" to report value of skin wettedness
+#' @param bodyPosition a string representing body position, has to be 'sitting' or 'standing'. Default value is 'sitting' 
 #'
 #' @details 
 #' All variables must have the same length 1. For the calculation of several 
@@ -80,10 +82,14 @@
 #' ## Calculation of a single set of values.
 #' calc2Node(22, 25, .50, 50)
 
-calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760, 
+calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
                       ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
-                      csw = 170, cdil = 120, cstr = .5, varOut="else"){
+                      csw = 170, cdil = 120, cstr = .5, varOut="else", 
+                      bodyPosition = 'sitting'){
   
+  if(sa == 0 || is.null(sa)){
+    sa    <- ((ht * wt) / 3600 ) ^ .5 # surface Area (m2) according to mosteller formula 
+  }
   m <- met * 58.2 #[w/m2]
   w <- wme * 58.2 #[w/m2]
   mw <- m - w 
@@ -98,7 +104,6 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   tbn   <- 36.49 #setpoint for tb (.1*tskn + .9*tcrn)
   skbfn <- 6.3   #neutral value for skbf
   sbc   <- 5.6697 * 10 ^ (-08) #stephan-Boltzmann constant
-  sa    <- ((ht * wt) / 3600 ) ^ .5   # surface Area (m2) according to mosteller formula 
   
   vel <- max(vel, 0.1) # set minimum va to .1 m/s
   
@@ -172,9 +177,13 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
         flag <- TRUE
       }
     }
-    tcl = 30.260895
     while (!flag){
-      chr <- 4 * sbc * (((tcl + tr) / 2 + 273.15) ^ 3) * .72
+      if(tolower(gsub(" ", "", bodyPosition, fixed = TRUE)) == 'sitting'){
+        chr <- 4.0 * 0.95 * sbc * (((tcl + tr) / 2.0 + 273.15) ^ 3.0) * 0.7
+      }
+      else{
+        chr <- 4.0 * 0.95 * sbc * (((tcl + tr) / 2.0 + 273.15) ^ 3.0) * 0.73
+      }
       ctc <- chr + chc
       ra  <- 1 / (facl * ctc) # resistance of air layer to dry heat transfer
       top <- (chr * tr + chc * ta) / ctc
@@ -194,7 +203,6 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
     ssk  <- hfcs - dry - esk
     tcsk <- .97 * alfa * wt
     tccr <- .97 * (1 - alfa) * wt
-    sa <- 1.8258
     dtsk <- (ssk * sa) / tcsk / 60 # deg C per minute
     dtcr <- scr * sa / tccr / 60 # deg C per minute
     dtim <- 1 #minutes
@@ -276,7 +284,6 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   # Define new heat flow terms, coeffs, and abbreviations
   store   <- m - w - cres - eres - dry - esk     #rate of body heat storage #?
   hsk     <- dry + esk                   #total heat loss from skin
-  hsk <- 52.181036
   rn      <- m - w                       #net metabolic heat production [w/m2]
   ecomf   <- .42 * (rn - 58.2)
   
@@ -287,11 +294,9 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   hd      <- 1 / (ra + rcl) #?
   he      <- 1 / (rea + recl)#?
   wet     <- pwet
-  tsk <- 33.396536
   pssk    <- fnsvp(tsk)
   
   #Definition of ASHRAE standard environment... denoted "s"
-  chr <- 4.44069
   chrs <- chr
   if (met < .85){
     chcs <- 3
@@ -304,7 +309,6 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   rcls  <- .155 * rclos
   facls <- 1 + kclo * rclos
   fcls  <- 1 / (1 + .155 * facls * ctcs * rclos)
-  fcls <- 0.5076707
   ims   <- .45
   icls  <- (ims * chcs / ctcs * (1 - fcls)) / (chcs / ctcs - fcls * ims)
   ras   <- 1 / (facls * ctcs)

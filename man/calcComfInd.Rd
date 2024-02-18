@@ -102,7 +102,7 @@ calcComfInd(lsCond, request=c("pmv", "ptse"))
 For references see individual functions.
 }
 \seealso{
-see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHBpmv}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctAdapt}}
+see also \code{\link{calcPMVPPD}}, \code{\link{calc2Node}}, \code{\link{calcHbExSteady}}, \code{\link{calcATHBpmv2015}}, \code{\link{calcdTNZ}}, \code{\link{calcPMVadj}}, \code{\link{calcPtsa}}, \code{\link{calctAdapt}}
 }
 \author{
 Sophia Mueller and Marcel Schweiker. Further contribution by Shaomi Rahman.

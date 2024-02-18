@@ -80,7 +80,7 @@ calcPtse <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, pb = 760,
   
   pmv <- as.numeric(calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1])
   met  <- ifelse (pmv > 0, met * (1 + pmv * (-.067)), met)
-  set  <- calc2Node(ta, tr, vel, rh, clo, met, wme, pb, ltime, ht, wt, tu, obj = "set")[2]
+  set  <- calc2Node(ta, tr, vel, rh, clo, met, wme, NULL, pb, ltime, ht, wt, tu, obj = "set")[2]
   ptse <- .25 * set - 6.03
   ptse <- esCoeff * ptse
   names(ptse) <- "ptse"

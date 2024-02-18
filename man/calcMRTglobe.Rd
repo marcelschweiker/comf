@@ -39,9 +39,7 @@ calcMRTglobe(tg, ta, vel)
 }
 \references{
 Teitelbaum et al. (2022) <10.1038/s41598-022-10172-5>
-}
-\seealso{
-see also \code{\link{calcMRT}}
+Teitelbaum (2022)  <https://github.com/eteitelb/MixedConvection>
 }
 \author{
 code implemented into R by Shaomi Rahman and Marcel Schweiker.

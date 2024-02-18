@@ -38,11 +38,10 @@
 #' based on ISO 9920 Appendix H (Figure H.1). A typical winter case leads to a 
 #' value of around .86, in the summer case this goes down to values around .68.
 #' 
-#' @return \code{calcdTNZ} returns a dataframe with the columns dTNZ, dTNZTs, dTNZTa. Thereby \cr{
+#' @return \code{calcdTNZ} returns a dataframe with the columns dTNZ, dTNZTs, dTNZTa. Thereby \cr
 #'  \code{dTNZ}    The absolute distance to the centroid of the thermoneutral zone \cr
 #'  \code{dTNZTs}  Relative value of distance assuming skin temperature to be dominant for sensation\cr
 #'  \code{dTNZTa}  Relative value of distance assuming ambient temperature to be dominant for sensation \cr
-#' }
 #' 
 #' @note 
 #' This function was used in earlier versions of TNZ calculation (see references

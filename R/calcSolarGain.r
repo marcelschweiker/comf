@@ -33,8 +33,6 @@ calcSolarGain <- function(solAlt, solAzi, solRadDir, solTrans,
                           posture="seated", floorRef=0.6){
   
   posture = tolower(posture)
-  validateSolarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
-                    posture)
   solarGainRes = solarGain(solAlt, solAzi, solRadDir, solTrans, fSvv, fBes, asw, 
                            posture, floorRef=0.6)
   
