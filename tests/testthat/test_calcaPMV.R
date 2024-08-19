@@ -1,5 +1,3 @@
-library(testthat)
-library(comf)
 # Define the test
 test_that("Test calcaPMV function outputs", {
 
