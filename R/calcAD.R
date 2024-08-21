@@ -46,5 +46,6 @@ calcAD <- function(ta,tr,vel,rh,clo,met,vAnkle){
        warning('Velocity(vel) should be less than or equal to 0.2')
 
      }
+    data.frame(round(tsv,3), ppdval, acceptability)
 
 }
