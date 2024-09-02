@@ -38,9 +38,12 @@ calcATHBstandard <- function(trm, ta, tr, vel, rh, met){
   LAdpt <- calcPMVPPD(ta, tr, vel, rh, cloAdpt, metAdpt, getLoad = TRUE)$Lraw
   
   # predicted thermal sensation vote 
-  PTSVATHBpmv <- 1.484304 + 0.0276035 * LAdpt - 0.9602187 * metAdpt - 0.03421333 *
-    trm + 0.002971073 * LAdpt * metAdpt + 0.0002264348 * LAdpt * trm +
-    0.01869608 * metAdpt * trm + 0.0002264348 * LAdpt * trm - 0.0002909158 * 
-    LAdpt * metAdpt * trm
+  PTSVATHBpmv <- 1.484304 + 
+	0.0276035 * LAdpt - 
+	0.9602187 * metAdpt - 
+	0.03421333 * trm + 
+	0.0002264348 * LAdpt * trm +
+    0.01869608 * metAdpt * trm + 
+	0.0002909158 * LAdpt * metAdpt * trm
   PTSVATHBpmv
 }
