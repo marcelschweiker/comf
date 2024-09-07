@@ -22,8 +22,8 @@ test_that("test calcSolarGain", {
     expect_true(abs(sg[1] - outputs$erf) < tolerance$erf,
       info = paste("Failed at data row", i, ": ERF tolerance check.")
     )
-    expect_true(abs(sg[2] - outputs$t_rsw) < tolerance$delta_mrt,
-      info = paste("Failed at data row", i, ": ERF tolerance check.")
+    expect_true(abs(sg[2] - outputs$delta_mrt) < tolerance$delta_mrt,
+      info = paste("Failed at data row", i, ": delta_mrt tolerance check.")
     )
   }
 })
