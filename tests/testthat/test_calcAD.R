@@ -9,13 +9,13 @@ test_that("test calcAD", {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
     result <- calcAD(
-      ta = inputs$ta,
+      ta = inputs$tdb,
       tr = inputs$tr,
-      vel = inputs$vel,
+      vel = inputs$v,
       rh = inputs$rh,
       met = inputs$met,
       clo = inputs$clo,
-      vAnkle = inputs$vAnkle
+      vAnkle = inputs$v_ankle
     )
     expect_true(
       abs(result$Ankle_draft_ppd - outputs$Ankle_draft_ppd)
