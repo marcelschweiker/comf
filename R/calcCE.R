@@ -19,41 +19,36 @@
 #' @export
 
 
-calcCE <- function(ta, tr, vel, rh, clo= .5, met=1, wme=0)
-  {
-   if (vel <= 0.2){
-   ce = 0
-   warning('For velocity less than or equal to 0.2, cooling effect is Zero')
-   print(paste0("Cooling Effect: ", ce ))
-  }
-
-
-  still_air_threshold <- 0.1
-  initial_set_tmp = calcSET(ta=ta, tr=tr, vel=vel, rh=rh, clo=clo, met=met, wme=wme)
-  initial_set_tmp = round(initial_set_tmp, 1)
-  f <- function(x){
-    change =  calcSET(ta - x, tr - x, vel=still_air_threshold, rh=rh, clo=clo, met=met, wme=wme)
-    change = round(change, 1)
-    return (change - initial_set_tmp)
-
-  }
-  out <- tryCatch(
-    {
-
-      ce = bisect(f,0,15)
-      print(paste0("Cooling Effect: ", lapply(ce, round,2)))
-
-
-
-    },
-    error=function(cond) {
-
-      message(paste("The cooling effect could not be calculated, assuming the value 0"))
-      message(cond)
-      # Choose a return value in case of error
-      return(NA)
+calcCEmod <- function(ta, tr, vel, rh, clo= .5, met=1, wme=0){
+  if (vel <= 0.2){
+     ce <- 0
+     warning('For velocity less than or equal to 0.2, cooling effect is Zero')
+     #print(paste0("Cooling Effect: ", ce ))
+  } else {
+    still_air_threshold <- 0.1
+    initial_set_tmp = calcSET(ta=ta, tr=tr, vel=vel, rh=rh, clo=clo, met=met, wme=wme)
+    initial_set_tmp = round(initial_set_tmp, 1)
+    f <- function(x){
+      change = calcSET(ta - x, tr - x, vel=still_air_threshold, rh=rh, clo=clo, met=met, wme=wme)
+      change = round(change, 1)
+      change - initial_set_tmp
     }
-
-  )
-
+    out <- tryCatch(
+      {
+        ce = bisect(f,0,15)
+        #print(paste0("Cooling Effect: ", lapply(ce, round,2)))
+  
+      },
+      error=function(cond) {
+  
+        message(paste("The cooling effect could not be calculated, assuming the value 0"))
+        message(cond)
+        # Choose a return value in case of error
+        return(NA)
+      }
+  
+    )
+    ce <- out$x
+  }
+data.frame(ce)
 }
