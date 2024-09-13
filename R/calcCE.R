@@ -14,12 +14,12 @@
 #' @returns ce - Cooling Effect in [degree C]
 #' @references
 #' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
-#' @examples calcCE(25,25,0.3,50,0.5,1) # returns Cooling Effect: 1.3
+#' @examples calcCE(25,25,0.3,50,0.5,1) # returns Cooling Effect: 1.4
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 #' @export
 
 
-calcCEmod <- function(ta, tr, vel, rh, clo= .5, met=1, wme=0){
+calcCE <- function(ta, tr, vel, rh, clo= .5, met=1, wme=0){
   if (vel <= 0.2){
      ce <- 0
      warning('For velocity less than or equal to 0.2, cooling effect is Zero')
