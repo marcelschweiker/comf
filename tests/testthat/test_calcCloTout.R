@@ -1,4 +1,4 @@
-test_that("test calcclo_tout", {
+test_that("test calcCloTout", {
   source("../config.R")
   source("../utils-test-tool.R")
   # call retrieve_data() to get test data
