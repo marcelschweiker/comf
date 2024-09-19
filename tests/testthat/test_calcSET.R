@@ -40,7 +40,6 @@ test_that("calcSET function returns correct values", {
     )
 
     expected_set <- outputs[[1]]
-    print(paste("Test case", i, "- Result:", result, "Expected:", expected_set))
     expect_true(
       abs(result - expected_set) < tolerance_set,
       info = paste("Test case", i, "failed on SET values")
