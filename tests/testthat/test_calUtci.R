@@ -40,9 +40,6 @@ test_that("calcUTCI returns correct values", {
     result <- as.numeric(result)
     expected_utci <- as.numeric(expected_utci)
 
-    print(paste("Test case", i, "- Result:", result, "Expected:", expected_utci))
-    print(paste("Types - Result:", class(result), "Expected:", class(expected_utci)))
-
     expect_true(
       abs(result - expected_utci) < tolerance$utci,
       info = paste("Test case", i, "failed on UTCI values")
