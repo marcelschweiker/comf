@@ -12,5 +12,6 @@ url_config <- list(
   test_set_url = paste0(unit_test_data_prefix, "ts_set.json"),
   test_e_pmv_url = paste0(unit_test_data_prefix,"ts_e_pmv.json"),
   test_utci_url = paste0(unit_test_data_prefix,"ts_utci.json"),
-  test_athb_url = paste0(unit_test_data_prefix,"ts_athb.json")
+  test_athb_url = paste0(unit_test_data_prefix,"ts_athb.json"),
+  test_two_node_url = paste0(unit_test_data_prefix,"ts_two_nodes.json")
 )
