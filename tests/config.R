@@ -14,5 +14,6 @@ url_config <- list(
   test_utci_url = paste0(unit_test_data_prefix, "ts_utci.json"),
   test_athb_url = paste0(unit_test_data_prefix, "ts_athb.json"),
   test_two_node_url = paste0(unit_test_data_prefix, "ts_two_nodes.json"),
-  test_ce_url = paste0(unit_test_data_prefix, "ts_cooling_effect.json")
+  test_ce_url = paste0(unit_test_data_prefix, "ts_cooling_effect.json"),
+  test_pet_steady_url = paste0(unit_test_data_prefix, "ts_pet_steady.json")
 )
