@@ -16,7 +16,7 @@
 #' @author Code implemented into R by Yiqing Zhang.
 #' @export
 
-calcclo_tout <- function(tout, units = "SI") {
+calcCloTout <- function(tout, units = "SI") {
   # Check if tout is numeric or a list of numeric values
   if (!is.numeric(tout) && !is.list(tout)) {
     stop("tout must be numeric or a list of numeric values.")
@@ -28,6 +28,10 @@ calcclo_tout <- function(tout, units = "SI") {
     if (!is.numeric(tout)) {
       stop("Elements of tout list must be numeric values.")
     }
+  }
+
+  if (is.na(units)) {
+    units <- "SI"
   }
 
   # Validate the units

@@ -1,32 +1,35 @@
 test_that("test calcCloTout", {
   source("../config.R")
   source("../utils-test-tool.R")
-  # call retrieve_data() to get test data
+
   reference_tables <- retrieve_data(url_config$test_clo_tout_url)
-  tolerance <- reference_tables$tolerance
   data <- reference_tables$data
 
   for (i in seq_len(nrow(data))) {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
     
-    result <- calcclo_tout(tout = inputs$tout, units = inputs$units)
+    result <- calcCloTout(tout = inputs$tout, units = inputs$units)
 
-    # Check results for scalar and array inputs
-    expect_true(abs(result - outputs$result) < tolerance$result,
-      info = paste("Failed at data row", i, ": clo_tout result tolerance check.")
+    expected_result <- unlist(outputs$clo_tout)
+    
+    print("Actual result:")
+    print(result)
+    print("Expected (unlisted) result:")
+    print(expected_result)
+
+    expect_equal(result, expected_result,
+      info = paste("Failed at data row", i, ": clo_tout result exact check.")
     )
   }
 
-  # Test for error with invalid units
   expect_error(
-    calcclo_tout(tout = 27, units = "invalid"),
+    calcCloTout(tout = 27, units = "invalid"),
     "Invalid unit"
   )
-  
-  # Test for error with invalid tout type
+
   expect_error(
-    calcclo_tout(tout = "invalid"),
+    calcCloTout(tout = "invalid"),
     "tout must be numeric or a list of numeric values"
   )
 })
