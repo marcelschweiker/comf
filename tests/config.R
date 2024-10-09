@@ -10,7 +10,7 @@ url_config <- list(
   test_humidex_url = paste0(unit_test_data_prefix, "ts_humidex.json"),
   test_heat_index_url = paste0(unit_test_data_prefix, "ts_heat_index.json"),
   test_clo_tout_url = paste0(unit_test_data_prefix, "ts_clo_tout.json"),
-  test_adaptive_en_url = paste0(unit_test_data_prefix, "ts_adaptive_en.json")
+  test_adaptive_en_url = paste0(unit_test_data_prefix, "ts_adaptive_en.json"),
   test_pmv_ppd_url = paste0(unit_test_data_prefix, "ts_pmv_pdd.json"),
   test_set_url = paste0(unit_test_data_prefix, "ts_set.json"),
   test_e_pmv_url = paste0(unit_test_data_prefix, "ts_e_pmv.json"),
