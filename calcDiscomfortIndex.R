@@ -27,7 +27,7 @@
 #' calcdiscomfort_index(tdb=25, rh=50)
 #' @author Code implemented into R by Haiyang Liu.
 #' @export
-calcdiscomfort_index <- function(tdb, rh) {
+calcDiscomfortIndex <- function(tdb, rh) {
   # Convert input temperature and humidity to numeric vectors for calculation
   tdb <- as.numeric(tdb)
   rh <- as.numeric(rh)
