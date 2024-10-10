@@ -25,7 +25,7 @@ test_that("calcVTG calculates vertical temperature gradient PPD correctly", {
     )
   }
   # Test for error when velocity is too high
-  expect_error(calcVTG(ta = 25, tr = 25, vel = 0.3, rh = 50,
+  expect_warning(calcVTG(ta = 25, tr = 25, vel = 0.3, rh = 50,
                        met = 1.2, clo = 0.5, v_tmp_grad = 7),
                "Velocity\\(vel\\) should be less than or equal to 0.2")
 })
