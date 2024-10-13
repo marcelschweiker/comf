@@ -5,7 +5,7 @@ source("../utils-test-tool.R")
 
 test_that("Test wc function", {
   # Retrieve the test data from the specified URL
-  reference_tables <- retrieve_data(url_config$test_wci_url)
+  reference_tables <- retrieve_data(url_config$test_wind_chill_index_url)
   
   tolerance <- reference_tables$tolerance
   data_list <- reference_tables$data
