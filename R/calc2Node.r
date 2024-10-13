@@ -245,13 +245,14 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb
     if (skbf > 90){skbf <- 90}
     if (skbf < .5){skbf <- .5}
     regsw <- csw * warmb * exp(warms / 10.7)
+    ### careful because it can be wrong
     if (regsw > 500){regsw <- 500}
     ersw <- .68 * regsw
     # lr <- 2.02*(tsk+273.15)/273.15
     rea  <- 1 / (lr * facl * chc) #evaporative resistance of air layer
     recl <- rcl / (lr * icl) #evaporative resistance of clothing (icl<-.45)
     emax <- (fnsvp(tsk) - pa) / (rea + recl)
-    prsw <- ersw / emax
+    prsw <- ersw / emax### check these if the skin search for "W" 
     pwet <- .06 + .94 * prsw
     edif <- pwet * emax - ersw
     esk  <- ersw + edif
@@ -401,7 +402,7 @@ calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb
   if(varOut=="skinWet"){
     output <- data.frame(wet)
   } else {
-    output <- data.frame(et, set, tsens, disc, pd, ps, pts, pmvg, pmvstar)
+    output <- data.frame(et, set, tsens, disc, pd, ps, pts, pmvg, pmvstar, tsk, tcr, wet, esk, regsw)
   }
   rm(et, set, tsens, disc, pd, ps, pts)
   output
