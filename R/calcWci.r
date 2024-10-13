@@ -27,7 +27,7 @@
 #' Siple, P. A., & Passel, C. F. (1945). Measurements of Dry Atmospheric Cooling in Subfreezing Temperatures. \emph{Proceedings of the American Philosophical Society}, 89(1), 177–199.
 #'
 #' @export
-wc <- function(tdb, v, round_output = TRUE) {
+calcWci <- function(tdb, v, round_output = TRUE) {
   wci <- (10.45 + 10 * sqrt(v) - v) * (33 - tdb)
   # The factor 1.163 converts the result to W/m²
   wci <- wci * 1.163
