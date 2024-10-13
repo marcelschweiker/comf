@@ -14,12 +14,8 @@ test_that("Test calc2Node function", {
     inputs <- as.list(data_list$inputs[i, ])
     outputs <- as.list(data_list$outputs[i, ])
 
-    # print(paste("Test case", i, "outputs:"))
-    # str(outputs)  # 检查输出结构，确保 `w` 字段存在并解析正确
-
-    
     # Skip test case if 'execute_in_R' is set to FALSE
-    if (!is.null(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
+    if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next
     }
@@ -30,11 +26,6 @@ test_that("Test calc2Node function", {
     rh <- as.numeric(inputs$rh)
     clo <- as.numeric(inputs$clo)
     met <- as.numeric(inputs$met)
-
-
-    # wcrit <- ifelse(is.null(inputs$w_max), NA, as.numeric(inputs$w_max))
-    # regsw<- ifelse(is.null(inputs$max_sweating), NA, as.numeric(inputs$max_sweating))
-    # skbf <- ifelse(is.null(inputs$max_skin_blood_flow), NA, as.numeric(inputs$max_skin_blood_flow))
     
 
     result <- calc2Node(
@@ -61,10 +52,8 @@ test_that("Test calc2Node function", {
       expect_true(
         abs(result$disc - expected_disc) < tolerance$disc,
         info = paste("Failed at data row", i, ": disc tolerance check. Inputs:", 
-                     "tdb =", ta, "tr =", tr, "vel =", vel,
+                     "tdb =", ta, "tr =", tr, "v =", vel,
                      "rh =", rh, "clo =", clo, "met =", met,
-                    #  "w_max =", w_max, "max_sweating =", max_sweating, 
-                    #  "max_skin_blood_flow = ",max_skin_blood_flow,
                      "Expected disc =", expected_disc, 
                      "Actual disc =", result$disc)
       )
@@ -75,9 +64,10 @@ test_that("Test calc2Node function", {
       expect_true(
         abs(result$pmvg - expected_pmv_gagge) < tolerance$pmv_gagge, 
         info = paste("Failed at data row", i, ": pmv_gagge tolerance check. Inputs:", 
-                     "tdb =", inputs$tdb, "tr =", inputs$tr, "vel =", inputs$vel, 
-                     "rh =", inputs$rh, "clo =", inputs$clo, "met =", inputs$met,
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
                      "Expected pmv_gagge =", expected_pmv_gagge, 
+                     "tolerance pmv_gagge = ", tolerance$pmv_gagge,
                      "Actual pmv_gagge =", result$pmvg)
       )
     }
@@ -87,8 +77,8 @@ test_that("Test calc2Node function", {
       expect_true(
         abs(result$pmvstar - expected_pmv_set) < tolerance$pmv_set,
         info = paste("Failed at data row", i, ": pmv_set tolerance check. Inputs:", 
-                     "tdb =", inputs$tdb, "tr =", inputs$tr, "vel =", inputs$vel, 
-                     "rh =", inputs$rh, "clo =", inputs$clo, "met =", inputs$met,
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
                      "Expected pmv_set =", expected_pmv_set, 
                      "Actual pmv_set =", result$pmvstar)
       )
@@ -99,8 +89,8 @@ test_that("Test calc2Node function", {
       expect_true(
         abs(result$tcr - expected_tcore) < tolerance$t_core,
         info = paste("Failed at data row", i, ": t_core tolerance check. Inputs:", 
-                     "tdb =", inputs$tdb, "tr =", inputs$tr, "vel =", inputs$vel, 
-                     "rh =", inputs$rh, "clo =", inputs$clo, "met =", inputs$met,
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
                      "Expected t_core =", expected_tcore, 
                      "Actual t_core =", result$tcr)
       )
@@ -111,8 +101,8 @@ test_that("Test calc2Node function", {
       expect_true(
         abs(result$esk - expected_esk) < tolerance$e_skin,
         info = paste("Failed at data row", i, ": e_skin tolerance check. Inputs:", 
-                     "tdb =", inputs$tdb, "tr =", inputs$tr, "vel =", inputs$vel, 
-                     "rh =", inputs$rh, "clo =", inputs$clo, "met =", inputs$met,
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
                      "Expected e_skin =", expected_esk, 
                      "Actual e_skin =", result$esk)
       )
@@ -123,8 +113,8 @@ test_that("Test calc2Node function", {
       expect_true(
         abs(result$wet - expected_w) < tolerance$w,
         info = paste("Failed at data row", i, ": w tolerance check. Inputs:", 
-                     "tdb =", inputs$tdb, "tr =", inputs$tr, "vel =", inputs$vel, 
-                     "rh =", inputs$rh, "clo =", inputs$clo, "met =", inputs$met,
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
                      "Expected w =", expected_w, 
                      "Actual w =", result$wet)
       )
@@ -135,8 +125,8 @@ test_that("Test calc2Node function", {
       expect_true(
         abs(result$regsw - expected_m_rsw) < tolerance$m_rsw,
         info = paste("Failed at data row", i, ": m_rsw tolerance check. Inputs:", 
-                     "tdb =", inputs$tdb, "tr =", inputs$tr, "vel =", inputs$vel, 
-                     "rh =", inputs$rh, "clo =", inputs$clo, "met =", inputs$met,
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
                      "Expected m_rsw =", expected_m_rsw, 
                      "Actual m_rsw =", result$regsw)
       )
