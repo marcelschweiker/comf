@@ -2,7 +2,7 @@ library(testthat)
 source("../config.R")
 source("../utils-test-tool.R")
 
-test_that("Test calcATHBstandard", {
+test_that("test calcATHBstandard", {
   reference_tables <- retrieve_data(url_config$test_athb_url)
 
   tolerance <- reference_tables$tolerance
