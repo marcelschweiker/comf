@@ -10,17 +10,14 @@ test_that("calcVTG calculates vertical temperature gradient PPD correctly", {
   for (i in seq_len(nrow(data))) {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
-    
     if (isFALSE(data$execute_in_R[i])) {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next
     }
-    
     if (!is.null(inputs$units) && !is.na(inputs$units) && inputs$units == "ip") {
       print(paste("Skipping test case", i, "due to 'units' being 'ip'"))
       next
     }
-    
     result <- tryCatch({
       calcVTG(
         ta = inputs$tdb,
@@ -38,7 +35,6 @@ test_that("calcVTG calculates vertical temperature gradient PPD correctly", {
       print(paste("Error in test case", i, ":", e$message))
       NULL
     })
-    
     if (!is.null(result)) {
       expect_true(abs(result$PPD_vg - outputs$PPD_vg) < tolerance$PPD_vg,
         info = paste("Failed at data row", i, ": PPD_vg tolerance check.",
