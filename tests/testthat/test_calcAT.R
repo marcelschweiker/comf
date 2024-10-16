@@ -1,4 +1,4 @@
-test_that("test calcHumx", {
+test_that("test calcAT", {
   source("../config.R")
   source("../utils-test-tool.R")
   # call retrieve_data() to get test data
