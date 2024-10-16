@@ -15,7 +15,9 @@ Tests are executed automatically by the script, which assesses each function sys
 
 ## Results
 Below is the latest test result
+
 ========test result========
+
 |Test              |Result |
 |:-----------------|:------|
 |Context           |PASSED |
@@ -31,4 +33,6 @@ Below is the latest test result
 |calcVTG           |FAILED |
 |calcWbgt          |PASSED |
 |calUtci           |PASSED |
+
 ========test result========
+
