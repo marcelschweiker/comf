@@ -1,5 +1,5 @@
 # Define global URLs and any other configurations
-unit_test_data_prefix <- "https://raw.githubusercontent.com/TwinGan/validation-data-comfort-models/release_v1.0/"
+unit_test_data_prefix <- "https://raw.githubusercontent.com/FedericoTartarini/validation-data-comfort-models/refs/heads/main/"
 
 url_config <- list(
   test_adaptive_en_url = paste0(unit_test_data_prefix, "ts_adaptive_en.json"),
@@ -14,5 +14,6 @@ url_config <- list(
   test_utci_url = paste0(unit_test_data_prefix, "ts_utci.json"),
   test_athb_url = paste0(unit_test_data_prefix, "ts_athb.json"),
   test_pet_steady_url = paste0(unit_test_data_prefix, "ts_pet_steady.json"),
-  test_at_url = paste0(unit_test_data_prefix, "ts_at.json")
+  test_at_url = paste0(unit_test_data_prefix, "ts_at.json"),
+  test_phs_url = paste0(unit_test_data_prefix, "ts_phs.json")
 )
