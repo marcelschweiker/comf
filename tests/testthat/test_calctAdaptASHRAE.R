@@ -5,15 +5,11 @@ test_that("test calctAdaptASHRAE", {
   reference_tables <- retrieve_data(url_config$test_adaptive_ashrae_url)
   tolerance <- reference_tables$tolerance
   data <- reference_tables$data
-  #print(is.vector(data[11, "outputs"]$tmp_cmf[[1]]))
 
   for (i in seq_len(nrow(data))) {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
     result <- calctAdaptASHRAE(inputs$t_running_mean[[1]])
-    # print(inputs$t_running_mean[[1]])
-    # print(outputs$tmp_cmf[[1]])
-    # print(result$tAdaptASHRAE)
 
     expect_true(abs(result$tAdaptASHRAE - outputs$tmp_cmf[[1]]) < tolerance,
       info = paste("Failed at data row", i, ": AdaptASHRAE tolerance check. inputs:",
