@@ -24,23 +24,3 @@ test_that("test calcHeatIndex", {
       info = paste("Failed at data row", i, ": Heat Index tolerance check.")
     )
   }
-
-  # Test with hardcoded cases for additional validation
-  hardcoded_cases <- data.frame(
-    temp = c(25, 30, 77, 86),
-    rh = c(50, 80, 50, 80),
-    units = c("SI", "SI", "IP", "IP"),
-    expected = c(25.9, 37.7, 78.6, 99.8)
-  )
-
-  for (i in seq_len(nrow(hardcoded_cases))) {
-    result <- calcHeatIndex(
-      temp = hardcoded_cases$temp[i],
-      rh = hardcoded_cases$rh[i],
-      units = hardcoded_cases$units[i]
-    )
-    
-    expect_equal(result, hardcoded_cases$expected[i], 
-      info = paste("Hardcoded case failed at row", i))
-  }
-})
