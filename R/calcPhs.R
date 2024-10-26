@@ -131,8 +131,13 @@ calcPhs <- function(
   def_speed <- ifelse(walk_sp == 0, 0, 1)
 
   # Radiating area dubois
-  a_r_du <- ifelse(posture == 2, 0.77, ifelse(posture == 3, 0.67, 0.7))
-
+  a_r_du <- 0.7
+  if (posture == "standing") {
+    a_r_du <- 0.77
+  }
+  if (posture == "crouching") {
+    a_r_du <- 0.67
+  }
   # Max sweat rate based on metabolic rate
   sw_max <- (met - 32) * a_dubois
   sw_max <- ifelse(sw_max > 400, 400, ifelse(sw_max < 250, 250, sw_max))
