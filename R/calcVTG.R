@@ -46,9 +46,9 @@ calcVTG <- function(ta,tr,vel,rh,clo,met,v_tmp_grad){
         warning('Velocity(vel) should be less than or equal to 0.2.')
 
       }
-
-
-
-
+  return(list(
+    PPD_vg = ppdval,
+    Acceptability = acceptability
+  ))
 
 }
