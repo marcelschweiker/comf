@@ -1,16 +1,15 @@
 #' Calculates the Heat Index (HI).
 #' 
-#' @param tdb float value that dry bulb air temperature, default in [°C] in [°F] if `units` = 'IP'
-#' @param rh float value that is relative humidity, [%]
-#' @param round is boolean value, default True. If True rounds output value, if False it does not round it
+#' @param tdb float value that dry bulb air temperature, default in Celsius in Fahrenheit if 'units' = 'IP'
+#' @param rh float value that is relative humidity
 #' @param units is {'SI', 'IP'}, select the SI (International System of Units) or the IP (Imperial Units) system.
 #' 
 #' @details It combines air temperature and relative humidity to determine an apparent temperature. 
 #' The HI equation [12]_ is derived by multiple regression analysis in temperature and relative 
-#' humidity from the first version of Steadman’s (1979) apparent temperature (AT) [13]_.
+#' humidity from the first version of Steadman's (1979) apparent temperature (AT) [13]_.
 #'
-#' @return hi, a float value, is the Heat Index, default in [°C] in [°F] if `units` = 'IP'
-#' @references Steadman’s (1979) apparent temperature (AT)
+#' @return hi, a float value, is the Heat Index, default in Celsius inFahrenheit if 'units' = 'IP'
+#' @references Steadman's (1979) apparent temperature (AT)
 #' @examples
 #' calcHeatIndex(tdb=25, rh=50)
 #' @author Code implemented into R by Yiqing Zhang.

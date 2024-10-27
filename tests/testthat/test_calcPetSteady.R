@@ -17,7 +17,7 @@ test_that("test calcHumx", {
       met = inputs$met,
       clo = inputs$clo
     )
-    expect_true(abs(result - outputs) < tolerance$PET,
+    expect_true(abs(result - outputs$pet) < tolerance$pet,
       info = paste(
         "Failed at data row", i, ": humidex tolerance check. inputs:",
         inputs$tdb, inputs$tr, inputs$rh, inputs$v, "outputs:", outputs

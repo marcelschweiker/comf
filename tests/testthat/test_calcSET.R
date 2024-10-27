@@ -7,7 +7,7 @@ test_that("calcSET function returns correct values", {
   reference_tables <- retrieve_data(url_config$test_set_url)
 
   tolerance <- reference_tables$tolerance
-  data_list <- reference_tables$data  
+  data_list <- reference_tables$data
   tolerance_set <- tolerance$set
   total_cases <- nrow(data_list)
 
@@ -18,8 +18,8 @@ test_that("calcSET function returns correct values", {
     units <- ifelse(is.null(inputs$units) || is.na(inputs$units), "SI", inputs$units)
 
     if (units == "IP") {
-      ta <- (inputs$tdb - 32) * 5/9
-      tr <- (inputs$tr - 32) * 5/9
+      ta <- (inputs$tdb - 32) * 5 / 9
+      tr <- (inputs$tr - 32) * 5 / 9
       vel <- inputs$v * 0.3048
     } else {
       ta <- inputs$tdb
