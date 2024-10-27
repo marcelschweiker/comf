@@ -4,16 +4,16 @@ source("../utils-test-tool.R")
 
 test_that("calcePMV returns correct values", {
   reference_tables <- retrieve_data(url_config$test_e_pmv_url)
-  
+
   tolerance <- reference_tables$tolerance
   data_list <- reference_tables$data
-  
+
   total_cases <- nrow(data_list)
-  
+
   for (i in seq_len(total_cases)) {
     inputs <- as.list(data_list$inputs[i, ])
     outputs <- as.list(data_list$outputs[i, ])
-    
+
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
       print(paste("Skipping test case", i, "because 'execute_in_R' is FALSE"))
       next
@@ -26,7 +26,7 @@ test_that("calcePMV returns correct values", {
     met <- as.numeric(inputs$met)
     clo <- as.numeric(inputs$clo)
     epCoeff <- as.numeric(inputs$e_coefficient)
-    
+
     result <- calcePMV(
       ta = ta,
       tr = tr,
@@ -36,7 +36,7 @@ test_that("calcePMV returns correct values", {
       met = met,
       epCoeff = epCoeff
     )
-    
+
     expected_pmv <- outputs[[1]]
 
     expect_true(

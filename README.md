@@ -17,22 +17,26 @@ Tests are executed automatically by the script, which assesses each function sys
 Below is the latest test result
 
 ========test result========
-
-|Test              |Result |
-|:-----------------|:------|
-|Context           |PASSED |
-|calcAD            |FAILED |
-|calcAT            |PASSED |
-|calcATHBstrandard |FAILED |
-|calcePMV          |PASSED |
-|calcHumidity      |FAILED |
-|calcPetSteady     |PASSED |
-|calcpmvpdd        |FAILED |
-|calcSET           |FAILED |
-|calcSolarGain     |FAILED |
-|calcVTG           |FAILED |
-|calcWbgt          |PASSED |
-|calUtci           |PASSED |
-
+|Test                |Result |
+|:-------------------|:------|
+|Context             |PASSED |
+|calcAD              |PASSED |
+|calcAT              |PASSED |
+|calcATHBstrandard   |FAILED |
+|calcCloTout         |PASSED |
+|calcDiscomfortIndex |FAILED |
+|calcePMV            |PASSED |
+|calcHeatIndex       |PASSED |
+|calcHumidity        |FAILED |
+|calcPetSteady       |FAILED |
+|calcPhs             |FAILED |
+|calcpmvpdd          |FAILED |
+|calcSET             |FAILED |
+|calcSolarGain       |FAILED |
+|calctAdapt15251     |FAILED |
+|calctAdaptASHRAE    |FAILED |
+|calcVTG             |PASSED |
+|calcWbgt            |PASSED |
+|calUtci             |PASSED |
 ========test result========
 
