@@ -1,53 +1,48 @@
-library(jsonlite)
 library(testthat)
 source("../config.R")
 source("../utils-test-tool.R")
 
-test_that("calcSET function returns correct values", {
-  reference_tables <- retrieve_data(url_config$test_set_url)
+test_that("Test calcCE function", {
+  reference_tables <- retrieve_data(url_config$test_cooling_effect_url)
 
   tolerance <- reference_tables$tolerance
-  data_list <- reference_tables$data
-  tolerance_set <- tolerance$set
 
+  print(paste0("Tolerance: ", tolerance))
+  data_list <- reference_tables$data
+  
   total_cases <- nrow(data_list)
 
   for (i in seq_len(total_cases)) {
     inputs <- as.list(data_list$inputs[i, ])
     outputs <- as.list(data_list$outputs[i, ])
 
-    # Skip test case if 'execute_in_R' is set to FALSE
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next
     }
 
-    ta <- inputs$tdb
-    tr <- inputs$tr
-    vel <- inputs$v
+    ta <- as.numeric(inputs$tdb)
+    tr <- as.numeric(inputs$tr)
+    vel <- as.numeric(inputs$vr)
     rh <- as.numeric(inputs$rh)
     clo <- as.numeric(inputs$clo)
     met <- as.numeric(inputs$met)
 
-
-    result <- calcSET(
-      ta = ta,
-      tr = tr,
-      vel = vel,
-      rh = rh,
-      met = met,
-      clo = clo
-    )
-
-    expected_set <- outputs[[1]]
-
+    result <- calcCE(ta, tr, vel, rh, clo, met)
+    
+    if (!is.numeric(result)) {
+      stop(paste("Test case", i, "- Result is not numeric:", result))
+    }
+    
+    expected_ce <- as.numeric(outputs[[1]])
+    
     expect_true(
-      abs(result - expected_set) < tolerance_set,
-              info = paste("Failed at data row", i, ": set_tmp tolerance check. Inputs:", 
+      abs(result - expected_ce) < tolerance$ce,
+              info = paste("Failed at data row", i, ": cooling_effect tolerance check. Inputs:", 
                      "tdb =", ta, "tr =", tr, "v =", vel,
                      "rh =", rh, "clo =", clo, "met =", met,
-                     "Expected set =", expected_set, 
-                     "Actual set =", result)
+                     "Expected ce =", expected_ce, 
+                     "Actual ce =", result)
     )
   }
 })
