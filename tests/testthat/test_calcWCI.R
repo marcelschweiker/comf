@@ -16,10 +16,6 @@ test_that("Test wc function", {
     inputs <- as.list(data_list$inputs[i, ])
     outputs <- as.list(data_list$outputs[i, ])
     
-    # Debugging statements
-    # print(paste("Test case", i, "- Inputs:", inputs))
-    # print(paste("Test case", i, "- Outputs:", outputs))
-    
     # Input parameters
     tdb <- as.numeric(inputs$tdb)
     v <- as.numeric(inputs$v)
@@ -27,13 +23,10 @@ test_that("Test wc function", {
     round_output <- ifelse(is.null(inputs$round) || is.na(inputs$round), TRUE, as.logical(inputs$round))
     
     # Call the wc function to compute the result
-    result <- wc(tdb = tdb, v = v, round_output = round_output)
+    result <- calcWci(tdb = tdb, v = v, round_output = round_output)
     
     # Extract expected value
     expected_wci <- as.numeric(outputs[[1]])
-    
-    # Print result and expected value for debugging
-    # print(paste("Test case", i, "- Result (wci):", result$wci, "Expected (wci):", expected_wci))
     
     # Validate wci
     expect_true(

@@ -9,26 +9,26 @@ test_that("calcSET function returns correct values", {
   tolerance <- reference_tables$tolerance
   data_list <- reference_tables$data  
   tolerance_set <- tolerance$set
+
   total_cases <- nrow(data_list)
 
   for (i in seq_len(total_cases)) {
     inputs <- as.list(data_list$inputs[i, ])
     outputs <- as.list(data_list$outputs[i, ])
 
-    units <- ifelse(is.null(inputs$units) || is.na(inputs$units), "SI", inputs$units)
-
-    if (units == "IP") {
-      ta <- (inputs$tdb - 32) * 5/9
-      tr <- (inputs$tr - 32) * 5/9
-      vel <- inputs$v * 0.3048
-    } else {
-      ta <- inputs$tdb
-      tr <- inputs$tr
-      vel <- inputs$v
+    # Skip test case if 'execute_in_R' is set to FALSE
+    if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
+      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
+      next
     }
-    rh <- ifelse(is.null(inputs$rh) || is.na(inputs$rh), 50, inputs$rh)
-    met <- ifelse(is.null(inputs$met) || is.na(inputs$met), 1.1, inputs$met)
-    clo <- ifelse(is.null(inputs$clo) || is.na(inputs$clo), 0.5, inputs$clo)
+
+    ta <- inputs$tdb
+    tr <- inputs$tr
+    vel <- inputs$v
+    rh <- as.numeric(inputs$rh)
+    clo <- as.numeric(inputs$clo)
+    met <- as.numeric(inputs$met)
+
 
     result <- calcSET(
       ta = ta,
@@ -40,9 +40,14 @@ test_that("calcSET function returns correct values", {
     )
 
     expected_set <- outputs[[1]]
+
     expect_true(
       abs(result - expected_set) < tolerance_set,
-      info = paste("Test case", i, "failed on SET values")
+              info = paste("Failed at data row", i, ": set_tmp tolerance check. Inputs:", 
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
+                     "Expected set =", expected_set, 
+                     "Actual set =", result)
     )
   }
 })

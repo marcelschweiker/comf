@@ -6,6 +6,8 @@ test_that("Test calcCE function", {
   reference_tables <- retrieve_data(url_config$test_cooling_effect_url)
 
   tolerance <- reference_tables$tolerance
+
+  print(paste0("Tolerance: ", tolerance))
   data_list <- reference_tables$data
   
   total_cases <- nrow(data_list)
@@ -15,8 +17,8 @@ test_that("Test calcCE function", {
     outputs <- as.list(data_list$outputs[i, ])
 
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
-        print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-        next
+      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
+      next
     }
 
     ta <- as.numeric(inputs$tdb)
@@ -34,12 +36,13 @@ test_that("Test calcCE function", {
     
     expected_ce <- as.numeric(outputs[[1]])
     
-    # print the results and the expected to debug
-    print(paste("Test case", i, "- Result (cooling_effect):", result, "Expected (cooling_effect):", expected_ce))
-    
     expect_true(
-      abs(result - expected_ce) < tolerance$cooling_effect,
-      info = paste("Test case", i, "failed on cooling_effect values")
+      abs(result - expected_ce) < tolerance$ce,
+              info = paste("Failed at data row", i, ": cooling_effect tolerance check. Inputs:", 
+                     "tdb =", ta, "tr =", tr, "v =", vel,
+                     "rh =", rh, "clo =", clo, "met =", met,
+                     "Expected ce =", expected_ce, 
+                     "Actual ce =", result)
     )
   }
 })
