@@ -10,7 +10,7 @@ test_that("test calcSolarGain", {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
     params <- list()
-    for (name in names(inputs)){
+    for (name in names(inputs)) {
       value <- inputs[[name]]
       if (!is.na(value)) {
         params[[name]] <- value

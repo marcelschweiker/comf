@@ -7,13 +7,13 @@ test_that("calcUTCI returns correct values", {
   reference_tables <- retrieve_data(url_config$test_utci_url)
   tolerance <- reference_tables$tolerance
   data_list <- reference_tables$data
-  
+
   total_cases <- nrow(data_list)
-  
+
   for (i in seq_len(total_cases)) {
     inputs <- as.list(data_list$inputs[i, ])
     outputs <- as.list(data_list$outputs[i, ])
-    
+
     # Check if this test case is skipped (vel is out of range or execute_in_R is false)
     # why we need this?
     # because in R the function don't support the vel > 10 and IP, so it will be useless to test these files.
@@ -26,14 +26,14 @@ test_that("calcUTCI returns correct values", {
     tr <- as.numeric(inputs$tr)
     vel <- as.numeric(inputs$v)
     rh <- as.numeric(inputs$rh)
-    
+
     result <- calcUTCI(
       ta = ta,
       tr = tr,
       vel = vel,
       rh = rh
     )
-    
+
     expected_utci <- outputs[[1]]
 
     result <- as.numeric(result)

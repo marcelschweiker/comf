@@ -7,7 +7,7 @@ test_that("calcSET function returns correct values", {
   reference_tables <- retrieve_data(url_config$test_set_url)
 
   tolerance <- reference_tables$tolerance
-  data_list <- reference_tables$data  
+  data_list <- reference_tables$data
   tolerance_set <- tolerance$set
 
   total_cases <- nrow(data_list)

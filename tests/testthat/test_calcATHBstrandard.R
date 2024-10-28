@@ -7,7 +7,7 @@ test_that("test calcATHBstandard", {
 
   tolerance <- reference_tables$tolerance
   data_list <- reference_tables$data
-  
+
   total_cases <- nrow(data_list)
 
   result <- numeric(total_cases)
@@ -20,7 +20,7 @@ test_that("test calcATHBstandard", {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next
     }
-    
+
     trm <- as.numeric(inputs$t_running_mean)
     ta <- as.numeric(inputs$tdb)
     tr <- as.numeric(inputs$tr)
@@ -29,9 +29,9 @@ test_that("test calcATHBstandard", {
     met <- as.numeric(inputs$met)
 
     result[i] <- calcATHBstandard(trm, ta, tr, vel, rh, met)
-    
+
     expected_athb <- as.numeric(outputs[[1]])
-    
+
     expect_true(
       abs(result[i] - expected_athb) < tolerance$athb_pmv,
       info = paste("Test case", i, "failed on ATHB standard values")

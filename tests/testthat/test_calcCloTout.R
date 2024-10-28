@@ -8,11 +8,11 @@ test_that("test calcCloTout", {
   for (i in seq_len(nrow(data))) {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
-    
+
     result <- calcCloTout(tout = inputs$tout, units = inputs$units)
 
     expected_result <- unlist(outputs$clo_tout)
-    
+
     print("Actual result:")
     print(result)
     print("Expected (unlisted) result:")
