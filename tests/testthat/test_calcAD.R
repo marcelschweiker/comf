@@ -21,7 +21,7 @@ test_that("test calcAD", {
     result <- suppressWarnings(calcAD(
       ta = inputs$tdb,
       tr = inputs$tr,
-      vel = inputs$v,
+      vel = inputs$vr,
       rh = inputs$rh,
       met = inputs$met,
       clo = inputs$clo,
@@ -36,9 +36,9 @@ test_that("test calcAD", {
     cat("Tolerance:", tolerance$PPD_ad, "\n")
 
     expect_true(
-      abs(result$Ankle_draft_ppd - outputs$Ankle_draft_ppd)
-      < tolerance$Ankle_draft_ppd,
-      info = paste("Failed at data row", i, ":Ankle_draft_ppd tolerance check.")
+      abs(result$ppdAd - outputs$PPD_ad)
+      < tolerance$PPD_ad,
+      info = paste("Failed at data row", i, ":Ankle_draft_ppd tolerance check.", "|result: ", result$ppdAd, "expect_outputs: ", outputs)
     )
   }
 })
