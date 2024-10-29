@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcPhs.R
 \name{calcPhs}
 \alias{calcPhs}
-\title{Calculates the Predicted Heat Strain (PHS) based on ISO 7933:2004 Standard}
+\title{Calculates the Predicted Heat Strain (PHS) based on ISO 7933:2004}
 \usage{
 calcPhs(
   tdb,
@@ -39,7 +39,7 @@ calcPhs(
 
 \item{v}{float or numeric vector. Air speed, default in [m/s]}
 
-\item{rh}{float or numeric vector. Relative humidity, [%]}
+\item{rh}{float or numeric vector. Relative humidity, [\%]}
 
 \item{met}{float or numeric vector. Metabolic rate, [W/m2]}
 
@@ -87,19 +87,23 @@ outside the standard applicability limits (15 < tdb < 50 Celsius, 0 < tr < 60 Ce
 \item{sweat_rate}{float, default 0. Initial sweat rate}
 }
 \value{
-A list containing the following:
-- `t_re`: Rectal temperature,
-- `t_sk`: Skin temperature,
-- `t_cr`: Core temperature, Celsius
-- `t_cr_eq`: Core temperature as a function of metabolic rate, Celsius
-- `t_sk_t_cr_wg`: Fraction of body mass at the skin temperature
-- `d_lim_loss_50`: Maximum allowable exposure time for water loss (mean subject), [minutes]
-- `d_lim_loss_95`: Maximum allowable exposure time for water loss (95% of working population), [minutes]
-- `d_lim_t_re`: Maximum allowable exposure time for heat storage, [minutes]
-- `water_loss_watt`: Maximum water loss in watts, [W]
-- `water_loss`: Maximum water loss, [g]
+\describe{
+  \item{t_re}{Rectal temperature in Celsius}
+  \item{t_sk}{Skin temperature in Celsius}
+  \item{t_cr}{Core temperature in Celsius}
+  \item{t_cr_eq}{Core temperature as a function of metabolic rate, in Celsius}
+  \item{t_sk_t_cr_wg}{Fraction of body mass at the skin temperature}
+  \item{d_lim_loss_50}{Maximum allowable exposure time for water loss for a mean subject, in minutes}
+  \item{d_lim_loss_95}{Maximum allowable exposure time for water loss for 95\% of the working population, in minutes}
+  \item{d_lim_t_re}{Maximum allowable exposure time for heat storage, in minutes}
+  \item{water_loss_watt}{Maximum water loss in watts}
+  \item{water_loss}{Maximum water loss in grams}
+}
 }
 \description{
+Calculates the Predicted Heat Strain (PHS) based on ISO 7933:2004
+}
+\details{
 The PHS model predicts:
 - Heat by respiratory convection and evaporation
 - Steady-state mean skin temperature and instantaneous skin temperature
@@ -110,7 +114,9 @@ The PHS model predicts:
 }
 \examples{
 # Example usage of phs function
-results <- phs(tdb = 40, tr = 40, rh = 33.85, v = 0.3, met = 150, clo = 0.5, posture = 2, wme = 0)
+calcPhs(tdb = 40, tr = 40, rh = 33.85, v = 0.3, met = 150, clo = 0.5, posture = 2, wme = 0)
 print(results)
-
+}
+\author{
+Code implemented into R by Chongyu Gan.
 }

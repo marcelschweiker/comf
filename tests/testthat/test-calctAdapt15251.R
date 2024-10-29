@@ -1,7 +1,4 @@
 test_that("test calctAdapt15251", {
-  source("../config.R")
-  source("../utils-test-tool.R")
-
   reference_tables <- retrieve_data(url_config$test_adaptive_en_url)
   tolerance <- reference_tables$tolerance
   data <- reference_tables$data

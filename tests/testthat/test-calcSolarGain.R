@@ -1,6 +1,4 @@
 test_that("test calcSolarGain", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   # call retrieve_data() to get test data
   reference_tables <- retrieve_data(url_config$test_solar_gain_url)
   tolerance <- reference_tables$tolerance
@@ -19,13 +17,17 @@ test_that("test calcSolarGain", {
       posture = inputs$posture
     )
     expect_true(abs(sg[1] - outputs$erf) < tolerance$erf,
-      info = paste("Failed at data row", i
-                   , ", expected erf:", outputs$erf, ", real erf:", sg[1])
+      info = paste(
+        "Failed at data row", i,
+        ", expected erf:", outputs$erf, ", real erf:", sg[1]
+      )
     )
     expect_true(abs(sg[2] - outputs$delta_mrt) < tolerance$delta_mrt,
-      info = paste("Failed at data row", i
-                   , ", expected delta_mrt:", outputs$erf
-                   , ", real delta_mrt:", sg[1])
+      info = paste(
+        "Failed at data row", i,
+        ", expected delta_mrt:", outputs$erf,
+        ", real delta_mrt:", sg[1]
+      )
     )
   }
 })

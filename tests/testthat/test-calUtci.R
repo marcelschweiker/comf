@@ -1,6 +1,4 @@
 test_that("calcUTCI returns correct values", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   reference_tables <- retrieve_data(url_config$test_utci_url)
   tolerance <- reference_tables$tolerance
   data_list <- reference_tables$data
@@ -14,7 +12,7 @@ test_that("calcUTCI returns correct values", {
     # Check if this test case is skipped (vel is out of range or execute_in_R is false)
     # why we need this?
     # because in R the function don't support the vel > 10 and IP, so it will be useless to test these files.
-    if ((!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE)){
+    if ((!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE)) {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE or invalid vel range"))
       next
     }

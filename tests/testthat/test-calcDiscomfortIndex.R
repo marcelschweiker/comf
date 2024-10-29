@@ -1,7 +1,4 @@
 test_that("test_calcDiscomfortIndex", {
-  source("../config.R")
-  source("../utils-test-tool.R")
-
   # URL to get the test data from the configuration
   reference_tables <- retrieve_data(url_config$test_discomfort_index_url)
   tolerance <- reference_tables$tolerance
