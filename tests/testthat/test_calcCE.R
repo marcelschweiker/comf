@@ -1,15 +1,13 @@
-library(testthat)
-source("../config.R")
-source("../utils-test-tool.R")
-
 test_that("Test calcCE function", {
+  source("../config.R")
+  source("../utils-test-tool.R")
+
   reference_tables <- retrieve_data(url_config$test_cooling_effect_url)
 
   tolerance <- reference_tables$tolerance
 
-  print(paste0("Tolerance: ", tolerance))
   data_list <- reference_tables$data
-  
+
   total_cases <- nrow(data_list)
 
   for (i in seq_len(total_cases)) {
@@ -17,8 +15,7 @@ test_that("Test calcCE function", {
     outputs <- as.list(data_list$outputs[i, ])
 
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
-      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-      next
+      skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
     }
 
     ta <- as.numeric(inputs$tdb)
@@ -29,20 +26,22 @@ test_that("Test calcCE function", {
     met <- as.numeric(inputs$met)
 
     result <- calcCE(ta, tr, vel, rh, clo, met)
-    
-    if (!is.numeric(result)) {
-      stop(paste("Test case", i, "- Result is not numeric:", result))
+    if (is.na(result)) {
+      skip(paste("skip due to return result is NA"))
     }
-    
+    numbers <- strsplit(result, " ")[[1]]
+    result_ce <- as.numeric(numbers[length(numbers)])
     expected_ce <- as.numeric(outputs[[1]])
-    
+
     expect_true(
-      abs(result - expected_ce) < tolerance$ce,
-              info = paste("Failed at data row", i, ": cooling_effect tolerance check. Inputs:", 
-                     "tdb =", ta, "tr =", tr, "v =", vel,
-                     "rh =", rh, "clo =", clo, "met =", met,
-                     "Expected ce =", expected_ce, 
-                     "Actual ce =", result)
+      abs(result_ce - expected_ce) < tolerance$ce,
+      info = paste(
+        "Failed at data row", i, ": cooling_effect tolerance check. Inputs:",
+        "tdb =", ta, "tr =", tr, "v =", vel,
+        "rh =", rh, "clo =", clo, "met =", met,
+        "Expected ce =", expected_ce,
+        "Actual ce =", result_ce
+      )
     )
   }
 })

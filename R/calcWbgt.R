@@ -1,8 +1,4 @@
-#' Calculates the Wet Bulb Globe Temperature (WBGT)
-#'
-#' The WBGT is a heat stress index that measures the thermal
-#' environment to which a person is exposed. It is compliant with ISO 7243.
-#'
+#' @title Calculates the Wet Bulb Globe Temperature (WBGT)
 #' @param twb Numeric value representing natural (no forced air flow)
 #' wet bulb temperature in degrees Celsius.
 #' @param tg Numeric value representing globe temperature in [degree C].
