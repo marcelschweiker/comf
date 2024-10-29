@@ -1,9 +1,6 @@
-library(testthat)
-source("../config.R")
-source("../utils-test-tool.R")
-
-
 test_that("calcUTCI returns correct values", {
+  source("../config.R")
+  source("../utils-test-tool.R")
   reference_tables <- retrieve_data(url_config$test_utci_url)
   tolerance <- reference_tables$tolerance
   data_list <- reference_tables$data

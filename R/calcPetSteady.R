@@ -1,7 +1,7 @@
 library(nleqslv)
-#' Calculate the Steady Physiological Equivalent Temperature (PET)
+#' @title Calculate the Steady Physiological Equivalent Temperature (PET)
 #'
-#' The PET is calculated using the Munich Energy-balance Model for Individuals,
+#' @details The PET is calculated using the Munich Energy-balance Model for Individuals,
 #' PET is defined as the air temperature at which, in a typical indoor setting,
 #' the heat budget of the human body is balanced with the same core and skin
 #' temperature as under the complex outdoor conditions to be assessed.

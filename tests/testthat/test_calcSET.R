@@ -1,9 +1,6 @@
-library(jsonlite)
-library(testthat)
-source("../config.R")
-source("../utils-test-tool.R")
-
 test_that("calcSET function returns correct values", {
+  source("../config.R")
+  source("../utils-test-tool.R")
   reference_tables <- retrieve_data(url_config$test_set_url)
 
   tolerance <- reference_tables$tolerance

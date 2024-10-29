@@ -1,9 +1,6 @@
-library(testthat)
-source("../config.R")
-source("../utils-test-tool.R")
-
-
 test_that("Test wc function", {
+  source("../config.R")
+  source("../utils-test-tool.R")
   # Retrieve the test data from the specified URL
   reference_tables <- retrieve_data(url_config$test_wind_chill_index_url)
   

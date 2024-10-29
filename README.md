@@ -20,15 +20,17 @@ Below is the latest test result
 |Test                |Result |
 |:-------------------|:------|
 |Context             |PASSED |
+|calc2Node           |FAILED |
 |calcAD              |PASSED |
 |calcAT              |PASSED |
 |calcATHBstrandard   |FAILED |
+|calcCE              |FAILED |
 |calcCloTout         |PASSED |
-|calcDiscomfortIndex |FAILED |
+|calcDiscomfortIndex |PASSED |
 |calcePMV            |PASSED |
 |calcHeatIndex       |PASSED |
 |calcHumidity        |FAILED |
-|calcPetSteady       |FAILED |
+|calcPetSteady       |PASSED |
 |calcPhs             |FAILED |
 |calcpmvpdd          |FAILED |
 |calcSET             |FAILED |
@@ -37,6 +39,7 @@ Below is the latest test result
 |calctAdaptASHRAE    |FAILED |
 |calcVTG             |PASSED |
 |calcWbgt            |PASSED |
-|calUtci             |PASSED |
+|calcWCI             |PASSED |
+|calUtci [2.2s]      |FAILED |
 ========test result========
 

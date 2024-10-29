@@ -1,8 +1,6 @@
-library(testthat)
-source("../config.R")
-source("../utils-test-tool.R")
-
 test_that("calcePMV returns correct values", {
+  source("../config.R")
+  source("../utils-test-tool.R")
   reference_tables <- retrieve_data(url_config$test_e_pmv_url)
 
   tolerance <- reference_tables$tolerance

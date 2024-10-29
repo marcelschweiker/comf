@@ -14,46 +14,37 @@
 #' @returns ce - Cooling Effect in [degree C]
 #' @references
 #' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
-#' @examples calcCE(25,25,0.3,50,0.5,1) # returns Cooling Effect: 1.3
+#' @examples calcCE(25, 25, 0.3, 50, 0.5, 1) # returns Cooling Effect: 1.3
 #' @author Code implemented in to R by Shoaib Sarwar. Further contribution by Marcel Schweiker.
 #' @export
 
 
-calcCE <- function(ta, tr, vel, rh, clo= .5, met=1, wme=0)
-  {
-   if (vel <= 0.2){
-   ce = 0
-   warning('For velocity less than or equal to 0.2, cooling effect is Zero')
-   print(paste0("Cooling Effect: ", ce ))
+calcCE <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0) {
+  if (vel <= 0.2) {
+    ce <- 0
+    warning("For velocity less than or equal to 0.2, cooling effect is Zero")
+    return(paste0("Cooling Effect: ", ce))
   }
 
 
   still_air_threshold <- 0.1
-  initial_set_tmp = calcSET(ta=ta, tr=tr, vel=vel, rh=rh, clo=clo, met=met, wme=wme)
-  initial_set_tmp = round(initial_set_tmp, 1)
-  f <- function(x){
-    change =  calcSET(ta - x, tr - x, vel=still_air_threshold, rh=rh, clo=clo, met=met, wme=wme)
-    change = round(change, 1)
-    return (change - initial_set_tmp)
-
+  initial_set_tmp <- calcSET(ta = ta, tr = tr, vel = vel, rh = rh, clo = clo, met = met, wme = wme)
+  initial_set_tmp <- round(initial_set_tmp, 1)
+  f <- function(x) {
+    change <- calcSET(ta - x, tr - x, vel = still_air_threshold, rh = rh, clo = clo, met = met, wme = wme)
+    change <- round(change, 1)
+    return(change - initial_set_tmp)
   }
   out <- tryCatch(
     {
-
-      ce = bisect(f,0,15)
-      print(paste0("Cooling Effect: ", lapply(ce, round,2)))
-
-
-
+      ce <- bisect(f, 0, 15)
+      print(paste0("Cooling Effect: ", lapply(ce, round, 2)))
     },
-    error=function(cond) {
-
+    error = function(cond) {
       message(paste("The cooling effect could not be calculated, assuming the value 0"))
       message(cond)
       # Choose a return value in case of error
       return(NA)
     }
-
   )
-
 }

@@ -22,8 +22,7 @@ wet bulb temperature in degrees Celsius.}
 Numeric value of the Wet Bulb Globe Temperature Index in [degree C].
 }
 \description{
-The WBGT is a heat stress index that measures the thermal
-environment to which a person is exposed. It is compliant with ISO 7243.
+Calculates the Wet Bulb Globe Temperature (WBGT)
 }
 \details{
 The WBGT determines the impact of heat on a person throughout
