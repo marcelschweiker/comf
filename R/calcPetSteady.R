@@ -1,36 +1,46 @@
 library(nleqslv)
 #' @title Calculate the Steady Physiological Equivalent Temperature (PET)
 #'
-#' @details The PET is calculated using the Munich Energy-balance Model for Individuals,
-#' PET is defined as the air temperature at which, in a typical indoor setting,
-#' the heat budget of the human body is balanced with the same core and skin
-#' temperature as under the complex outdoor conditions to be assessed.
+#' @description
+#' Calculates the steady-state Physiological Equivalent Temperature (PET) using the
+#' Munich Energy-balance Model for Individuals. PET is defined as the air temperature at
+#' which, in a typical indoor setting, the heat budget of the human body is balanced,
+#' maintaining the same core and skin temperature that would be achieved under the assessed
+#' outdoor conditions.
 #'
-#' The PET was originally proposed by Hoppe. In 2018, Walther and Goestchel proposed a
-#' correction of the original model, purging the errors in the PET calculation routine,
-#' and implementing a state-of-the-art vapour diffusion model.
+#' The PET index was originally proposed by Hoppe and later revised by Walther and Goestchel
+#' in 2018, who corrected errors in the initial PET calculation routine and implemented a
+#' state-of-the-art vapor diffusion model.
 #'
-#' @param tdb float, dry bulb air temperature, [degree]
-#' @param tr float, mean radiant temperature, [degree]
-#' @param v float, air speed, [m/s]
-#' @param rh float, relative humidity, [%]
-#' @param met float, metabolic rate, [met]
-#' @param clo float, clothing insulation, [clo]
-#' @param p_atm float, atmospheric pressure, default value 1013.25 [hPa]
-#' @param position integer, position of the individual (1=sitting, 2=standing, 3=standing forced convection)
-#' @param age integer, age in years, default 23
-#' @param sex integer, gender (1 for male, 2 for female), default 1
-#' @param weight float, body mass, [kg], default 75
-#' @param height float, height, [m], default 1.8
-#' @param wme float, external work, [W/(m2)], default 0
+#' @param tdb float, Dry bulb air temperature in degrees Celsius.
+#' @param tr float, Mean radiant temperature in degrees Celsius.
+#' @param v float, Air speed in meters per second (m/s).
+#' @param rh float, Relative humidity in percent (\%).
+#' @param met float, Metabolic rate in metabolic rate units (met).
+#' @param clo float, Clothing insulation in clo units.
+#' @param p_atm float, Atmospheric pressure in hectopascals (hPa), default value 1013.25.
+#' @param position integer, Position of the individual: 1 = sitting, 2 = standing,
+#' 3 = standing with forced convection.
+#' @param age integer, Age of the individual in years, default 23.
+#' @param sex integer, Gender of the individual: 1 for male, 2 for female, default 1.
+#' @param weight float, Body mass in kilograms (kg), default 75.
+#' @param height float, Height of the individual in meters (m), default 1.8.
+#' @param wme float, External work performed by the individual in watts per square meter
+#' (W/m^2), default 0.
 #'
-#' @return PET, Steady-state PET under the given ambient conditions
+#' @return Returns the calculated steady-state Physiological Equivalent Temperature (PET) under
+#' the specified ambient conditions, in degrees Celsius.
 #'
 #' @examples
+#' # Calculate PET for typical indoor conditions
 #' pet_steady(tdb = 20, tr = 20, rh = 50, v = 0.15, met = 1.37, clo = 0.5)
+#'
 #' @references
-#' Hoppe, P. (1999). The Physiological Equivalent Temperature - A Universal Index for the Biometeorological Assessment of the Thermal Environment.
-#' Walther, G. and Goestchel, P. (2018). Improvement and Extension of the Munich Energy-balance Model for Individuals.
+#' Hoppe, P. (1999). The Physiological Equivalent Temperature - A Universal Index for the
+#' Biometeorological Assessment of the Thermal Environment.
+#' Walther, G., and Goestchel, P. (2018). Improvement and Extension of the Munich
+#' Energy-balance Model for Individuals.
+#'
 #' @author Code implemented into R by Chongyu Gan.
 #' @export
 calcPetSteady <- function(
