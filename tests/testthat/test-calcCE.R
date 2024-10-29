@@ -1,7 +1,4 @@
 test_that("Test calcCE function", {
-  source("../config.R")
-  source("../utils-test-tool.R")
-
   reference_tables <- retrieve_data(url_config$test_cooling_effect_url)
 
   tolerance <- reference_tables$tolerance

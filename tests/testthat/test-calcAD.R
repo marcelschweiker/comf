@@ -1,6 +1,4 @@
 test_that("test calcAD", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   # call retrieve_data() to get test data
   reference_tables <- retrieve_data(url_config$test_ankle_draft_url)
   tolerance <- reference_tables$tolerance
@@ -9,6 +7,7 @@ test_that("test calcAD", {
   for (i in seq_len(nrow(data))) {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
+    print(data$execute_in_R[i])
     if (isFALSE(data$execute_in_R[i])) {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next

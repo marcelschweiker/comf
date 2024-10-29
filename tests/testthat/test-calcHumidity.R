@@ -1,6 +1,4 @@
 test_that("test calcHumx", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   # call retrieve_data() to get test data
   reference_tables <- retrieve_data(url_config$test_humidex_url)
   tolerance <- reference_tables$tolerance
@@ -18,8 +16,10 @@ test_that("test calcHumx", {
       next
     }
     expect_true(abs(result - outputs$humidex) < tolerance$humidex,
-      info = paste("Failed at data row", i, ": humidex tolerance check. inputs:"
-                   , inputs$tdb, inputs$rh, "outputs:", outputs$humidex)
+      info = paste(
+        "Failed at data row", i, ": humidex tolerance check. inputs:",
+        inputs$tdb, inputs$rh, "outputs:", outputs$humidex
+      )
     )
   }
 })

@@ -1,6 +1,4 @@
 test_that("test calcPhs", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   # call retrieve_data() to get test data
   reference_tables <- retrieve_data(url_config$test_phs_url)
   tolerance <- reference_tables$tolerance

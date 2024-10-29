@@ -1,6 +1,4 @@
 test_that("test calcAT", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   # call retrieve_data() to get test data
   reference_tables <- retrieve_data(url_config$test_at_url)
   tolerance <- reference_tables$tolerance

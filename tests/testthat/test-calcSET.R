@@ -1,6 +1,4 @@
 test_that("calcSET function returns correct values", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   reference_tables <- retrieve_data(url_config$test_set_url)
 
   tolerance <- reference_tables$tolerance
@@ -40,11 +38,13 @@ test_that("calcSET function returns correct values", {
 
     expect_true(
       abs(result - expected_set) < tolerance_set,
-              info = paste("Failed at data row", i, ": set_tmp tolerance check. Inputs:", 
-                     "tdb =", ta, "tr =", tr, "v =", vel,
-                     "rh =", rh, "clo =", clo, "met =", met,
-                     "Expected set =", expected_set, 
-                     "Actual set =", result)
+      info = paste(
+        "Failed at data row", i, ": set_tmp tolerance check. Inputs:",
+        "tdb =", ta, "tr =", tr, "v =", vel,
+        "rh =", rh, "clo =", clo, "met =", met,
+        "Expected set =", expected_set,
+        "Actual set =", result
+      )
     )
   }
 })

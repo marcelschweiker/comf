@@ -1,6 +1,4 @@
 test_that("calcVTG calculates vertical temperature gradient PPD correctly", {
-  source("../config.R")
-  source("../utils-test-tool.R")
   # call retrieve_data() to get test data
   reference_tables <- retrieve_data(url_config$test_vtg_url)
   tolerance <- reference_tables$tolerance
@@ -18,27 +16,17 @@ test_that("calcVTG calculates vertical temperature gradient PPD correctly", {
       print(paste("Skipping test case", i, "due to 'units' being 'ip'"))
       next
     }
-    result <- tryCatch(
-      {
-        calcVTG(
-          ta = inputs$tdb,
-          tr = inputs$tr,
-          vel = inputs$v,
-          rh = inputs$rh,
-          clo = inputs$clo,
-          met = inputs$met,
-          v_tmp_grad = inputs$delta_t
-        )
-      },
-      warning = function(w) {
-        print(paste("Warning in test case", i, ":", w$message))
-        NULL
-      },
-      error = function(e) {
-        print(paste("Error in test case", i, ":", e$message))
-        NULL
-      }
-    )
+    result <-
+      calcVTG(
+        ta = inputs$tdb,
+        tr = inputs$tr,
+        vel = inputs$vr,
+        rh = inputs$rh,
+        clo = inputs$clo,
+        met = inputs$met,
+        v_tmp_grad = inputs$vertical_tmp_grad
+      )
+
     if (!is.null(result)) {
       expect_true(abs(result$PPD_vg - outputs$PPD_vg) < tolerance$PPD_vg,
         info = paste(

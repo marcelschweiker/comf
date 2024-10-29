@@ -1,7 +1,4 @@
 test_that("test calcATHBstandard", {
-  source("../config.R")
-  source("../utils-test-tool.R")
-
   reference_tables <- retrieve_data(url_config$test_athb_url)
 
   tolerance <- reference_tables$tolerance

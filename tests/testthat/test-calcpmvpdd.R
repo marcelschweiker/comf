@@ -1,8 +1,5 @@
 # Define the test
 test_that("test_calcpmvpdd", {
-  source("../config.R")
-  source("../utils-test-tool.R")
-
   # Retrieve test data using retrieve_data function
   reference_tables <- retrieve_data(url_config$test_pmv_ppd_url)
 
