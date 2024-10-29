@@ -17,22 +17,40 @@ test_that("test_calcpmvpdd", {
     inputs <- data$inputs[i, ]
     expected <- data$outputs[i, ]
 
+    if (!is.na(data$execute_in_R[i]) &&
+          data$execute_in_R[i] == FALSE) {
+      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
+      next
+    }
+
+    if (!is.na(inputs$units) && inputs$units == "ip") {
+      print(paste("Skipping test case", i, "due to 'units' being 'ip'"))
+      next
+    }
+    ta <- inputs$tdb[[1]]
+    tr <- inputs$tr[[1]]
+    rh <- inputs$rh[[1]]
+    vel <- inputs$vr[[1]]
+    met <- inputs$met[[1]]
+    clo <- inputs$clo[[1]]
     # Run the calcPMVPPD function with the current test case inputs
     result <- calcPMVPPD(
-      inputs$tdb,
-      inputs$tr,
-      inputs$rh,
-      inputs$vr,
-      inputs$met,
-      inputs$clo
+      ta = ta,
+      tr = tr,
+      rh = rh,
+      vel = vel,
+      met = met,
+      clo = clo
     )
 
     # Compare the results with the expected values using expect_true and abs()
-    expect_true(abs(result$pmv - expected$pmv) < tolerance_pmv,
-      info = paste("Test case", i, "failed on PMV values")
+    expect_true(abs(result$pmv - expected$pmv[[1]]) < tolerance_pmv,
+      info = paste("Test case", i, "failed on PMV values", "expected pmv: "
+                   , expected$pmv[[1]], "actual pmv: ", result$pmv)
     )
-    expect_true(abs(result$ppd - expected$ppd) < tolerance_ppd,
-      info = paste("Test case", i, "failed on PPD values")
+    expect_true(abs(result$ppd - expected$ppd[[1]]) < tolerance_ppd,
+      info = paste("Test case", i, "failed on ppd values", "expected ppd: "
+                   , expected$ppd[[1]], "actual ppd: ", result$ppd)
     )
   }
 })

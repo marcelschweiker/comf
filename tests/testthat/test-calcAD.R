@@ -7,7 +7,6 @@ test_that("test calcAD", {
   for (i in seq_len(nrow(data))) {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
-    print(data$execute_in_R[i])
     if (isFALSE(data$execute_in_R[i])) {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next

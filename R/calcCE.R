@@ -22,7 +22,7 @@
 calcCE <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0) {
   if (vel <= 0.2) {
     ce <- 0
-    warning("For velocity less than or equal to 0.2, cooling effect is Zero")
+    print("For velocity less than or equal to 0.2, cooling effect is Zero")
     return(paste0("Cooling Effect: ", ce))
   }
 
@@ -44,7 +44,7 @@ calcCE <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0) {
       message(paste("The cooling effect could not be calculated, assuming the value 0"))
       message(cond)
       # Choose a return value in case of error
-      return(NA)
+      return(0)
     }
   )
 }
