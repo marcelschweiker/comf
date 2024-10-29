@@ -24,7 +24,7 @@ Below is the latest test result
 |calcAD              |PASSED |
 |calcAT              |PASSED |
 |calcATHBstrandard   |FAILED |
-|calcCE [1.1s]       |FAILED |
+|calcCE              |FAILED |
 |calcCloTout         |PASSED |
 |calcDiscomfortIndex |PASSED |
 |calcePMV            |PASSED |
@@ -37,9 +37,9 @@ Below is the latest test result
 |calcSolarGain       |FAILED |
 |calctAdapt15251     |FAILED |
 |calctAdaptASHRAE    |FAILED |
+|calcUtci [2.2s]     |PASSED |
 |calcVTG             |PASSED |
 |calcWbgt            |PASSED |
 |calcWCI             |PASSED |
-|calUtci [2.3s]      |FAILED |
 ========test result========
 
