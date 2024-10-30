@@ -11,7 +11,7 @@ calcHeatIndex(tdb, rh, units = "SI")
 
 \item{rh}{float value that is relative humidity}
 
-\item{units}{is {'SI', 'IP'}, select the SI (International System of Units) or the IP (Imperial Units) system.}
+\item{units}{is \{'SI', 'IP'\}, select the SI (International System of Units) or the IP (Imperial Units) system.}
 }
 \value{
 hi, a float value, is the Heat Index, default in Celsius inFahrenheit if 'units' = 'IP'

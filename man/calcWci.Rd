@@ -37,7 +37,7 @@ which differs from plastic in terms of curvature, roughness, and radiation
 exchange qualities, and is always below 33 Degree in a cold environment.
 }
 \examples{
-wc(tdb = -5, v = 5.5)
+calcWci(tdb = -5, v = 5.5)
 
 }
 \references{

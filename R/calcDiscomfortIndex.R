@@ -1,7 +1,7 @@
 #' Calculates the Discomfort Index(DI).
 #' The Discomfort Index is based on air temperature and humidity.
 #' Thermal discomfort prevention strategy.It is compliant with ISO 15265.
-#' @param ta a numeric value presenting air temperature in [degree C].
+#' @param tdb a numeric value presenting air temperature in [degree C].
 #' @param rh a numeric value presenting relative humidity.
 #'
 #' @details The Discomfort Index (DI) is an effective temperature based

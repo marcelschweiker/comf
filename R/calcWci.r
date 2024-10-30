@@ -21,7 +21,7 @@
 #'   \item{\code{wci}}{Numeric value of the wind chill index in [W/m squre].}
 #' }
 #'
-#' @examples wc(tdb = -5, v = 5.5)
+#' @examples calcWci(tdb = -5, v = 5.5)
 #'
 #' @references
 #' ASHRAE Handbook-Fundamentals (2017). Chapter 9: Thermal Comfort.

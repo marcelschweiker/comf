@@ -28,6 +28,6 @@ the current ambient conditions of temperature, humidity,
 and possibly solar radiation.
 }
 \examples{
-at(tdb = 25, rh = 30, v = 0.1) # Without solar radiation
-at(tdb = 25, rh = 50, v = 0.1, q = 300) # With solar radiation
+calcAT(tdb = 25, rh = 30, v = 0.1) # Without solar radiation
+calcAT(tdb = 25, rh = 50, v = 0.1, q = 300) # With solar radiation
 }

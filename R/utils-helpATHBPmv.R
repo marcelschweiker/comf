@@ -26,6 +26,7 @@ calcSeason <- function(season){
   return(c(spring, summer, winter))
 }
 
+#' @keywords internal
 p_sat <- function(tdb) {
   # Constants for the equation
   c_to_k <- 273.15
