@@ -13,8 +13,8 @@
 #' @param round If TRUE, the output value is rounded to one decimal place.
 #' @return Apparent temperature in degrees Celsius.
 #' @examples
-#' at(tdb = 25, rh = 30, v = 0.1) # Without solar radiation
-#' at(tdb = 25, rh = 50, v = 0.1, q = 300) # With solar radiation
+#' calcAT(tdb = 25, rh = 30, v = 0.1) # Without solar radiation
+#' calcAT(tdb = 25, rh = 50, v = 0.1, q = 300) # With solar radiation
 #' @export
 calcAT <- function(tdb, rh, v, q = NULL, round = TRUE) {
   enthalpy <- function(tdb, hr) {

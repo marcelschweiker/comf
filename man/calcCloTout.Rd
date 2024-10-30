@@ -10,7 +10,7 @@ calcCloTout(tout, units = "SI")
 \item{tout}{float, int, or array-like outdoor air temperature at 06:00 a.m.
 default in [Celsius] in [Fahrenheit] if 'units' = 'IP'}
 
-\item{units}{is {'SI', 'IP'}, select the SI (International System of Units) or 
+\item{units}{is \{"SI", "IP"\}, select the SI \(International System of Units\) or 
 the IP (Imperial Units) system. Defaults to 'SI'.}
 }
 \value{
@@ -25,8 +25,7 @@ Icl using this equation in mechanically conditioned buildings [1]_. Limitations:
 may not be accurate for extreme temperature ranges.
 }
 \examples{
-clo_tout(tout=27)
-clo_tout(tout=[27, 25])
+calcCloTout(tout=27)
 }
 \references{
 ASHRAE 55 2020

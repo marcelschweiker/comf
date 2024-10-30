@@ -4,4 +4,4 @@ importFrom("plyr", "round_any")
 importFrom("graphics", "image")
 importFrom("reshape", "melt")
 importFrom("jsonlite", "fromJSON")
-
+importFrom(nleqslv, nleqslv)

@@ -2,7 +2,7 @@
 #' 
 #' @param tdb float value that dry bulb air temperature, default in Celsius in Fahrenheit if 'units' = 'IP'
 #' @param rh float value that is relative humidity
-#' @param units is {'SI', 'IP'}, select the SI (International System of Units) or the IP (Imperial Units) system.
+#' @param units is \{'SI', 'IP'\}, select the SI (International System of Units) or the IP (Imperial Units) system.
 #' 
 #' @details It combines air temperature and relative humidity to determine an apparent temperature. 
 #' The HI equation [12]_ is derived by multiple regression analysis in temperature and relative 

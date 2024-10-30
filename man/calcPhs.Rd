@@ -115,7 +115,6 @@ The PHS model predicts:
 \examples{
 # Example usage of phs function
 calcPhs(tdb = 40, tr = 40, rh = 33.85, v = 0.3, met = 150, clo = 0.5, posture = 2, wme = 0)
-print(results)
 }
 \author{
 Code implemented into R by Chongyu Gan.

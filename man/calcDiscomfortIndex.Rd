@@ -9,9 +9,9 @@ Thermal discomfort prevention strategy.It is compliant with ISO 15265.}
 calcDiscomfortIndex(tdb, rh)
 }
 \arguments{
-\item{rh}{a numeric value presenting relative humidity.}
+\item{tdb}{a numeric value presenting air temperature in [degree C].}
 
-\item{ta}{a numeric value presenting air temperature in [degree C].}
+\item{rh}{a numeric value presenting relative humidity.}
 }
 \value{
 A list containing:

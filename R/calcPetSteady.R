@@ -33,7 +33,7 @@ library(nleqslv)
 #'
 #' @examples
 #' # Calculate PET for typical indoor conditions
-#' pet_steady(tdb = 20, tr = 20, rh = 50, v = 0.15, met = 1.37, clo = 0.5)
+#' calcPetSteady(tdb = 20, tr = 20, rh = 50, v = 0.15, met = 1.37, clo = 0.5)
 #'
 #' @references
 #' Hoppe, P. (1999). The Physiological Equivalent Temperature - A Universal Index for the
