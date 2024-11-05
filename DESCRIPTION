@@ -12,6 +12,12 @@ LazyLoad: yes
 LazyData: true
 Suggests: 
     R.rsp,
+    usethis,
+    devtools,
+    covr,
+    httr,
+    dplyr,
+    knitr,
     testthat (>= 3.0.0)
 VignetteBuilder: R.rsp
 RoxygenNote: 7.3.2

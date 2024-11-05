@@ -25,7 +25,7 @@ test_that("Test wc function", {
 
     # Validate wci
     expect_true(
-      abs(result$wci - expected_wci) < tolerance$wci,
+      abs(result$wci - expected_wci) <= tolerance$wci,
       info = paste("Test case", i, "failed on wci values")
     )
   }

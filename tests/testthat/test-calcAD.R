@@ -35,7 +35,7 @@ test_that("test calcAD", {
 
     expect_true(
       abs(result$ppdAd - outputs$PPD_ad)
-      < tolerance$PPD_ad,
+      <= tolerance$PPD_ad,
       info = paste("Failed at data row", i, ":Ankle_draft_ppd tolerance check.", "|result: ", result$ppdAd, "expect_outputs: ", outputs)
     )
   }

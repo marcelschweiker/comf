@@ -1,4 +1,0 @@
-inst/include/testthat/vendor/catch.h
-inst/include/testthat/testthat.h
-R/deprec-*.R
-R/compat-*.R

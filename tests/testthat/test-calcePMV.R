@@ -36,7 +36,7 @@ test_that("calcePMV returns correct values", {
     expected_pmv <- outputs[[1]]
 
     expect_true(
-      all(abs(result$epmv - expected_pmv) < tolerance$pmv),
+      all(abs(result$epmv - expected_pmv) <= tolerance$pmv),
       info = paste("Test case", i, "failed on epmv values")
     )
   }

@@ -12,7 +12,8 @@ test_that("calcSET function returns correct values", {
     outputs <- as.list(data_list$outputs[i, ])
 
     # Skip test case if 'execute_in_R' is set to FALSE
-    if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
+    if (!is.na(data_list$execute_in_R[i]) &&
+          data_list$execute_in_R[i] == FALSE) {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next
     }

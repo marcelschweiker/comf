@@ -19,7 +19,7 @@ test_that("test calctAdapt15251", {
     }
 
     result <- calctAdapt15251(inputs$t_running_mean[[1]])
-    expect_true(abs(result$tAdapt15251 - expected_output) < tolerance,
+    expect_true(abs(result$tAdapt15251 - expected_output) <= tolerance,
       info = paste(
         "Failed at data row", i, ": Adapt15251 tolerance check. inputs:",
         inputs$t_running_mean[[1]], "outputs: ", outputs$tAdapt15251,

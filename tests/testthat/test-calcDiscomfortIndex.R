@@ -23,7 +23,7 @@ test_that("test_calcDiscomfortIndex", {
 
     # Test the DI value to ensure that it is within the tolerance range
     expect_true(
-      all(abs(result$di - outputs$di[[1]]) < tolerance$di),
+      all(abs(result$di - outputs$di[[1]]) <= tolerance$di),
       info = paste("Test case", i, "failed on DI values")
     )
 

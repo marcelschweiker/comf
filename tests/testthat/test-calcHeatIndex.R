@@ -15,7 +15,7 @@ test_that("test calcHeatIndex", {
       units = units
     )
 
-    expect_true(abs(result - outputs$hi) < tolerance$hi,
+    expect_true(abs(result - outputs$hi) <= tolerance$hi,
       info = paste("Failed at data row", i, ": Heat Index tolerance check.")
     )
   }

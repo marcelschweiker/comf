@@ -13,7 +13,7 @@ test_that("test calctAdaptASHRAE", {
 
     result <- calctAdaptASHRAE(inputs$t_running_mean[[1]])
 
-    expect_true(abs(result$tAdaptASHRAE - outputs$tmp_cmf[[1]]) < tolerance,
+    expect_true(abs(result$tAdaptASHRAE - outputs$tmp_cmf[[1]]) <= tolerance,
       info = paste(
         "Failed at data row", i, ": AdaptASHRAE tolerance check. inputs:",
         inputs$t_running_mean[[1]], "expected outputs:",

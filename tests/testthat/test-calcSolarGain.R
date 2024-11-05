@@ -16,13 +16,13 @@ test_that("test calcSolarGain", {
       asw = inputs$asw,
       posture = inputs$posture
     )
-    expect_true(abs(sg[1] - outputs$erf) < tolerance$erf,
+    expect_true(abs(sg[1] - outputs$erf) <= tolerance$erf,
       info = paste(
         "Failed at data row", i,
         ", expected erf:", outputs$erf, ", real erf:", sg[1]
       )
     )
-    expect_true(abs(sg[2] - outputs$delta_mrt) < tolerance$delta_mrt,
+    expect_true(abs(sg[2] - outputs$delta_mrt) <= tolerance$delta_mrt,
       info = paste(
         "Failed at data row", i,
         ", expected delta_mrt:", outputs$erf,

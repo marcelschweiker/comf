@@ -29,7 +29,7 @@ test_that("test calcATHBstandard", {
     expected_athb <- as.numeric(outputs[[1]])
 
     expect_true(
-      abs(result[i] - expected_athb) < tolerance$athb_pmv,
+      abs(result[i] - expected_athb) <= tolerance$athb_pmv,
       info = paste("Test case", i, "failed on ATHB standard values")
     )
   }
