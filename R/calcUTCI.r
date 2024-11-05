@@ -2,12 +2,13 @@
 #'
 #' @aliases calcUTCI calcutci utci UTCI
 #'
-#' @usage calcUTCI(ta, tr, vel, rh)
+#' @usage calcUTCI(ta, tr, vel, rh, bypassLimits = FALSE)
 #'
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
 #' @param vel a numeric value presenting air velocity in [m/s]
 #' @param rh a numeric value presenting relative humidity [\%]
+#' @param bypassLimits a boolean value clarifying whether default limits should be bypassed
 #'
 #' @return the \code{utciValue} value rounded to one decimal
 #' @export
@@ -23,7 +24,9 @@
 calcUTCI <- function(ta, tr, vel, rh) {
   
   #validate the inputs and prints an error message for invalid inputs
-  validateUTCI(ta, tr, vel, rh)
+  if(bypassLimits = FALSE){
+    validateUTCI(ta, tr, vel, rh)
+  }
   
   #calculate utci value from function
   utciValue = utciApprox(ta, tr, vel, rh)
