@@ -13,7 +13,7 @@ test_that("test calctAdaptASHRAE", {
     units <- if ("units" %in% names(inputs)) inputs$units[[1]] else "si"
     output.list <- if (is.null(outputs$tmp_cmf[[1]])) list(NA) else as.list(outputs$tmp_cmf[[1]])
     result <- calctAdaptASHRAE(tmmo, units = units)
-
+    
     expect_true(
       all(mapply(function(x, y) {
         (is.na(x) && is.na(y)) || (!is.na(x) && !is.na(y) && abs(x - y) < tolerance[[1]])  

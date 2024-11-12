@@ -54,7 +54,7 @@ calctAdaptASHRAE <- function(tmmo, units) {
   if (is.na(units)) {
     units <- "si"
   }
-
+  
   if (units == "ip") {
     tmmo <- if (is.list(tmmo) || is.vector(tmmo)) {
       lapply(tmmo, function(temp) (temp - 32) * 5 / 9)

@@ -13,15 +13,15 @@ test_that("test calctAdapt15251", {
     output.list <- if (is.null(outputs$tmp_cmf[[1]])) list(NA) else as.list(outputs$tmp_cmf[[1]])
     result <- calctAdapt15251(input.list)
 
-      expect_true(
-          all(mapply(function(x, y) {
-              (is.na(x) && is.na(y)) || (!is.na(x) && !is.na(y) && abs(x - y) < tolerance[[1]])  
-            },
-            result, output.list)),
-          info = paste(
-            "Failed at data row", i, ": Adapt15251 tolerance check. inputs:",
-            inputs$trm, "outputs:", outputs$tAdapt15251
-          )
+    expect_true(
+        all(mapply(function(x, y) {
+            (is.na(x) && is.na(y)) || (!is.na(x) && !is.na(y) && abs(x - y) < tolerance[[1]])  
+          },
+          result, output.list)),
+        info = paste(
+          "Failed at data row", i, ": Adapt15251 tolerance check. inputs:",
+          inputs$trm, "outputs:", outputs$tAdapt15251
         )
+      )
   }
 })
