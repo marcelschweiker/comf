@@ -9,11 +9,19 @@ test_that("test calctAdapt15251", {
   for (i in seq_len(nrow(data))) {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
-    result <- calctAdapt15251(inputs$t_running_mean[[1]])
+    input.list <- if (is.null(inputs$t_running_mean[[1]])) list(NA) else as.list(inputs$t_running_mean[[1]])
+    output.list <- if (is.null(outputs$tmp_cmf[[1]])) list(NA) else as.list(outputs$tmp_cmf[[1]])
+    result <- calctAdapt15251(input.list)
 
-    expect_true(abs(result$tAdapt15251 - outputs$tmp_cmf[[1]]) < tolerance,
-      info = paste("Failed at data row", i, ": Adapt15251 tolerance check. inputs:",
-                   inputs$trm, "outputs:", outputs$tAdapt15251)
-    )
+      expect_true(
+          all(mapply(function(x, y) {
+              (is.na(x) && is.na(y)) || (!is.na(x) && !is.na(y) && abs(x - y) < tolerance[[1]])  
+            },
+            result, output.list)),
+          info = paste(
+            "Failed at data row", i, ": Adapt15251 tolerance check. inputs:",
+            inputs$trm, "outputs:", outputs$tAdapt15251
+          )
+        )
   }
 })

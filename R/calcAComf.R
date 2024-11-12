@@ -27,7 +27,7 @@
 #' trm <- 21.2
 #' ## calculate adaptive comfort temperature
 #' calctAdapt15251(trm)
-#' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
+#' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller, Shoaib Sarwar and Yiqing Zhang.
 #' @seealso see also \code{\link{calcComfInd}}
 #' @references \code{calctAdapt15251} is based on DIN EN 15251 Indoor environmental input parameters for design and assessment of energy performance of buildings addressing indoor air quality, thermal environment, lighting and acoustics; German version EN 15251:2012 2012.
 #' @references \code{calcAdaptASHRAE} is based on Brager & de Dear (2001) Climate, comfort, & natural ventilation: a new adaptive comfort standard for ASHRAE standard 55.
@@ -35,23 +35,66 @@
 #' @references \code{calctnHumphreysNV} and \code{calctnHumphreysAC} are based on Humphreys (1978) Outdoor temperatures and comfort indoors. Batiment International, Building Research and Practice, Taylor and Francis.
 #' @export
 
-
-
-calctAdapt15251 <- function(trm=20){
+calctAdapt15251 <- function(trm){
+  if (is.list(trm) || is.vector(trm)) {
+    tAdapt15251 <- lapply(trm, function(elem) {
+      if (elem >= 10 && elem <= 33.5) {
+        0.33 * elem + 18.8
+      } else {
+        NA
+      }
+    })
+    return(tAdapt15251)
+  }
   data.frame(tAdapt15251 = 0.33*trm + 18.8)
 }
 
-calctAdaptASHRAE <- function(tmmo){
-  data.frame(tAdaptASHRAE = 0.33*tmmo + 17.8)
+
+calctAdaptASHRAE <- function(tmmo, units) {
+  if (is.na(units)) {
+    units <- "si"
+  }
+
+  if (units == "ip") {
+    tmmo <- if (is.list(tmmo) || is.vector(tmmo)) {
+      lapply(tmmo, function(temp) (temp - 32) * 5 / 9)
+    } else {
+      (tmmo - 32) * 5 / 9
+    }
+  }
+
+  tAdaptASHRAE <- if (is.list(tmmo) || is.vector(tmmo)) {
+    lapply(tmmo, function(elem) {
+      if (elem >= 10 && elem <= 33.5) {
+        0.31 * elem + 17.8
+      } else {
+        NA
+      }
+    })
+  } else {
+    data.frame(tAdaptASHRAE = if (tmmo >= 10 && tmmo <= 33.5) 0.31 * tmmo + 17.8 else NA)
+  }
+
+  if (units == "ip") {
+    tAdaptASHRAE <- if (is.list(tAdaptASHRAE) || is.vector(tAdaptASHRAE)) {
+      lapply(tAdaptASHRAE, function(temp) if (!is.na(temp)) temp * 9 / 5 + 32 else NA)
+    } else {
+      data.frame(tAdaptASHRAE = tAdaptASHRAE$tAdaptASHRAE * 9 / 5 + 32)
+    }
+  }
+  return(tAdaptASHRAE)
 }
+
 
 calctnAuliciems <- function(ta, tmmo){
   data.frame(tnAuliciems = 9.22+0.48*ta+0.14*tmmo)
 }
 
+
 calctnHumphreysNV <- function(tmmo){
   data.frame(tnHumphreysNV = .534*tmmo + 11.9)
 }
+
 
 calctnHumphreysAC <- function(tmmo){
   data.frame(tnHumphreysAC = 23.9+.295*(tmmo-22)*exp(-((tmmo-22)/(24*2 ^ .5)) ^ 2))
