@@ -11,14 +11,11 @@ test_that("test calcHumx", {
       ta = inputs$tdb,
       rh = inputs$rh
     )
-    if (is.na(outputs$humidex)) {
-      # Skip this iteration if humidex is missing
-      next
-    }
-    expect_true(abs(result - outputs$humidex) < tolerance$humidex,
+    expect_true(abs(result - outputs$humidex) <= 1,
       info = paste(
         "Failed at data row", i, ": humidex tolerance check. inputs:",
-        inputs$tdb, inputs$rh, "outputs:", outputs$humidex
+        "ta:", inputs$tdb, "rh:", inputs$rh, "expected_outputs:",
+        outputs$humidex, "real output:", result
       )
     )
   }

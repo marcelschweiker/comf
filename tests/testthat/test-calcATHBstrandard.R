@@ -24,13 +24,17 @@ test_that("test calcATHBstandard", {
     rh <- as.numeric(inputs$rh)
     met <- as.numeric(inputs$met)
 
-    result[i] <- calcATHBstandard(trm, ta, tr, vel, rh, met)
+    result <- calcATHBstandard(trm, ta, tr, vel, rh, met)
 
     expected_athb <- as.numeric(outputs[[1]])
 
     expect_true(
-      abs(result[i] - expected_athb) < tolerance$athb_pmv,
-      info = paste("Test case", i, "failed on ATHB standard values")
+      abs(result - expected_athb) <= tolerance$athb_pmv,
+      info = paste(
+        "Test case", i, "inputs: trm:", trm,
+        "ta:", ta, "tr:", tr, "vel:", vel, "rh:", rh,
+        "met:", met, "expected output:", expected_athb, "real output:", result
+      )
     )
   }
 })

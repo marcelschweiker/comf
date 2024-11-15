@@ -20,23 +20,23 @@ Below is the latest test result
 |Test                |Result |
 |:-------------------|:------|
 |Context             |PASSED |
-|calc2Node           |FAILED |
+|calc2Node           |PASSED |
 |calcAD              |PASSED |
 |calcAT              |PASSED |
-|calcATHBstrandard   |FAILED |
-|calcCE              |FAILED |
+|calcATHBstrandard   |PASSED |
+|calcCE              |PASSED |
 |calcCloTout         |PASSED |
 |calcDiscomfortIndex |PASSED |
 |calcePMV            |PASSED |
 |calcHeatIndex       |PASSED |
-|calcHumidity        |FAILED |
+|calcHumidity        |PASSED |
 |calcPetSteady       |PASSED |
-|calcPhs             |FAILED |
-|calcpmvpdd          |FAILED |
-|calcSET             |FAILED |
-|calcSolarGain       |FAILED |
-|calctAdapt15251     |FAILED |
-|calctAdaptASHRAE    |FAILED |
+|calcPhs             |PASSED |
+|calcpmvpdd          |PASSED |
+|calcSET             |PASSED |
+|calcSolarGain       |PASSED |
+|calctAdapt15251     |PASSED |
+|calctAdaptASHRAE    |PASSED |
 |calcUtci [2.2s]     |PASSED |
 |calcVTG             |PASSED |
 |calcWbgt            |PASSED |

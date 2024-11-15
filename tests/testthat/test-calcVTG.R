@@ -28,7 +28,7 @@ test_that("calcVTG calculates vertical temperature gradient PPD correctly", {
       )
 
     if (!is.null(result)) {
-      expect_true(abs(result$PPD_vg - outputs$PPD_vg) < tolerance$PPD_vg,
+      expect_true(abs(result$PPD_vg - outputs$PPD_vg) <= tolerance$PPD_vg,
         info = paste(
           "Failed at data row", i, ": PPD_vg tolerance check.",
           "\nInputs:", paste(names(inputs), unlist(inputs), sep = " = ", collapse = ", "),

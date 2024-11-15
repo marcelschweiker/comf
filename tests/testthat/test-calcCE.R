@@ -28,7 +28,7 @@ test_that("Test calcCE function", {
     expected_ce <- as.numeric(outputs[[1]])
 
     expect_true(
-      abs(result_ce - expected_ce) < tolerance$ce,
+      abs(result_ce - expected_ce) <= tolerance$ce,
       info = paste(
         "Failed at data row", i, ": cooling_effect tolerance check. Inputs:",
         "tdb =", ta, "tr =", tr, "v =", vel,

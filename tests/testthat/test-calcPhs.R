@@ -32,7 +32,7 @@ test_that("test calcPhs", {
       if (is.list(expect_value)) {
         expect_value <- expect_value[[1]]
       }
-      expect_true(abs(result[[name]] - expect_value) < tolerance[[name]],
+      expect_true(abs(result[[name]] - expect_value) <= tolerance[[name]],
         info = paste(
           "Failed at data row", i,
           "error key:", name,

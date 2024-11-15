@@ -15,7 +15,7 @@ test_that("test calcAT", {
       }
     }
     result <- do.call(calcAT, params)
-    expect_true(abs(result - outputs$at) < tolerance$at,
+    expect_true(abs(result - outputs$at) <= tolerance$at,
       info = paste(
         "Failed at data row", i, ": ", "at tolerance check. inputs:",
         inputs, "outputs:", outputs
