@@ -10,14 +10,21 @@ test_that("test calctAdaptASHRAE", {
       print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
       next
     }
+    tmmo <- if (is.null(inputs$t_running_mean[[1]])) list(NA) else as.list(inputs$t_running_mean[[1]])
+    units <- if ("units" %in% names(inputs)) inputs$units[[1]] else "si"
+    output.list <- if (is.null(outputs$tmp_cmf[[1]])) list(NA) else as.list(outputs$tmp_cmf[[1]])
+    result <- calctAdaptASHRAE(tmmo, units = units)
 
-    result <- calctAdaptASHRAE(inputs$t_running_mean[[1]])
-
-    expect_true(abs(result$tAdaptASHRAE - outputs$tmp_cmf[[1]]) <= tolerance,
+    expect_true(
+      all(mapply(
+        function(x, y) {
+          (is.na(x) && is.na(y)) || (!is.na(x) && !is.na(y) && abs(x - y) < tolerance[[1]])
+        },
+        result, output.list
+      )),
       info = paste(
         "Failed at data row", i, ": AdaptASHRAE tolerance check. inputs:",
-        inputs$t_running_mean[[1]], "expected outputs:",
-        outputs$tmp_cmf[[1]], "real output:", result$tAdaptASHRAE
+        inputs$tmmo, "outputs:", outputs$tAdaptASHRAE
       )
     )
   }
