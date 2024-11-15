@@ -23,8 +23,8 @@ Below is the latest test result
 |calc2Node           |PASSED |
 |calcAD              |PASSED |
 |calcAT              |PASSED |
-|calcATHBstrandard   |FAILED |
-|calcCE [1.1s]       |FAILED |
+|calcATHBstrandard   |PASSED |
+|calcCE              |PASSED |
 |calcCloTout         |PASSED |
 |calcDiscomfortIndex |PASSED |
 |calcePMV            |PASSED |
@@ -34,10 +34,10 @@ Below is the latest test result
 |calcPhs             |PASSED |
 |calcpmvpdd          |PASSED |
 |calcSET             |PASSED |
-|calcSolarGain       |FAILED |
+|calcSolarGain       |PASSED |
 |calctAdapt15251     |PASSED |
-|calctAdaptASHRAE    |FAILED |
-|calcUtci [2.4s]     |PASSED |
+|calctAdaptASHRAE    |PASSED |
+|calcUtci [2.2s]     |PASSED |
 |calcVTG             |PASSED |
 |calcWbgt            |PASSED |
 |calcWCI             |PASSED |
