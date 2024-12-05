@@ -4,7 +4,7 @@ Title: Models and Equations for Human Comfort Research
 Version: 0.1.12
 Date: 2024-01-29
 Imports: plyr, graphics, reshape, jsonlite, nleqslv
-Authors@R: c(person("Marcel", "Schweiker", email = "mschweiker@ukaachen.de", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3906-4688")), person("Sophia", "Mueller", role = c("aut")), person("Michael", "Kleber", role = c("ctr")), person("Boris", "Kingma", comment = c(ORCID = "0000-0001-5961-0215"), role = c("ctr")), person("Masanori", "Shukuya", comment = c(ORCID = "0000-0003-2777-4375"), role = c("ctr")), person("Shaomi", "Rahman", role = c("ctr")), person("Shoaib", "Sarwar", role=c("ctr")))
+Authors@R: c(person("Marcel", "Schweiker", email = "mschweiker@ukaachen.de", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3906-4688")), person("Sophia", "Mueller", role = c("aut")), person("Michael", "Kleber", role = c("ctr")), person("Boris", "Kingma", comment = c(ORCID = "0000-0001-5961-0215"), role = c("ctr")), person("Masanori", "Shukuya", comment = c(ORCID = "0000-0003-2777-4375"), role = c("ctr")), person("Shaomi", "Rahman", role = c("ctr")), person("Shoaib", "Sarwar", role=c("ctr")), person("Chongyu", "Gan", role=c("ctr")))
 Maintainer: Marcel Schweiker <mschweiker@ukaachen.de>
 Description: Calculation of various common and less common comfort indices such as predicted mean vote or the two node model. Converts physical variables such as relative to absolute humidity and evaluates the performance of comfort indices.
 License: GPL-2
@@ -18,7 +18,8 @@ Suggests:
     httr,
     dplyr,
     knitr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    nleqslv
 VignetteBuilder: R.rsp
 RoxygenNote: 7.3.2
 Encoding: UTF-8

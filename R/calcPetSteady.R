@@ -1,4 +1,3 @@
-library(nleqslv)
 #' @title Calculate the Steady Physiological Equivalent Temperature (PET)
 #'
 #' @description

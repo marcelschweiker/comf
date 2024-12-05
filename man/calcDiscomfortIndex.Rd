@@ -2,9 +2,7 @@
 % Please edit documentation in R/calcDiscomfortIndex.R
 \name{calcDiscomfortIndex}
 \alias{calcDiscomfortIndex}
-\title{Calculates the Discomfort Index(DI).
-The Discomfort Index is based on air temperature and humidity.
-Thermal discomfort prevention strategy.It is compliant with ISO 15265.}
+\title{Calculates the Discomfort Index(DI).}
 \usage{
 calcDiscomfortIndex(tdb, rh)
 }
@@ -24,7 +22,6 @@ A list containing:
  }
 }
 \description{
-Calculates the Discomfort Index(DI).
 The Discomfort Index is based on air temperature and humidity.
 Thermal discomfort prevention strategy.It is compliant with ISO 15265.
 }

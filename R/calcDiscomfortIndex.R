@@ -1,4 +1,6 @@
-#' Calculates the Discomfort Index(DI).
+#' @title Calculates the Discomfort Index(DI).
+#'
+#' @description
 #' The Discomfort Index is based on air temperature and humidity.
 #' Thermal discomfort prevention strategy.It is compliant with ISO 15265.
 #' @param tdb a numeric value presenting air temperature in [degree C].

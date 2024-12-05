@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcCloTout.R
 \name{calcCloTout}
 \alias{calcCloTout}
-\title{Representative clothing insulation Icl as a function of outdoor air temperature at 06:00 a.m [4].}
+\title{Representative clothing insulation}
 \usage{
 calcCloTout(tout, units = "SI")
 }

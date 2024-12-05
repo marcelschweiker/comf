@@ -1,5 +1,6 @@
-#' Calculate Apparent Temperature (AT)
+#' @title Calculate Apparent Temperature (AT)
 #'
+#' @description
 #' This function calculates the Apparent Temperature (AT), which
 #' is defined as the temperature at the reference humidity level
 #' producing the same amount of discomfort as that experienced under

@@ -61,5 +61,5 @@ calctAdapt15251(trm)
 see also \code{\link{calcComfInd}}
 }
 \author{
-Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
+Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller, Shoaib Sarwar and Yiqing Zhang.
 }

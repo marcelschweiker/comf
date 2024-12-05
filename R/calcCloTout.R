@@ -1,3 +1,6 @@
+#' @title Representative clothing insulation
+#'
+#' @description
 #' Representative clothing insulation Icl as a function of outdoor air temperature at 06:00 a.m [4].
 #'
 #' @param tout float, int, or array-like outdoor air temperature at 06:00 a.m.

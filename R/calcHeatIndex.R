@@ -1,5 +1,5 @@
-#' Calculates the Heat Index (HI).
-#' 
+#' @title Calculates the Heat Index (HI).
+#'
 #' @param tdb float value that dry bulb air temperature, default in Celsius in Fahrenheit if 'units' = 'IP'
 #' @param rh float value that is relative humidity
 #' @param units is \{'SI', 'IP'\}, select the SI (International System of Units) or the IP (Imperial Units) system.
