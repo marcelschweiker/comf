@@ -15,12 +15,13 @@ validateUTCI <- function(ta, tr, vel, rh) {
   }
   
   #check range for ta & tr
-  for (parameter in c(ta, tr)) {
-    checkRange(parameter, 0, 40)
-  }
+  checkRange(ta, -50, 50)
+  
+  # check range for difference of ta & tr
+  checkRange(tr - ta, -30.0, 70.0)
   
   #check range for vel
-  checkRange(vel, 0, 10)
+  checkRange(vel, 0.5, 17)
   
   #check range for rh
   checkRange(rh, 0, 100)

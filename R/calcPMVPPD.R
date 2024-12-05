@@ -4,16 +4,28 @@
 #' @usage calcPMVPPD(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15, getLoad = FALSE)
 #' @param ta a numeric value presenting air temperature in [degree C]
 #' @param tr a numeric value presenting mean radiant temperature in [degree C]
-#' @param vel a numeric value presenting air velocity in [m/s]
+#' @param vel a numeric value presenting relative air velocity in [m/s] - see note 1
 #' @param rh a numeric value presenting relative humidity [\%]
-#' @param clo a numeric value presenting clothing insulation level in [clo]
+#' @param clo a numeric value presenting dynamic clothing insulation level in [clo] - see note 2
 #' @param met a numeric value presenting metabolic rate in [met]
 #' @param wme a numeric value presenting external work in [met]
-#' @param basMet a numeric value presenting basal metabolic rate [w/m2]
+#' @param basMet a numeric value presenting basal metabolic rate [w/m2] - see note 3
 #' @param getLoad a boolean value. Set to true to get thermal load as output instead of PMV/PPD
 
-#' @details The PMV is an index that predicts the mean value of the thermal sensation of a large group of people on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, neutral, slightly warm, warm and hot. The PPD is an index that establishes a quantitative prediction of the percentage of thermally dissatisfied people determined from PMV. 
-#' @details Note that the adjustments in the value for basMet need to be made with great cautiousness as the PMV calculation is an empirical model and might not be valid for other values of basMet than the one commonly used.
+#' @details The PMV is an index that predicts the mean value of the thermal sensation of a large group of people 
+#' @details on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, 
+#' @details neutral, slightly warm, warm and hot. The PPD is an index that establishes a quantitative prediction 
+#' @details of the percentage of thermally dissatisfied people determined from PMV. 
+#' @details Note 1: vel is the relative air velocity caused by body movement and not the air velocity
+#' @details measured by the air velocity sensor. The relative air velocity is the sum of the average air velocity
+#' @details measured by the sensor plus the activity-generated air velocity (vag). Where vag is the activity-generated 
+#' @details air velocity caused by motion of individual body parts. 
+#' @details Note 2: The activity as well as the air speed modify the insulation characteristics of the clothing and 
+#' @details the adjacent air layer. Consequently, the ISO 7730 states that the clothing insulation shall be corrected.
+#' @details The ASHRAE 55 Standard corrects for the effect of the body movement for met equal or higher than 1.2 met using
+#' @details the equation clo = Icl × (0.6 + 0.4/met) 
+#' @details Note 3: The adjustments in the value for basMet need to be made with great cautiousness as the PMV 
+#' @details calculation is an empirical model and might not be valid for other values of basMet than the one commonly used.
 #' @returns PMV - Predicted Mean Vote
 #' @returns PPD - Predicted Percentage of Dissatisfied occupants in [\%]
 #' @returns Lraw - thermal load (only when getLoad was set to TRUE)
