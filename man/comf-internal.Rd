@@ -37,7 +37,7 @@
 \alias{validatePMVPPD}
 \alias{validateSET}
 \alias{validateAllFunctions}
-
+\alias{p_sat}
 
 \title{
 Internal Functions Used by Other Functions of this Package
@@ -84,7 +84,7 @@ calcCoolingStrategyBuilding(coolingStrategyBuilding)
 calcBuildingType(buildingType)
 calcBuildingTypeSimple(buildingTypeSimple)
 calcSeason(season)
-
+p_sat(tdb)
 }
 \arguments{
 depending on the function

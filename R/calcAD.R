@@ -21,30 +21,23 @@
 
 
 
-calcAD <- function(ta,tr,vel,rh,clo,met,vAnkle){
-
-
-
+calcAD <- function(ta, tr, vel, rh, clo, met, vAnkle) {
   tsv = calcPMV(ta=ta, tr=tr, vel=vel, rh=rh, clo=clo, met=met)
-
-  ppdval = (exp(-2.58 + 3.05 * vAnkle - 1.06 * tsv)/(1 + exp(-2.58 + 3.05 * vAnkle -1.06 * tsv))) * 100
-
-
-     ppdval = round(ppdval,1)
-
-     acceptability = ppdval <= 20
-
-     print(paste0("PMV value: ", round(tsv,3)))
-
-     print(paste0("Ankle_draft_ppd: ", ppdval))
-
-     print(paste0("Acceptability: ", acceptability))
-
-     if (vel > 0.2)
-       {
-
-       warning('Velocity(vel) should be less than or equal to 0.2')
-
-     }
-
+  
+  ppdval = (exp(-2.58 + 3.05 * vAnkle - 1.06 * tsv) / (1 + exp(-2.58 + 3.05 * vAnkle - 1.06 * tsv))) * 100
+  
+  ppdval = round(ppdval, 1)
+  
+  acceptability = ppdval <= 20
+  
+  if (vel > 0.2) {
+    warning('Velocity(vel) should be less than or equal to 0.2')
+  }
+  
+  # Return a list with the required Ankle_draft_ppd value
+  return(list(
+    ppdAd = ppdval,
+    PMV = round(tsv, 3),
+    acceptability = acceptability
+  ))
 }

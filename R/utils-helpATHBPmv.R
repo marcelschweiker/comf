@@ -25,3 +25,4 @@ calcSeason <- function(season){
   winter <- if(seasonValue=='winter') 1 else 0
   return(c(spring, summer, winter))
 }
+
