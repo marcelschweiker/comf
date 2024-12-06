@@ -50,19 +50,7 @@ calctAdapt15251 <- function(trm){
 }
 
 
-calctAdaptASHRAE <- function(tmmo, units) {
-  if (is.na(units)) {
-    units <- "si"
-  }
-  
-  if (units == "ip") {
-    tmmo <- if (is.list(tmmo) || is.vector(tmmo)) {
-      lapply(tmmo, function(temp) (temp - 32) * 5 / 9)
-    } else {
-      (tmmo - 32) * 5 / 9
-    }
-  }
-
+calctAdaptASHRAE <- function(tmmo) {
   tAdaptASHRAE <- if (is.list(tmmo) || is.vector(tmmo)) {
     lapply(tmmo, function(elem) {
       if (elem >= 10 && elem <= 33.5) {
@@ -75,13 +63,6 @@ calctAdaptASHRAE <- function(tmmo, units) {
     data.frame(tAdaptASHRAE = if (tmmo >= 10 && tmmo <= 33.5) 0.31 * tmmo + 17.8 else NA)
   }
 
-  if (units == "ip") {
-    tAdaptASHRAE <- if (is.list(tAdaptASHRAE) || is.vector(tAdaptASHRAE)) {
-      lapply(tAdaptASHRAE, function(temp) if (!is.na(temp)) temp * 9 / 5 + 32 else NA)
-    } else {
-      data.frame(tAdaptASHRAE = tAdaptASHRAE$tAdaptASHRAE * 9 / 5 + 32)
-    }
-  }
   return(tAdaptASHRAE)
 }
 
