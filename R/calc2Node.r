@@ -83,7 +83,7 @@
 #' calc2Node(22, 25, .50, 50)
 
 calc2Node <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, sa = NULL, pb = 760, 
-                      ltime = 59, ht = 171, wt = 70, tu = 40, obj = "set", 
+                      ltime = 60, ht = 171, wt = 70, tu = 40, obj = "set", 
                       csw = 170, cdil = 120, cstr = .5, varOut="else", 
                       bodyPosition = 'sitting'){
   
