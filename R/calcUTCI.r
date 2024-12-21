@@ -24,7 +24,7 @@
 calcUTCI <- function(ta, tr, vel, rh) {
   
   #validate the inputs and prints an error message for invalid inputs
-  if(bypassLimits = FALSE){
+  if(bypassLimits == FALSE){
     validateUTCI(ta, tr, vel, rh)
   }
   
