@@ -11,7 +11,7 @@
 #' @aliases calcVapourpressure
 #' @usage calcDewp(ta, rh)
 #' @usage calcEnth(ta, rh, pb)
-#' @usage calcHumx(ta, rh)
+#' @usage calcHumx(ta, rh, model = "masterton")
 #' @usage calcMixR(ta, rh, pb)
 #' @usage calcRH(ta, mr, pb)
 #' @usage calcSVP(ta)
@@ -21,6 +21,7 @@
 #' @param rh a numeric value or vector presenting relative humidity in [\%], except for \code{calcVapourpressure}, where it must be in decimal (e.g. 0.5).
 #' @param mr a numeric value or vector presenting the mixIng ratio in [g/kg.
 #' @param pb a numeric value or vector presenting barometric pressure in [torr].
+#' @param model a selection of either masterton or rana
 #' @details The length of the arguments must be either the same or they must have the length one and one common second length.
 #' @returns \code{calcDewp} returns the dew point temperature in [degree C]
 #' @returns \code{calcEnth} returns a single value or a vector of values of enthalpy in [J]
@@ -74,8 +75,14 @@ calcDewp <- function(ta, rh){
 }
 
 # humidex of air
-calcHumx <- function(ta, rh){
-  ta+5/9*(6.11*exp(5417.753*(1/273.15-1/(calcDewp(ta, rh)+273.15)))-10)
+calcHumx <- function(ta, rh, model="masterton"){
+  if(model == "masterton"){
+    ta + 5 / 9 * ( 6.11 * exp( 5417.753 * (1 / 273.15 - 1 / (calcDewp(ta, rh) + 273.15 ))) -10 )
+  } else if (model == "rana"){
+    ta + 5 / 9 * ((6.112 * 10 ** (7.5 * ta / (237.7 + ta)) * rh / 100) - 10)
+  } else {
+    stop(paste("error: ", model, " is not a valid model name! Please check the documentation.", sep = ""))
+  }
 }
 
 # saturation vapor pressure
