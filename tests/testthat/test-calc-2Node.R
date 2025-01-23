@@ -87,7 +87,7 @@ test_that("Test calc2Node function", {
     )
 
     check_tolerance(
-      result$wet, as.numeric(outputs$w), 0.1,
+      result$wet, as.numeric(outputs$w), tolerance$w,
       paste(
         "Failed at data row", i, ": w tolerance check. Inputs:",
         "tdb =", ta, ", tr =", tr, ", v =", vel,
