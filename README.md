@@ -11,8 +11,9 @@ If you want to contribute to the project, you can do so by following these steps
 
 1. Fork the repository
 2. Make changes to the forked repository
-3. Write tests for the changes
-4. Submit a pull request
+3. Reformate the code using the `styler` package using `styler::style_dir()`
+4. Write tests for the changes
+5. Submit a pull request
 
 # Test Script Documentation
 
