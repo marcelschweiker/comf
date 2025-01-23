@@ -52,56 +52,49 @@
 #' rh <- 50
 #' calcEnth(ta, rh, 760)
 #' @author Michael Kleber (code and documentation), Marcel Schweiker (documentation).
-#' @references 
+#' @references
 #' Ranaa, Kusya, Jurdaka, Wallb & Hua (2013) <doi:10.1016/j.enbuild.2013.04.019>
 #'
 #' Masterton & Richardson (1979) Humidex a method of quantifying humandiscomfort due to excessive heat and humidity, clI 1-79. Downsview, Ont: Environment Canada. Atmosheric Environment Service.
 #' @export
 
 # mixIng ratio of water in dry air
-calcMixR <- function(ta, rh, pb){
-  1000*((exp((17.62*ta)/(243.12+ta))*611.2*(rh/100))/(461.51*(ta+273.15)))/(((pb/760*101325)-(exp((17.62*ta)/(243.12+ta))*611.2*(rh/100)))/(287.058*(ta+273.15)))
+calcMixR <- function(ta, rh, pb) {
+  1000 * ((exp((17.62 * ta) / (243.12 + ta)) * 611.2 * (rh / 100)) / (461.51 * (ta + 273.15))) / (((pb / 760 * 101325) - (exp((17.62 * ta) / (243.12 + ta)) * 611.2 * (rh / 100))) / (287.058 * (ta + 273.15)))
 }
 
 # enthalpy of air
-calcEnth <- function(ta, rh, pb){
-  1.006*ta + (calcMixR(ta, rh, pb)/1000)*(1.86*ta + 2500)
+calcEnth <- function(ta, rh, pb) {
+  1.006 * ta + (calcMixR(ta, rh, pb) / 1000) * (1.86 * ta + 2500)
 }
 
 # dewpoint of air
-calcDewp <- function(ta, rh){
-  (rh/100) ^ (1/8.02)*(109.8+ta)-109.8
+calcDewp <- function(ta, rh) {
+  (rh / 100)^(1 / 8.02) * (109.8 + ta) - 109.8
 }
 
 # humidex of air
-calcHumx <- function(ta, rh){
-  ta+5/9*(6.11*exp(5417.753*(1/273.15-1/(calcDewp(ta, rh)+273.15)))-10)
+calcHumx <- function(ta, rh) {
+  ta + 5 / 9 * (6.11 * exp(5417.753 * (1 / 273.15 - 1 / (calcDewp(ta, rh) + 273.15))) - 10)
 }
 
 # saturation vapor pressure
-calcSVP <- function(ta){
-  6.1078*10^((7.5*ta)/(237.3+ta))*100
+calcSVP <- function(ta) {
+  6.1078 * 10^((7.5 * ta) / (237.3 + ta)) * 100
 }
 
 # vapor pressure
-calcVP <- function(ta, mr, pb){
-  (mr/1000*(pb/760*101325)*462.51*(ta+273.15))/(mr/1000*(ta+273.15)*462.51+(ta+273.15)*287.058)
+calcVP <- function(ta, mr, pb) {
+  (mr / 1000 * (pb / 760 * 101325) * 462.51 * (ta + 273.15)) / (mr / 1000 * (ta + 273.15) * 462.51 + (ta + 273.15) * 287.058)
 }
 
 # relative humidity from air temperature, mixIng ratio and barometric pressure
-calcRH <- function(ta, mr, pb){
-  calcVP(ta, mr, pb)/calcSVP(ta)*100
+calcRH <- function(ta, mr, pb) {
+  calcVP(ta, mr, pb) / calcSVP(ta) * 100
 }
 
 # vapour pressure for pdftnz
-calcVapourpressure <- function(ta, rh){ # Ta in degree C and rh in decimal (e.g. 0.5)
-  psat <- 100 * exp(18.965 - 4030/(ta + 235))
+calcVapourpressure <- function(ta, rh) { # Ta in degree C and rh in decimal (e.g. 0.5)
+  psat <- 100 * exp(18.965 - 4030 / (ta + 235))
   rh * psat
 }
-
-
-
-
-
-
-

@@ -16,13 +16,13 @@
 #' @examples
 #' ## Note. Due to random generated asv values. The values for the coefficients will not be meaningful.
 #' ## Create sample data
-#' ta  <- 20:24     # vector with air temperature values
-#' tr  <- ta         # vector with radiant temperature values
-#' vel <- rep(.1,5)  # vector with air velocities
-#' rh  <- rep(50,5)  # vector with relative humidity values
-#' clo <- rep(1.0,5) # vector with clo values
-#' met <- rep(1.1,5) # vector with metabolic rates
-#' asv <- rnorm(5)   # vector with actual sensation votes
+#' ta <- 20:24 # vector with air temperature values
+#' tr <- ta # vector with radiant temperature values
+#' vel <- rep(.1, 5) # vector with air velocities
+#' rh <- rep(50, 5) # vector with relative humidity values
+#' clo <- rep(1.0, 5) # vector with clo values
+#' met <- rep(1.1, 5) # vector with metabolic rates
+#' asv <- rnorm(5) # vector with actual sensation votes
 
 #' lsCond <- as.list(data.frame(ta,tr,vel,rh,clo,met,asv))
 
@@ -41,11 +41,9 @@
 #' @export
 
 
-calcaPMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, apCoeff){
-
-  pmv  <- calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1]
+calcaPMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, apCoeff) {
+  pmv <- calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1]
   apmv <- pmv / (1 + apCoeff * pmv)
   names(apmv) <- "apmv"
   data.frame(apmv = apmv)
-
 }

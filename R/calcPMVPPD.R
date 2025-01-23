@@ -12,24 +12,24 @@
 #' @param basMet a numeric value presenting basal metabolic rate [w/m2] - see note 3
 #' @param getLoad a boolean value. Set to true to get thermal load as output instead of PMV/PPD
 
-#' @details The PMV is an index that predicts the mean value of the thermal sensation of a large group of people 
-#' @details on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool, 
-#' @details neutral, slightly warm, warm and hot. The PPD is an index that establishes a quantitative prediction 
-#' @details of the percentage of thermally dissatisfied people determined from PMV. 
+#' @details The PMV is an index that predicts the mean value of the thermal sensation of a large group of people
+#' @details on a sensation scale expressed from (-3) to (+3) corresponding to the categories cold, cool, slightly cool,
+#' @details neutral, slightly warm, warm and hot. The PPD is an index that establishes a quantitative prediction
+#' @details of the percentage of thermally dissatisfied people determined from PMV.
 #' @details Note 1: vel is the relative air velocity caused by body movement and not the air velocity
 #' @details measured by the air velocity sensor. The relative air velocity is the sum of the average air velocity
-#' @details measured by the sensor plus the activity-generated air velocity (vag). Where vag is the activity-generated 
-#' @details air velocity caused by motion of individual body parts. 
-#' @details Note 2: The activity as well as the air speed modify the insulation characteristics of the clothing and 
+#' @details measured by the sensor plus the activity-generated air velocity (vag). Where vag is the activity-generated
+#' @details air velocity caused by motion of individual body parts.
+#' @details Note 2: The activity as well as the air speed modify the insulation characteristics of the clothing and
 #' @details the adjacent air layer. Consequently, the ISO 7730 states that the clothing insulation shall be corrected.
 #' @details The ASHRAE 55 Standard corrects for the effect of the body movement for met equal or higher than 1.2 met using
-#' @details the equation clo = Icl × (0.6 + 0.4/met) 
-#' @details Note 3: The adjustments in the value for basMet need to be made with great cautiousness as the PMV 
+#' @details the equation clo = Icl × (0.6 + 0.4/met)
+#' @details Note 3: The adjustments in the value for basMet need to be made with great cautiousness as the PMV
 #' @details calculation is an empirical model and might not be valid for other values of basMet than the one commonly used.
 #' @returns PMV - Predicted Mean Vote
 #' @returns PPD - Predicted Percentage of Dissatisfied occupants in [\%]
 #' @returns Lraw - thermal load (only when getLoad was set to TRUE)
-#' @examples calcPMVPPD(25,25,0.3,50,0.5,1)
+#' @examples calcPMVPPD(25, 25, 0.3, 50, 0.5, 1)
 #' @author Code implemented in to R by Marcel Schweiker. Further contribution by Sophia Mueller and Shoaib Sarwar.
 #' @seealso see also \code{\link{calcComfInd}}
 #' @references Fanger (1970) Thermal Comfort Analysis and Applications in Environmental Engineering McGraw-Hill, New York.
@@ -37,59 +37,60 @@
 #' @export
 
 
-calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15, getLoad = FALSE){
-
-  m   <- met * basMet
-  w   <- wme * basMet
-  mw  <- m - w
+calcPMVPPD <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, basMet = 58.15, getLoad = FALSE) {
+  m <- met * basMet
+  w <- wme * basMet
+  mw <- m - w
   icl <- .155 * clo
-  pa  <- rh * 10 * exp(16.6536 - (4030.183 / (ta + 235)))
+  pa <- rh * 10 * exp(16.6536 - (4030.183 / (ta + 235)))
 
   # Compute the corresponding fcl value
-  if (icl <= .078){
+  if (icl <= .078) {
     fcl <- 1 + 1.29 * icl
   } else {
     fcl <- 1.05 + .645 * icl
   }
 
   fcic <- icl * fcl
-  p2   <- fcic * 3.96
-  p3   <- fcic * 100
-  tra  <- tr + 273
-  taa  <- ta + 273
-  p1   <- fcic * taa
-  p4   <- 308.7 - .028 * mw + p2 * (tra / 100) ^ 4
+  p2 <- fcic * 3.96
+  p3 <- fcic * 100
+  tra <- tr + 273
+  taa <- ta + 273
+  p1 <- fcic * taa
+  p4 <- 308.7 - .028 * mw + p2 * (tra / 100)^4
 
   # First guess for surface temperature
-  tclA <- taa + (35.5-ta) / (3.5 * (6.45 * icl + .1))
-  xn   <- tclA / 100
-  xf   <- xn
-  hcf  <- 12.1 * (vel) ^ .5
-  noi  <- 0
-  eps  <- .00015
+  tclA <- taa + (35.5 - ta) / (3.5 * (6.45 * icl + .1))
+  xn <- tclA / 100
+  xf <- xn
+  hcf <- 12.1 * (vel)^.5
+  noi <- 0
+  eps <- .00015
 
 
   # Compute surface temperature of clothing by iterations
-  while (noi < 150){
-    xf  <- (xf + xn) / 2
-    hcn <- 2.38 * abs(100 * xf - taa) ^ .25
-    if (hcf > hcn){
+  while (noi < 150) {
+    xf <- (xf + xn) / 2
+    hcn <- 2.38 * abs(100 * xf - taa)^.25
+    if (hcf > hcn) {
       hc <- hcf
     } else {
       hc <- hcn
     }
-    xn  <- (p4 + p1 * hc - p2 * xf ^ 4) / (100 + p3 * hc)
+    xn <- (p4 + p1 * hc - p2 * xf^4) / (100 + p3 * hc)
     noi <- noi + 1
-    if(noi > 1 & abs(xn - xf) <= eps){break}
+    if (noi > 1 & abs(xn - xf) <= eps) {
+      break
+    }
   }
   tcl <- 100 * xn - 273
 
   # Compute pmv
 
-  pm1 <- 3.96 * fcl * (xn ^ 4 - (tra / 100) ^ 4)
+  pm1 <- 3.96 * fcl * (xn^4 - (tra / 100)^4)
   pm2 <- fcl * hc * (tcl - ta)
   pm3 <- .303 * exp(-.036 * m) + .028
-  if (mw > basMet){
+  if (mw > basMet) {
     pm4 <- .42 * (mw - basMet)
   } else {
     pm4 <- 0
@@ -99,10 +100,10 @@ calcPMVPPD <- function(ta, tr, vel, rh, clo=.5, met=1, wme=0, basMet=58.15, getL
   Lraw <- (mw - pm5 - pm4 - pm6 - pm1 - pm2)
   pmv <- pm3 * Lraw
 
-  ppd <- 100 - 95 * exp(-.03353 * pmv ^ 4 - .2179 * pmv ^ 2)
-  if(getLoad == FALSE){
-	data.frame(pmv, ppd)
-	} else {
-	data.frame(pmv, ppd, Lraw)
-	}
+  ppd <- 100 - 95 * exp(-.03353 * pmv^4 - .2179 * pmv^2)
+  if (getLoad == FALSE) {
+    data.frame(pmv, ppd)
+  } else {
+    data.frame(pmv, ppd, Lraw)
+  }
 }

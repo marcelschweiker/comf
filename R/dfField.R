@@ -1,7 +1,7 @@
 #' Field data example
 #'
 #' Randomly sampled data from a field study campaign
-#' with data from 156 samples. For further description, 
+#' with data from 156 samples. For further description,
 #' see the reference given.
 #'
 #' @docType data
@@ -23,7 +23,7 @@
 #'
 #' @keywords datasets
 #'
-#' @references Schweiker, M. and Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework. 
+#' @references Schweiker, M. and Wagner, A. Exploring potentials and limitations of the adaptive thermal heat balance framework.
 #' Proceedings of 9th Windsor Conference: Making Comfort Relevant Cumberland Lodge, Windsor, UK, 2016.
 #' <https://windsorconference.com/>
 #'

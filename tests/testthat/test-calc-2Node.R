@@ -12,8 +12,7 @@ test_that("Test calc2Node function", {
 
     # Skip test case if 'execute_in_R' is set to FALSE
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
-      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-      next
+      skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
     }
 
     ta <- as.numeric(inputs$tdb)
@@ -22,7 +21,6 @@ test_that("Test calc2Node function", {
     rh <- as.numeric(inputs$rh)
     clo <- as.numeric(inputs$clo)
     met <- as.numeric(inputs$met)
-
 
     result <- calc2Node(
       ta = ta,
@@ -33,113 +31,81 @@ test_that("Test calc2Node function", {
       met = met
     )
 
-    expected_disc <- as.numeric(outputs$disc)
-    expected_pmv_gagge <- as.numeric(outputs$pmv_gagge)
-    expected_pmv_set <- as.numeric(outputs$pmv_set)
-    expected_tcore <- as.numeric(outputs$t_core)
-    expected_esk <- as.numeric(outputs$e_skin)
-    expected_w <- as.numeric(outputs$w)
-    expected_m_rsw <- as.numeric(outputs$m_rsw)
-
-
-
-    # Verify disc, using tolerance for comparison
-    if (!is.null(expected_disc) && !is.na(expected_disc)) {
-      expect_true(
-        abs(result$disc - expected_disc) <= tolerance$disc,
-        info = paste(
-          "Failed at data row", i, ": disc tolerance check. Inputs:",
-          "tdb =", ta, "tr =", tr, "v =", vel,
-          "rh =", rh, "clo =", clo, "met =", met,
-          "Expected disc =", expected_disc,
-          "Actual disc =", result$disc
-        )
+    check_tolerance(
+      result$disc, as.numeric(outputs$disc), tolerance$disc,
+      paste(
+        "Failed at data row", i, ": disc tolerance check. Inputs:",
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
+        "Expected disc =", as.numeric(outputs$disc),
+        "Actual disc =", result$disc
       )
-    }
+    )
 
-    # Verify pmv_gagge, using tolerance for comparison
-    if (!is.null(expected_pmv_gagge) && !is.na(expected_pmv_gagge)) {
-      expect_true(
-        abs(result$pmvg - expected_pmv_gagge) <= tolerance$pmv_gagge,
-        info = paste(
-          "Failed at data row", i, ": pmv_gagge tolerance check. Inputs:",
-          "tdb =", ta, "tr =", tr, "v =", vel,
-          "rh =", rh, "clo =", clo, "met =", met,
-          "Expected pmv_gagge =", expected_pmv_gagge,
-          "tolerance pmv_gagge = ", tolerance$pmv_gagge,
-          "Actual pmv_gagge =", result$pmvg
-        )
+    check_tolerance(
+      result$pmvg, as.numeric(outputs$pmv_gagge), tolerance$pmv_gagge,
+      paste(
+        "Failed at data row", i, ": pmv_gagge tolerance check. Inputs:",
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
+        "Expected pmv_gagge =", as.numeric(outputs$pmv_gagge),
+        "Actual pmv_gagge =", result$pmvg
       )
-    }
+    )
 
-    # Verify pmv_set, using tolerance for comparison
-    if (!is.null(expected_pmv_set) && !is.na(expected_pmv_set)) {
-      expect_true(
-        abs(result$pmvstar - expected_pmv_set) <= tolerance$pmv_set,
-        info = paste(
-          "Failed at data row", i, ": pmv_set tolerance check. Inputs:",
-          "tdb =", ta, "tr =", tr, "v =", vel,
-          "rh =", rh, "clo =", clo, "met =", met,
-          "Expected pmv_set =", expected_pmv_set,
-          "Actual pmv_set =", result$pmvstar
-        )
+    check_tolerance(
+      result$pmvstar, as.numeric(outputs$pmv_set), tolerance$pmv_set,
+      paste(
+        "Failed at data row", i, ": pmv_set tolerance check. Inputs:",
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
+        "Expected pmv_set =", as.numeric(outputs$pmv_set),
+        "Actual pmv_set =", result$pmvstar
       )
-    }
+    )
 
-    # Verify t_core, using tolerance t_core
-    if (!is.null(expected_tcore)) {
-      expect_true(
-        abs(result$tcr - expected_tcore) <= tolerance$t_core,
-        info = paste(
-          "Failed at data row", i, ": t_core tolerance check. Inputs:",
-          "tdb =", ta, "tr =", tr, "v =", vel,
-          "rh =", rh, "clo =", clo, "met =", met,
-          "Expected t_core =", expected_tcore,
-          "Actual t_core =", result$tcr
-        )
+    check_tolerance(
+      result$tcr, as.numeric(outputs$t_core), tolerance$t_core,
+      paste(
+        "Failed at data row", i, ": t_core tolerance check. Inputs:",
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
+        "Expected t_core =", as.numeric(outputs$t_core),
+        "Actual t_core =", result$tcr
       )
-    }
+    )
 
-    # Verify e_skin, using tolerance e_skin
-    if (!is.null(expected_esk)) {
-      expect_true(
-        abs(result$esk - expected_esk) <= tolerance$e_skin,
-        info = paste(
-          "Failed at data row", i, ": e_skin tolerance check. Inputs:",
-          "tdb =", ta, "tr =", tr, "v =", vel,
-          "rh =", rh, "clo =", clo, "met =", met,
-          "Expected e_skin =", expected_esk,
-          "Actual e_skin =", result$esk
-        )
+    check_tolerance(
+      result$esk, as.numeric(outputs$e_skin), tolerance$e_skin,
+      paste(
+        "Failed at data row", i, ": e_skin tolerance check. Inputs:",
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
+        "Expected e_skin =", as.numeric(outputs$e_skin),
+        "Actual e_skin =", result$esk
       )
-    }
+    )
 
-    # Verify w, using tolerance w
-    if (!is.null(expected_w)) {
-      expect_true(
-        abs(result$wet - expected_w) <= 0.1,
-        info = paste(
-          "Failed at data row", i, ": w tolerance check. Inputs:",
-          "tdb =", ta, "tr =", tr, "v =", vel,
-          "rh =", rh, "clo =", clo, "met =", met,
-          "Expected w =", expected_w,
-          "Actual w =", result$wet
-        )
+    check_tolerance(
+      result$wet, as.numeric(outputs$w), 0.1,
+      paste(
+        "Failed at data row", i, ": w tolerance check. Inputs:",
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
+        "Expected w =", as.numeric(outputs$w),
+        "Actual w =", result$wet
       )
-    }
+    )
 
-    # Verify m_rsw, using tolerance m_rsw
-    if (!is.null(expected_m_rsw)) {
-      expect_true(
-        abs(result$regsw - expected_m_rsw) <= tolerance$m_rsw,
-        info = paste(
-          "Failed at data row", i, ": m_rsw tolerance check. Inputs:",
-          "tdb =", ta, "tr =", tr, "v =", vel,
-          "rh =", rh, "clo =", clo, "met =", met,
-          "Expected m_rsw =", expected_m_rsw,
-          "Actual m_rsw =", result$regsw
-        )
+    check_tolerance(
+      result$regsw, as.numeric(outputs$m_rsw), tolerance$m_rsw,
+      paste(
+        "Failed at data row", i, ": m_rsw tolerance check. Inputs:",
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
+        "Expected m_rsw =", as.numeric(outputs$m_rsw),
+        "Actual m_rsw =", result$regsw
       )
-    }
+    )
   }
 })

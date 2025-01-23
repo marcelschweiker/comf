@@ -1,5 +1,4 @@
 test_that("test calcSolarGain", {
-
   # call retrieve_data() to get test data
   reference_tables <- retrieve_data(url_config$test_wbgt_url)
   tolerance <- reference_tables$tolerance

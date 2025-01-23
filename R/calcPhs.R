@@ -81,7 +81,6 @@ calcPhs <- function(
     t_cr_eq = FALSE,
     t_sk_t_cr_wg = 0.3,
     sweat_rate = 0) {
-  
   met <- met * 58.15
   wme <- wme * 58.15
   p_a <- p_sat(tdb) / 1000 * rh / 100
@@ -229,7 +228,7 @@ calcPhs <- function(
 
     if (e_req <= 0) {
       e_req <- 0
-      sw_req <- 0  # required sweat rate [W/m2]
+      sw_req <- 0 # required sweat rate [W/m2]
     } else if (e_max <= 0) {
       e_max <- 0
       sw_req <- sw_max

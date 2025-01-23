@@ -57,42 +57,42 @@
 #' @references For references see individual functions.
 #' @export
 
-createCond <- function(a = TRUE){
+createCond <- function(a = TRUE) {
   # (7)
-  if (a == TRUE){
-    ta    	<- 25   # Air temperature (degree C)
-    tr    	<- 25   # mean radiant temperature (degree C)
-    vel   	<- .1   # Air velocity (m/s)
-    rh    	<- 50   # Relative Humidity (%)
-    clo   	<- .5   # clothing (do)
-    met   	<- 1.1    # metabolic rate (met)
-    wme   	<- 0    # External work (met)
-    tu    	<- 40   # turbulence intensity (%)
-    tmmo  	<- 15   # mean monthly outdoor temperature (degree C)
-    ltime 	<- 60   # Exposure time (min)
-    pb    	<- 760  # Barometric pressure (torr)
-    wt    	<- 70   # weight (Kg)
-    ht    	<- 171  # height (cm)
-    trm   	<- 15   # Running mean outdoor temperature (degree C)
-    age	  	<- 21   # age (years)
-    gender 	<- 1    # gender (female = 1)
-    tsk   	<- 35   # mean skin temperature [degree C]
-    psych 	<- (-1.4) # factor related to fixed effect on perceived control
+  if (a == TRUE) {
+    ta <- 25 # Air temperature (degree C)
+    tr <- 25 # mean radiant temperature (degree C)
+    vel <- .1 # Air velocity (m/s)
+    rh <- 50 # Relative Humidity (%)
+    clo <- .5 # clothing (do)
+    met <- 1.1 # metabolic rate (met)
+    wme <- 0 # External work (met)
+    tu <- 40 # turbulence intensity (%)
+    tmmo <- 15 # mean monthly outdoor temperature (degree C)
+    ltime <- 60 # Exposure time (min)
+    pb <- 760 # Barometric pressure (torr)
+    wt <- 70 # weight (Kg)
+    ht <- 171 # height (cm)
+    trm <- 15 # Running mean outdoor temperature (degree C)
+    age <- 21 # age (years)
+    gender <- 1 # gender (female = 1)
+    tsk <- 35 # mean skin temperature [degree C]
+    psych <- (-1.4) # factor related to fixed effect on perceived control
     apCoeff <- .293 # adaptive coefficient for pmv
-    epCoeff <- .9   # expectancy factor for pmv
+    epCoeff <- .9 # expectancy factor for pmv
     asCoeff <- (.2) # adaptive coefficient for set
-    esCoeff <- 1.3   # expectancy factor for set
-    asv     <- 1.5  # actual sensation vote (0 = neutral)
-    tao		<- 5 # outdoor air temperature
-    rho		<- 70   # outdoor relative humidity
-    frad 	<- .7	# 0.7(for seating), 0.73(for standing) [-]
-    eps 	<- .95	# emissivity [-]
-    ic 	    <- 1.085# 1.084 (average permeability), 0.4 (low permeability)
-    tcrI	<- 37	# initial values for core temp
-    tskI	<- 36	# initial values for skin temperature
-    basMet	<- 58.2 # basal metabolic rate
-    warmUp	<- 60	# length of warm up period, i.e. number of times, loop is running for HBx calculation
-    cdil	<- 100
+    esCoeff <- 1.3 # expectancy factor for set
+    asv <- 1.5 # actual sensation vote (0 = neutral)
+    tao <- 5 # outdoor air temperature
+    rho <- 70 # outdoor relative humidity
+    frad <- .7 # 0.7(for seating), 0.73(for standing) [-]
+    eps <- .95 # emissivity [-]
+    ic <- 1.085 # 1.084 (average permeability), 0.4 (low permeability)
+    tcrI <- 37 # initial values for core temp
+    tskI <- 36 # initial values for skin temperature
+    basMet <- 58.2 # basal metabolic rate
+    warmUp <- 60 # length of warm up period, i.e. number of times, loop is running for HBx calculation
+    cdil <- 100
     sigmatr <- .25
 
     print("A list with standard values was created. It contains standard room conditions.")
@@ -100,55 +100,53 @@ createCond <- function(a = TRUE){
 
     # (8)
     list(ta = ta, tr = tr, vel = vel, rh = rh, clo = clo, met = met, wme = wme, tu = tu, tmmo = tmmo, ltime = ltime, pb = pb, wt = wt, ht = ht, trm = trm, age = age, gender = gender, tsk = tsk, psych = psych, apCoeff = apCoeff, epCoeff = epCoeff, asCoeff = asCoeff, esCoeff = esCoeff, asv = asv, tao = tao, rho = rho, frad = frad, eps = eps, ic = ic, tcrI = tcrI, tskI = tskI, basMet = basMet, warmUp = warmUp, cdil = cdil, sigmatr = sigmatr)
-
   } else {
     # (9)
-    ta    	<- NA # Air temperature (degree C)
-    tr    	<- NA # mean radiant temperature (degree C)
-    vel   	<- NA # Air velocity (m/s)
-    rh    	<- NA # Relative Humidity (%)
-    clo   	<- NA # clothing (do)
-    met   	<- NA # metabolic rate (met)
-    wme   	<- NA # External work (met)
-    tu    	<- NA # turbulence intensity (%)
-    tmmo  	<- NA # mean monthly outdoor temperature (degree C)
-    ltime 	<- NA # Exposure time (min)
-    pb    	<- NA # Barometric pressure (torr)
-    wt    	<- NA # weight (Kg)
-    ht    	<- NA # height (cm)
-    trm   	<- NA # Running mean outdoor temperature (degree C)
-    age	  	<- NA # age (years)
-    gender 	<- NA # gender (female = 1)
-    tsk   	<- NA # mean skin temperature [degree C]
-    psych 	<- NA # factor related to fixed effect on perceived control
-    apCoeff  <- NA # adaptive coefficient
-    epCoeff  <- NA # expectancy factor
-    asCoeff  <- NA # adaptive coefficient for set
-    esCoeff  <- NA  # expectancy factor for set
-    asv     <- NA # actual sensation vote (0 = neutral)
-    tao		<- NA # outdoor air temperature
-    rho		<- NA   # outdoor relative humidity
-    frad 	<- NA	# 0.7(for seating), 0.73(for standing) [-]
-    eps 	<- NA	# emissivity [-]
-    ic 	    <- NA   # 1.084 (average permeability), 0.4 (low permeability)
-    tcrI	<- NA	# initial values for core temp
-    tskI	<- NA	# initial values for skin temperature
-    basMet	<- NA   # basal metabolic rate
-    warmUp	<- NA	# length of warm up period, i.e. number of times, loop is running for HBx calculation
-    cdil	<- NA
+    ta <- NA # Air temperature (degree C)
+    tr <- NA # mean radiant temperature (degree C)
+    vel <- NA # Air velocity (m/s)
+    rh <- NA # Relative Humidity (%)
+    clo <- NA # clothing (do)
+    met <- NA # metabolic rate (met)
+    wme <- NA # External work (met)
+    tu <- NA # turbulence intensity (%)
+    tmmo <- NA # mean monthly outdoor temperature (degree C)
+    ltime <- NA # Exposure time (min)
+    pb <- NA # Barometric pressure (torr)
+    wt <- NA # weight (Kg)
+    ht <- NA # height (cm)
+    trm <- NA # Running mean outdoor temperature (degree C)
+    age <- NA # age (years)
+    gender <- NA # gender (female = 1)
+    tsk <- NA # mean skin temperature [degree C]
+    psych <- NA # factor related to fixed effect on perceived control
+    apCoeff <- NA # adaptive coefficient
+    epCoeff <- NA # expectancy factor
+    asCoeff <- NA # adaptive coefficient for set
+    esCoeff <- NA # expectancy factor for set
+    asv <- NA # actual sensation vote (0 = neutral)
+    tao <- NA # outdoor air temperature
+    rho <- NA # outdoor relative humidity
+    frad <- NA # 0.7(for seating), 0.73(for standing) [-]
+    eps <- NA # emissivity [-]
+    ic <- NA # 1.084 (average permeability), 0.4 (low permeability)
+    tcrI <- NA # initial values for core temp
+    tskI <- NA # initial values for skin temperature
+    basMet <- NA # basal metabolic rate
+    warmUp <- NA # length of warm up period, i.e. number of times, loop is running for HBx calculation
+    cdil <- NA
     sigmatr <- NA
 
     print("An empty list was created. You need to edit it for using it in the function 'calcComfInd'.")
 
-    #(10)
+    # (10)
     list(ta = ta, tr = tr, vel = vel, rh = rh, clo = clo, met = met, wme = wme, tu = tu, tmmo = tmmo, ltime = ltime, pb = pb, wt = wt, ht = ht, trm = trm, age = age, gender = gender, tsk = tsk, psych = psych, apCoeff = apCoeff, epCoeff = epCoeff, asCoeff = asCoeff, esCoeff = esCoeff, asv = asv, tao = tao, rho = rho, frad = frad, eps = eps, ic = ic, tcrI = tcrI, tskI = tskI, basMet = basMet, warmUp = warmUp, cdil = cdil, sigmatr = sigmatr)
-
   }
 }
 
 createcond <- createCond
 
-listOfRequests <- function(){
+listOfRequests <- function() {
   print(c("pmv", "ppd", "tnHumphreysNV", "tnHumphreysAC", "tAdapt15251", "dTNZ", "dTNZTa", "dTNZts", "ATHBpmv", "ATHBset", "ATHBpts", "apmv", "ptsa", "epmv", "ptse", "epCoeff", "apCoeff", "esCoeff", "asCoeff", "set", "et", "tsens", "disc", "pd", "ps", "pts", "HBxst", "pmvadj", "humidex"))
 }
-#listOfRequests()
+# listOfRequests()
