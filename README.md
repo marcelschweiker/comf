@@ -23,7 +23,7 @@ To run the test locally follow these steps:
 1. Clone the repository
 2. Open the R console in your terminal using the command `R`
 3. Run the following commands in the R console `devtools::test()` to run all the tests
-4. To run a specific test, use the command `devtools::test_active_file("tests/testthat/test-calcAD.R")`
+4. To run a specific test, use the command `devtools::test_active_file("tests/testthat/test-calc-AD.R")`
 
 
 The `helper-test-script.R` script is designed to leverage the `devtools::test()` function for running tests across various functions. These tests utilize test cases from the [validation-data-comfort-models](https://github.com/FedericoTartarini/validation-data-comfort-models) repository.
