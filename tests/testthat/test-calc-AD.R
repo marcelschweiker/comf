@@ -33,10 +33,15 @@ test_that("test calcAD", {
     cat("Difference:", abs(result$ppdAd - outputs$PPD_ad), "\n")
     cat("Tolerance:", tolerance$PPD_ad, "\n")
 
-    expect_true(
-      abs(result$ppdAd - outputs$PPD_ad)
-      <= tolerance$PPD_ad,
-      info = paste("Failed at data row", i, ":Ankle_draft_ppd tolerance check.", "|result: ", result$ppdAd, "expect_outputs: ", outputs)
-    )
+    check_tolerance(
+          result$ppdAd, as.numeric(outputs$ppd_ad), tolerance$ppd_ad,
+          paste(
+            "Failed at data row", i, "Inputs:",
+            "tdb =", ta, ", tr =", tr, ", v =", vel,
+            ", rh =", rh, ", clo =", clo, ", met =", met,
+            "Expected m_rsw =", as.numeric(outputs$ppd_ad),
+            "Actual m_rsw =", result$ppd_ad
+          )
+        )
   }
 })
