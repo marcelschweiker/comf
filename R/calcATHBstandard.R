@@ -35,9 +35,9 @@ calcATHBstandard <- function(trm, ta, tr, vel, rh, met, clo = 0.5, cloAdapt = FA
   metAdpt <- met - (0.234 * trm) / 58.2
   
   # adapted clothing insulation level through behavioural adaptation
-  if(cloAdapt = FALSE){
+  if(cloAdapt == FALSE){
 	cloAdpt <- 10 ^ (-0.1716848 - 0.0004853 * trm + 0.0817623 * metAdpt - 0.0052730 * trm * metAdpt)
-  } else if(cloAdapt = TRUE){
+  } else if(cloAdapt == TRUE){
 	cloAdpt <- clo
   } else {
 	stop("error: cloAdapt can only be FALSE or TRUE")
