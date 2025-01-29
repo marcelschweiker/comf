@@ -28,10 +28,10 @@ test_that("test calcAD", {
 
     cat("\nTesting row", i, "\n")
     cat("Inputs:", paste(names(inputs), inputs, sep = "=", collapse = ", "), "\n")
-    cat("Expected output:", outputs$PPD_ad, "\n")
+    cat("Expected output:", outputs$ppd_ad, "\n")
     cat("Actual output:", result$ppdAd, "\n")
-    cat("Difference:", abs(result$ppdAd - outputs$PPD_ad), "\n")
-    cat("Tolerance:", tolerance$PPD_ad, "\n")
+    cat("Difference:", abs(result$ppdAd - outputs$ppd_ad), "\n")
+    cat("Tolerance:", tolerance$ppd_ad, "\n")
 
     check_tolerance(
           result$ppdAd, as.numeric(outputs$ppd_ad), tolerance$ppd_ad,
