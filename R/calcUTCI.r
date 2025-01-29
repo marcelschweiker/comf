@@ -21,7 +21,7 @@
 #' @seealso see also \code{\link{calcComfInd}}
 #' @examples
 #' calcUTCI(25, 25, 1.0, 50) # Returns 24.6
-calcUTCI <- function(ta, tr, vel, rh) {
+calcUTCI <- function(ta, tr, vel, rh, bypassLimits = FALSE) {
   # validate the inputs and prints an error message for invalid inputs
   if (bypassLimits == FALSE) {
     validateUTCI(ta, tr, vel, rh)
