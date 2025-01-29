@@ -10,6 +10,9 @@ test_that("Test calc2Node function", {
     inputs <- as.list(data_list$inputs[i, ])
     outputs <- as.list(data_list$outputs[i, ])
 
+    # # Print the inputs
+    # print(paste("Testing row", i, "with inputs:", toString(inputs)))
+
     # Skip test case if 'execute_in_R' is set to FALSE
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
       skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
