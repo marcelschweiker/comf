@@ -11,8 +11,7 @@ test_that("test_calcDiscomfortIndex", {
     outputs <- data[i, "outputs"]
     execute_in_R <- data$execute_in_R[i]
     if (!is.na(execute_in_R) && execute_in_R == FALSE) {
-      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-      next
+      skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
     }
 
     # Call the calcdiscomfort_index function

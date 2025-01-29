@@ -8,12 +8,10 @@ test_that("test calcAD", {
     inputs <- data[i, "inputs"]
     outputs <- data[i, "outputs"]
     if (isFALSE(data$execute_in_R[i])) {
-      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-      next
+      skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
     }
     if (!is.null(inputs$units) && !is.na(inputs$units) && inputs$units == "ip") {
-      print(paste("Skipping test case", i, "due to 'units' being 'ip'"))
-      next
+      skip(paste("Skipping test case", i, "due to 'units' being 'ip'"))
     }
 
     result <- suppressWarnings(calcAD(
@@ -26,12 +24,12 @@ test_that("test calcAD", {
       vAnkle = inputs$v_ankle
     ))
 
-    cat("\nTesting row", i, "\n")
-    cat("Inputs:", paste(names(inputs), inputs, sep = "=", collapse = ", "), "\n")
-    cat("Expected output:", outputs$ppd_ad, "\n")
-    cat("Actual output:", result$ppdAd, "\n")
-    cat("Difference:", abs(result$ppdAd - outputs$ppd_ad), "\n")
-    cat("Tolerance:", tolerance$ppd_ad, "\n")
+    # cat("\nTesting row", i, "\n")
+    # cat("Inputs:", paste(names(inputs), inputs, sep = "=", collapse = ", "), "\n")
+    # cat("Expected output:", outputs$ppd_ad, "\n")
+    # cat("Actual output:", result$ppdAd, "\n")
+    # cat("Difference:", abs(result$ppdAd - outputs$ppd_ad), "\n")
+    # cat("Tolerance:", tolerance$ppd_ad, "\n")
 
     check_tolerance(
           result$ppdAd, as.numeric(outputs$ppd_ad), tolerance$ppd_ad,

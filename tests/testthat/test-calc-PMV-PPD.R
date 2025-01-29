@@ -19,13 +19,11 @@ test_that("test_calcpmvpdd", {
 
     if (!is.na(data$execute_in_R[i]) &&
       data$execute_in_R[i] == FALSE) {
-      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-      next
+      skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
     }
 
     if (!is.na(inputs$units) && inputs$units == "ip") {
-      print(paste("Skipping test case", i, "due to 'units' being 'ip'"))
-      next
+      skip(paste("Skipping test case", i, "due to 'units' being 'ip'"))
     }
     ta <- inputs$tdb[[1]]
     tr <- inputs$tr[[1]]

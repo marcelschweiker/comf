@@ -14,8 +14,7 @@ test_that("calcSET function returns correct values", {
     # Skip test case if 'execute_in_R' is set to FALSE
     if (!is.na(data_list$execute_in_R[i]) &&
       data_list$execute_in_R[i] == FALSE) {
-      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-      next
+      skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
     }
 
     ta <- inputs$tdb

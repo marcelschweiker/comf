@@ -32,13 +32,6 @@ calcVTG <- function(ta, tr, vel, rh, clo, met, v_tmp_grad) {
 
   acceptability <- ppdval <= 5
 
-  print(paste0("PMV value: ", tsv))
-
-  print(paste0("Vertical Air Temperature Gradient: ", ppdval))
-
-  print(paste0("Acceptability: ", acceptability))
-
-
   if (vel > 0.2) {
     warning("Velocity(vel) should be less than or equal to 0.2.")
   }
