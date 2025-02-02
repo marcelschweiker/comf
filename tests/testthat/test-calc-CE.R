@@ -12,7 +12,7 @@ test_that("Test calcCE function", {
     outputs <- as.list(data_list$outputs[i, ])
 
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
-      next
+      skip
     }
 
     ta <- as.numeric(inputs$tdb)
@@ -31,10 +31,11 @@ test_that("Test calcCE function", {
       abs(result_ce - expected_ce) <= tolerance$ce,
       info = paste(
         "Failed at data row", i, ": cooling_effect tolerance check. Inputs:",
-        "tdb =", ta, "tr =", tr, "v =", vel,
-        "rh =", rh, "clo =", clo, "met =", met,
+        "tdb =", ta, ", tr =", tr, ", v =", vel,
+        ", rh =", rh, ", clo =", clo, ", met =", met,
         "Expected ce =", expected_ce,
-        "Actual ce =", result_ce
+        "Actual ce =", result_ce,
+        "tolerance", tolerance$ce
       )
     )
   }

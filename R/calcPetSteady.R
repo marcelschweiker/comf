@@ -70,8 +70,10 @@ calcPetSteady <- function(
     } else if (formula == "kurazumi") {
       return(0.2440 * (weight^0.383) * (height^0.693))
     } else {
-      stop(paste("The formula", formula
-                 , "to calculate the body surface area does not exist."))
+      stop(paste(
+        "The formula", formula,
+        "to calculate the body surface area does not exist."
+      ))
     }
   }
 
@@ -114,7 +116,7 @@ calcPetSteady <- function(
     tc_set <- 36.6 # Core temperature set point
     tsk_set <- 34 # Skin temperature set point
     # Calculation of the weighted body temperature
-    tbody_set <- 0.1 * tsk_set + 0.9 * tc_set 
+    tbody_set <- 0.1 * tsk_set + 0.9 * tc_set
 
     # Calculate the deviation from the set body temperature
     sig_body <- t_body - tbody_set

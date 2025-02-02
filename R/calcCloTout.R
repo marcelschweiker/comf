@@ -5,21 +5,20 @@
 #'
 #' @param tout float, int, or array-like outdoor air temperature at 06:00 a.m.
 #' default in [Celsius] in [Fahrenheit] if 'units' = 'IP'
-#' @param units is \{"SI", "IP"\}, select the SI \(International System of Units\) or 
+#' @param units is \{"SI", "IP"\}, select the SI \(International System of Units\) or
 #' the IP (Imperial Units) system. Defaults to 'SI'.
 #'
-#' @details The ASHRAE 55 2020 states that it is acceptable to determine the clothing insulation 
-#' Icl using this equation in mechanically conditioned buildings [1]_. Limitations: This equation 
+#' @details The ASHRAE 55 2020 states that it is acceptable to determine the clothing insulation
+#' Icl using this equation in mechanically conditioned buildings [1]_. Limitations: This equation
 #' may not be accurate for extreme temperature ranges.
 #' @return clo : float, int, or array-like. Representative clothing insulation Icl, [clo]
 #' @references ASHRAE 55 2020
 #' @examples
-#' calcCloTout(tout=27)
+#' calcCloTout(tout = 27)
 #' @author Code implemented into R by Yiqing Zhang.
 #' @export
 
 calcCloTout <- function(tout, units = "SI") {
-
   if (!is.numeric(tout) && !is.list(tout)) {
     stop("tout must be numeric or a list of numeric values.")
   }
@@ -41,7 +40,7 @@ calcCloTout <- function(tout, units = "SI") {
   }
 
   if (tolower(units) == "ip") {
-    tout <- (tout - 32) * 5/9
+    tout <- (tout - 32) * 5 / 9
   }
 
   clo <- ifelse(tout < 26, 10^(-0.1635 - 0.0066 * tout), 0.46)

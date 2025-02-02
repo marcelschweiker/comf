@@ -15,10 +15,10 @@
 #' @returns \code{calcTroin} returns a data.frame with radiative and operative temperature.
 #' @examples ## Note: Due to random generated asv values. The values for the coefficients will not be meaningful.
 #' ## Create sample data
-#' ta  <- 20:24      # vector with air temperature values
-#' vel <- rep(.1,5)  # vector with air velocities
-#' met <- rep(1.1,5) # vector with metabolic rates
-#' tg <- 25:29       # vector with globe temperature values
+#' ta <- 20:24 # vector with air temperature values
+#' vel <- rep(.1, 5) # vector with air velocities
+#' met <- rep(1.1, 5) # vector with metabolic rates
+#' tg <- 25:29 # vector with globe temperature values
 #'
 #' calcTroin(vel, tg, ta, met)
 #' @author  Marcel Schweiker. Further contribution by Shoaib Sarwar.
@@ -27,18 +27,15 @@
 #' @export
 
 
-calcTroin <- function(vel, tg, ta, met){
-
+calcTroin <- function(vel, tg, ta, met) {
   ifelse(vel <= 0, 0, vel)
-  met<-as.numeric(met*58) #w/m2
-  varIn<-vel+0.0052*(met-58) # see EN IsO 7730:2005 Appendix C.2
-  vara<-ifelse(varIn<0.2,0.5,ifelse(varIn>0.6,0.7,0.6)) # see appendix G.3 of EN IsO 7726:2001
-  tr<-((tg+273)^4+2.5*10^8*vel^0.6*(tg-ta))^0.25-273 # see equation 9 of EN IsO 7726:2001
-  to<-(vara*ta)+(1-vara)*tr # see appendix G.3 of EN IsO 7726:2001
+  met <- as.numeric(met * 58) # w/m2
+  varIn <- vel + 0.0052 * (met - 58) # see EN IsO 7730:2005 Appendix C.2
+  vara <- ifelse(varIn < 0.2, 0.5, ifelse(varIn > 0.6, 0.7, 0.6)) # see appendix G.3 of EN IsO 7726:2001
+  tr <- ((tg + 273)^4 + 2.5 * 10^8 * vel^0.6 * (tg - ta))^0.25 - 273 # see equation 9 of EN IsO 7726:2001
+  to <- (vara * ta) + (1 - vara) * tr # see appendix G.3 of EN IsO 7726:2001
   data.frame(tr, to)
-
 }
 calctroin <- calcTroin
 Troin <- calcTroin
 troin <- calcTroin
-

@@ -13,8 +13,7 @@ test_that("test calcATHBstandard", {
     outputs <- as.list(data_list$outputs[i, ])
 
     if (!is.null(data_list$execute_in_R[i]) && !is.na(data_list$execute_in_R[i]) && data_list$execute_in_R[i] == FALSE) {
-      print(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
-      next
+      skip(paste("Skipping test case", i, "due to 'execute_in_R' being FALSE"))
     }
 
     trm <- as.numeric(inputs$t_running_mean)

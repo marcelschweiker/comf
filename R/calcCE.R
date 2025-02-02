@@ -19,20 +19,18 @@
 #' @export
 
 
-calcCE <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0) {
-  if (vel <= 0.1) {
+calcCE <- function(ta, tr, vel, rh, clo, met, wme = 0) {
+  still_air_threshold <- 0.1
+  if (vel <= still_air_threshold) {
+
     ce <- 0
     return(ce)
     warning('For velocity less than or equal to 0.1, cooling effect is Zero')
   }
 
-
-  still_air_threshold <- 0.1
   initial_set_tmp <- calcSET(ta = ta, tr = tr, vel = vel, rh = rh, clo = clo, met = met, wme = wme)
-  initial_set_tmp <- round(initial_set_tmp, 1)
   f <- function(x) {
     change <- calcSET(ta - x, tr - x, vel = still_air_threshold, rh = rh, clo = clo, met = met, wme = wme)
-    change <- round(change, 1)
     return(change - initial_set_tmp)
   }
   out <- tryCatch(

@@ -55,9 +55,10 @@ if (length(indexes) == 2) {
   part1 <- readme_contents[1:start_index]
   part2 <- readme_contents[(end_index):length(readme_contents)]
   new_contents <- c(part1, markdown_table, part2)
-
 } else {
-  new_contents <- c(readme_contents, "\n========test result========\n"
-                    , markdown_table, "\n========test result========\n")
+  new_contents <- c(
+    readme_contents, "\n========test result========\n",
+    markdown_table, "\n========test result========\n"
+  )
 }
 writeLines(new_contents, "README.md")

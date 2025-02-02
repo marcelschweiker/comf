@@ -9,9 +9,9 @@
 #' @format A data frame with 10 rows and 16 variables:
 #' \describe{
 #'  \item{\code{accl}}{a numeric vector of state of acclimatised subject, 100 if acclimatised, 0 otherwise [-]}
-#'	\item{\code{posture}}{a numeric vector of posture of subject, posture = 1 sitting, =2 standing, =3 crouching [-]}
+#' 	\item{\code{posture}}{a numeric vector of posture of subject, posture = 1 sitting, =2 standing, =3 crouching [-]}
 #'  \item{\code{Ta}}{a numeric vector of air temperature [degree C]}
-#'	\item{\code{Pa}}{a numeric vector of partial water vapour pressure [kPa]}
+#' 	\item{\code{Pa}}{a numeric vector of partial water vapour pressure [kPa]}
 #'  \item{\code{Tr}}{a numeric vector of mean radiant temperature [degree C]}
 #'  \item{\code{Va}}{a numeric vector of air velocity (m/s)}
 #'  \item{\code{Met}}{a numeric vector of metabolic rate (W/(m*m))}

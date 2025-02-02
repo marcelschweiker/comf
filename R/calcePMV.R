@@ -19,13 +19,13 @@
 #' @examples
 #' ## Note. Due to random generated asv values. The values for the coefficients will not be meaningful.
 #' ## Create sample data
-#' ta  <- 20:24     # vector with air temperature values
-#' tr  <- ta         # vector with radiant temperature values
-#' vel <- rep(.1,5)  # vector with air velocities
-#' rh  <- rep(50,5)  # vector with relative humidity values
-#' clo <- rep(1.0,5) # vector with clo values
-#' met <- rep(1.1,5) # vector with metabolic rates
-#' asv <- rnorm(5)   # vector with actual sensation votes
+#' ta <- 20:24 # vector with air temperature values
+#' tr <- ta # vector with radiant temperature values
+#' vel <- rep(.1, 5) # vector with air velocities
+#' rh <- rep(50, 5) # vector with relative humidity values
+#' clo <- rep(1.0, 5) # vector with clo values
+#' met <- rep(1.1, 5) # vector with metabolic rates
+#' asv <- rnorm(5) # vector with actual sensation votes
 
 #' lsCond <- as.list(data.frame(ta,tr,vel,rh,clo,met,asv))
 
@@ -45,17 +45,13 @@
 
 
 
-calcePMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, epCoeff){
-
+calcePMV <- function(ta, tr, vel, rh, clo = .5, met = 1, wme = 0, epCoeff) {
   pmv <- as.numeric(calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1])
-  met <- ifelse (pmv > 0, met * (1 + pmv * (-.067)), met)
+  met <- ifelse(pmv > 0, met * (1 + pmv * (-.067)), met)
   pmv <- calcPMVPPD(ta, tr, vel, rh, clo, met, wme)[1]
   epmv <- epCoeff * pmv
   names(epmv) <- "epmv"
   data.frame(epmv = epmv)
-
 }
 ePMV <- calcePMV
 epmv <- calcePMV
-
-

@@ -24,11 +24,11 @@
 #' @note The outcome heavily depends on the distribution of actual votes, i.e. in case most of the actual votes are in the same category, e.g. 'neutral', the average accuray is very high due to the fact that for the other categories the number of TRUE negative predicted votes is high as well.
 #' @export
 
-calcAvgAcc <- function(ref, pred){
-  classes    <- sort(unique(c(unique(as.numeric(as.character(ref))), unique(as.numeric(as.character(pred))))))
+calcAvgAcc <- function(ref, pred) {
+  classes <- sort(unique(c(unique(as.numeric(as.character(ref))), unique(as.numeric(as.character(pred))))))
 
   tp <- tn <- fp <- fn <- NA
-  for (i in 1:length(classes)){ # calculation tp, tn, fn, fp for each class
+  for (i in 1:length(classes)) { # calculation tp, tn, fn, fp for each class
     tp[i] <- length(which(ref == classes[i] & pred == classes[i]))
     tn[i] <- length(which(ref != classes[i] & pred != classes[i]))
     fn[i] <- length(which(ref == classes[i] & pred != classes[i]))

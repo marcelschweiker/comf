@@ -35,7 +35,7 @@
 #' @references \code{calctnHumphreysNV} and \code{calctnHumphreysAC} are based on Humphreys (1978) Outdoor temperatures and comfort indoors. Batiment International, Building Research and Practice, Taylor and Francis.
 #' @export
 
-calctAdapt15251 <- function(trm){
+calctAdapt15251 <- function(trm) {
   if (is.list(trm) || is.vector(trm)) {
     tAdapt15251 <- lapply(trm, function(elem) {
       if (elem >= 10 && elem <= 33.5) {
@@ -46,7 +46,7 @@ calctAdapt15251 <- function(trm){
     })
     return(tAdapt15251)
   }
-  data.frame(tAdapt15251 = 0.33*trm + 18.8)
+  data.frame(tAdapt15251 = 0.33 * trm + 18.8)
 }
 
 
@@ -67,17 +67,16 @@ calctAdaptASHRAE <- function(tmmo) {
 }
 
 
-calctnAuliciems <- function(ta, tmmo){
-  data.frame(tnAuliciems = 9.22+0.48*ta+0.14*tmmo)
+calctnAuliciems <- function(ta, tmmo) {
+  data.frame(tnAuliciems = 9.22 + 0.48 * ta + 0.14 * tmmo)
 }
 
 
-calctnHumphreysNV <- function(tmmo){
-  data.frame(tnHumphreysNV = .534*tmmo + 11.9)
+calctnHumphreysNV <- function(tmmo) {
+  data.frame(tnHumphreysNV = .534 * tmmo + 11.9)
 }
 
 
-calctnHumphreysAC <- function(tmmo){
-  data.frame(tnHumphreysAC = 23.9+.295*(tmmo-22)*exp(-((tmmo-22)/(24*2 ^ .5)) ^ 2))
+calctnHumphreysAC <- function(tmmo) {
+  data.frame(tnHumphreysAC = 23.9 + .295 * (tmmo - 22) * exp(-((tmmo - 22) / (24 * 2^.5))^2))
 }
-

@@ -36,13 +36,13 @@
 #' @export
 
 
-calcBias <- function(ref, pred){
-  ref <- ifelse(rep(is.factor(ref),length(ref)), as.numeric(as.character(ref)), ref)
-  pred <- ifelse(rep(is.factor(pred),length(pred)), as.numeric(as.character(pred)), pred)
+calcBias <- function(ref, pred) {
+  ref <- ifelse(rep(is.factor(ref), length(ref)), as.numeric(as.character(ref)), ref)
+  pred <- ifelse(rep(is.factor(pred), length(pred)), as.numeric(as.character(pred)), pred)
   bias <- pred - ref
   meanBias <- mean(bias, na.rm = T)
   sdBias <- sd(bias)
-  seBias <- sdBias/sqrt(length(ref))
+  seBias <- sdBias / sqrt(length(ref))
 
   data.frame(meanBias, sdBias, seBias)
 }

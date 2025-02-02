@@ -9,11 +9,11 @@
 #' @format A data frame with 13 rows and 8 variables:
 #' \describe{
 #'  \item{\code{top}}{a numeric vector of operative temperature [degree C]}
-#'	\item{\code{vel}}{a numeric vector of indoor air velocity [m/s]}
+#' 	\item{\code{vel}}{a numeric vector of indoor air velocity [m/s]}
 #'  \item{\code{rh}}{a numeric vector of relative humidity [\%]}
-#'	\item{\code{met}}{a numeric vector of metabolic rate [MET]}
+#' 	\item{\code{met}}{a numeric vector of metabolic rate [MET]}
 #'  \item{\code{clo}}{a numeric vector of clothing insulation level [CLO]}
-#'  \item{\code{pmv}}{a numeric vector of Predicted mean vote (PMV)} 
+#'  \item{\code{pmv}}{a numeric vector of Predicted mean vote (PMV)}
 #' }
 #'
 #' @keywords datasets

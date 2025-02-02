@@ -9,3 +9,12 @@ retrieve_data <- function(url) {
   data <- fromJSON(content(resp, "text"), flatten = FALSE)
   return(data)
 }
+
+check_tolerance <- function(actual, expected, tolerance, message) {
+  if (!is.null(expected) && !is.na(expected)) {
+    expect_true(
+      abs(actual - expected) <= tolerance,
+      info = message
+    )
+  }
+}
