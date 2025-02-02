@@ -10,7 +10,7 @@
 #' @param clo a numeric value presenting clothing insulation level in [clo]
 #' @param met a numeric value presenting metabolic rate in [met]
 #' @param wme a numeric value presenting external work in [met]
-#' @details The CE of the elevated air velocity is the difference in SET between conditions with given air velocities and still air. The cooling effect should be calculated only for air velocities higher than 0.2 m/s.
+#' @details The CE of the elevated air velocity is the difference in SET between conditions with given air velocities and still air. The cooling effect should be calculated only for air velocities higher than 0.1 m/s.
 #' @returns ce - Cooling Effect in [degree C]
 #' @references
 #' Original code in Python by Tartarini & Schiavon (2020) <doi:10.1016/j.softx.2020.100578>
@@ -22,8 +22,10 @@
 calcCE <- function(ta, tr, vel, rh, clo, met, wme = 0) {
   still_air_threshold <- 0.1
   if (vel <= still_air_threshold) {
+
     ce <- 0
     return(ce)
+    warning('For velocity less than or equal to 0.1, cooling effect is Zero')
   }
 
   initial_set_tmp <- calcSET(ta = ta, tr = tr, vel = vel, rh = rh, clo = clo, met = met, wme = wme)
